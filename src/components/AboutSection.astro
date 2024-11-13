@@ -1,0 +1,94 @@
+---
+const skills = [
+    'Full Stack Development',
+    'AI Integration',
+    'Web3 Technologies',
+    'Cloud Architecture',
+    'DevOps'
+];
+---
+
+<section id="about" class="about-section">
+    <div class="section-header">
+        <h2 class="section-title">Digital Architect</h2>
+        <div class="divider"></div>
+    </div>
+    <div class="about-content">
+        <p class="about-description">
+            Transforming complex challenges into elegant digital solutions. 
+            My approach blends cutting-edge technologies with strategic innovation, 
+            creating scalable systems that push the boundaries of what's possible.
+        </p>
+        <div class="skills-grid">
+            {skills.map((skill) => (
+                <div class="skill-chip">{skill}</div>
+            ))}
+        </div>
+    </div>
+</section>
+
+<style>
+    .about-section {
+        max-width: 1200px;
+        margin: 4rem auto;
+        padding: 2rem;
+    }
+
+    .section-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+    }
+
+    .divider {
+        flex-grow: 1;
+        height: 2px;
+        background: linear-gradient(to right, var(--primary-color), transparent);
+    }
+
+    .about-description {
+        max-width: 800px;
+        margin: 0 auto 2rem;
+        text-align: center;
+        color: var(--text-light);
+        opacity: 0.8;
+        line-height: 1.6;
+    }
+
+    .skills-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem;
+    }
+
+    .skill-chip {
+        padding: 0.5rem 1rem;
+        background: rgba(0, 255, 255, 0.1);
+        border-radius: 20px;
+        font-size: 0.9rem;
+        color: var(--text-light);
+        transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .skill-chip:hover {
+        background: rgba(0, 255, 255, 0.2);
+        transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+        .section-title {
+            font-size: 2rem;
+        }
+
+        .about-description {
+            text-align: left;
+        }
+    }
+</style>

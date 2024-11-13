@@ -1,0 +1,173 @@
+---
+// Server-side form handling would require backend integration
+---
+
+<section class="contact-section" id="contact">
+    <div class="section-header">
+        <h2 class="section-title">Let's Connect</h2>
+        <div class="divider"></div>
+    </div>
+    <div class="contact-container">
+        <form 
+            class="contact-form" 
+            name="contact" 
+            method="POST" 
+            data-netlify="true"
+            action="/success"
+        >
+            <input type="hidden" name="form-name" value="contact" />
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input 
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    placeholder="Your Name" 
+                    required 
+                />
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="Your Email" 
+                    required 
+                />
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea 
+                    id="message" 
+                    name="message" 
+                    placeholder="Your Message" 
+                    required
+                ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+        <div class="contact-info">
+            <h3>Contact Details</h3>
+            <p>
+                <strong>Email:</strong> mikey.shaw@example.com<br />
+                <strong>Phone:</strong> +1 (555) 123-4567
+            </p>
+            <div class="social-links">
+                <a href="https://linkedin.com/in/mikeyshaw" target="_blank">LinkedIn</a>
+                <a href="https://github.com/mikeyshaw" target="_blank">GitHub</a>
+                <a href="https://twitter.com/mikeyshaw" target="_blank">Twitter</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .contact-section {
+        background: rgba(18, 18, 18, 0.7);
+        padding: 4rem 2rem;
+        color: var(--text-light);
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .section-title {
+        color: var(--primary-color);
+        font-size: 2.5rem;
+    }
+
+    .divider {
+        height: 2px;
+        background: linear-gradient(to right, var(--primary-color), transparent);
+        margin: 1rem auto;
+        max-width: 200px;
+    }
+
+    .contact-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .form-group label {
+        color: var(--secondary-color);
+    }
+
+    .form-group input,
+    .form-group textarea {
+        background: rgba(0, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--text-light);
+        padding: 0.8rem;
+        border-radius: 5px;
+    }
+
+    .form-group textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    .btn-primary {
+        background: var(--primary-color);
+        color: var(--background-dark);
+        border: none;
+        padding: 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background: color-mix(in srgb, var(--primary-color) 80%, white);
+    }
+
+    .contact-info {
+        background: rgba(0, 255, 255, 0.05);
+        padding: 2rem;
+        border-radius: 10px;
+    }
+
+    .contact-info h3 {
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .social-links a {
+        color: var(--secondary-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+        color: var(--primary-color);
+    }
+
+    @media (max-width: 768px) {
+        .contact-container {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

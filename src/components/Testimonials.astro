@@ -1,0 +1,138 @@
+---
+const testimonials = [
+    {
+        quote: "Mikey's innovative approach to solving complex technical challenges is truly remarkable. His ability to integrate cutting-edge technologies sets him apart.",
+        author: "Sarah Johnson",
+        role: "CTO, TechInnovate Solutions",
+        avatar: "https://randomuser.me/api/portraits/women/44.jpg"
+    },
+    {
+        quote: "Working with Mikey was a game-changer. His expertise in AI and Web3 technologies brought our project to the next level.",
+        author: "Alex Rodriguez",
+        role: "Founder, BlockchainX",
+        avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+    },
+    {
+        quote: "Exceptional full-stack developer with a deep understanding of modern web technologies. Highly recommended!",
+        author: "Emily Chen",
+        role: "Senior Engineering Manager",
+        avatar: "https://randomuser.me/api/portraits/women/67.jpg"
+    }
+];
+---
+
+<section class="testimonials-section">
+    <div class="section-header">
+        <h2 class="section-title">Trusted By Colleagues</h2>
+        <div class="divider"></div>
+    </div>
+    <div class="testimonials-grid">
+        {testimonials.map((testimonial) => (
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <div class="quote-icon">❝</div>
+                    <p class="testimonial-text">{testimonial.quote}</p>
+                    <div class="testimonial-author">
+                        <img 
+                            src={testimonial.avatar} 
+                            alt={testimonial.author} 
+                            class="author-avatar"
+                        />
+                        <div class="author-info">
+                            <span class="author-name">{testimonial.author}</span>
+                            <span class="author-role">{testimonial.role}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        ))}
+    </div>
+</section>
+
+<style>
+    .testimonials-section {
+        background: rgba(18, 18, 18, 0.7);
+        padding: 4rem 2rem;
+        color: var(--text-light);
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .section-title {
+        color: var(--primary-color);
+        font-size: 2.5rem;
+    }
+
+    .divider {
+        height: 2px;
+        background: linear-gradient(to right, var(--primary-color), transparent);
+        margin: 1rem auto;
+        max-width: 200px;
+    }
+
+    .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .testimonial-card {
+        background: rgba(0, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 2rem;
+        position: relative;
+        transition: transform 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .quote-icon {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        font-size: 4rem;
+        color: var(--primary-color);
+        opacity: 0.2;
+    }
+
+    .testimonial-text {
+        margin-bottom: 1.5rem;
+        font-style: italic;
+        line-height: 1.6;
+    }
+
+    .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .author-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 2px solid var(--primary-color);
+    }
+
+    .author-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .author-name {
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+
+    .author-role {
+        font-size: 0.8rem;
+        color: var(--secondary-color);
+    }
+</style>

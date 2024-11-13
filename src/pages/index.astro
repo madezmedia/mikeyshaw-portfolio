@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import HeroSection from '../components/HeroSection.astro';
+import AboutSection from '../components/AboutSection.astro';
+import TechnologyMarquee from '../components/TechnologyMarquee.astro';
+import ProjectsGrid from '../components/ProjectsGrid.astro';
+import Scene3D from '../components/Scene3D.astro';
+import { ChatWidget } from '../components/ChatWidget';
+import BlogFeed from '../components/BlogFeed.astro';
+import Achievements from '../components/Achievements.astro';
+import SkillsVisualization from '../components/SkillsVisualization.astro';
+import Testimonials from '../components/Testimonials.astro';
+import ContactForm from '../components/ContactForm.astro';
+import GitHubStats from '../components/GitHubStats.astro';
+---
+
+<Layout title="Mikey Shaw | Digital Architect">
+    <Navbar />
+    <Scene3D shapeCount={40} complexity={0.8} theme="dark" />
+    
+    <main class="portfolio-container">
+        <HeroSection />
+        <AboutSection />
+        <TechnologyMarquee />
+        <ProjectsGrid />
+        <Achievements />
+        <SkillsVisualization />
+        <Testimonials />
+        <GitHubStats />
+        <ContactForm />
+        <BlogFeed />
+    </main>
+
+    <ChatWidget client:load />
+</Layout>
+
+<style>
+    .portfolio-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        background: var(--background-dark);
+        color: var(--text-light);
+    }
+</style>

@@ -1,0 +1,44 @@
+name: Branch Management
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create-branches:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Create Development Branch
+        run: |
+          git checkout -b develop
+          git push origin develop
+
+      - name: Create Initial Feature Branches
+        run: |
+          feature_branches=(
+            "feature/ui-improvements"
+            "feature/performance-optimization"
+            "feature/accessibility-enhancements"
+            "feature/seo-optimization"
+          )
+
+          for branch in "${feature_branches[@]}"; do
+            git checkout develop
+            git checkout -b "$branch"
+            git push origin "$branch"
+          done
+
+      - name: Create Release and Hotfix Branches
+        run: |
+          git checkout main
+          git checkout -b release/v1.0.0
+          git push origin release/v1.0.0
+          
+          git checkout main
+          git checkout -b hotfix/initial-setup
+          git push origin hotfix/initial-setup

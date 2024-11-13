@@ -1,0 +1,138 @@
+---
+interface BlogPost {
+	title: string;
+	excerpt: string;
+	date: string;
+	url: string;
+	readingTime: string;
+}
+
+const blogPosts: BlogPost[] = [
+	{
+		title: "Building Repubot: A Journey in AI-Powered Reputation Management",
+		excerpt: "Learn about the challenges and insights gained while developing an innovative reputation management solution.",
+		date: "2024-04-15",
+		url: "#",
+		readingTime: "5 min read"
+	},
+	{
+		title: "The Future of E-commerce: Trends to Watch in 2024",
+		excerpt: "Exploring emerging technologies and strategies reshaping the e-commerce landscape.",
+		date: "2024-04-10",
+		url: "#",
+		readingTime: "4 min read"
+	},
+	{
+		title: "Leveraging AI for Better Customer Experience",
+		excerpt: "How artificial intelligence is transforming customer service and engagement.",
+		date: "2024-04-05",
+		url: "#",
+		readingTime: "6 min read"
+	}
+];
+
+function formatDate(dateStr: string) {
+	return new Date(dateStr).toLocaleDateString('en-US', {
+		month: 'long',
+		day: 'numeric',
+		year: 'numeric'
+	});
+}
+---
+
+<div class="blog-feed">
+	<h2>Latest Blog Posts</h2>
+	<div class="posts-grid">
+		{blogPosts.map((post) => (
+			<article class="blog-post">
+				<div class="post-meta">
+					<time datetime={post.date}>{formatDate(post.date)}</time>
+					<span class="reading-time">{post.readingTime}</span>
+				</div>
+				<h3>
+					<a href={post.url}>{post.title}</a>
+				</h3>
+				<p>{post.excerpt}</p>
+				<a href={post.url} class="read-more">
+					Read More
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<line x1="5" y1="12" x2="19" y2="12"></line>
+						<polyline points="12 5 19 12 12 19"></polyline>
+					</svg>
+				</a>
+			</article>
+		))}
+	</div>
+</div>
+
+<style>
+	.blog-feed {
+		margin: 4rem 0;
+		padding: 2rem;
+		border-radius: 1rem;
+		background: rgba(var(--accent-dark), 0.2);
+		backdrop-filter: blur(10px);
+	}
+	.posts-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+		margin-top: 2rem;
+	}
+	.blog-post {
+		background: rgba(var(--accent-dark), 0.3);
+		border-radius: 0.8rem;
+		padding: 1.5rem;
+		transition: transform 0.3s ease;
+	}
+	.blog-post:hover {
+		transform: translateY(-5px);
+	}
+	.post-meta {
+		display: flex;
+		gap: 1rem;
+		font-size: 0.9rem;
+		color: rgba(var(--accent-light), 0.8);
+		margin-bottom: 1rem;
+	}
+	.reading-time {
+		padding-left: 1rem;
+		border-left: 2px solid rgba(var(--accent-light), 0.2);
+	}
+	h3 {
+		font-size: 1.5rem;
+		margin: 0 0 1rem 0;
+	}
+	h3 a {
+		color: rgb(var(--accent-light));
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+	h3 a:hover {
+		color: white;
+	}
+	p {
+		margin: 0 0 1.5rem 0;
+		font-size: 1rem;
+		opacity: 0.9;
+		line-height: 1.6;
+	}
+	.read-more {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: rgb(var(--accent-light));
+		text-decoration: none;
+		font-weight: 500;
+		transition: gap 0.3s ease;
+	}
+	.read-more:hover {
+		gap: 0.8rem;
+	}
+	.read-more svg {
+		transition: transform 0.3s ease;
+	}
+	.read-more:hover svg {
+		transform: translateX(3px);
+	}
+</style>

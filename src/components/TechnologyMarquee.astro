@@ -1,0 +1,97 @@
+---
+import * as SimpleIcons from 'simple-icons';
+
+type Technology = {
+    name: string;
+    icon: { svg: string };
+};
+
+const technologies: Technology[] = [
+    { name: 'JavaScript', icon: SimpleIcons.siJavascript },
+    { name: 'TypeScript', icon: SimpleIcons.siTypescript },
+    { name: 'React', icon: SimpleIcons.siReact },
+    { name: 'Node.js', icon: SimpleIcons.siNodedotjs },
+    { name: 'Docker', icon: SimpleIcons.siDocker },
+    { name: 'GraphQL', icon: SimpleIcons.siGraphql },
+    { name: 'Kubernetes', icon: SimpleIcons.siKubernetes },
+    { name: 'Rust', icon: SimpleIcons.siRust },
+    { name: 'Next.js', icon: SimpleIcons.siNextdotjs },
+    { name: 'Astro', icon: SimpleIcons.siAstro },
+    { name: 'Three.js', icon: SimpleIcons.siThreedotjs }
+];
+---
+
+<section class="tech-marquee-section">
+    <div class="tech-marquee">
+        <div class="tech-track">
+            {technologies.map((tech) => (
+                <div class="tech-icon" title={tech.name}>
+                    <Fragment set:html={`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#D4AF37">${tech.icon.svg}</svg>`} />
+                </div>
+            ))}
+            {technologies.map((tech) => (
+                <div class="tech-icon" title={tech.name}>
+                    <Fragment set:html={`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#D4AF37">${tech.icon.svg}</svg>`} />
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
+
+<style>
+    .tech-marquee-section {
+        background: rgba(18, 18, 18, 0.5);
+        padding: 2rem 0;
+        margin: 2rem 0;
+    }
+
+    .tech-marquee {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .tech-track {
+        display: inline-flex;
+        animation: marquee 30s linear infinite;
+        width: max-content;
+    }
+
+    .tech-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        margin: 0 1rem;
+        background: rgba(212, 175, 55, 0.1);
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+    }
+
+    .tech-icon svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    .tech-icon:hover {
+        transform: scale(1.1);
+    }
+
+    @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+
+    @media (max-width: 768px) {
+        .tech-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 0.5rem;
+        }
+
+        .tech-icon svg {
+            width: 25px;
+            height: 25px;
+        }
+    }
+</style>

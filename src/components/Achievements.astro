@@ -1,0 +1,115 @@
+---
+const achievements = [
+    {
+        title: "AWS Certified Developer",
+        issuer: "Amazon Web Services",
+        date: "2023",
+        icon: "🏆"
+    },
+    {
+        title: "Machine Learning Specialization",
+        issuer: "Stanford Online",
+        date: "2022",
+        icon: "🧠"
+    },
+    {
+        title: "Web3 Blockchain Developer",
+        issuer: "Consensys Academy",
+        date: "2022",
+        icon: "🔗"
+    }
+];
+---
+
+<section class="achievements-section">
+    <div class="section-header">
+        <h2 class="section-title">Professional Achievements</h2>
+        <div class="divider"></div>
+    </div>
+    <div class="achievements-grid">
+        {achievements.map((achievement) => (
+            <div class="achievement-card">
+                <div class="achievement-icon">{achievement.icon}</div>
+                <div class="achievement-details">
+                    <h3 class="achievement-title">{achievement.title}</h3>
+                    <p class="achievement-issuer">{achievement.issuer}</p>
+                    <span class="achievement-date">{achievement.date}</span>
+                </div>
+            </div>
+        ))}
+    </div>
+</section>
+
+<style>
+    .achievements-section {
+        background: rgba(18, 18, 18, 0.5);
+        padding: 4rem 2rem;
+        color: var(--text-light);
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .section-title {
+        color: var(--primary-color);
+        font-size: 2.5rem;
+    }
+
+    .divider {
+        height: 2px;
+        background: linear-gradient(to right, var(--primary-color), transparent);
+        margin: 1rem auto;
+        max-width: 200px;
+    }
+
+    .achievements-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .achievement-card {
+        display: flex;
+        align-items: center;
+        background: rgba(0, 255, 255, 0.05);
+        padding: 1.5rem;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+    }
+
+    .achievement-card:hover {
+        transform: scale(1.05);
+    }
+
+    .achievement-icon {
+        font-size: 3rem;
+        margin-right: 1rem;
+        opacity: 0.7;
+    }
+
+    .achievement-details {
+        flex-grow: 1;
+    }
+
+    .achievement-title {
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .achievement-issuer {
+        color: var(--secondary-color);
+        opacity: 0.8;
+    }
+
+    .achievement-date {
+        display: block;
+        font-size: 0.8rem;
+        color: var(--text-light);
+        opacity: 0.6;
+        margin-top: 0.5rem;
+    }
+</style>

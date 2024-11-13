@@ -1,0 +1,49 @@
+name: Vercel Deployment
+
+on:
+  push:
+    branches: 
+      - main
+      - develop
+      - 'feature/**'
+      - 'hotfix/**'
+      - 'release/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+      
+      - name: Install Dependencies
+        run: npm ci
+      
+      - name: Build Project
+        run: npm run build
+      
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+        run: |
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            vercel deployment --prod --token=$VERCEL_TOKEN
+          else
+            vercel deployment --token=$VERCEL_TOKEN
+          fi
+      
+      - name: Create GitHub Deployment
+        uses: chrnorm/deployment-action@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: ${{ github.ref_name }}
+          environment-url: https://mikey-shaw-portfolio.vercel.app

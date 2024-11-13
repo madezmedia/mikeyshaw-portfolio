@@ -1,0 +1,107 @@
+---
+const skills = [
+    { name: 'React', level: 90, color: '#61DAFB' },
+    { name: 'Node.js', level: 85, color: '#68A063' },
+    { name: 'TypeScript', level: 80, color: '#3178C6' },
+    { name: 'Python', level: 75, color: '#FFD43B' },
+    { name: 'Docker', level: 70, color: '#0DB7ED' },
+    { name: 'Kubernetes', level: 65, color: '#326CE5' },
+    { name: 'GraphQL', level: 60, color: '#E10098' },
+    { name: 'Solidity', level: 55, color: '#363636' }
+];
+---
+
+<section class="skills-section">
+    <div class="section-header">
+        <h2 class="section-title">Technical Proficiency</h2>
+        <div class="divider"></div>
+    </div>
+    <div class="skills-container">
+        {skills.map((skill) => (
+            <div class="skill-bar">
+                <div class="skill-info">
+                    <span class="skill-name">{skill.name}</span>
+                    <span class="skill-percentage">{skill.level}%</span>
+                </div>
+                <div 
+                    class="skill-progress" 
+                    data-level={skill.level}
+                    data-color={skill.color}
+                ></div>
+            </div>
+        ))}
+    </div>
+</section>
+
+<style>
+    .skills-section {
+        background: rgba(18, 18, 18, 0.7);
+        padding: 4rem 2rem;
+        color: var(--text-light);
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .section-title {
+        color: var(--primary-color);
+        font-size: 2.5rem;
+    }
+
+    .divider {
+        height: 2px;
+        background: linear-gradient(to right, var(--primary-color), transparent);
+        margin: 1rem auto;
+        max-width: 200px;
+    }
+
+    .skills-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .skill-bar {
+        background: rgba(0, 255, 255, 0.05);
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        overflow: hidden;
+    }
+
+    .skill-info {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    .skill-name {
+        color: var(--text-light);
+    }
+
+    .skill-percentage {
+        color: var(--primary-color);
+    }
+
+    .skill-progress {
+        height: 10px;
+        width: 0;
+        transition: width 1.5s ease-in-out;
+    }
+</style>
+
+<script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+        const progressBars = document.querySelectorAll('.skill-progress');
+        progressBars.forEach((bar) => {
+            const level = bar.getAttribute('data-level');
+            const color = bar.getAttribute('data-color');
+            
+            if (bar instanceof HTMLElement) {
+                bar.style.width = `${level}%`;
+                bar.style.backgroundColor = color;
+            }
+        });
+    });
+</script>

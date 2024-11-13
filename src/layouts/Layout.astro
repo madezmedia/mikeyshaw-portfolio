@@ -1,0 +1,110 @@
+---
+import { ChatWidget } from '../components/ChatWidget';
+import '../components/ChatWidget.css';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Mikey Shaw's Portfolio" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<slot />
+		<div id="chat-widget-container"></div>
+	</body>
+</html>
+
+<script>
+	import React from 'react';
+	import { createRoot } from 'react-dom/client';
+	import { ChatWidget } from '../components/ChatWidget';
+
+	document.addEventListener('DOMContentLoaded', () => {
+		const container = document.getElementById('chat-widget-container');
+		if (container) {
+			const root = createRoot(container);
+			root.render(React.createElement(ChatWidget));
+		}
+	});
+</script>
+
+<style is:global>
+	:root {
+		--primary-color: #D4AF37;  /* Dark Gold */
+		--secondary-color: #C0C0C0;  /* Silver */
+		--accent-color: #708090;  /* Slate Gray */
+		--background-dark: #121212;
+		--text-light: #E0E0E0;
+
+		--accent: 212, 175, 55;  /* Dark Gold in RGB */
+		--accent-light: 192, 192, 192;  /* Silver in RGB */
+		--accent-dark: 112, 128, 144;  /* Slate Gray in RGB */
+		--accent-gradient: linear-gradient(
+			45deg,
+			rgb(var(--accent)),
+			rgb(var(--accent-light)) 30%,
+			white 60%
+		);
+	}
+	html {
+		font-family: 'Inter', system-ui, sans-serif;
+		background: var(--background-dark);
+		color: var(--text-light);
+	}
+	body {
+		margin: 0;
+		padding: 0;
+		min-height: 100vh;
+		overflow-x: hidden;
+		background: var(--background-dark);
+	}
+	* {
+		box-sizing: border-box;
+		scrollbar-color: var(--primary-color) var(--background-dark);
+		scrollbar-width: thin;
+	}
+	::-webkit-scrollbar {
+		width: 8px;
+	}
+	::-webkit-scrollbar-track {
+		background: var(--background-dark);
+	}
+	::-webkit-scrollbar-thumb {
+		background: var(--primary-color);
+		border-radius: 4px;
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: var(--secondary-color);
+	}
+	code {
+		font-family:
+			Menlo,
+			Monaco,
+			Lucida Console,
+			Liberation Mono,
+			DejaVu Sans Mono,
+			Bitstream Vera Sans Mono,
+			Courier New,
+			monospace;
+		color: var(--primary-color);
+	}
+	a {
+		color: var(--primary-color);
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+	a:hover {
+		color: var(--secondary-color);
+	}
+</style>

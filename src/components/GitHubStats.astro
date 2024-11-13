@@ -1,0 +1,99 @@
+---
+const githubUsername = 'madezmedia';
+---
+
+<section class="github-stats-section">
+    <div class="section-header">
+        <h2 class="section-title">GitHub Contributions</h2>
+        <div class="divider"></div>
+    </div>
+    <div class="github-stats-container">
+        <div class="github-profile-card">
+            <img 
+                src={`https://github-readme-stats.vercel.app/api?username=${githubUsername}&show_icons=true&theme=dark&hide_border=true&bg_color=121212&title_color=D4AF37&text_color=C0C0C0`} 
+                alt="GitHub Stats" 
+                class="github-stats-image"
+            />
+            <img 
+                src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${githubUsername}&layout=compact&theme=dark&hide_border=true&bg_color=121212&title_color=D4AF37&text_color=C0C0C0`} 
+                alt="Top Languages" 
+                class="github-langs-image"
+            />
+        </div>
+        <div class="github-streak-card">
+            <img 
+                src={`https://github-readme-streak-stats.herokuapp.com/?user=${githubUsername}&theme=dark&hide_border=true&background=121212&ring=D4AF37&fire=D4AF37&currStreakLabel=C0C0C0`} 
+                alt="GitHub Streak" 
+                class="github-streak-image"
+            />
+        </div>
+    </div>
+</section>
+
+<style>
+    .github-stats-section {
+        background: rgba(18, 18, 18, 0.7);
+        padding: 4rem 2rem;
+        color: var(--text-light);
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .section-title {
+        color: var(--primary-color);
+        font-size: 2.5rem;
+    }
+
+    .divider {
+        height: 2px;
+        background: linear-gradient(to right, var(--primary-color), transparent);
+        margin: 1rem auto;
+        max-width: 200px;
+    }
+
+    .github-stats-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .github-profile-card {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .github-stats-image,
+    .github-langs-image,
+    .github-streak-image {
+        max-width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease;
+    }
+
+    .github-profile-card img:hover,
+    .github-streak-card img:hover {
+        transform: scale(1.02);
+    }
+
+    @media (max-width: 768px) {
+        .github-profile-card {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .github-stats-image,
+        .github-langs-image,
+        .github-streak-image {
+            width: 100%;
+        }
+    }
+</style>

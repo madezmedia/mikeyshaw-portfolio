@@ -1,0 +1,114 @@
+---
+const navItems = [
+    { name: 'Home', href: '#' },
+    { name: 'About', href: '#about' },
+    { name: 'Technologies', href: '#technologies' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Contact', href: '#contact' }
+];
+---
+
+<nav class="portfolio-navbar">
+    <div class="navbar-container">
+        <div class="logo">
+            <a href="#">
+                <span class="logo-text">MS</span>
+            </a>
+        </div>
+        <div class="nav-links">
+            {navItems.map((item) => (
+                <a href={item.href} class="nav-link">{item.name}</a>
+            ))}
+        </div>
+        <div class="nav-cta">
+            <a href="#contact" class="btn btn-primary">Let's Connect</a>
+        </div>
+    </div>
+</nav>
+
+<style>
+    .portfolio-navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(18, 18, 18, 0.8);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        transition: background 0.3s ease;
+    }
+
+    .navbar-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .logo-text {
+        color: var(--primary-color);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    .nav-link {
+        color: var(--text-light);
+        text-decoration: none;
+        position: relative;
+        transition: color 0.3s ease;
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary-color);
+        transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+        color: var(--primary-color);
+    }
+
+    .nav-link:hover::after {
+        width: 100%;
+    }
+
+    .nav-cta .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+        .navbar-container {
+            flex-direction: column;
+            padding: 1rem;
+        }
+
+        .nav-links {
+            margin: 1rem 0;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .nav-cta {
+            width: 100%;
+            text-align: center;
+        }
+    }
+</style>
