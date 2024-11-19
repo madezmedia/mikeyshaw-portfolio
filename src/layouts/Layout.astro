@@ -1,110 +1,174 @@
 ---
-import { ChatWidget } from '../components/ChatWidget';
-import '../components/ChatWidget.css';
+import ChatWidget from '../components/ChatWidget.tsx';
 
-interface Props {
-	title: string;
+export interface Props {
+	title?: string;
+	description?: string;
+	keywords?: string[];
+	author?: string;
+	ogImage?: string;
 }
 
-const { title } = Astro.props;
+const { 
+	title = "Michael Shaw | Digital Architect & AI Innovator", 
+	description = "Michael Shaw: A visionary Digital Architect specializing in AI, automation, and innovative technology solutions. Transforming complex challenges into intelligent systems.",
+	keywords = [
+		"Michael Shaw", 
+		"Digital Architect", 
+		"AI Specialist", 
+		"Technology Innovation", 
+		"Automation Expert", 
+		"Machine Learning", 
+		"Software Development", 
+		"Mad EZ Media"
+	],
+	author = "Michael Shaw",
+	ogImage = "/images/mikey-shaw.png"
+} = Astro.props;
 ---
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Mikey Shaw's Portfolio" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
+		
+		<!-- Primary Meta Tags -->
 		<title>{title}</title>
+		<meta name="title" content={title} />
+		<meta name="description" content={description} />
+		<meta name="author" content={author} />
+		<meta name="keywords" content={keywords.join(", ")} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://mikeyshaw.online/" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImage} />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content="https://mikeyshaw.online/" />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={ogImage} />
+
+		<!-- Structured Data: Organization -->
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "Person",
+			"name": "Michael Shaw",
+			"jobTitle": "Digital Architect",
+			"url": "https://mikeyshaw.online",
+			"image": "/images/mikey-shaw.png",
+			"sameAs": [
+				"https://www.linkedin.com/in/michael-shaw-clt/",
+				"https://github.com/madezmedia",
+				"https://www.facebook.com/profile.php?id=100088552065336"
+			],
+			"worksFor": {
+				"@type": "Organization",
+				"name": "Mad EZ Media"
+			},
+			"knowsAbout": [
+				"AI", 
+				"Automation", 
+				"Software Development", 
+				"Technology Innovation"
+			]
+		}
+		</script>
+
+		<!-- Canonical Link -->
+		<link rel="canonical" href="https://mikeyshaw.online" />
+
+		<!-- Robots Meta Tag -->
+		<meta name="robots" content="index, follow" />
+
+		<!-- Preload Critical Assets -->
+		<link rel="preload" href="/images/mikey-shaw.png" as="image" />
+		<link rel="preload" href="/favicon.svg" as="image" />
+
+		<slot name="head" />
 	</head>
 	<body>
-		<slot />
-		<div id="chat-widget-container"></div>
+		<div class="app-container">
+			<slot />
+		</div>
+		<ChatWidget client:load />
 	</body>
 </html>
 
-<script>
-	import React from 'react';
-	import { createRoot } from 'react-dom/client';
-	import { ChatWidget } from '../components/ChatWidget';
-
-	document.addEventListener('DOMContentLoaded', () => {
-		const container = document.getElementById('chat-widget-container');
-		if (container) {
-			const root = createRoot(container);
-			root.render(React.createElement(ChatWidget));
-		}
-	});
-</script>
-
 <style is:global>
 	:root {
-		--primary-color: #D4AF37;  /* Dark Gold */
-		--secondary-color: #C0C0C0;  /* Silver */
-		--accent-color: #708090;  /* Slate Gray */
-		--background-dark: #121212;
-		--text-light: #E0E0E0;
+		--accent: 124, 58, 237;
+		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
+		--primary-color: #D4AF37;
+		--secondary-color: #C0C0C0;
+		--accent-dark: 18, 18, 18;
+		--accent-light: 40, 40, 40;
+	}
 
-		--accent: 212, 175, 55;  /* Dark Gold in RGB */
-		--accent-light: 192, 192, 192;  /* Silver in RGB */
-		--accent-dark: 112, 128, 144;  /* Slate Gray in RGB */
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
+	html, body {
+		max-width: 100%;
+		overflow-x: hidden;
 	}
+
 	html {
-		font-family: 'Inter', system-ui, sans-serif;
-		background: var(--background-dark);
-		color: var(--text-light);
+		font-family: system-ui, sans-serif;
+		background-color: #121212;
+		color: white;
 	}
+
 	body {
+		background-color: #121212;
+		color: #E0E0E0;
 		margin: 0;
 		padding: 0;
-		min-height: 100vh;
+		font-family: 'Inter', sans-serif;
+	}
+
+	.app-container {
+		max-width: 100%;
+		width: 100%;
 		overflow-x: hidden;
-		background: var(--background-dark);
+		position: relative;
 	}
-	* {
-		box-sizing: border-box;
-		scrollbar-color: var(--primary-color) var(--background-dark);
-		scrollbar-width: thin;
+
+	code {
+		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+			Bitstream Vera Sans Mono, Courier New, monospace;
 	}
+
+	/* Responsive Adjustments */
+	@media (max-width: 768px) {
+		body {
+			font-size: 14px;
+		}
+
+		.app-container {
+			padding: 0 15px;
+		}
+	}
+
+	/* Scrollbar Styling */
 	::-webkit-scrollbar {
-		width: 8px;
+		width: 10px;
 	}
+
 	::-webkit-scrollbar-track {
-		background: var(--background-dark);
+		background: rgba(18, 18, 18, 0.9);
 	}
+
 	::-webkit-scrollbar-thumb {
 		background: var(--primary-color);
-		border-radius: 4px;
+		border-radius: 5px;
 	}
+
 	::-webkit-scrollbar-thumb:hover {
-		background: var(--secondary-color);
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-		color: var(--primary-color);
-	}
-	a {
-		color: var(--primary-color);
-		text-decoration: none;
-		transition: color 0.3s ease;
-	}
-	a:hover {
-		color: var(--secondary-color);
+		background: #FFD700;
 	}
 </style>
