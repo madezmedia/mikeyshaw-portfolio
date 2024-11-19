@@ -1,23 +1,14 @@
 {
     "version": 2,
     "builds": [
-        {
-            "src": "package.json",
-            "use": "@vercel/static-build",
-            "config": { 
-                "distDir": "dist" 
-            }
-        }
+        { "src": "package.json", "use": "@vercel/static-build" }
     ],
     "routes": [
         { "handle": "filesystem" },
         { "src": "/(.*)", "dest": "/index.html" }
     ],
     "env": {
-        "GITHUB_USERNAME": "@github_username"
+        "NODE_VERSION": "16.x"
     },
-    "github": {
-        "enabled": true,
-        "silent": true
-    }
+    "framework": "astro"
 }

@@ -1,33 +1,66 @@
 ---
-const navItems = [
-    { name: 'Home', href: '#' },
-    { name: 'About', href: '#about' },
-    { name: 'Technologies', href: '#technologies' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' }
+const navLinks = [
+    { name: 'Home', href: '#home', icon: '🏠' },
+    { name: 'About', href: '#about', icon: '👤' },
+    { name: 'Projects', href: '#projects', icon: '💡' },
+    { name: 'Skills', href: '#skills', icon: '🛠️' },
+    { name: 'Achievements', href: '#achievements', icon: '🏆' },
+    { name: 'Company', href: '#company-profile', icon: '🌐' },
+    { name: 'Contact', href: '#lets-connect', icon: '📞' }
 ];
 ---
 
-<nav class="portfolio-navbar">
+<nav class="navbar">
     <div class="navbar-container">
-        <div class="logo">
-            <a href="#">
-                <span class="logo-text">MS</span>
-            </a>
+        <div class="logo-container">
+            <a href="#home" class="logo desktop-logo">MIKEY SHAW</a>
         </div>
-        <div class="nav-links">
-            {navItems.map((item) => (
-                <a href={item.href} class="nav-link">{item.name}</a>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        
+        <ul class="nav-menu">
+            {navLinks.map((link) => (
+                <li class="nav-item">
+                    <a href={link.href} class="nav-link">
+                        <span class="nav-icon">{link.icon}</span>
+                        <span class="nav-link-text">{link.name}</span>
+                    </a>
+                </li>
             ))}
-        </div>
-        <div class="nav-cta">
-            <a href="#contact" class="btn btn-primary">Let's Connect</a>
+        </ul>
+    </div>
+    
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-content">
+            <div class="glass-card">
+                <button class="close-drawer" id="close-drawer">&times;</button>
+                <div class="mobile-nav-header">
+                    <img src="/images/mad-ez-media-logo.png" alt="Mad EZ Media Logo" class="mobile-nav-logo">
+                    <h2 class="mobile-nav-title">Navigation</h2>
+                </div>
+                <ul class="mobile-nav-menu">
+                    {navLinks.map((link) => (
+                        <li class="mobile-nav-item">
+                            <a href={link.href} class="mobile-nav-link">
+                                <span class="nav-icon">{link.icon}</span>
+                                <span class="nav-link-text">{link.name}</span>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     </div>
 </nav>
 
 <style>
-    .portfolio-navbar {
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
+
+    .navbar {
         position: fixed;
         top: 0;
         left: 0;
@@ -35,7 +68,7 @@ const navItems = [
         background: rgba(18, 18, 18, 0.8);
         backdrop-filter: blur(10px);
         z-index: 1000;
-        transition: background 0.3s ease;
+        transition: all 0.3s ease;
     }
 
     .navbar-container {
@@ -47,68 +80,260 @@ const navItems = [
         padding: 1rem 2rem;
     }
 
-    .logo {
-        font-size: 1.5rem;
-        font-weight: bold;
-    }
-
-    .logo-text {
-        color: var(--primary-color);
-        text-transform: uppercase;
-        letter-spacing: 2px;
-    }
-
-    .nav-links {
+    .logo-container {
         display: flex;
-        gap: 1.5rem;
+        align-items: center;
+    }
+
+    .logo {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+        letter-spacing: 0.1em;
+    }
+
+    .nav-menu {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        align-items: center;
+    }
+
+    .nav-item {
+        margin-left: 1rem;
+        display: flex;
+        align-items: center;
     }
 
     .nav-link {
-        color: var(--text-light);
+        font-family: 'Orbitron', sans-serif;
+        color: var(--secondary-color);
         text-decoration: none;
-        position: relative;
         transition: color 0.3s ease;
+        position: relative;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.75rem;
+    }
+
+    .nav-icon {
+        font-size: 0.5rem;
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+    }
+
+    .nav-link:hover .nav-icon {
+        opacity: 1;
     }
 
     .nav-link::after {
         content: '';
         position: absolute;
-        bottom: -5px;
-        left: 0;
         width: 0;
         height: 2px;
-        background: var(--primary-color);
+        bottom: -3px;
+        left: 0;
+        background-color: var(--primary-color);
         transition: width 0.3s ease;
     }
 
     .nav-link:hover {
-        color: var(--primary-color);
+        color: white;
     }
 
     .nav-link:hover::after {
         width: 100%;
     }
 
-    .nav-cta .btn {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
+    .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
     }
 
-    @media (max-width: 768px) {
-        .navbar-container {
-            flex-direction: column;
-            padding: 1rem;
+    .bar {
+        width: 25px;
+        height: 3px;
+        background-color: var(--primary-color);
+        margin: 3px 0;
+        transition: 0.4s;
+    }
+
+    .mobile-drawer {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 300px;
+        height: 100%;
+        transition: 0.5s;
+        z-index: 1100;
+    }
+
+    .drawer-content {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+    }
+
+    .glass-card {
+        flex-grow: 1;
+        background: rgba(30, 30, 30, 0.85);
+        backdrop-filter: blur(15px);
+        border-radius: 20px 0 0 20px;
+        box-shadow: 
+            -10px 0 15px rgba(0, 0, 0, 0.1), 
+            0 10px 20px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+    }
+
+    .mobile-drawer.active {
+        right: 0;
+    }
+
+    .close-drawer {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        color: var(--primary-color);
+        font-size: 2.5rem;
+        cursor: pointer;
+        transition: transform 0.3s ease, color 0.3s ease;
+        line-height: 1;
+        z-index: 10;
+    }
+
+    .close-drawer:hover {
+        transform: rotate(90deg);
+        color: white;
+    }
+
+    .mobile-nav-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+    }
+
+    .mobile-nav-logo {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+        margin-bottom: 1rem;
+        border-radius: 50%;
+        border: 2px solid var(--primary-color);
+    }
+
+    .mobile-nav-title {
+        font-family: 'Orbitron', sans-serif;
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        opacity: 0.9;
+    }
+
+    .mobile-nav-menu {
+        list-style: none;
+        padding: 0;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .mobile-nav-item {
+        margin-bottom: 1.5rem;
+        opacity: 0.9;
+        transition: opacity 0.3s ease;
+    }
+
+    .mobile-nav-item:hover {
+        opacity: 1;
+    }
+
+    .mobile-nav-link {
+        display: flex;
+        align-items: center;
+        color: var(--secondary-color);
+        text-decoration: none;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+
+    .nav-icon {
+        margin-right: 1rem;
+        font-size: 1.5rem;
+        opacity: 0.8;
+    }
+
+    .mobile-nav-link:hover {
+        color: white;
+    }
+
+    .mobile-nav-link:hover .nav-icon {
+        opacity: 1;
+    }
+
+    @media (max-width: 992px) {
+        .nav-menu {
+            display: none;
         }
 
-        .nav-links {
-            margin: 1rem 0;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .nav-cta {
-            width: 100%;
-            text-align: center;
+        .menu-toggle {
+            display: flex;
         }
     }
 </style>
+
+<script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileDrawer = document.getElementById('mobile-drawer');
+        const closeDrawer = document.getElementById('close-drawer');
+        const navLinks = document.querySelectorAll('.mobile-nav-link');
+
+        function toggleMobileDrawer() {
+            mobileDrawer.classList.toggle('active');
+        }
+
+        if (mobileMenu) {
+            mobileMenu.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleMobileDrawer();
+            });
+        }
+
+        if (closeDrawer) {
+            closeDrawer.addEventListener('click', (e) => {
+                e.stopPropagation();
+                mobileDrawer.classList.remove('active');
+            });
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.stopPropagation();
+                mobileDrawer.classList.remove('active');
+            });
+        });
+    });
+</script>
