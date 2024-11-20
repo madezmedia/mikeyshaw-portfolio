@@ -1,107 +1,289 @@
 ---
-const skills = [
-    { name: 'React', level: 90, color: '#61DAFB' },
-    { name: 'Node.js', level: 85, color: '#68A063' },
-    { name: 'TypeScript', level: 80, color: '#3178C6' },
-    { name: 'Python', level: 75, color: '#FFD43B' },
-    { name: 'Docker', level: 70, color: '#0DB7ED' },
-    { name: 'Kubernetes', level: 65, color: '#326CE5' },
-    { name: 'GraphQL', level: 60, color: '#E10098' },
-    { name: 'Solidity', level: 55, color: '#363636' }
+import { UX_CONFIG } from '../utils/ux';
+
+interface SkillCategory {
+    name: string;
+    icon: string;
+    color: string;
+    skills: {
+        name: string;
+        proficiency: number;
+        icon?: string;
+    }[];
+}
+
+const skillCategories: SkillCategory[] = [
+    {
+        name: 'AI & Machine Learning',
+        icon: '🤖',
+        color: '#FF6B6B',
+        skills: [
+            { name: 'TensorFlow', proficiency: 0.9, icon: '/icons/tensorflow.svg' },
+            { name: 'PyTorch', proficiency: 0.85, icon: '/icons/pytorch.svg' },
+            { name: 'Scikit-learn', proficiency: 0.8, icon: '/icons/graphql.svg' },
+            { name: 'Keras', proficiency: 0.75, icon: '/icons/rust.svg' }
+        ]
+    },
+    {
+        name: 'Data Science',
+        icon: '📊',
+        color: '#4ECDC4',
+        skills: [
+            { name: 'Pandas', proficiency: 0.9, icon: '/icons/nodejs.svg' },
+            { name: 'NumPy', proficiency: 0.85, icon: '/icons/nextjs.svg' },
+            { name: 'Matplotlib', proficiency: 0.8, icon: '/icons/docker.svg' },
+            { name: 'Seaborn', proficiency: 0.75, icon: '/icons/kubernetes.svg' }
+        ]
+    },
+    {
+        name: 'Web Technologies',
+        icon: '💻',
+        color: '#45B7D1',
+        skills: [
+            { name: 'React', proficiency: 0.95, icon: '/icons/react.svg' },
+            { name: 'TypeScript', proficiency: 0.9, icon: '/icons/typescript.svg' },
+            { name: 'Node.js', proficiency: 0.85, icon: '/icons/nodejs.svg' },
+            { name: 'GraphQL', proficiency: 0.8, icon: '/icons/graphql.svg' }
+        ]
+    }
 ];
 ---
 
-<section class="skills-section">
-    <div class="section-header">
+<section class="skills-visualization-section">
+    <div class="skills-header">
         <h2 class="section-title">Technical Proficiency</h2>
-        <div class="divider"></div>
+        <p class="section-subtitle">Cutting-Edge Technology Expertise</p>
     </div>
-    <div class="skills-container">
-        {skills.map((skill) => (
-            <div class="skill-bar">
-                <div class="skill-info">
-                    <span class="skill-name">{skill.name}</span>
-                    <span class="skill-percentage">{skill.level}%</span>
+
+    <div class="skills-visualization-container">
+        {skillCategories.map((category) => (
+            <div 
+                class="skill-category" 
+                style={`--category-color: ${category.color}`}
+            >
+                <div class="category-header">
+                    <span class="category-icon">{category.icon}</span>
+                    <h3 class="category-name">{category.name}</h3>
                 </div>
-                <div 
-                    class="skill-progress" 
-                    data-level={skill.level}
-                    data-color={skill.color}
-                ></div>
+
+                <div class="skill-bars">
+                    {category.skills.map((skill) => (
+                        <div class="skill-bar-container">
+                            <div class="skill-info">
+                                {skill.icon && (
+                                    <img 
+                                        src={skill.icon} 
+                                        alt={`${skill.name} Icon`} 
+                                        class="skill-icon"
+                                    />
+                                )}
+                                <span class="skill-name">{skill.name}</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div 
+                                    class="skill-bar-fill" 
+                                    style={`width: ${skill.proficiency * 100}%; background-color: var(--category-color);`}
+                                ></div>
+                            </div>
+                            <span class="skill-percentage">
+                                {Math.round(skill.proficiency * 100)}%
+                            </span>
+                        </div>
+                    ))}
+                </div>
             </div>
         ))}
     </div>
+
+    <div class="skills-venn-diagram">
+        <h3 class="section-subtitle">Skill Intersections</h3>
+        <div class="venn-diagram-container">
+            <div class="venn-circle ai-ml">AI/ML</div>
+            <div class="venn-circle data-science">Data Science</div>
+            <div class="venn-circle web-tech">Web Tech</div>
+            <div class="venn-intersection">Full-Stack AI Solutions</div>
+        </div>
+    </div>
 </section>
 
-<style>
-    .skills-section {
-        background: rgba(18, 18, 18, 0.7);
-        padding: 4rem 2rem;
-        color: var(--text-light);
+<style define:vars={{
+    transitionDuration: `${UX_CONFIG.TRANSITION_DURATION}ms`
+}}>
+    .skills-visualization-section {
+        max-width: 1200px;
+        margin: 4rem auto;
+        padding: 2rem;
+        background: color-mix(in srgb, var(--bg-primary) 80%, transparent);
+        border-radius: 16px;
+        border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
     }
 
-    .section-header {
+    .skills-header {
         text-align: center;
         margin-bottom: 2rem;
     }
 
     .section-title {
-        color: var(--primary-color);
         font-size: 2.5rem;
+        color: var(--primary);
+        margin: 0;
+        font-family: 'Orbitron', sans-serif;
     }
 
-    .divider {
-        height: 2px;
-        background: linear-gradient(to right, var(--primary-color), transparent);
-        margin: 1rem auto;
-        max-width: 200px;
+    .section-subtitle {
+        color: var(--text-secondary);
+        opacity: 0.7;
+        margin-top: 0.5rem;
     }
 
-    .skills-container {
-        max-width: 800px;
-        margin: 0 auto;
+    .skills-visualization-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
     }
 
-    .skill-bar {
-        background: rgba(0, 255, 255, 0.05);
-        border-radius: 10px;
-        margin-bottom: 1rem;
-        overflow: hidden;
+    .skill-category {
+        background: color-mix(in srgb, var(--category-color) 10%, transparent);
+        border-radius: 16px;
+        padding: 1.5rem;
+        transition: transform var(--transitionDuration) ease;
+    }
+
+    .skill-category:hover {
+        transform: scale(1.05);
+    }
+
+    .category-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .category-icon {
+        font-size: 2.5rem;
+        opacity: 0.8;
+    }
+
+    .category-name {
+        font-size: 1.5rem;
+        color: var(--category-color);
+        margin: 0;
+    }
+
+    .skill-bars {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .skill-bar-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
     }
 
     .skill-info {
         display: flex;
-        justify-content: space-between;
-        padding: 0.5rem 1rem;
-        background: rgba(0, 0, 0, 0.2);
+        align-items: center;
+        gap: 0.5rem;
+        flex: 1;
+    }
+
+    .skill-icon {
+        width: 24px;
+        height: 24px;
     }
 
     .skill-name {
-        color: var(--text-light);
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+    }
+
+    .skill-bar {
+        flex: 3;
+        height: 10px;
+        background: color-mix(in srgb, var(--category-color) 20%, transparent);
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .skill-bar-fill {
+        height: 100%;
+        transition: width var(--transitionDuration) ease;
     }
 
     .skill-percentage {
-        color: var(--primary-color);
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        width: 50px;
+        text-align: right;
     }
 
-    .skill-progress {
-        height: 10px;
-        width: 0;
-        transition: width 1.5s ease-in-out;
+    .skills-venn-diagram {
+        margin-top: 3rem;
+        text-align: center;
+    }
+
+    .venn-diagram-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        height: 300px;
+    }
+
+    .venn-circle {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        opacity: 0.6;
+        transition: opacity var(--transitionDuration) ease;
+    }
+
+    .venn-circle.ai-ml {
+        background-color: #FF6B6B;
+        left: 25%;
+    }
+
+    .venn-circle.data-science {
+        background-color: #4ECDC4;
+        right: 25%;
+    }
+
+    .venn-circle.web-tech {
+        background-color: #45B7D1;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .venn-intersection {
+        position: absolute;
+        background: color-mix(in srgb, var(--primary) 30%, transparent);
+        color: var(--text-primary);
+        padding: 1rem;
+        border-radius: 8px;
+        font-weight: bold;
+        opacity: 0;
+        transition: opacity var(--transitionDuration) ease;
+    }
+
+    .venn-diagram-container:hover .venn-circle {
+        opacity: 0.3;
+    }
+
+    .venn-diagram-container:hover .venn-intersection {
+        opacity: 1;
+    }
+
+    @media (max-width: 1024px) {
+        .skills-visualization-container {
+            grid-template-columns: 1fr;
+        }
     }
 </style>
-
-<script is:inline>
-    document.addEventListener('DOMContentLoaded', () => {
-        const progressBars = document.querySelectorAll('.skill-progress');
-        progressBars.forEach((bar) => {
-            const level = bar.getAttribute('data-level');
-            const color = bar.getAttribute('data-color');
-            
-            if (bar instanceof HTMLElement) {
-                bar.style.width = `${level}%`;
-                bar.style.backgroundColor = color;
-            }
-        });
-    });
-</script>

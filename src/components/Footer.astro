@@ -1,0 +1,148 @@
+---
+import { UX_CONFIG } from '../utils/ux';
+import SocialLinks from './SocialLinks.astro';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-section copyright">
+            <p>© {currentYear} Mad EZ Media. All rights reserved.</p>
+        </div>
+
+        <div class="footer-section legal-links">
+            <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+            <span class="divider">|</span>
+            <a href="/terms-of-service" class="footer-link">Terms of Service</a>
+            <span class="divider">|</span>
+            <a href="/cookie-policy" class="footer-link">Cookie Policy</a>
+        </div>
+
+        <div class="footer-section social-links">
+            <SocialLinks />
+        </div>
+
+        <div class="footer-section creator-tag">
+            <p>
+                Created with <span class="heart">❤️</span> Coded By <span class="robot">🤖</span> 
+                <a 
+                    href="https://github.com/madezmedia" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="creator-link"
+                >
+                    @madezmedia
+                </a>
+            </p>
+        </div>
+    </div>
+</footer>
+
+<style define:vars={{
+    transitionDuration: `${UX_CONFIG.TRANSITION_DURATION}ms`
+}}>
+    .site-footer {
+        background: color-mix(in srgb, var(--bg-primary) 80%, transparent);
+        border-top: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+        padding: 2rem;
+        transition: background-color var(--transitionDuration) ease;
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .footer-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        color: var(--text-secondary);
+    }
+
+    .copyright p {
+        margin: 0;
+        font-size: 0.9rem;
+        opacity: 0.7;
+    }
+
+    .legal-links {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .footer-link {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color var(--transitionDuration) ease;
+        font-size: 0.9rem;
+    }
+
+    .footer-link:hover {
+        color: var(--primary);
+    }
+
+    .divider {
+        color: var(--text-secondary);
+        opacity: 0.5;
+    }
+
+    .creator-tag {
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .heart {
+        animation: pulse 1.5s infinite;
+    }
+
+    .robot {
+        animation: rotate 3s linear infinite;
+    }
+
+    .creator-link {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: bold;
+        transition: transform var(--transitionDuration) ease;
+    }
+
+    .creator-link:hover {
+        transform: scale(1.1);
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+    }
+
+    @keyframes rotate {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 768px) {
+        .footer-content {
+            gap: 1rem;
+        }
+
+        .legal-links {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .divider {
+            display: none;
+        }
+    }
+</style>

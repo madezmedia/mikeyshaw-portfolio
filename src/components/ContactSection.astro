@@ -1,0 +1,276 @@
+---
+import { UX_CONFIG } from '../utils/ux';
+import SocialLinks from './SocialLinks.astro';
+import CalEmbed from './CalEmbed.tsx';
+
+const contactOptions = [
+    {
+        platform: 'LinkedIn',
+        icon: '💼',
+        url: 'https://www.linkedin.com/in/michael-shaw-clt/',
+        description: 'Professional Network'
+    },
+    {
+        platform: 'Email',
+        icon: '✉️',
+        url: 'mailto:michael@madezmedia.com',
+        description: 'Business Inquiries'
+    },
+    {
+        platform: 'GitHub',
+        icon: '💻',
+        url: 'https://github.com/madezmedia',
+        description: 'Open Source Projects'
+    }
+];
+---
+
+<section class="contact-section">
+    <div class="contact-header">
+        <h2 class="section-title">Let's Connect</h2>
+        <p class="section-subtitle">Schedule, Collaborate, Innovate</p>
+    </div>
+
+    <div class="contact-container">
+        <div class="contact-methods">
+            <div class="quick-connect">
+                {contactOptions.map((option) => (
+                    <div 
+                        class="connection-card" 
+                        data-platform={option.platform}
+                    >
+                        <div class="connection-icon-container">
+                            <span class="connection-icon">{option.icon}</span>
+                        </div>
+                        <div class="connection-details">
+                            <h3 class="connection-platform">{option.platform}</h3>
+                            <p class="connection-description">{option.description}</p>
+                            <a 
+                                href={option.url} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                class="connection-link"
+                            >
+                                Connect
+                            </a>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <div class="social-connect">
+                <h3 class="social-title">Follow My Journey</h3>
+                <SocialLinks />
+            </div>
+        </div>
+
+        <div class="scheduling-container">
+            <div class="scheduling-header">
+                <h3 class="scheduling-title">Book a Meeting</h3>
+                <p class="scheduling-subtitle">Direct Access to Collaboration</p>
+            </div>
+            <CalEmbed client:load />
+        </div>
+    </div>
+</section>
+
+<style define:vars={{
+    transitionDuration: `${UX_CONFIG.TRANSITION_DURATION}ms`
+}}>
+    .contact-section {
+        max-width: 1200px;
+        margin: 4rem auto;
+        padding: 2rem;
+        background: linear-gradient(
+            135deg, 
+            color-mix(in srgb, var(--bg-primary) 90%, transparent),
+            color-mix(in srgb, var(--bg-secondary) 90%, transparent)
+        );
+        border-radius: 16px;
+        border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+        box-shadow: 
+            0 15px 30px color-mix(in srgb, var(--accent) 10%, transparent),
+            0 10px 20px color-mix(in srgb, var(--accent) 5%, transparent);
+        transition: transform var(--transitionDuration) ease;
+    }
+
+    .contact-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin: 0;
+        font-family: 'Orbitron', sans-serif;
+        background: linear-gradient(
+            to right, 
+            var(--primary), 
+            color-mix(in srgb, var(--primary) 50%, transparent)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .section-subtitle {
+        color: var(--text-secondary);
+        opacity: 0.7;
+        margin-top: 0.5rem;
+    }
+
+    .contact-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .contact-methods {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .quick-connect {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .connection-card {
+        background: color-mix(in srgb, var(--accent) 10%, transparent);
+        border-radius: 16px;
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        transition: 
+            transform var(--transitionDuration) ease,
+            box-shadow var(--transitionDuration) ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .connection-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+            circle at center, 
+            color-mix(in srgb, var(--primary) 20%, transparent) 0%, 
+            transparent 70%
+        );
+        opacity: 0;
+        transition: opacity var(--transitionDuration) ease;
+        z-index: 1;
+    }
+
+    .connection-card:hover {
+        transform: scale(1.03) rotateX(3deg);
+        box-shadow: 
+            0 15px 30px color-mix(in srgb, var(--primary) 30%, transparent),
+            0 10px 20px color-mix(in srgb, var(--primary) 20%, transparent);
+    }
+
+    .connection-card:hover::before {
+        opacity: 1;
+    }
+
+    .connection-icon-container {
+        background: color-mix(in srgb, var(--primary) 20%, transparent);
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform var(--transitionDuration) ease;
+    }
+
+    .connection-card:hover .connection-icon-container {
+        transform: rotate(360deg);
+    }
+
+    .connection-icon {
+        font-size: 3rem;
+        opacity: 0.8;
+    }
+
+    .connection-details {
+        flex-grow: 1;
+    }
+
+    .connection-platform {
+        margin: 0 0 0.5rem;
+        color: var(--primary);
+        font-size: 1.2rem;
+    }
+
+    .connection-description {
+        margin: 0 0 1rem;
+        color: var(--text-secondary);
+        opacity: 0.7;
+    }
+
+    .connection-link {
+        display: inline-block;
+        background: var(--primary);
+        color: var(--bg-primary);
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        transition: 
+            transform var(--transitionDuration) ease,
+            box-shadow var(--transitionDuration) ease;
+    }
+
+    .connection-link:hover {
+        transform: scale(1.05);
+        box-shadow: 
+            0 10px 20px color-mix(in srgb, var(--primary) 30%, transparent),
+            0 6px 10px color-mix(in srgb, var(--primary) 20%, transparent);
+    }
+
+    .social-connect {
+        text-align: center;
+    }
+
+    .social-title {
+        color: var(--text-secondary);
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .scheduling-container {
+        background: color-mix(in srgb, var(--accent) 10%, transparent);
+        border-radius: 16px;
+        padding: 2rem;
+    }
+
+    .scheduling-header {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .scheduling-title {
+        color: var(--primary);
+        margin: 0;
+        font-size: 1.5rem;
+    }
+
+    .scheduling-subtitle {
+        color: var(--text-secondary);
+        opacity: 0.7;
+        margin-top: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .contact-container {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

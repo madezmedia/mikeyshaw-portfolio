@@ -1,4 +1,5 @@
 ---
+import { UX_CONFIG } from '../utils/ux';
 import SocialLinks from './SocialLinks.astro';
 
 interface HeroProps {
@@ -18,11 +19,11 @@ const {
     <div class="hero-grid">
         <div class="hero-content">
             <div class="hero-intro">
-                <div class="code-terminal">
+                <div class="code-terminal theme-hover">
                     <div class="terminal-header">
-                        <span class="terminal-dot red"></span>
-                        <span class="terminal-dot yellow"></span>
-                        <span class="terminal-dot green"></span>
+                        <span class="terminal-dot minimize"></span>
+                        <span class="terminal-dot maximize"></span>
+                        <span class="terminal-dot close"></span>
                     </div>
                     <div class="terminal-body">
                         <code>
@@ -39,7 +40,7 @@ const {
             <h1 class="hero-title">
                 {taglines.map((tagline, index) => (
                     <span 
-                        class="hero-tagline" 
+                        class="hero-tagline animate-fade-in-up" 
                         style={`--delay: ${index * 0.2}s`}
                     >
                         {tagline}
@@ -47,28 +48,34 @@ const {
                 ))}
             </h1>
 
-            <p class="hero-description">{description}</p>
+            <p class="hero-description animate-subtle-scale">{description}</p>
 
             <div class="hero-cta">
-                <a href="#projects" class="btn btn-primary">
+                <a 
+                    href="#projects" 
+                    class="btn btn-primary hover-lift"
+                    data-ux-interaction="true"
+                >
                     <span>View Portfolio</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M13 5l7 7-7 7M5 12h14"></path>
                     </svg>
                 </a>
-                <a href="#contact" class="btn btn-secondary">
+                <a 
+                    href="#contact" 
+                    class="btn btn-secondary hover-lift"
+                    data-ux-interaction="true"
+                >
                     <span>Let's Connect</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                     </svg>
                 </a>
             </div>
-
-            
         </div>
 
         <div class="hero-visual">
-            <div class="code-background">
+            <div class="code-background theme-hover">
                 <pre class="code-snippet"><code>
 <span class="keyword">class</span> <span class="class-name">DigitalArchitect</span> 
     <span class="method">constructor</span>() }
@@ -89,19 +96,79 @@ const {
     </div>
 </section>
 
+<script define:vars={{UX_CONFIG}}>
+    document.addEventListener('DOMContentLoaded', () => {
+        // UX Interactions for buttons
+        const interactiveElements = document.querySelectorAll('[data-ux-interaction="true"]');
+        
+        interactiveElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                element.style.transform = `scale(${UX_CONFIG.HOVER_SCALE})`;
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                element.style.transform = 'scale(1)';
+            });
+        });
+
+        // Preload images for visual section
+        const heroVisual = document.querySelector('.hero-visual');
+        if (heroVisual) {
+            const images = [
+                '/images/mikey-shaw.png',
+                '/images/mad-ez-media-logo.png'
+            ];
+            
+            images.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
+        }
+    });
+</script>
+
 <style>
+    :root {
+        /* Dark Mode Variables */
+        --hero-bg-dark: #121212;
+        --hero-bg-gradient-dark: color-mix(in srgb, #121212 95%, #D4AF37);
+        --hero-text-primary-dark: #E0E0E0;
+        --hero-text-secondary-dark: #C0C0C0;
+        --hero-accent-dark: #D4AF37;
+        --hero-terminal-bg-dark: #1E1E1E;
+        --hero-terminal-header-dark: #2C2C2C;
+
+        /* Light Mode Variables */
+        --hero-bg-light: #F8F9FA;
+        --hero-bg-gradient-light: color-mix(in srgb, #FFFFFF 95%, #28A745);
+        --hero-text-primary-light: #212529;
+        --hero-text-secondary-light: #495057;
+        --hero-accent-light: #28A745;
+        --hero-terminal-bg-light: #F1F3F5;
+        --hero-terminal-header-light: #E9ECEF;
+    }
+
     .advanced-hero {
-        min-height: 100vh;
+        min-height: 90vh;  /* Reduced from 100vh */
         display: flex;
         align-items: center;
         background: linear-gradient(
             135deg, 
-            rgba(18, 18, 18, 0.95), 
-            rgba(18, 18, 18, 0.98)
+            var(--hero-bg-dark), 
+            var(--hero-bg-gradient-dark)
         );
-        color: var(--text-light);
+        color: var(--hero-text-primary-dark);
         overflow: hidden;
         position: relative;
+    }
+
+    :root[data-theme='light'] .advanced-hero {
+        background: linear-gradient(
+            135deg, 
+            var(--hero-bg-light), 
+            var(--hero-bg-gradient-light)
+        );
+        color: var(--hero-text-primary-light);
     }
 
     .hero-grid {
@@ -110,61 +177,96 @@ const {
         align-items: center;
         max-width: 1200px;
         margin: 0 auto;
-        padding: 2rem;
-        gap: 2rem;
+        padding: 1rem;  /* Reduced padding */
+        gap: 1.5rem;   /* Reduced gap */
     }
 
     .hero-content {
         display: flex;
         flex-direction: column;
-        gap: 1.5rem;
+        gap: 1rem;  /* Reduced gap */
         z-index: 2;
     }
 
     .code-terminal {
-        background: #1E1E1E;
+        background: var(--hero-terminal-bg-dark);
         border-radius: 10px;
         overflow: hidden;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         max-width: 400px;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;  /* Reduced margin */
+    }
+
+    :root[data-theme='light'] .code-terminal {
+        background: var(--hero-terminal-bg-light);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
 
     .terminal-header {
         display: flex;
         align-items: center;
-        background: #2C2C2C;
-        padding: 10px;
+        background: var(--hero-terminal-header-dark);
+        padding: 8px;  /* Reduced padding */
+    }
+
+    :root[data-theme='light'] .terminal-header {
+        background: var(--hero-terminal-header-light);
     }
 
     .terminal-dot {
-        width: 12px;
-        height: 12px;
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
-        margin-right: 8px;
+        margin-right: 6px;
+        opacity: 0.7;
     }
 
-    .terminal-dot.red { background: #FF5F56; }
-    .terminal-dot.yellow { background: #FFBD2E; }
-    .terminal-dot.green { background: #27C93F; }
+    .terminal-dot.minimize { background: #C0C0C0; }
+    .terminal-dot.maximize { background: #708090; }
+    .terminal-dot.close { background: #D4AF37; }
 
     .terminal-body {
-        padding: 1rem;
+        padding: 0.75rem;  /* Reduced padding */
         font-family: 'Courier New', monospace;
-        font-size: 0.9rem;
-        color: #39FF14;
+        font-size: 0.85rem;  /* Slightly smaller font */
+        color: var(--hero-text-primary-dark);
+        transition: color 0.3s ease;
     }
 
-    .terminal-prompt { color: #9CDCFE; }
-    .terminal-path { color: #CE9178; }
-    .terminal-command { color: #569CD6; }
-    .terminal-result { color: #B5CEA8; }
+    :root[data-theme='light'] .terminal-body {
+        color: var(--hero-text-primary-light);
+    }
+
+    .terminal-prompt { 
+        color: #C0C0C0; 
+        transition: color 0.3s ease;
+    }
+    .terminal-path { 
+        color: var(--hero-accent-dark);
+        transition: color 0.3s ease;
+    }
+    .terminal-command { 
+        color: #708090; 
+        transition: color 0.3s ease;
+    }
+    .terminal-result { 
+        color: var(--hero-text-primary-dark);
+        transition: color 0.3s ease;
+    }
+
+    :root[data-theme='light'] .terminal-path {
+        color: var(--hero-accent-light);
+    }
+
+    :root[data-theme='light'] .terminal-result {
+        color: var(--hero-text-primary-light);
+    }
 
     .hero-title {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
-        font-size: 3rem;
+        gap: 0.25rem;  /* Reduced gap */
+        font-size: 2.75rem;  /* Slightly smaller */
         font-weight: 900;
     }
 
@@ -173,45 +275,58 @@ const {
         transform: translateY(20px);
         animation: fadeInUp 0.8s forwards;
         animation-delay: var(--delay);
-        color: var(--primary-color);
+        color: var(--hero-accent-dark);
     }
 
-    @keyframes fadeInUp {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    :root[data-theme='light'] .hero-tagline {
+        color: var(--hero-accent-light);
     }
 
     .hero-description {
         max-width: 500px;
-        color: var(--secondary-color);
+        color: var(--hero-text-secondary-dark);
         opacity: 0.8;
+        font-size: 0.95rem;  /* Slightly smaller */
+    }
+
+    :root[data-theme='light'] .hero-description {
+        color: var(--hero-text-secondary-light);
     }
 
     .hero-cta {
         display: flex;
-        gap: 1rem;
+        gap: 0.75rem;  /* Reduced gap */
     }
 
     .btn {
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        padding: 0.8rem 1.5rem;
+        padding: 0.6rem 1.25rem;  /* Reduced padding */
         border-radius: 5px;
         text-decoration: none;
         transition: all 0.3s ease;
+        font-size: 0.9rem;  /* Slightly smaller */
     }
 
     .btn-primary {
-        background: var(--primary-color);
-        color: var(--background-dark);
+        background: var(--hero-accent-dark);
+        color: var(--hero-text-primary-dark);
+    }
+
+    :root[data-theme='light'] .btn-primary {
+        background: var(--hero-accent-light);
+        color: white;
     }
 
     .btn-secondary {
-        border: 2px solid var(--primary-color);
-        color: var(--primary-color);
+        border: 2px solid var(--hero-accent-dark);
+        color: var(--hero-accent-dark);
+    }
+
+    :root[data-theme='light'] .btn-secondary {
+        border: 2px solid var(--hero-accent-light);
+        color: var(--hero-accent-light);
     }
 
     .btn svg {
@@ -226,26 +341,63 @@ const {
     }
 
     .code-background {
-        background: #1E1E1E;
+        background: var(--hero-terminal-bg-dark);
         border-radius: 10px;
         padding: 2rem;
         box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
         max-width: 500px;
+        transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    :root[data-theme='light'] .code-background {
+        background: var(--hero-terminal-bg-light);
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.1);
     }
 
     .code-snippet {
         font-family: 'Courier New', monospace;
         font-size: 0.9rem;
-        color: #D4D4D4;
+        color: var(--hero-text-primary-dark);
         margin: 0;
         white-space: pre-wrap;
+        transition: color 0.3s ease;
     }
 
-    .keyword { color: #569CD6; }
-    .class-name { color: #4EC9B0; }
-    .method { color: #DCDCAA; }
-    .comment { color: #6A9955; }
-    .string { color: #CE9178; }
+    :root[data-theme='light'] .code-snippet {
+        color: var(--hero-text-primary-light);
+    }
+
+    .keyword { 
+        color: #708090; 
+        transition: color 0.3s ease;
+    }
+    .class-name { 
+        color: var(--hero-accent-dark);
+        transition: color 0.3s ease;
+    }
+    .method { 
+        color: #C0C0C0; 
+        transition: color 0.3s ease;
+    }
+    .comment { 
+        color: #708090; 
+        opacity: 0.7;
+        transition: color 0.3s ease;
+    }
+    .string { 
+        color: var(--hero-accent-dark);
+        transition: color 0.3s ease;
+    }
+
+    :root[data-theme='light'] .class-name,
+    :root[data-theme='light'] .string {
+        color: var(--hero-accent-light);
+    }
+
+    :root[data-theme='light'] .method {
+        color: #6C757D;
+    }
 
     @media (max-width: 1024px) {
         .hero-grid {
@@ -262,34 +414,3 @@ const {
         }
     }
 </style>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const taglines = ['Innovator', 'Full Stack Developer', 'AI & Web3 Enthusiast'];
-        const typedTextElement = document.querySelector('.typed-text');
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-
-        function type() {
-            const currentText = taglines[textIndex];
-            const displayText = isDeleting 
-                ? currentText.slice(0, charIndex - 1) 
-                : currentText.slice(0, charIndex + 1);
-
-            typedTextElement.textContent = displayText;
-
-            if (!isDeleting && displayText === currentText) {
-                setTimeout(() => { isDeleting = true; }, 2000);
-            } else if (isDeleting && displayText === '') {
-                isDeleting = false;
-                textIndex = (textIndex + 1) % taglines.length;
-            }
-
-            charIndex += isDeleting ? -1 : 1;
-            setTimeout(type, isDeleting ? 50 : 150);
-        }
-
-        type();
-    });
-</script>

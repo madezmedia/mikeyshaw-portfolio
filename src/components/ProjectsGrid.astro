@@ -1,74 +1,26 @@
 ---
 import ProjectCard from './ProjectCard.astro';
+import type { Project } from '../types/project';
+import { PROJECTS } from '../types/project';
 
-type ProjectStatus = 'In Progress' | 'Prototype' | 'Completed';
-
-type Project = {
-    title: string;
-    description: string;
-    tech: string[];
-    href: string;
-    image: string;
-    status: ProjectStatus;
-};
-
-const projects: Project[] = [
-    {
-        title: "Repubot MVP",
-        description: "AI-powered reputation management platform revolutionizing online brand monitoring.",
-        tech: ['AI', 'Node.js', 'React'],
-        href: "https://github.com/madezmedia/Repubot",
-        image: "/placeholders/project-placeholder.svg",
-        status: "In Progress"
-    },
-    {
-        title: "Web3 Marketplace",
-        description: "Decentralized e-commerce solution leveraging blockchain technology for secure transactions.",
-        tech: ['Solidity', 'React', 'Web3.js'],
-        href: "#",
-        image: "/placeholders/project-placeholder.svg",
-        status: "Prototype"
-    },
-    {
-        title: "AI Content Generator",
-        description: "Intelligent content creation tool using advanced natural language processing.",
-        tech: ['OpenAI', 'Python', 'Next.js'],
-        href: "#",
-        image: "/placeholders/project-placeholder.svg",
-        status: "In Progress"
-    },
-    {
-        title: "Favor AI Betting Analytics",
-        description: "Professional sports betting analytics platform with AI-powered predictions and real-time odds tracking.",
-        tech: ['Vite', 'React', 'TypeScript', 'AI'],
-        href: "https://astounding-fox-50fec6.netlify.app/",
-        image: "/placeholders/project-placeholder.svg",
-        status: "Completed"
-    }
-];
+const featuredProjects = PROJECTS.filter(project => project.featured);
 ---
 
-<section id="projects" class="projects-section">
+<section class="projects-grid-section">
     <div class="section-header">
-        <h2 class="section-title">Innovative Projects</h2>
+        <h2 class="section-title">Featured Projects</h2>
         <div class="divider"></div>
     </div>
+
     <div class="projects-grid">
-        {projects.map((project) => (
-            <ProjectCard 
-                title={project.title}
-                description={project.description}
-                tech={project.tech}
-                href={project.href}
-                image={project.image}
-                status={project.status}
-            />
+        {featuredProjects.map((project: Project) => (
+            <ProjectCard project={project} />
         ))}
     </div>
 </section>
 
 <style>
-    .projects-section {
+    .projects-grid-section {
         max-width: 1200px;
         margin: 4rem auto;
         padding: 2rem;
@@ -83,13 +35,15 @@ const projects: Project[] = [
 
     .section-title {
         font-size: 2.5rem;
-        color: var(--primary-color);
+        color: var(--primary);
+        margin: 0;
+        font-family: 'Orbitron', sans-serif;
     }
 
     .divider {
         flex-grow: 1;
         height: 2px;
-        background: linear-gradient(to right, var(--primary-color), transparent);
+        background: linear-gradient(to right, var(--primary), transparent);
     }
 
     .projects-grid {

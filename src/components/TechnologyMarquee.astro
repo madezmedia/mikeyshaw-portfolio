@@ -1,23 +1,25 @@
 ---
 import * as SimpleIcons from 'simple-icons';
+import { UX_CONFIG } from '../utils/ux';
 
 type Technology = {
     name: string;
     icon: { svg: string };
+    color: string;
 };
 
 const technologies: Technology[] = [
-    { name: 'JavaScript', icon: SimpleIcons.siJavascript },
-    { name: 'TypeScript', icon: SimpleIcons.siTypescript },
-    { name: 'React', icon: SimpleIcons.siReact },
-    { name: 'Node.js', icon: SimpleIcons.siNodedotjs },
-    { name: 'Docker', icon: SimpleIcons.siDocker },
-    { name: 'GraphQL', icon: SimpleIcons.siGraphql },
-    { name: 'Kubernetes', icon: SimpleIcons.siKubernetes },
-    { name: 'Rust', icon: SimpleIcons.siRust },
-    { name: 'Next.js', icon: SimpleIcons.siNextdotjs },
-    { name: 'Astro', icon: SimpleIcons.siAstro },
-    { name: 'Three.js', icon: SimpleIcons.siThreedotjs }
+    { name: 'JavaScript', icon: SimpleIcons.siJavascript, color: '#F7DF1E' },
+    { name: 'TypeScript', icon: SimpleIcons.siTypescript, color: '#3178C6' },
+    { name: 'React', icon: SimpleIcons.siReact, color: '#61DAFB' },
+    { name: 'Node.js', icon: SimpleIcons.siNodedotjs, color: '#339933' },
+    { name: 'Docker', icon: SimpleIcons.siDocker, color: '#2496ED' },
+    { name: 'GraphQL', icon: SimpleIcons.siGraphql, color: '#E10098' },
+    { name: 'Kubernetes', icon: SimpleIcons.siKubernetes, color: '#326CE5' },
+    { name: 'Rust', icon: SimpleIcons.siRust, color: '#000000' },
+    { name: 'Next.js', icon: SimpleIcons.siNextdotjs, color: '#000000' },
+    { name: 'Astro', icon: SimpleIcons.siAstro, color: '#FF5D01' },
+    { name: 'Three.js', icon: SimpleIcons.siThreedotjs, color: '#000000' }
 ];
 ---
 
@@ -25,24 +27,54 @@ const technologies: Technology[] = [
     <div class="tech-marquee">
         <div class="tech-track">
             {technologies.map((tech) => (
-                <div class="tech-icon" title={tech.name}>
-                    <Fragment set:html={`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#D4AF37">${tech.icon.svg}</svg>`} />
+                <div 
+                    class="tech-icon" 
+                    title={tech.name}
+                    data-tooltip={tech.name}
+                    style={`--tech-color: ${tech.color}`}
+                >
+                    <Fragment 
+                        set:html={`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="var(--tech-icon-color)">${tech.icon.svg}</svg>`} 
+                    />
                 </div>
             ))}
             {technologies.map((tech) => (
-                <div class="tech-icon" title={tech.name}>
-                    <Fragment set:html={`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#D4AF37">${tech.icon.svg}</svg>`} />
+                <div 
+                    class="tech-icon" 
+                    title={tech.name}
+                    data-tooltip={tech.name}
+                    style={`--tech-color: ${tech.color}`}
+                >
+                    <Fragment 
+                        set:html={`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="var(--tech-icon-color)">${tech.icon.svg}</svg>`} 
+                    />
                 </div>
             ))}
         </div>
     </div>
 </section>
 
-<style>
+<style define:vars={{
+    transitionDuration: `${UX_CONFIG.TRANSITION_DURATION}ms`
+}}>
+    :root {
+        --tech-bg-dark: color-mix(in srgb, #121212 80%, transparent);
+        --tech-bg-light: color-mix(in srgb, #F8F9FA 80%, transparent);
+        --tech-icon-color-dark: #D4AF37;
+        --tech-icon-color-light: #28A745;
+    }
+
     .tech-marquee-section {
-        background: rgba(18, 18, 18, 0.5);
+        background: var(--tech-bg-dark);
         padding: 2rem 0;
         margin: 2rem 0;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: background-color var(--transitionDuration) ease;
+    }
+
+    :root[data-theme='light'] .tech-marquee-section {
+        background: var(--tech-bg-light);
     }
 
     .tech-marquee {
@@ -60,21 +92,82 @@ const technologies: Technology[] = [
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 60px;
-        height: 60px;
-        margin: 0 1rem;
-        background: rgba(212, 175, 55, 0.1);
-        border-radius: 8px;
-        transition: transform 0.3s ease;
+        width: 80px;
+        height: 80px;
+        margin: 0 1.5rem;
+        background: color-mix(in srgb, var(--tech-color) 10%, transparent);
+        border-radius: 12px;
+        transition: 
+            transform 0.3s ease,
+            box-shadow 0.3s ease,
+            background 0.3s ease;
+        position: relative;
+        cursor: pointer;
+        perspective: 1000px;
     }
 
-    .tech-icon svg {
-        width: 30px;
-        height: 30px;
+    .tech-icon::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            135deg, 
+            color-mix(in srgb, var(--tech-color) 20%, transparent),
+            color-mix(in srgb, var(--tech-color) 5%, transparent)
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: 12px;
+        z-index: -1;
     }
 
     .tech-icon:hover {
-        transform: scale(1.1);
+        transform: scale(1.1) rotateY(10deg);
+        box-shadow: 
+            0 10px 20px color-mix(in srgb, var(--tech-color) 30%, transparent),
+            0 6px 10px color-mix(in srgb, var(--tech-color) 20%, transparent);
+    }
+
+    .tech-icon:hover::before {
+        opacity: 1;
+    }
+
+    .tech-icon svg {
+        width: 40px;
+        height: 40px;
+        transition: fill var(--transitionDuration) ease;
+        fill: var(--tech-icon-color-dark);
+    }
+
+    :root[data-theme='light'] .tech-icon svg {
+        fill: var(--tech-icon-color-light);
+    }
+
+    .tech-icon[data-tooltip]::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: -35px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: 
+            opacity 0.3s ease,
+            visibility 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .tech-icon:hover[data-tooltip]::after {
+        opacity: 1;
+        visibility: visible;
     }
 
     @keyframes marquee {
@@ -84,14 +177,31 @@ const technologies: Technology[] = [
 
     @media (max-width: 768px) {
         .tech-icon {
-            width: 50px;
-            height: 50px;
-            margin: 0 0.5rem;
+            width: 60px;
+            height: 60px;
+            margin: 0 1rem;
         }
 
         .tech-icon svg {
-            width: 25px;
-            height: 25px;
+            width: 30px;
+            height: 30px;
         }
     }
 </style>
+
+<script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+        const techIcons = document.querySelectorAll('.tech-icon');
+        
+        techIcons.forEach((icon) => {
+            icon.addEventListener('mouseenter', function() {
+                const techColor = this.style.getPropertyValue('--tech-color');
+                this.style.setProperty('--tech-icon-color', techColor);
+            });
+
+            icon.addEventListener('mouseleave', function() {
+                this.style.setProperty('--tech-icon-color', 'currentColor');
+            });
+        });
+    });
+</script>

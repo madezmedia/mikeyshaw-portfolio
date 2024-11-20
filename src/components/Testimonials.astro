@@ -1,47 +1,93 @@
 ---
-const testimonials = [
+import { UX_CONFIG } from '../utils/ux';
+
+interface Testimonial {
+    name: string;
+    role: string;
+    company: string;
+    quote: string;
+    avatar: string;
+    rating: number;
+    color: string;
+}
+
+const testimonials: Testimonial[] = [
     {
-        quote: "Mikey's innovative approach to solving complex technical challenges is truly remarkable. His ability to integrate cutting-edge technologies sets him apart.",
-        author: "Sarah Johnson",
-        role: "CTO, TechInnovate Solutions",
-        avatar: "https://randomuser.me/api/portraits/women/44.jpg"
+        name: 'Sarah Thompson',
+        role: 'CTO',
+        company: 'TechInnovate',
+        quote: 'Mad EZ Media transformed our digital strategy with their cutting-edge AI solutions. Their expertise is unparalleled.',
+        avatar: 'https://randomuser.me/api/portraits/women/68.jpg',
+        rating: 5,
+        color: '#28A745'
     },
     {
-        quote: "Working with Mikey was a game-changer. His expertise in AI and Web3 technologies brought our project to the next level.",
-        author: "Alex Rodriguez",
-        role: "Founder, BlockchainX",
-        avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+        name: 'Michael Rodriguez',
+        role: 'Founder',
+        company: 'StartupEdge',
+        quote: 'The team\'s ability to blend advanced technology with intuitive design is remarkable. They truly understand modern digital landscapes.',
+        avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
+        rating: 4.5,
+        color: '#D4AF37'
     },
     {
-        quote: "Exceptional full-stack developer with a deep understanding of modern web technologies. Highly recommended!",
-        author: "Emily Chen",
-        role: "Senior Engineering Manager",
-        avatar: "https://randomuser.me/api/portraits/women/67.jpg"
+        name: 'Emily Chen',
+        role: 'Product Manager',
+        company: 'DataDrive Solutions',
+        quote: 'Exceptional AI-driven solutions that have revolutionized our product development process. Highly recommended!',
+        avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
+        rating: 5,
+        color: '#708090'
     }
 ];
 ---
 
 <section class="testimonials-section">
     <div class="section-header">
-        <h2 class="section-title">Trusted By Colleagues</h2>
-        <div class="divider"></div>
+        <h2 class="section-title">Client Testimonials</h2>
+        <p class="section-subtitle">Transforming Visions into Digital Realities</p>
     </div>
+
     <div class="testimonials-grid">
         {testimonials.map((testimonial) => (
-            <div class="testimonial-card">
-                <div class="testimonial-content">
-                    <div class="quote-icon">❝</div>
-                    <p class="testimonial-text">{testimonial.quote}</p>
-                    <div class="testimonial-author">
+            <div 
+                class="testimonial-card" 
+                style={`--testimonial-color: ${testimonial.color}`}
+            >
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar-container">
                         <img 
                             src={testimonial.avatar} 
-                            alt={testimonial.author} 
-                            class="author-avatar"
+                            alt={`${testimonial.name}'s Avatar`} 
+                            class="testimonial-avatar"
                         />
-                        <div class="author-info">
-                            <span class="author-name">{testimonial.author}</span>
-                            <span class="author-role">{testimonial.role}</span>
-                        </div>
+                    </div>
+                    <div class="testimonial-info">
+                        <h3 class="testimonial-name">{testimonial.name}</h3>
+                        <p class="testimonial-role">
+                            {testimonial.role} @ {testimonial.company}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="testimonial-content">
+                    <blockquote class="testimonial-quote">
+                        "{testimonial.quote}"
+                    </blockquote>
+                </div>
+
+                <div class="testimonial-footer">
+                    <div class="testimonial-rating">
+                        {Array.from({ length: 5 }, (_, i) => (
+                            <span 
+                                class={`rating-star ${i < Math.floor(testimonial.rating) ? 'filled' : ''}`}
+                            >
+                                ★
+                            </span>
+                        ))}
+                        <span class="rating-value">
+                            {testimonial.rating.toFixed(1)}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -49,11 +95,17 @@ const testimonials = [
     </div>
 </section>
 
-<style>
+<style define:vars={{
+    transitionDuration: `${UX_CONFIG.TRANSITION_DURATION}ms`
+}}>
     .testimonials-section {
-        background: rgba(18, 18, 18, 0.7);
-        padding: 4rem 2rem;
-        color: var(--text-light);
+        max-width: 1200px;
+        margin: 4rem auto;
+        padding: 2rem;
+        background: color-mix(in srgb, var(--bg-primary) 80%, transparent);
+        border-radius: 16px;
+        border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+        transition: background-color var(--transitionDuration) ease;
     }
 
     .section-header {
@@ -62,77 +114,156 @@ const testimonials = [
     }
 
     .section-title {
-        color: var(--primary-color);
         font-size: 2.5rem;
+        color: var(--primary);
+        margin: 0;
+        font-family: 'Orbitron', sans-serif;
     }
 
-    .divider {
-        height: 2px;
-        background: linear-gradient(to right, var(--primary-color), transparent);
-        margin: 1rem auto;
-        max-width: 200px;
+    .section-subtitle {
+        color: var(--text-secondary);
+        opacity: 0.7;
+        margin-top: 0.5rem;
     }
 
     .testimonials-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(3, 1fr);
         gap: 2rem;
-        max-width: 1200px;
-        margin: 0 auto;
     }
 
     .testimonial-card {
-        background: rgba(0, 255, 255, 0.05);
-        border-radius: 10px;
-        padding: 2rem;
+        background: color-mix(in srgb, var(--testimonial-color) 10%, transparent);
+        border-radius: 16px;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        transition: 
+            transform var(--transitionDuration) ease,
+            box-shadow var(--transitionDuration) ease;
         position: relative;
-        transition: transform 0.3s ease;
+        overflow: hidden;
+    }
+
+    .testimonial-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+            circle at center, 
+            color-mix(in srgb, var(--testimonial-color) 20%, transparent) 0%, 
+            transparent 70%
+        );
+        opacity: 0;
+        transition: opacity var(--transitionDuration) ease;
+        z-index: 1;
     }
 
     .testimonial-card:hover {
-        transform: translateY(-10px);
+        transform: scale(1.05) rotateX(5deg);
+        box-shadow: 
+            0 15px 30px color-mix(in srgb, var(--testimonial-color) 30%, transparent),
+            0 10px 20px color-mix(in srgb, var(--testimonial-color) 20%, transparent);
     }
 
-    .quote-icon {
-        position: absolute;
-        top: 1rem;
-        left: 1rem;
-        font-size: 4rem;
-        color: var(--primary-color);
-        opacity: 0.2;
+    .testimonial-card:hover::before {
+        opacity: 1;
     }
 
-    .testimonial-text {
-        margin-bottom: 1.5rem;
-        font-style: italic;
-        line-height: 1.6;
-    }
-
-    .testimonial-author {
+    .testimonial-header {
         display: flex;
         align-items: center;
         gap: 1rem;
     }
 
-    .author-avatar {
-        width: 60px;
-        height: 60px;
+    .testimonial-avatar-container {
+        width: 80px;
+        height: 80px;
         border-radius: 50%;
-        border: 2px solid var(--primary-color);
+        overflow: hidden;
+        border: 3px solid var(--testimonial-color);
+        transition: transform var(--transitionDuration) ease;
     }
 
-    .author-info {
+    .testimonial-card:hover .testimonial-avatar-container {
+        transform: rotate(360deg);
+    }
+
+    .testimonial-avatar {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .testimonial-info {
+        flex-grow: 1;
+    }
+
+    .testimonial-name {
+        font-size: 1.2rem;
+        color: var(--testimonial-color);
+        margin: 0;
+    }
+
+    .testimonial-role {
+        color: var(--text-secondary);
+        opacity: 0.7;
+        margin: 0.25rem 0 0;
+    }
+
+    .testimonial-content {
+        flex-grow: 1;
+    }
+
+    .testimonial-quote {
+        font-style: italic;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    .testimonial-footer {
         display: flex;
-        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
     }
 
-    .author-name {
-        font-weight: bold;
-        color: var(--primary-color);
+    .testimonial-rating {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
     }
 
-    .author-role {
-        font-size: 0.8rem;
-        color: var(--secondary-color);
+    .rating-star {
+        color: var(--text-secondary);
+        opacity: 0.3;
+        font-size: 1.2rem;
+    }
+
+    .rating-star.filled {
+        color: var(--testimonial-color);
+        opacity: 1;
+    }
+
+    .rating-value {
+        margin-left: 0.5rem;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 1024px) {
+        .testimonials-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .testimonials-grid {
+            grid-template-columns: 1fr;
+        }
     }
 </style>

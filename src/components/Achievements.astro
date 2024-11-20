@@ -1,115 +1,226 @@
 ---
-const achievements = [
+import { UX_CONFIG } from '../utils/ux';
+
+interface Achievement {
+    icon: string;
+    title: string;
+    value: string;
+    description: string;
+    color: string;
+}
+
+const achievements: Achievement[] = [
     {
-        title: "AWS Certified Developer",
-        issuer: "Amazon Web Services",
-        date: "2023",
-        icon: "🏆"
+        icon: '🏆',
+        title: 'Innovation Awards',
+        value: '3+',
+        description: 'Recognized for groundbreaking digital solutions and creative technology implementations.',
+        color: '#D4AF37'
     },
     {
-        title: "Machine Learning Specialization",
-        issuer: "Stanford Online",
-        date: "2022",
-        icon: "🧠"
+        icon: '🚀',
+        title: 'Successful Projects',
+        value: '50+',
+        description: 'Delivered complex digital projects across diverse industries with exceptional quality.',
+        color: '#28A745'
     },
     {
-        title: "Web3 Blockchain Developer",
-        issuer: "Consensys Academy",
-        date: "2022",
-        icon: "🔗"
+        icon: '👥',
+        title: 'Client Satisfaction',
+        value: '95%',
+        description: 'Consistently high satisfaction rates through personalized, results-driven approaches.',
+        color: '#708090'
+    },
+    {
+        icon: '🌐',
+        title: 'Global Reach',
+        value: '10+',
+        description: 'Serving clients across multiple countries with cutting-edge digital solutions.',
+        color: '#3178C6'
     }
 ];
 ---
 
 <section class="achievements-section">
-    <div class="section-header">
-        <h2 class="section-title">Professional Achievements</h2>
-        <div class="divider"></div>
+    <div class="achievements-header">
+        <h2 class="section-title">Our Achievements</h2>
+        <p class="section-subtitle">Transforming Digital Landscapes</p>
     </div>
+
     <div class="achievements-grid">
         {achievements.map((achievement) => (
-            <div class="achievement-card">
-                <div class="achievement-icon">{achievement.icon}</div>
-                <div class="achievement-details">
-                    <h3 class="achievement-title">{achievement.title}</h3>
-                    <p class="achievement-issuer">{achievement.issuer}</p>
-                    <span class="achievement-date">{achievement.date}</span>
+            <div 
+                class="achievement-card theme-hover"
+                style={`--achievement-color: ${achievement.color}`}
+                data-achievement-title={achievement.title}
+            >
+                <div class="achievement-icon-container">
+                    <span class="achievement-icon">{achievement.icon}</span>
+                </div>
+                
+                <div class="achievement-content">
+                    <div class="achievement-value">{achievement.value}</div>
+                    <div class="achievement-title">{achievement.title}</div>
+                </div>
+
+                <div class="achievement-description">
+                    {achievement.description}
                 </div>
             </div>
         ))}
     </div>
 </section>
 
-<style>
+<style define:vars={{
+    transitionDuration: `${UX_CONFIG.TRANSITION_DURATION}ms`
+}}>
     .achievements-section {
-        background: rgba(18, 18, 18, 0.5);
-        padding: 4rem 2rem;
-        color: var(--text-light);
+        max-width: 1200px;
+        margin: 4rem auto;
+        padding: 2rem;
+        background: color-mix(in srgb, var(--bg-primary) 80%, transparent);
+        border-radius: 16px;
+        border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+        transition: background-color var(--transitionDuration) ease;
     }
 
-    .section-header {
+    .achievements-header {
         text-align: center;
         margin-bottom: 2rem;
     }
 
     .section-title {
-        color: var(--primary-color);
         font-size: 2.5rem;
+        color: var(--primary);
+        margin: 0;
+        font-family: 'Orbitron', sans-serif;
     }
 
-    .divider {
-        height: 2px;
-        background: linear-gradient(to right, var(--primary-color), transparent);
-        margin: 1rem auto;
-        max-width: 200px;
+    .section-subtitle {
+        color: var(--text-secondary);
+        opacity: 0.7;
+        margin-top: 0.5rem;
     }
 
     .achievements-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
-        max-width: 1200px;
-        margin: 0 auto;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
     }
 
     .achievement-card {
-        display: flex;
-        align-items: center;
-        background: rgba(0, 255, 255, 0.05);
+        background: color-mix(in srgb, var(--achievement-color) 10%, transparent);
+        border-radius: 16px;
         padding: 1.5rem;
-        border-radius: 10px;
-        transition: transform 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: 
+            transform var(--transitionDuration) ease,
+            box-shadow var(--transitionDuration) ease;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    .achievement-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+            circle at center, 
+            color-mix(in srgb, var(--achievement-color) 20%, transparent) 0%, 
+            transparent 70%
+        );
+        opacity: 0;
+        transition: opacity var(--transitionDuration) ease;
+        z-index: 1;
     }
 
     .achievement-card:hover {
-        transform: scale(1.05);
+        transform: scale(1.05) rotateX(5deg);
+        box-shadow: 
+            0 15px 30px color-mix(in srgb, var(--achievement-color) 30%, transparent),
+            0 10px 20px color-mix(in srgb, var(--achievement-color) 20%, transparent);
+    }
+
+    .achievement-card:hover::before {
+        opacity: 1;
+    }
+
+    .achievement-icon-container {
+        background: color-mix(in srgb, var(--achievement-color) 20%, transparent);
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1rem;
+        transition: transform var(--transitionDuration) ease;
+    }
+
+    .achievement-card:hover .achievement-icon-container {
+        transform: rotate(360deg);
     }
 
     .achievement-icon {
         font-size: 3rem;
-        margin-right: 1rem;
-        opacity: 0.7;
-    }
-
-    .achievement-details {
-        flex-grow: 1;
-    }
-
-    .achievement-title {
-        color: var(--primary-color);
-        margin-bottom: 0.5rem;
-    }
-
-    .achievement-issuer {
-        color: var(--secondary-color);
         opacity: 0.8;
     }
 
-    .achievement-date {
-        display: block;
-        font-size: 0.8rem;
-        color: var(--text-light);
-        opacity: 0.6;
-        margin-top: 0.5rem;
+    .achievement-value {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: var(--achievement-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .achievement-title {
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-secondary);
+        margin-bottom: 1rem;
+    }
+
+    .achievement-description {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        opacity: 0.7;
+        transition: opacity var(--transitionDuration) ease;
+    }
+
+    .achievement-card:hover .achievement-description {
+        opacity: 1;
+    }
+
+    @media (max-width: 1024px) {
+        .achievements-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .achievements-grid {
+            grid-template-columns: 1fr;
+        }
     }
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const achievementCards = document.querySelectorAll('.achievement-card');
+        
+        achievementCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const title = this.getAttribute('data-achievement-title');
+                console.log(`Hovering over achievement: ${title}`);
+            });
+        });
+    });
+</script>

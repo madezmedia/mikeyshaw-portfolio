@@ -11,9 +11,10 @@ import BlogFeed from '../components/BlogFeed.astro';
 import Achievements from '../components/Achievements.astro';
 import SkillsVisualization from '../components/SkillsVisualization.astro';
 import Testimonials from '../components/Testimonials.astro';
-import ContactForm from '../components/ContactForm.astro';
+import ContactSection from '../components/ContactSection.astro';
 import GitHubStats from '../components/GitHubStats.astro';
 import CompanyProfile from '../components/CompanyProfile.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <Layout title="Mikey Shaw | Digital Architect">
@@ -30,10 +31,11 @@ import CompanyProfile from '../components/CompanyProfile.astro';
         <SkillsVisualization />
         <Testimonials />
         <GitHubStats />
-        <ContactForm />
+        <ContactSection />
         <BlogFeed />
     </main>
 
+    <Footer />
     <ChatWidget client:load />
 </Layout>
 

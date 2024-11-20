@@ -1,4 +1,6 @@
 ---
+import { THEME_TRANSITION_DURATION } from '../utils/theme';
+
 interface Props {
   shapeCount?: number;
   complexity?: number;
@@ -13,7 +15,7 @@ const {
 ---
 <canvas id="bg" class="scene-3d"></canvas>
 
-<script define:vars={{ shapeCount, complexity, theme }}>
+<script define:vars={{ shapeCount, complexity, theme, THEME_TRANSITION_DURATION }}>
   import * as THREE from 'three';
   import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
   import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
@@ -21,7 +23,8 @@ const {
   import { gsap } from 'gsap';
 
   class ProfessionalScene {
-    constructor() {
+    constructor(initialTheme) {
+      this.currentTheme = initialTheme;
       this.initScene();
       this.createShapes();
       this.setupLighting();
@@ -43,10 +46,17 @@ const {
       this.renderer.setSize(window.innerWidth, window.innerHeight);
       this.camera.position.set(0, 0, 50);
 
-      // Theme-based background with new color scheme
-      this.scene.background = theme === 'dark' 
-        ? new THREE.Color(0x121212)  // Dark background 
-        : new THREE.Color(0xf4f4f8);
+      this.updateSceneBackground();
+    }
+
+    updateSceneBackground() {
+      const darkBackground = new THREE.Color(0x121212);
+      const lightBackground = new THREE.Color(0xF8F9FA);
+      
+      gsap.to(this.scene, {
+        duration: THEME_TRANSITION_DURATION / 1000,
+        backgroundColor: this.currentTheme === 'dark' ? darkBackground : lightBackground
+      });
     }
 
     createShapes() {
@@ -57,11 +67,10 @@ const {
         new THREE.TetrahedronGeometry(2, Math.floor(complexity * 3))
       ];
 
-      const colors = [
-        0xD4AF37,  // Dark Gold
-        0xC0C0C0,  // Silver
-        0x708090   // Slate Gray
-      ];
+      const darkColors = [0xD4AF37, 0xC0C0C0, 0x708090];
+      const lightColors = [0x007BFF, 0x6C757D, 0x28A745];
+
+      const colors = this.currentTheme === 'dark' ? darkColors : lightColors;
 
       for (let i = 0; i < shapeCount; i++) {
         const geometry = geometries[Math.floor(Math.random() * geometries.length)];
@@ -101,7 +110,10 @@ const {
 
     setupLighting() {
       const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
-      const directionalLight = new THREE.DirectionalLight(0xD4AF37, 0.6);  // Gold-tinted light
+      const directionalLight = new THREE.DirectionalLight(
+        this.currentTheme === 'dark' ? 0xD4AF37 : 0x007BFF, 
+        0.6
+      );
       directionalLight.position.set(5, 5, 5);
 
       this.scene.add(ambientLight, directionalLight);
@@ -133,10 +145,24 @@ const {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.composer.setSize(window.innerWidth, window.innerHeight);
       });
+
+      document.addEventListener('theme-changed', (event) => {
+        const newTheme = event.detail.theme;
+        if (this.currentTheme !== newTheme) {
+          this.currentTheme = newTheme;
+          this.updateSceneBackground();
+          this.setupLighting();
+          
+          // Recreate shapes with new theme colors
+          this.shapes.forEach(shape => this.scene.remove(shape));
+          this.shapes = [];
+          this.createShapes();
+        }
+      });
     }
   }
 
-  new ProfessionalScene();
+  new ProfessionalScene(theme);
 </script>
 
 <style>
@@ -148,6 +174,11 @@ const {
     width: 100%;
     height: 100%;
     opacity: 0.7;
-    background: linear-gradient(45deg, rgba(212, 175, 55, 0.1), rgba(192, 192, 192, 0.05));
+    background: linear-gradient(
+      45deg, 
+      color-mix(in srgb, var(--bg-primary) 10%, transparent), 
+      color-mix(in srgb, var(--bg-secondary) 10%, transparent)
+    );
+    transition: background ${THEME_TRANSITION_DURATION}ms ease;
   }
 </style>

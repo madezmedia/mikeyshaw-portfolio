@@ -1,5 +1,7 @@
 ---
 import ChatWidget from '../components/ChatWidget.tsx';
+import '../styles/animations.css';
+import { UX_CONFIG } from '../utils/ux';
 
 export interface Props {
 	title?: string;
@@ -93,10 +95,58 @@ const {
 		<link rel="preload" href="/favicon.svg" as="image" />
 
 		<slot name="head" />
+
+		<script is:inline define:vars={{UX_CONFIG}}>
+			// Advanced Theme Management with UX Considerations
+			const THEME_TRANSITION_DURATION = UX_CONFIG.TRANSITION_DURATION;
+
+			const getStoredTheme = () => localStorage.getItem('theme') || 'dark';
+			const setStoredTheme = (theme) => localStorage.setItem('theme', theme);
+			
+			const getPreferredTheme = () => {
+				const storedTheme = getStoredTheme();
+				if (storedTheme) return storedTheme;
+				return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+			};
+
+			const setTheme = (theme) => {
+				document.documentElement.setAttribute('data-theme', theme);
+				setStoredTheme(theme);
+				
+				// Dispatch global theme change event with UX transition
+				const themeChangeEvent = new CustomEvent('theme-changed', { 
+					detail: { 
+						theme, 
+						duration: THEME_TRANSITION_DURATION 
+					} 
+				});
+				document.dispatchEvent(themeChangeEvent);
+			};
+
+			// Initial theme setup with transition
+			const initTheme = () => {
+				const theme = getPreferredTheme();
+				document.documentElement.style.transition = `all ${THEME_TRANSITION_DURATION}ms ${UX_CONFIG.ANIMATION_EASE}`;
+				setTheme(theme);
+			};
+
+			// Initialize on load
+			window.addEventListener('load', initTheme);
+
+			// Theme toggle listener
+			window.addEventListener('load', () => {
+				document.addEventListener('themeToggle', (e) => {
+					const newTheme = e.detail.theme;
+					setTheme(newTheme);
+				});
+			});
+		</script>
 	</head>
 	<body>
 		<div class="app-container">
-			<slot />
+			<div class="content-wrapper">
+				<slot />
+			</div>
 		</div>
 		<ChatWidget client:load />
 	</body>
@@ -104,53 +154,119 @@ const {
 
 <style is:global>
 	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-		--primary-color: #D4AF37;
-		--secondary-color: #C0C0C0;
-		--accent-dark: 18, 18, 18;
-		--accent-light: 40, 40, 40;
+		/* Dark Mode Palette */
+		--primary-dark: #D4AF37;     /* Gold */
+		--secondary-dark: #C0C0C0;   /* Silver */
+		--accent-dark: #708090;      /* Slate Gray */
+		--bg-primary-dark: #121212;  /* Deep Black */
+		--bg-secondary-dark: #1E1E1E;/* Soft Black */
+		--text-primary-dark: #E0E0E0;/* Light Gray */
+		--text-secondary-dark: #A0A0A0; /* Medium Gray */
+
+		/* Light Mode Palette */
+		--primary-light: #28A745;    /* Green */
+		--secondary-light: #6C757D;  /* Gray */
+		--accent-light: #28A745;     /* Green */
+		--bg-primary-light: #F8F9FA; /* Light Gray */
+		--bg-secondary-light: #FFFFFF; /* White */
+		--text-primary-light: #212529; /* Dark Gray */
+		--text-secondary-light: #495057; /* Medium Gray */
+
+		/* Default to Dark Mode */
+		--primary: var(--primary-dark);
+		--secondary: var(--secondary-dark);
+		--accent: var(--accent-dark);
+		--bg-primary: var(--bg-primary-dark);
+		--bg-secondary: var(--bg-secondary-dark);
+		--text-primary: var(--text-primary-dark);
+		--text-secondary: var(--text-secondary-dark);
+
+		/* Layout Variables */
+		--navbar-height: 80px;
+		--content-top-padding: 100px;
+	}
+
+	/* Light Mode Overrides */
+	:root[data-theme='light'] {
+		--primary: var(--primary-light);
+		--secondary: var(--secondary-light);
+		--accent: var(--accent-light);
+		--bg-primary: var(--bg-primary-light);
+		--bg-secondary: var(--bg-secondary-light);
+		--text-primary: var(--text-primary-light);
+		--text-secondary: var(--text-secondary-light);
 	}
 
 	html, body {
 		max-width: 100%;
 		overflow-x: hidden;
+		scroll-behavior: smooth;
+		transition: 
+			background-color 0.3s ease, 
+			color 0.3s ease,
+			background-image 0.3s ease;
 	}
 
 	html {
-		font-family: system-ui, sans-serif;
-		background-color: #121212;
-		color: white;
+		font-family: 'Inter', system-ui, sans-serif;
+		background: linear-gradient(
+			135deg, 
+			var(--bg-primary), 
+			var(--bg-secondary)
+		);
+		color: var(--text-primary);
+		line-height: 1.6;
 	}
 
 	body {
-		background-color: #121212;
-		color: #E0E0E0;
+		background: transparent;
+		color: var(--text-primary);
 		margin: 0;
 		padding: 0;
-		font-family: 'Inter', sans-serif;
 	}
 
 	.app-container {
-		max-width: 100%;
 		width: 100%;
-		overflow-x: hidden;
-		position: relative;
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+		background: linear-gradient(
+			to bottom right, 
+			color-mix(in srgb, var(--bg-primary) 90%, transparent),
+			color-mix(in srgb, var(--bg-secondary) 90%, transparent)
+		);
+		transition: all 0.3s ease;
 	}
 
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
+	.content-wrapper {
+		width: 100%;
+		max-width: 1440px;
+		margin: 0 auto;
+		padding: 0 2rem;
+		flex-grow: 1;
 	}
 
-	/* Responsive Adjustments */
+	/* First section after navbar gets top padding */
+	.content-wrapper > section:first-child {
+		padding-top: var(--content-top-padding);
+	}
+
+	/* Global Theme Transition */
+	* {
+		transition: 
+			background-color 0.3s ease,
+			color 0.3s ease,
+			border-color 0.3s ease,
+			box-shadow 0.3s ease;
+	}
+
 	@media (max-width: 768px) {
-		body {
-			font-size: 14px;
+		:root {
+			--content-top-padding: 80px;
 		}
 
-		.app-container {
-			padding: 0 15px;
+		.content-wrapper {
+			padding: 0 1rem;
 		}
 	}
 
@@ -160,15 +276,15 @@ const {
 	}
 
 	::-webkit-scrollbar-track {
-		background: rgba(18, 18, 18, 0.9);
+		background: var(--bg-secondary);
 	}
 
 	::-webkit-scrollbar-thumb {
-		background: var(--primary-color);
+		background: var(--accent-primary);
 		border-radius: 5px;
 	}
 
 	::-webkit-scrollbar-thumb:hover {
-		background: #FFD700;
+		background: color-mix(in srgb, var(--accent-primary) 80%, white);
 	}
 </style>

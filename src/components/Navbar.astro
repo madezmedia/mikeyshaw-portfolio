@@ -1,4 +1,6 @@
 ---
+import { THEME_TRANSITION_DURATION } from '../utils/theme';
+
 const navLinks = [
     { name: 'Home', href: '#home', icon: '🏠' },
     { name: 'About', href: '#about', icon: '👤' },
@@ -16,10 +18,16 @@ const navLinks = [
             <a href="#home" class="logo desktop-logo">MIKEY SHAW</a>
         </div>
         
-        <div class="menu-toggle" id="mobile-menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+        <div class="nav-controls">
+            <div class="theme-toggle desktop" id="theme-toggle" title="Toggle Theme">
+                <span class="theme-icon">🌓</span>
+            </div>
+            
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
         </div>
         
         <ul class="nav-menu">
@@ -42,6 +50,12 @@ const navLinks = [
                     <img src="/images/mad-ez-media-logo.png" alt="Mad EZ Media Logo" class="mobile-nav-logo">
                     <h2 class="mobile-nav-title">Navigation</h2>
                 </div>
+                <div class="mobile-theme-toggle">
+                    <div class="theme-toggle mobile" id="mobile-theme-toggle" title="Toggle Theme">
+                        <span class="theme-icon">🌓</span>
+                        <span class="theme-text">Switch Theme</span>
+                    </div>
+                </div>
                 <ul class="mobile-nav-menu">
                     {navLinks.map((link) => (
                         <li class="mobile-nav-item">
@@ -57,7 +71,7 @@ const navLinks = [
     </div>
 </nav>
 
-<style>
+<style define:vars={{ THEME_TRANSITION_DURATION }}>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
 
     .navbar {
@@ -65,10 +79,10 @@ const navLinks = [
         top: 0;
         left: 0;
         width: 100%;
-        background: rgba(18, 18, 18, 0.8);
+        background: color-mix(in srgb, var(--bg-primary) 80%, transparent);
         backdrop-filter: blur(10px);
         z-index: 1000;
-        transition: all 0.3s ease;
+        transition: all calc(var(--THEME_TRANSITION_DURATION) * 1ms) ease;
     }
 
     .navbar-container {
@@ -80,6 +94,57 @@ const navLinks = [
         padding: 1rem 2rem;
     }
 
+    .nav-controls {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .theme-toggle {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: color-mix(in srgb, var(--accent) 20%, transparent);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        transition: all calc(var(--THEME_TRANSITION_DURATION) * 1ms) ease;
+    }
+
+    .theme-toggle:hover {
+        background: color-mix(in srgb, var(--accent) 40%, transparent);
+    }
+
+    .theme-toggle .theme-icon {
+        font-size: 1.2rem;
+        transition: transform calc(var(--THEME_TRANSITION_DURATION) * 1ms) ease;
+    }
+
+    .theme-toggle:active .theme-icon {
+        transform: scale(0.9);
+    }
+
+    .mobile-theme-toggle {
+        display: none;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    .mobile-theme-toggle .theme-toggle {
+        width: 100%;
+        justify-content: center;
+        padding: 0.75rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+    }
+
+    .mobile-theme-toggle .theme-text {
+        margin-left: 0.5rem;
+        color: var(--secondary-color);
+        font-family: 'Orbitron', sans-serif;
+    }
+
     .logo-container {
         display: flex;
         align-items: center;
@@ -89,11 +154,16 @@ const navLinks = [
         font-family: 'Orbitron', sans-serif;
         font-size: 1.5rem;
         font-weight: 700;
-        color: var(--primary-color);
         text-decoration: none;
-        transition: color 0.3s ease;
+        transition: color calc(var(--THEME_TRANSITION_DURATION) * 1ms) ease;
         letter-spacing: 0.1em;
+        color: #D4AF37; /* Gold in dark mode */
     }
+
+    :root[data-theme='light'] .logo {
+        color: #28A745; /* Green in light mode */
+    }
+
 
     .nav-menu {
         display: flex;
@@ -111,9 +181,9 @@ const navLinks = [
 
     .nav-link {
         font-family: 'Orbitron', sans-serif;
-        color: var(--secondary-color);
+        color: var(--secondary);
         text-decoration: none;
-        transition: color 0.3s ease;
+        transition: color calc(var(--THEME_TRANSITION_DURATION) * 1ms) ease;
         position: relative;
         font-weight: 500;
         letter-spacing: 0.05em;
@@ -301,35 +371,72 @@ const navLinks = [
         .menu-toggle {
             display: flex;
         }
+
+        .theme-toggle.desktop {
+            display: none;
+        }
+
+        .mobile-theme-toggle {
+            display: block;
+        }
     }
+
+    /* Rest of existing Navbar styles remain unchanged */
+
+    /* Rest of the existing styles remain unchanged */
 </style>
 
-<script is:inline>
+<script is:inline define:vars={{THEME_TRANSITION_DURATION}}>
     document.addEventListener('DOMContentLoaded', () => {
-        const mobileMenu = document.getElementById('mobile-menu');
+        const desktopThemeToggle = document.getElementById('theme-toggle');
+        const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+        const mobileMenuButton = document.getElementById('mobile-menu');
         const mobileDrawer = document.getElementById('mobile-drawer');
-        const closeDrawer = document.getElementById('close-drawer');
-        const navLinks = document.querySelectorAll('.mobile-nav-link');
+        const closeDrawerButton = document.getElementById('close-drawer');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        let currentTheme = localStorage.getItem('theme') || 'dark';
+
+        function toggleTheme() {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            const themeEvent = new CustomEvent('themeToggle', { 
+                detail: { theme: currentTheme } 
+            });
+            document.dispatchEvent(themeEvent);
+
+            localStorage.setItem('theme', currentTheme);
+        }
 
         function toggleMobileDrawer() {
             mobileDrawer.classList.toggle('active');
         }
 
-        if (mobileMenu) {
-            mobileMenu.addEventListener('click', (e) => {
+        // Theme toggle listeners
+        if (desktopThemeToggle) {
+            desktopThemeToggle.addEventListener('click', toggleTheme);
+        }
+
+        if (mobileThemeToggle) {
+            mobileThemeToggle.addEventListener('click', toggleTheme);
+        }
+
+        // Mobile menu listeners
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', (e) => {
                 e.stopPropagation();
                 toggleMobileDrawer();
             });
         }
 
-        if (closeDrawer) {
-            closeDrawer.addEventListener('click', (e) => {
+        if (closeDrawerButton) {
+            closeDrawerButton.addEventListener('click', (e) => {
                 e.stopPropagation();
                 mobileDrawer.classList.remove('active');
             });
         }
 
-        navLinks.forEach(link => {
+        mobileNavLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.stopPropagation();
                 mobileDrawer.classList.remove('active');
