@@ -7,23 +7,42 @@
 - **Dark Mode First**: Sophisticated dark color palette
 - **Responsive**: Adaptive design across all devices
 - **Performance**: Lightweight, fast-loading components
+- **Accessibility**: Inclusive design for all users
 
-### Color Palette
-- **Primary**: #D4AF37 (Dark Gold)
+### Recent UX Enhancements
+- **ContactSection**: Comprehensive connection experience
+  - Cal.com scheduling integration
+  - Multiple connection methods
+  - Theme-aware styling
+- **Footer**: Enhanced site-wide information display
+  - Dynamic copyright
+  - Social media links
+  - Thematic color integration
+
+### Color Palette Evolution
+#### Dark Mode
+- **Primary**: #D4AF37 (Gold)
 - **Secondary**: #C0C0C0 (Silver)
 - **Accent**: #708090 (Slate Gray)
 - **Background Dark**: #121212
+- **Background Secondary**: #1E1E1E
 - **Text Light**: #E0E0E0
+- **Text Secondary**: #A0A0A0
 
-### Typography
-- **Font**: Inter
-- **Headings**: Bold, uppercase
-- **Body Text**: Clean, readable
-- **Size Hierarchy**: 
-  - H1: 2.5rem
-  - H2: 2rem
-  - H3: 1.5rem
-  - Body: 1rem
+#### Light Mode
+- **Primary**: #28A745 (Green)
+- **Secondary**: #6C757D (Gray)
+- **Accent**: #28A745
+- **Background Light**: #F8F9FA
+- **Background White**: #FFFFFF
+- **Text Dark**: #212529
+- **Text Secondary**: #495057
+
+### Typography Refinements
+- **Base Font**: Inter, system-ui, sans-serif
+- **Headings Font**: Orbitron, sans-serif
+- **Line Height**: 1.6
+- **Font Weights**: 400, 600, 700
 
 ## 🧩 Component Architecture
 
@@ -31,47 +50,39 @@
 - **Atomic Design**: Modular, reusable components
 - **Stateless Components**: Prefer functional components
 - **TypeScript**: Strict type checking
-- **Performance Optimization**: Lazy loading, memoization
+- **Performance Optimization**: 
+  - Lazy loading
+  - Memoization
+  - Minimal re-renders
+
+### New Component Design Guidelines
+#### ContactSection
+- **Purpose**: Comprehensive user connection experience
+- **Key Features**:
+  - Multiple connection methods
+  - Cal.com scheduling
+  - Responsive layout
+  - Theme-aware styling
+- **Interaction Principles**:
+  - Subtle hover effects
+  - Accessible navigation
+  - Clear user guidance
+
+#### Footer
+- **Purpose**: Site-wide information and navigation
+- **Key Features**:
+  - Dynamic copyright year
+  - Social media links
+  - Responsive design
+- **Interaction Principles**:
+  - Smooth hover transitions
+  - Consistent thematic styling
 
 ### Component Guidelines
-1. **Single Responsibility**
-   - Each component should have a clear, focused purpose
-   - Avoid complex, multi-purpose components
-
-2. **Prop Types**
-   - Define explicit interfaces
-   - Use optional props with default values
-   - Validate prop types
-
-3. **Styling**
-   - Use CSS variables for theming
-   - Prefer CSS modules or scoped styles
-   - Avoid global styles
-
-## 🚀 Development Workflow
-
-### Setup
-1. Node.js 16+
-2. npm or yarn
-3. VS Code recommended
-
-### Local Development
-```bash
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-
-# Build for production
-npm run build
-```
-
-### Code Quality
-- ESLint for linting
-- Prettier for formatting
-- TypeScript strict mode
-- 100% test coverage goal
+1. **Single Responsibility Principle**
+2. **Explicit Prop Types**
+3. **Theme-Aware Styling**
+4. **Performance Optimization**
 
 ## 🌐 Responsive Design
 
@@ -83,40 +94,34 @@ npm run build
 ### Responsive Strategies
 - Flexbox and CSS Grid
 - Media queries
-- Relative units (rem, %)
+- Relative units
 - Mobile-first approach
 
 ## 🎭 Interaction Design
 
 ### Animation Principles
-- Subtle, meaningful transitions
-- Performance-conscious animations
-- Use `@astro/motion` for lightweight animations
+- **Purpose-Driven Animations**
+- Performance-conscious
+- Subtle and meaningful
+- Enhances UX without distraction
 
 ### Interaction States
 - Hover effects
 - Focus states
-- Active/selected states
+- Active states
 - Disabled states
 
-## 🔒 Accessibility
+## 🔒 Accessibility Commitment
 
 ### WCAG 2.1 AA Compliance
-- Keyboard navigable
+- Keyboard navigable interfaces
 - Screen reader support
-- Color contrast
+- Sufficient color contrast
 - Semantic HTML
 - ARIA attributes
+- Inclusive design considerations
 
-## 🧠 State Management
-
-### Recommended Approaches
-- React Context for global state
-- Zustand for complex state
-- Avoid prop drilling
-- Immutable state updates
-
-## 🔍 Performance Optimization
+## 🚀 Performance Optimization
 
 ### Best Practices
 - Code splitting
@@ -124,59 +129,35 @@ npm run build
 - Minimal external dependencies
 - Server-side rendering
 - Static site generation
-
-## 🧪 Testing Strategy
-
-### Testing Layers
-1. **Unit Tests**
-   - Jest
-   - React Testing Library
-   - 100% component coverage
-
-2. **Integration Tests**
-   - Cypress
-   - Test critical user flows
-
-3. **Performance Testing**
-   - Lighthouse
-   - WebPageTest
-
-## 🚧 Contribution Guidelines
-
-### Pull Request Process
-1. Fork repository
-2. Create feature branch
-3. Commit with conventional commits
-4. Write tests
-5. Pass all checks
-6. Request review
-
-### Code Review Checklist
-- Follows design system
-- Performance impact
-- Accessibility
-- Test coverage
-- Documentation updates
-
-## 📦 Deployment
-
-### CI/CD
-- GitHub Actions
-- Vercel deployment
-- Automatic preview environments
-- Production branch protection
+- Efficient state management
 
 ## 🔮 Future Roadmap
 
 ### Planned Enhancements
-- Internationalization
-- Advanced analytics
+- Advanced AI-powered personalization
 - Enhanced 3D interactions
-- AI-powered personalization
+- Internationalization support
+- Comprehensive analytics integration
+- Continuous UX refinement
 
-## 📚 Learning Resources
+## 📚 Learning & Growth
 
-### Recommended Reading
+### Recommended Resources
 - Atomic Design by Brad Frost
 - Refactoring UI
 - Design Systems by Alla Kholmatova
+- Inclusive Design Patterns
+
+## 🤝 Contribution Philosophy
+
+### Guiding Principles
+- **Innovation**: Push design boundaries
+- **Accessibility**: Design for everyone
+- **Performance**: Optimize relentlessly
+- **User-Centricity**: Empathy-driven design
+
+### Continuous Improvement
+- Regular design system reviews
+- User feedback integration
+- Technology trend monitoring
+- Iterative refinement

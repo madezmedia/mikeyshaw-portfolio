@@ -1,86 +1,133 @@
-# Mikey Shaw's Professional Portfolio
+# 🚀 Mikey Shaw Portfolio: Digital Architecture & AI Innovation
 
-## 🚀 Project Overview
+## 🌟 Project Overview
 
-### Mad EZ Media and Technology Partners Portfolio
+### Digital Architect's Showcase
+A cutting-edge portfolio demonstrating the intersection of innovative technology, AI-driven solutions, and elegant design. Built with precision, performance, and user experience at its core.
 
-A cutting-edge, performance-optimized portfolio showcasing professional expertise in AI, automation, and technology consulting.
+## 🎨 UX Philosophy
+
+### Design Principles
+- **Minimalism**: Clean, purposeful interfaces
+- **Accessibility**: Inclusive digital experiences
+- **Performance**: Lightning-fast, efficient interactions
+- **Adaptive Design**: Seamless across all devices
 
 ## 🛠 Tech Stack
 
+### Core Technologies
 - **Framework**: Astro
-- **Frontend**: React, TypeScript
-- **Styling**: Tailwind CSS (custom implementation)
-- **Scheduling**: Cal.com
+- **Language**: TypeScript
+- **Styling**: Modern CSS with custom properties
 - **Deployment**: Vercel
 
-## 🌟 Key Features
+### Key Features
+- 🤖 AI-Powered Insights
+- 💻 Interactive Project Showcase
+- 📊 GitHub Contributions Visualization
+- 🌓 Dynamic Theme Management
+- 📅 Cal.com Scheduling Integration
 
-### Technical Highlights
-- Static Site Generation (SSG)
-- Responsive Design
-- Dark Mode
-- Accessibility Optimized
-- Performance-First Approach
+## 🆕 Recent Enhancements
 
-### Unique Components
-- 3D Scene Visualization
-- GitHub Contribution Stats
-- AI-Powered Scheduling Integration
-- Dynamic Project Showcase
+### ContactSection
+- Comprehensive connection experience
+- Multiple contact methods
+- Cal.com scheduling integration
+- Theme-aware styling
 
-## 🔍 SEO Optimization
+### Footer
+- Dynamic copyright
+- Social media links
+- Responsive design
 
-### Metadata Strategy
-- Comprehensive Open Graph tags
-- Twitter Card integration
-- Semantic HTML structure
-- Performance-optimized assets
-
-## 📅 Scheduling Integration
-
-Seamless booking experience powered by Cal.com, allowing potential clients to schedule consultations effortlessly.
-
-### Configuration
-- Namespace: ai-automation-discovery
-- Booking Link: mad-ez-media/ai-automation-discovery
-- Theme: Dark mode
-- Layout: Month view
-
-## 🚀 Performance Metrics
-
-- Lighthouse Score: 90+
-- First Contentful Paint: < 1.5s
-- Total Blocking Time: Minimal
-
-## 🔐 Privacy & Compliance
-
-- WCAG 2.1 AA Compliance
-- Responsive Design
-- Accessibility Features
-
-## 📦 Local Development
+## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 16+
-- npm or yarn
+- Node.js 18+
+- npm or pnpm
 
-### Setup
+### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/madezmedia/portfolio
+git clone https://github.com/madezmedia/mikeyshaw-portfolio.git
+
+# Navigate to project directory
+cd mikeyshaw-portfolio
 
 # Install dependencies
-npm install
+pnpm install
 
 # Run development server
-npm run dev
+pnpm run dev
 ```
 
 ## 🌐 Deployment
 
-Automatically deployed via Vercel with preview and production environments.
+### Automatic Deployments
+- Preview: Vercel preview environments
+- Production: Automatic deployment from `main` branch
 
-## 📝 License
+## 🔍 Project Structure
 
-Proprietary - Mad EZ Media and Technology Partners
+```
+src/
+├── components/       # Reusable UI components
+├── layouts/          # Page layouts
+├── pages/            # Astro pages
+├── styles/           # Global styles
+├── types/            # TypeScript type definitions
+└── utils/            # Utility functions
+```
+
+## 🎭 Theme Management
+
+### Color Palette
+#### Dark Mode
+- Primary: #D4AF37 (Gold)
+- Secondary: #C0C0C0 (Silver)
+- Background: #121212
+
+#### Light Mode
+- Primary: #28A745 (Green)
+- Secondary: #6C757D (Gray)
+- Background: #F8F9FA
+
+## 🤝 Contribution
+
+### Getting Started
+1. Fork the repository
+2. Create a feature branch
+3. Commit with conventional commits
+4. Open a pull request
+
+### Code of Conduct
+- Follow our [CONTRIBUTING.md](CONTRIBUTING.md)
+- Adhere to our [Design System](DESIGN_SYSTEM.md)
+- Review [Developer Onboarding Guide](DEVELOPER_ONBOARDING.md)
+
+## 📄 Documentation
+- [Design System](DESIGN_SYSTEM.md)
+- [Developer Onboarding](DEVELOPER_ONBOARDING.md)
+- [Changelog](CHANGELOG.md)
+
+## 🔒 Accessibility
+
+### WCAG 2.1 AA Compliance
+- Keyboard navigable
+- Screen reader support
+- Sufficient color contrast
+
+## 📞 Contact
+
+### Michael Shaw
+- **Email**: michael@madezmedia.com
+- **LinkedIn**: [Michael Shaw](https://www.linkedin.com/in/michael-shaw-clt/)
+- **GitHub**: [@madezmedia](https://github.com/madezmedia)
+
+## 📜 License
+MIT License
+
+---
+
+**Crafted with 💖 by Mad EZ Media**
