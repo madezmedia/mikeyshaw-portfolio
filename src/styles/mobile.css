@@ -1,0 +1,53 @@
+/* Mobile Optimization Styles */
+@media (max-width: 768px) {
+    /* Global Mobile Adjustments */
+    body {
+        font-size: 14px;
+    }
+
+    /* Ensure full-width sections */
+    .content-wrapper > section {
+        width: 100%;
+        padding: 1rem;
+        margin: 0;
+    }
+
+    /* Responsive Grid Layouts */
+    .grid-container {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+    }
+
+    /* Component Spacing */
+    .component-section {
+        margin: 1rem 0;
+        padding: 1rem;
+    }
+
+    /* Typography Adjustments */
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.2rem; }
+
+    /* Flexible Images */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Responsive Flexbox */
+    .flex-container {
+        flex-direction: column;
+    }
+
+    .flex-container > * {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    /* Scrollable Containers */
+    .scrollable-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
