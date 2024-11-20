@@ -1,35 +1,72 @@
 #!/bin/bash
 
-# Exit on first error
-set -e
+# Portfolio Deployment Script
 
-# Check if git is initialized
-if [ ! -d ".git" ]; then
-    echo "Initializing git repository..."
-    git init
-fi
+# Color codes for terminal output
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
 
-# Add all files
-git add .
+# Deployment Configuration
+PROJECT_NAME="Michael Shaw Portfolio"
+VERCEL_PROJECT_ID="your-vercel-project-id"
+DEPLOY_BRANCH="main"
 
-# Prompt for commit message
-read -p "Enter commit message: " commit_message
+# Deployment Stages
+function pre_deploy_checks() {
+    echo -e "${YELLOW}🔍 Running pre-deployment checks...${NC}"
+    
+    # Check if on correct branch
+    CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+    if [[ "$CURRENT_BRANCH" != "$DEPLOY_BRANCH" ]]; then
+        echo -e "${RED}❌ Error: You must be on $DEPLOY_BRANCH branch${NC}"
+        exit 1
+    fi
 
-# Commit changes
-git commit -m "$commit_message"
+    # Check for uncommitted changes
+    if [[ -n $(git status -s) ]]; then
+        echo -e "${RED}❌ Error: You have uncommitted changes${NC}"
+        git status
+        exit 1
+    fi
+}
 
-# Prompt for remote repository URL
-read -p "Enter GitHub repository URL: " repo_url
+function install_dependencies() {
+    echo -e "${YELLOW}📦 Installing dependencies...${NC}"
+    pnpm install
+}
 
-# Add remote if not exists
-if ! git remote | grep -q origin; then
-    git remote add origin "$repo_url"
-fi
+function run_tests() {
+    echo -e "${YELLOW}🧪 Running tests...${NC}"
+    pnpm test
+}
 
-# Push to GitHub
-git push -u origin main
+function build_project() {
+    echo -e "${YELLOW}🏗️  Building project...${NC}"
+    pnpm build
+}
 
-# Deploy to Vercel
-vercel
+function deploy_to_vercel() {
+    echo -e "${YELLOW}🚀 Deploying to Vercel...${NC}"
+    vercel --prod
+}
 
-echo "Deployment completed successfully!"
+function post_deploy_notification() {
+    echo -e "${GREEN}✅ Deployment Successful!${NC}"
+    echo -e "${YELLOW}🌐 Project: $PROJECT_NAME${NC}"
+    echo -e "${YELLOW}📅 Deployed at: $(date)${NC}"
+}
+
+# Main Deployment Function
+function main() {
+    pre_deploy_checks
+    install_dependencies
+    run_tests
+    build_project
+    deploy_to_vercel
+    post_deploy_notification
+}
+
+# Execute Main Deployment
+main

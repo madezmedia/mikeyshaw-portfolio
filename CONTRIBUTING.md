@@ -1,104 +1,175 @@
-# Contributing to Mikey Shaw's Portfolio
+# 🤝 Contributing to Michael Shaw's Portfolio
 
-## Welcome Contributors! 🎉
+## 🌟 Welcome Contributors!
 
-We appreciate your interest in contributing to this portfolio project. This document provides guidelines for contributing.
+Thank you for your interest in contributing to our portfolio project. This document provides guidelines and instructions for effective collaboration.
 
-## 🌳 Branch Strategy
+## 🎯 Contribution Philosophy
 
-### Main Branches
-- `main`: Stable production code
-- `develop`: Integration branch for features
+### Core Principles
+- **Innovation**: Push technological boundaries
+- **Quality**: Maintain high coding standards
+- **Inclusivity**: Welcoming to all skill levels
+- **Transparency**: Clear communication
+- **Continuous Improvement**: Iterative enhancement
 
-### Branch Types
-- `feature/`: New features or enhancements
-- `hotfix/`: Quick fixes for production issues
-- `release/`: Preparing new production releases
-
-## 🚀 Contributing Workflow
-
-1. **Fork the Repository**
-   ```bash
-   git clone https://github.com/madezmedia/mikey-shaw-portfolio.git
-   cd mikey-shaw-portfolio
-   ```
-
-2. **Create a Feature Branch**
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-
-3. **Make Changes**
-   - Follow existing code style
-   - Add/update tests if applicable
-   - Ensure no linting errors
-
-4. **Commit Changes**
-   ```bash
-   git add .
-   git commit -m "feat: Describe your feature/change"
-   ```
-
-5. **Push to Your Fork**
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-
-6. **Open Pull Request**
-   - Target the `develop` branch
-   - Provide a clear description of changes
-   - Link any related issues
-
-## 📋 Contribution Guidelines
-
-### Code Style
-- Follow Astro and TypeScript best practices
-- Use consistent formatting
-- Write clear, concise comments
-
-### Commit Messages
-- Use conventional commits format
-- Prefix with:
-  - `feat:` for new features
-  - `fix:` for bug fixes
-  - `docs:` for documentation
-  - `style:` for formatting
-  - `refactor:` for code improvements
-  - `test:` for test-related changes
-  - `chore:` for maintenance tasks
-
-### Pull Request Process
-1. Ensure all tests pass
-2. Update documentation if needed
-3. Get approval from maintainers
-
-## 🛠 Development Setup
+## 🚦 Getting Started
 
 ### Prerequisites
 - Node.js 18+
-- npm or yarn
+- pnpm or npm
+- Git
+- Basic understanding of:
+  - TypeScript
+  - Astro
+  - React
+  - Web Performance
+  - Accessibility Principles
 
-### Installation
+### Development Setup
 ```bash
-npm install
-npm run dev
+# Fork the repository
+# Clone your forked repository
+git clone https://github.com/[YOUR_USERNAME]/mikeyshaw-portfolio.git
+
+# Navigate to project directory
+cd mikeyshaw-portfolio
+
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
 ```
 
-### Building
+## 🔍 Contribution Workflow
+
+### 1. Issue Creation
+- Check existing issues before creating new ones
+- Use provided issue templates
+- Clearly describe:
+  - Problem statement
+  - Proposed solution
+  - Potential implementation approach
+
+### 2. Branch Strategy
 ```bash
-npm run build
+# Create a new branch
+git checkout -b [type/issue-description]
+
+# Branch Naming Conventions:
+# - feature/add-dark-mode-toggle
+# - bugfix/resolve-mobile-layout-issue
+# - docs/update-readme
+# - refactor/optimize-performance
 ```
 
-## 🤝 Code of Conduct
+### 3. Development Guidelines
 
+#### Code Quality
+- Follow TypeScript strict mode
+- Use ESLint and Prettier
+- Write comprehensive tests
+- Maintain 80%+ code coverage
+- Document new features/changes
+
+#### Performance Considerations
+- Optimize bundle size
+- Minimize render-blocking resources
+- Use lazy loading
+- Implement code splitting
+
+#### Accessibility Requirements
+- Follow WCAG 2.1 AA guidelines
+- Ensure keyboard navigability
+- Provide screen reader support
+- Maintain color contrast standards
+
+## 🧪 Testing
+
+### Test Types
+- Unit Tests
+- Integration Tests
+- Performance Tests
+- Accessibility Tests
+
+### Running Tests
+```bash
+# Run all tests
+pnpm test
+
+# Run specific test suite
+pnpm test:unit
+pnpm test:integration
+pnpm test:performance
+```
+
+## 📝 Commit Guidelines
+
+### Conventional Commits
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+#### Commit Types
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation changes
+- `style`: Formatting, missing semicolons
+- `refactor`: Code restructuring
+- `test`: Adding/modifying tests
+- `perf`: Performance improvements
+- `chore`: Maintenance tasks
+
+### Example Commit
+```bash
+feat(a11y): add keyboard navigation to project grid
+- Implement tab indexing
+- Add focus management
+- Enhance screen reader compatibility
+```
+
+## 🔄 Pull Request Process
+
+### PR Checklist
+- [ ] Linked to relevant issue
+- [ ] Follows coding standards
+- [ ] Passes all tests
+- [ ] Updated documentation
+- [ ] Performance impact assessed
+- [ ] Accessibility verified
+
+### Review Process
+- Minimum two approvals required
+- Automated checks must pass
+- Performance and accessibility metrics evaluated
+
+## 🛡️ Code of Conduct
 - Be respectful and inclusive
 - Provide constructive feedback
-- Collaborate and support each other
+- Collaborate with empathy
+- Celebrate diverse perspectives
 
-## 📞 Contact
+## 📊 Contribution Impact Tracking
+- Contributions tracked via:
+  - GitHub Insights
+  - Performance metrics
+  - User experience improvements
 
-For questions or discussions, open an issue or contact the maintainer.
+## 🏆 Recognition
+- Contributors acknowledged in README
+- Potential feature highlights
+- Open-source community recognition
 
-## 📄 License
+## 📞 Contact & Support
+- **Discussion**: GitHub Discussions
+- **Issues**: GitHub Issues
+- **Email**: michael@madezmedia.com
 
-This project is licensed under the MIT License.
+---
+
+**Together, we build extraordinary digital experiences.**

@@ -1,44 +1,66 @@
 name: Branch Management
 
 on:
-  push:
+  pull_request:
     branches:
       - main
+      - develop
 
 jobs:
-  create-branches:
+  lint-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          fetch-depth: 0
+          node-version: '18'
+      
+      - name: Install Dependencies
+        run: npm install
+      
+      - name: Run Linters
+        run: npm run lint
+      
+      - name: Run Tests
+        run: npm test
 
-      - name: Create Development Branch
+  branch-naming:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Check Branch Name
         run: |
-          git checkout -b develop
-          git push origin develop
+          BRANCH_NAME="${{ github.head_ref }}"
+          if [[ ! $BRANCH_NAME =~ ^(feature|bugfix|hotfix|docs|refactor)/[a-z0-9-]+$ ]]; then
+            echo "Branch name does not follow the required pattern:"
+            echo "Must start with feature/, bugfix/, hotfix/, docs/, or refactor/"
+            echo "followed by a lowercase description with hyphens"
+            exit 1
+          fi
 
-      - name: Create Initial Feature Branches
-        run: |
-          feature_branches=(
-            "feature/ui-improvements"
-            "feature/performance-optimization"
-            "feature/accessibility-enhancements"
-            "feature/seo-optimization"
-          )
-
-          for branch in "${feature_branches[@]}"; do
-            git checkout develop
-            git checkout -b "$branch"
-            git push origin "$branch"
-          done
-
-      - name: Create Release and Hotfix Branches
-        run: |
-          git checkout main
-          git checkout -b release/v1.0.0
-          git push origin release/v1.0.0
-          
-          git checkout main
-          git checkout -b hotfix/initial-setup
-          git push origin hotfix/initial-setup
+  pr-size-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Check PR Size
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const { data: prFiles } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+            
+            const changedFiles = prFiles.length;
+            const additions = prFiles.reduce((acc, file) => acc + file.additions, 0);
+            const deletions = prFiles.reduce((acc, file) => acc + file.deletions, 0);
+            
+            if (changedFiles > 20 || additions > 500 || deletions > 500) {
+              core.setFailed('Pull request is too large. Please break it into smaller PRs.');
+            }
