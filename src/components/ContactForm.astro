@@ -34,6 +34,7 @@ import CalEmbed from './CalEmbed';
         font-size: 2.5rem;
         color: var(--primary-color);
         margin: 0;
+        font-family: 'Orbitron', sans-serif;
     }
 
     .divider {
@@ -47,6 +48,7 @@ import CalEmbed from './CalEmbed';
         border-radius: 8px;
         overflow: hidden;
         min-height: 700px;
+        padding: 0;
     }
 
     /* Cal.com Embed Custom Styling */
@@ -54,5 +56,27 @@ import CalEmbed from './CalEmbed';
         --cal-brand-color: var(--primary-color);
         --cal-brand-text-color: var(--text-light);
         --cal-brand-background-color: var(--background-dark);
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    :global(.cal-embed iframe) {
+        border: none !important;
+        border-radius: 8px;
+    }
+
+    @media (max-width: 768px) {
+        .lets-connect {
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+        }
+
+        .connect-content {
+            min-height: 500px;
+        }
     }
 </style>
