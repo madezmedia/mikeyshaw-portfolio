@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
-import Cal, { getCalApi } from "@calcom/embed-react";
+import Cal from "@calcom/embed-react";
+import { getCalApi } from "@calcom/embed-react";
 
 interface CalEmbedProps {
     namespace?: string;
@@ -12,7 +13,9 @@ const CalEmbed: React.FC<CalEmbedProps> = ({
 }) => {
     const [currentTheme, setCurrentTheme] = useState<'dark' | 'light'>('dark');
     const [isLoading, setIsLoading] = useState(true);
+    const [isVisible, setIsVisible] = useState(false);
     const calContainerRef = useRef<HTMLDivElement>(null);
+    const observerRef = useRef<IntersectionObserver | null>(null);
 
     useEffect(() => {
         const initialTheme = document.documentElement.getAttribute('data-theme') as 'dark' | 'light';
@@ -34,10 +37,33 @@ const CalEmbed: React.FC<CalEmbedProps> = ({
     }, []);
 
     useEffect(() => {
+        // Intersection Observer for lazy loading
+        if (calContainerRef.current) {
+            observerRef.current = new IntersectionObserver(
+                ([entry]) => {
+                    if (entry.isIntersecting) {
+                        setIsVisible(true);
+                        observerRef.current?.disconnect();
+                    }
+                },
+                { threshold: 0.1 }
+            );
+            observerRef.current.observe(calContainerRef.current);
+        }
+
+        return () => {
+            observerRef.current?.disconnect();
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!isVisible) return;
+
         const initCalApi = async () => {
             try {
                 setIsLoading(true);
                 const cal = await getCalApi({"namespace": namespace});
+                
                 cal("ui", {
                     "theme": currentTheme,
                     "styles": {
@@ -55,7 +81,7 @@ const CalEmbed: React.FC<CalEmbedProps> = ({
                     if (calContainerRef.current) {
                         calContainerRef.current.classList.add('loaded');
                     }
-                }, 500);
+                }, 300);
             } catch (error) {
                 console.error('Cal API initialization error:', error);
                 setIsLoading(false);
@@ -63,7 +89,7 @@ const CalEmbed: React.FC<CalEmbedProps> = ({
         };
 
         initCalApi();
-    }, [currentTheme, namespace]);
+    }, [currentTheme, namespace, isVisible]);
 
     const themeStyles = {
         dark: {
@@ -124,24 +150,26 @@ const CalEmbed: React.FC<CalEmbedProps> = ({
                     <p>Loading Booking Calendar...</p>
                 </div>
             )}
-            <Cal 
-                namespace={namespace}
-                calLink={calLink}
-                style={{
-                    width: "100%", 
-                    height: "100%", 
-                    minHeight: '800px',
-                    opacity: isLoading ? 0 : 1,
-                    transition: 'opacity 0.5s ease',
-                    overflow: "visible",
-                    border: 'none',
-                    borderRadius: '8px'
-                }}
-                config={{
-                    layout: "column_view",
-                    theme: currentTheme
-                }}
-            />
+            {isVisible && (
+                <Cal 
+                    namespace={namespace}
+                    calLink={calLink}
+                    style={{
+                        width: "100%", 
+                        height: "100%", 
+                        minHeight: '800px',
+                        opacity: isLoading ? 0 : 1,
+                        transition: 'opacity 0.5s ease',
+                        overflow: "visible",
+                        border: 'none',
+                        borderRadius: '8px'
+                    }}
+                    config={{
+                        layout: "column_view",
+                        theme: currentTheme
+                    }}
+                />
+            )}
             <style>{`
                 @keyframes spin {
                     0% { transform: rotate(0deg); }

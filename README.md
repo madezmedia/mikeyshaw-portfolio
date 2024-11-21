@@ -1,84 +1,60 @@
-# 🚀 Michael Shaw - Digital Portfolio
+# Michael Shaw | Digital Architect & AI Innovator
 
-## 🌟 Project Overview
+## 🚀 Portfolio Showcase
 
-### Digital Architecture & AI Innovation Showcase
-A cutting-edge portfolio demonstrating the intersection of innovative technology, AI-driven solutions, and elegant design. Built with precision, performance, and user experience at its core.
+### Professional Profile
+Michael Shaw is a versatile Digital Architect specializing in AI, automation, and innovative technology solutions. This portfolio demonstrates expertise in transforming complex challenges into intelligent, scalable systems.
 
-## 🎨 Design Philosophy
-
-### Core Principles
-- **Minimalism**: Clean, purposeful interfaces
-- **Performance**: Lightning-fast, efficient interactions
-- **Accessibility**: Inclusive digital experiences
-- **Innovation**: Pushing technological boundaries
-
-## 🛠 Technology Stack
+## 🔧 Technical Expertise
 
 ### Core Technologies
-- **Framework**: Astro
-- **Language**: TypeScript
-- **Styling**: Modern CSS with custom properties
-- **Deployment**: Vercel
+- **Languages**: TypeScript, Python, JavaScript
+- **Frameworks**: React, Astro, Next.js
+- **AI/ML**: OpenAI, TensorFlow, PyTorch
+- **Cloud & DevOps**: Docker, Kubernetes
+- **Design**: Tailwind CSS, Figma
 
-### Key Features
-- 🤖 AI-Powered Insights
-- 💻 Interactive Project Showcase
-- 📊 GitHub Contributions Visualization
-- 🌓 Dynamic Theme Management
-- 📅 Cal.com Scheduling Integration
-- 🌐 Internationalization Support
-- 🔒 Robust Security Implementations
+### Key Projects
+1. **Favor AI**: 
+   - AI-powered automation platform
+   - Intelligent workflow optimization
+   - Machine learning integration
 
-## 🚀 Project Evolution Roadmap
+2. **Repubot**: 
+   - Advanced chatbot development
+   - Natural language processing
+   - Scalable conversational AI
 
-### Strategic Enhancement Dimensions
-1. **Performance Optimization**
-   - Lighthouse Performance Score Target: 90+
-   - First Contentful Paint: < 1.5s
+## 🌟 Portfolio Website Features
 
-2. **Accessibility & Inclusivity**
-   - WCAG 2.1 AA Compliance
-   - Comprehensive Screen Reader Support
+### Technical Highlights
+- **Framework**: Astro with TypeScript
+- **Performance**: 
+  - Lighthouse Score: 90+ 
+  - Optimized asset loading
+  - Lazy component rendering
+- **Responsive Design**: Mobile-first approach
+- **Theme Management**: 
+  - Dark/Light mode
+  - System preference integration
+  - Persistent theme selection
 
-3. **Developer Experience**
-   - Strict TypeScript Configurations
-   - Comprehensive Testing Infrastructure
+### Development Philosophy
+- Accessibility-first design
+- Performance optimization
+- Continuous learning and innovation
 
-4. **Security Enhancement**
-   - Advanced Content Security Policy
-   - Dependency Vulnerability Scanning
-
-5. **Progressive Web App**
-   - Offline Capabilities
-   - Installable Web Experience
-
-6. **Internationalization**
-   - Multi-Language Support
-   - Locale-Aware Components
-
-7. **AI Integration**
-   - Intelligent Chatbot
-   - Personalized Recommendations
-
-8. **Analytics & Insights**
-   - Comprehensive User Interaction Tracking
-   - Privacy-Conscious Data Collection
-
-## 🔧 Quick Start
+## 🛠 Development Setup
 
 ### Prerequisites
 - Node.js 18+
 - pnpm or npm
 - Git
 
-### Installation
+### Quick Start
 ```bash
 # Clone repository
-git clone https://github.com/madezmedia/mikeyshaw-portfolio.git
-
-# Navigate to project directory
-cd mikeyshaw-portfolio
+git clone https://github.com/madezmedia/portfolio
 
 # Install dependencies
 pnpm install
@@ -130,7 +106,7 @@ src/
 - Adhere to [Design System](DESIGN_SYSTEM.md)
 - Review [Developer Onboarding Guide](DEVELOPER_ONBOARDING.md)
 
-## 📄 Documentation
+## � Documentation
 - [Design System](DESIGN_SYSTEM.md)
 - [Developer Onboarding](DEVELOPER_ONBOARDING.md)
 - [Changelog](CHANGELOG.md)
@@ -149,6 +125,7 @@ src/
 - **Email**: michael@madezmedia.com
 - **LinkedIn**: [Michael Shaw](https://www.linkedin.com/in/michael-shaw-clt/)
 - **GitHub**: [@madezmedia](https://github.com/madezmedia)
+- **Email**: contact@mikeyshaw.pro
 
 ## 📜 License
 MIT License

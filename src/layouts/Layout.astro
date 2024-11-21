@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
 import ChatWidget from '../components/ChatWidget.tsx';
 import '../styles/animations.css';
 import '../styles/mobile.css';
@@ -28,15 +29,60 @@ const {
 	author = "Michael Shaw",
 	ogImage = "/images/mikey-shaw.png"
 } = Astro.props;
+
+// Critical CSS for immediate rendering
+const criticalCSS = `
+:root {
+    --primary-dark: #D4AF37;
+    --bg-primary-dark: #121212;
+    --text-primary-dark: #E0E0E0;
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    background: linear-gradient(135deg, var(--bg-primary-dark), #1E1E1E);
+    color: var(--text-primary-dark);
+}
+.app-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.content-wrapper {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    flex-grow: 1;
+}
+`;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		
+		<!-- Font Optimization -->
+		<link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
+		<style>
+			@font-face {
+				font-family: 'Inter';
+				src: url('/fonts/inter-variable.woff2') format('woff2-variations');
+				font-weight: 100 900;
+				font-display: swap;
+				font-style: normal;
+			}
+		</style>
+
 		<!-- Primary Meta Tags -->
 		<title>{title}</title>
 		<meta name="title" content={title} />
@@ -44,7 +90,7 @@ const {
 		<meta name="author" content={author} />
 		<meta name="keywords" content={keywords.join(", ")} />
 
-		<!-- Open Graph / Facebook -->
+		<!-- Open Graph / Social Media -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://mikeyshaw.online/" />
 		<meta property="og:title" content={title} />
@@ -87,8 +133,6 @@ const {
 
 		<!-- Canonical Link -->
 		<link rel="canonical" href="https://mikeyshaw.online" />
-
-		<!-- Robots Meta Tag -->
 		<meta name="robots" content="index, follow" />
 
 		<!-- Preload Critical Assets -->
@@ -136,10 +180,10 @@ const {
 
 			// Theme toggle listener
 			window.addEventListener('load', () => {
-				document.addEventListener('themeToggle', (e) => {
-					const newTheme = e.detail.theme;
-					setTheme(newTheme);
-				});
+				// Load theme script after initial render
+				const themeScript = document.createElement('script');
+				themeScript.src = '/scripts/theme.js';
+				document.head.appendChild(themeScript);
 			});
 		</script>
 	</head>
@@ -149,7 +193,7 @@ const {
 				<slot />
 			</div>
 		</div>
-		<ChatWidget client:load />
+		<ChatWidget client:visible />
 	</body>
 </html>
 
