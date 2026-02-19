@@ -19,42 +19,36 @@ const technologies: Technology[] = [
     { name: 'Rust', icon: SimpleIcons.siRust, color: '#000000' },
     { name: 'Next.js', icon: SimpleIcons.siNextdotjs, color: '#000000' },
     { name: 'Astro', icon: SimpleIcons.siAstro, color: '#FF5D01' },
-    { name: 'Three.js', icon: SimpleIcons.siThreedotjs, color: '#000000' }
+    { name: 'Three.js', icon: SimpleIcons.siThreedotjs, color: '#000000' },
+    { name: 'Python', icon: SimpleIcons.siPython, color: '#3776AB' }
 ];
+
+const radius = 250; // Radius of the 3D cylinder
+const angleStep = 360 / technologies.length;
 ---
 
-<section class="tech-marquee-section">
-    <div class="tech-marquee-header">
-        <h2 class="section-title">Technology Stack</h2>
-        <p class="section-subtitle">Tools & Technologies</p>
+<section class="tech-stack-section">
+    <div class="tech-header">
+        <h2 class="section-title">Core Technologies</h2>
+        <p class="section-subtitle">Holographic Proficiency Engine</p>
     </div>
 
-    <div class="tech-marquee-container">
-        <div class="tech-track">
-            {technologies.map((tech) => (
+    <div class="cylinder-container theme-hover">
+        <div class="cylinder">
+            {technologies.map((tech, index) => (
                 <div 
-                    class="tech-icon" 
+                    class="tech-card"
+                    style={`
+                        --index: ${index}; 
+                        --color: ${tech.color}; 
+                        --angle: ${index * angleStep}deg; 
+                        --radius: ${radius}px;
+                    `}
                     title={tech.name}
-                    data-tooltip={tech.name}
-                    style={`--tech-color: ${tech.color}`}
                 >
                     <div class="tech-icon-wrapper">
                         <Fragment 
-                            set:html={`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="var(--tech-icon-color)">${tech.icon.svg}</svg>`} 
-                        />
-                    </div>
-                </div>
-            ))}
-            {technologies.map((tech) => (
-                <div 
-                    class="tech-icon" 
-                    title={tech.name}
-                    data-tooltip={tech.name}
-                    style={`--tech-color: ${tech.color}`}
-                >
-                    <div class="tech-icon-wrapper">
-                        <Fragment 
-                            set:html={`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="var(--tech-icon-color)">${tech.icon.svg}</svg>`} 
+                            set:html={`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">${tech.icon.svg}</svg>`} 
                         />
                     </div>
                 </div>
@@ -66,16 +60,19 @@ const technologies: Technology[] = [
 <style define:vars={{
     transitionDuration: `${UX_CONFIG.TRANSITION_DURATION}ms`
 }}>
-    .tech-marquee-section {
-        width: 100%;
-        background: color-mix(in srgb, var(--bg-primary) 80%, transparent);
-        padding: 2rem 0;
+    .tech-stack-section {
+        max-width: 1200px;
+        margin: 4rem auto;
+        padding: 4rem 2rem;
+        perspective: 1000px;
         overflow: hidden;
     }
 
-    .tech-marquee-header {
+    .tech-header {
         text-align: center;
-        margin-bottom: 2rem;
+        margin-bottom: 4rem;
+        position: relative;
+        z-index: 10;
     }
 
     .section-title {
@@ -83,6 +80,7 @@ const technologies: Technology[] = [
         color: var(--primary);
         margin: 0;
         font-family: 'Orbitron', sans-serif;
+        text-shadow: 0 0 10px rgba(var(--primary-rgb), 0.5);
     }
 
     .section-subtitle {
@@ -91,94 +89,84 @@ const technologies: Technology[] = [
         margin-top: 0.5rem;
     }
 
-    .tech-marquee-container {
+    .cylinder-container {
         width: 100%;
-        overflow: hidden;
+        height: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform-style: preserve-3d;
+        mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
     }
 
-    .tech-track {
-        display: inline-flex;
-        animation: marquee 30s linear infinite;
-        width: max-content;
+    .cylinder {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        transform-style: preserve-3d;
+        animation: rotate 30s linear infinite;
     }
 
-    .tech-icon {
+    .cylinder:hover {
+        animation-play-state: paused;
+    }
+
+    .tech-card {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        left: 0;
+        top: 0;
+        transform: rotateY(var(--angle)) translateZ(var(--radius));
+        backface-visibility: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 1rem;
-        transition: transform var(--transitionDuration) ease;
+        transition: transform 0.3s ease, filter 0.3s ease;
     }
 
     .tech-icon-wrapper {
-        width: 60px;
-        height: 60px;
-        background: color-mix(in srgb, var(--tech-color) 10%, transparent);
+        width: 100%;
+        height: 100%;
+        background: color-mix(in srgb, var(--bg-secondary) 80%, transparent);
+        border: 1px solid color-mix(in srgb, var(--color) 50%, transparent);
         border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: 
-            transform var(--transitionDuration) ease,
-            background var(--transitionDuration) ease;
+        box-shadow: 0 0 15px color-mix(in srgb, var(--color) 20%, transparent);
+        padding: 12px;
+        transition: all 0.3s ease;
     }
 
-    .tech-icon:hover .tech-icon-wrapper {
-        transform: scale(1.1);
-        background: color-mix(in srgb, var(--tech-color) 20%, transparent);
+    .tech-card:hover .tech-icon-wrapper {
+        background: color-mix(in srgb, var(--color) 20%, transparent);
+        box-shadow: 0 0 30px var(--color);
+        transform: scale(1.2);
+        border-color: var(--color);
     }
 
-    .tech-icon svg {
-        width: 40px;
-        height: 40px;
-        transition: fill var(--transitionDuration) ease;
-        fill: var(--tech-icon-color-dark);
+    .tech-icon-wrapper svg {
+        width: 100%;
+        height: 100%;
+        fill: var(--color);
+        transition: fill 0.3s ease;
     }
 
-    @keyframes marquee {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
+    @keyframes rotate {
+        from { transform: rotateX(-5deg) rotateY(0deg); }
+        to { transform: rotateX(-5deg) rotateY(360deg); }
     }
 
     @media (max-width: 768px) {
-        .tech-track {
-            animation: mobile-marquee 20s linear infinite;
+        .cylinder-container {
+            mask-image: none;
+            height: 250px;
         }
 
-        .tech-icon {
-            margin: 0 0.5rem;
-        }
-
-        .tech-icon-wrapper {
-            width: 50px;
-            height: 50px;
-        }
-
-        .tech-icon svg {
-            width: 30px;
-            height: 30px;
-        }
-
-        @keyframes mobile-marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-75%); }
+        .cylinder {
+            /* Reduce radius on mobile */
+            transform: scale(0.6) rotateX(-5deg); 
         }
     }
 </style>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const techIcons = document.querySelectorAll('.tech-icon');
-        
-        techIcons.forEach(icon => {
-            icon.addEventListener('mouseenter', function() {
-                const techColor = this.style.getPropertyValue('--tech-color');
-                this.style.setProperty('--tech-icon-color', techColor);
-            });
-
-            icon.addEventListener('mouseleave', function() {
-                this.style.setProperty('--tech-icon-color', 'currentColor');
-            });
-        });
-    });
-</script>

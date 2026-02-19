@@ -6,8 +6,7 @@ const navLinks = [
     { name: 'About', href: '#about', icon: '👤', ariaLabel: 'Navigate to About section' },
     { name: 'Projects', href: '#projects', icon: '💡', ariaLabel: 'Navigate to Projects section' },
     { name: 'Skills', href: '#skills', icon: '🛠️', ariaLabel: 'Navigate to Skills section' },
-    { name: 'Achievements', href: '#achievements', icon: '🏆', ariaLabel: 'Navigate to Achievements section' },
-    { name: 'Testimonials', href: '#testimonials', icon: '💬', ariaLabel: 'Navigate to Testimonials section' },
+    { name: 'Desired Focus', href: '#desired-projects', icon: '🎯', ariaLabel: 'Navigate to Desired Projects section' },
     { name: 'Contact', href: '#contact', icon: '📞', ariaLabel: 'Navigate to Contact section' }
 ];
 ---
@@ -314,112 +313,145 @@ const navLinks = [
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const navLinks = document.querySelectorAll('[data-nav-link]');
-    const mobileDrawer = document.getElementById('mobile-drawer');
-    const mobileMenuButton = document.getElementById('mobile-menu');
-    const closeDrawerButton = document.getElementById('close-drawer');
-    const desktopThemeToggle = document.getElementById('theme-toggle');
-    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    function initNavbar() {
+        const navLinks = document.querySelectorAll('[data-nav-link]');
+        const mobileDrawer = document.getElementById('mobile-drawer');
+        const mobileMenuButton = document.getElementById('mobile-menu');
+        const closeDrawerButton = document.getElementById('close-drawer');
+        const desktopThemeToggle = document.getElementById('theme-toggle');
+        const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 
-    let currentTheme = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', currentTheme);
-
-    function smoothScroll(e) {
-        e.preventDefault();
-        const targetId = e.currentTarget.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        
-        if (targetElement) {
-            targetElement.scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
-            });
-            
-            // Close mobile drawer if open
-            if (mobileDrawer) {
-                mobileDrawer.classList.remove('active');
-                mobileMenuButton.setAttribute('aria-expanded', 'false');
-            }
-        }
-    }
-
-    // Add smooth scroll to all nav links
-    navLinks.forEach(link => {
-        link.addEventListener('click', smoothScroll);
-    });
-
-    function toggleTheme() {
-        currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        
+        let currentTheme = localStorage.getItem('theme') || 'dark';
         document.documentElement.setAttribute('data-theme', currentTheme);
-        
-        const themeChangeEvent = new CustomEvent('theme-changed', { 
-            detail: { theme: currentTheme } 
-        });
-        document.dispatchEvent(themeChangeEvent);
 
-        localStorage.setItem('theme', currentTheme);
-
-        desktopThemeToggle?.setAttribute('aria-pressed', String(currentTheme === 'light'));
-        mobileThemeToggle?.setAttribute('aria-pressed', String(currentTheme === 'light'));
-    }
-
-    function toggleMobileDrawer() {
-        const isOpen = mobileDrawer.classList.toggle('active');
-        mobileMenuButton.setAttribute('aria-expanded', String(isOpen));
-    }
-
-    if (desktopThemeToggle) {
-        desktopThemeToggle.addEventListener('click', toggleTheme);
-        desktopThemeToggle.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                toggleTheme();
+        function smoothScroll(e) {
+            e.preventDefault();
+            const targetId = e.currentTarget.getAttribute('href');
+            if (!targetId || targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Close mobile drawer if open
+                if (mobileDrawer) {
+                    mobileDrawer.classList.remove('active');
+                    mobileMenuButton?.setAttribute('aria-expanded', 'false');
+                }
             }
-        });
-    }
-
-    if (mobileThemeToggle) {
-        mobileThemeToggle.addEventListener('click', toggleTheme);
-        mobileThemeToggle.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                toggleTheme();
-            }
-        });
-    }
-
-    if (mobileMenuButton) {
-        mobileMenuButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleMobileDrawer();
-        });
-    }
-
-    if (closeDrawerButton) {
-        closeDrawerButton.addEventListener('click', (e) => {
-            e.stopPropagation();
-            mobileDrawer.classList.remove('active');
-            mobileMenuButton.setAttribute('aria-expanded', 'false');
-        });
-    }
-
-    mobileNavLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.stopPropagation();
-            mobileDrawer.classList.remove('active');
-            mobileMenuButton.setAttribute('aria-expanded', 'false');
-        });
-    });
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && mobileDrawer.classList.contains('active')) {
-            mobileDrawer.classList.remove('active');
-            mobileMenuButton.setAttribute('aria-expanded', 'false');
-            mobileMenuButton.focus();
         }
-    });
-});
+
+        // Add smooth scroll to all nav links
+        navLinks.forEach(link => {
+            link.addEventListener('click', smoothScroll);
+        });
+
+        function toggleTheme() {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            
+            const themeChangeEvent = new CustomEvent('theme-changed', { 
+                detail: { theme: currentTheme } 
+            });
+            document.dispatchEvent(themeChangeEvent);
+
+            localStorage.setItem('theme', currentTheme);
+
+            if (desktopThemeToggle) desktopThemeToggle.setAttribute('aria-pressed', String(currentTheme === 'light'));
+            if (mobileThemeToggle) mobileThemeToggle.setAttribute('aria-pressed', String(currentTheme === 'light'));
+        }
+
+        function toggleMobileDrawer() {
+            if (!mobileDrawer) return;
+            const isOpen = mobileDrawer.classList.toggle('active');
+            mobileMenuButton?.setAttribute('aria-expanded', String(isOpen));
+        }
+
+        if (desktopThemeToggle) {
+            desktopThemeToggle.addEventListener('click', toggleTheme);
+            desktopThemeToggle.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleTheme();
+                }
+            });
+        }
+
+        if (mobileThemeToggle) {
+            mobileThemeToggle.addEventListener('click', toggleTheme);
+            
+            // Initial state
+            mobileThemeToggle.setAttribute('aria-pressed', String(currentTheme === 'light'));
+
+            mobileThemeToggle.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleTheme();
+                }
+            });
+        }
+
+        // Set initial state for desktop toggle too
+        if (desktopThemeToggle) {
+             desktopThemeToggle.setAttribute('aria-pressed', String(currentTheme === 'light'));
+        }
+
+
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleMobileDrawer();
+            });
+        }
+
+        if (closeDrawerButton) {
+            closeDrawerButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (mobileDrawer) mobileDrawer.classList.remove('active');
+                mobileMenuButton?.setAttribute('aria-expanded', 'false');
+            });
+        }
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                // e.stopPropagation(); // Removed to allow smooth scroll to work if attached
+                if (mobileDrawer) mobileDrawer.classList.remove('active');
+                mobileMenuButton?.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileDrawer && mobileDrawer.classList.contains('active')) {
+                mobileDrawer.classList.remove('active');
+                mobileMenuButton?.setAttribute('aria-expanded', 'false');
+                mobileMenuButton?.focus();
+            }
+        });
+        
+        // Close drawer when clicking outside
+        document.addEventListener('click', (e) => {
+            if (mobileDrawer && mobileDrawer.classList.contains('active') && 
+                !mobileDrawer.contains(e.target) && 
+                !mobileMenuButton?.contains(e.target)) {
+                mobileDrawer.classList.remove('active');
+                mobileMenuButton?.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
+    // Initialize immediately if document is already ready, otherwise wait
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initNavbar);
+    } else {
+        initNavbar();
+    }
+    
+    // Re-initialize on view transitions if using them
+    document.addEventListener('astro:page-load', initNavbar);
 </script>

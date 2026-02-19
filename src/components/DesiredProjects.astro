@@ -1,0 +1,198 @@
+---
+import { UX_CONFIG } from '../utils/ux';
+
+interface DesiredProject {
+    icon: string;
+    title: string;
+    description: string;
+    tags: string[];
+    color: string;
+}
+
+const desiredProjects: DesiredProject[] = [
+    {
+        icon: '🤖',
+        title: 'Autonomous AI Agents',
+        description: 'Building self-operating AI systems capable of complex reasoning and task execution.',
+        tags: ['LLMs', 'LangChain', 'AutoGPT'],
+        color: '#FF6B6B'
+    },
+    {
+        icon: '☁️',
+        title: 'SaaS Platforms',
+        description: 'Scalable, multi-tenant cloud solutions solving real-world business problems.',
+        tags: ['Next.js', 'AWS', 'Stripe'],
+        color: '#4ECDC4'
+    },
+    {
+        icon: '🔗',
+        title: 'Web3 & Blockchain',
+        description: 'Decentralized applications (dApps) and smart contracts for the future internet.',
+        tags: ['Solidity', 'Ethereum', 'DeFi'],
+        color: '#45B7D1'
+    },
+    {
+        icon: '🧠',
+        title: 'Cognitive Automation',
+        description: 'Intelligent workflow automation mimicking human decision-making processes.',
+        tags: ['n8n', 'Python', 'ML'],
+        color: '#D4AF37'
+    },
+    {
+        icon: '🎙️',
+        title: 'Voice First AI',
+        description: 'Building natural, conversational voice interfaces using next-gen audio models.',
+        tags: ['VAPI', 'OpenAI Realtime', 'Twilio'],
+        color: '#FF4D4D'
+    },
+    {
+        icon: '🦞',
+        title: 'OpenClaw for Business',
+        description: 'Enterprise-grade web scraping and data intelligence automation at scale.',
+        tags: ['Puppeteer', 'Data Extraction', 'Automation'],
+        color: '#FF9900'
+    }
+];
+---
+
+<section id="desired-projects" class="desired-projects-section">
+    <div class="section-header">
+        <h2 class="section-title">Future Focus</h2>
+        <p class="section-subtitle">Innovating the Next Generation of Digital Solutions</p>
+    </div>
+
+    <div class="projects-grid">
+        {desiredProjects.map((project) => (
+            <div 
+                class="project-card theme-hover"
+                style={`--project-color: ${project.color}`}
+            >
+                <div class="icon-container">
+                    <span class="project-icon">{project.icon}</span>
+                </div>
+                
+                <h3 class="project-title">{project.title}</h3>
+                <p class="project-description">{project.description}</p>
+
+                <div class="project-tags">
+                    {project.tags.map(tag => (
+                        <span class="tag">{tag}</span>
+                    ))}
+                </div>
+            </div>
+        ))}
+    </div>
+</section>
+
+<style define:vars={{
+    transitionDuration: `${UX_CONFIG.TRANSITION_DURATION}ms`
+}}>
+    .desired-projects-section {
+        max-width: 1200px;
+        margin: 4rem auto;
+        padding: 2rem;
+        background: color-mix(in srgb, var(--bg-primary) 80%, transparent);
+        border-radius: 16px;
+        border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+        transition: background-color var(--transitionDuration) ease;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin: 0;
+        font-family: 'Orbitron', sans-serif;
+    }
+
+    .section-subtitle {
+        color: var(--text-secondary);
+        opacity: 0.7;
+        margin-top: 0.5rem;
+    }
+
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+    }
+
+    .project-card {
+        background: color-mix(in srgb, var(--project-color) 10%, transparent);
+        border-radius: 16px;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: 
+            transform var(--transitionDuration) ease,
+            box-shadow var(--transitionDuration) ease;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid color-mix(in srgb, var(--project-color) 20%, transparent);
+    }
+
+    .project-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 
+            0 15px 30px color-mix(in srgb, var(--project-color) 20%, transparent),
+            0 10px 20px color-mix(in srgb, var(--project-color) 10%, transparent);
+    }
+
+    .icon-container {
+        width: 80px;
+        height: 80px;
+        background: color-mix(in srgb, var(--project-color) 20%, transparent);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        transition: transform var(--transitionDuration) ease;
+    }
+
+    .project-card:hover .icon-container {
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    .project-icon {
+        font-size: 2.5rem;
+    }
+
+    .project-title {
+        font-size: 1.5rem;
+        color: var(--project-color);
+        margin: 0 0 1rem;
+        font-family: 'Orbitron', sans-serif;
+    }
+
+    .project-description {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        flex-grow: 1;
+    }
+
+    .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .tag {
+        background: color-mix(in srgb, var(--project-color) 15%, transparent);
+        color: var(--project-color);
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        border: 1px solid color-mix(in srgb, var(--project-color) 30%, transparent);
+    }
+</style>
