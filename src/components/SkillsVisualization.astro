@@ -18,60 +18,61 @@ interface SkillLink {
 // Data transformation for force graph
 const skillsData = {
     nodes: [        
-        // Groups: 1=AI, 2=Data, 3=Web, 4=Core
-        { id: "Digital Architect", group: 4, value: 20, icon: "👑" },
+        // Groups: 1=Voice AI, 2=Agent Frameworks, 3=Web/SaaS, 4=Core
+        { id: "AI Architect", group: 4, value: 20, icon: "👑" },
         
-        // AI & ML
-        { id: "AI & ML", group: 1, value: 15, icon: "🤖" },
-        { id: "TensorFlow", group: 1, value: 10 },
-        { id: "PyTorch", group: 1, value: 10 },
-        { id: "Scikit-learn", group: 1, value: 8 },
-        { id: "LLMs", group: 1, value: 12 },
-        { id: "OpenAI API", group: 1, value: 9 },
+        // Voice AI
+        { id: "Voice AI", group: 1, value: 15, icon: "🎙️" },
+        { id: "VAPI", group: 1, value: 11 },
+        { id: "ElevenLabs", group: 1, value: 10 },
+        { id: "OpenAI Realtime", group: 1, value: 10 },
+        { id: "OpenAI", group: 1, value: 12 },
         
-        // Data Science
-        { id: "Data Science", group: 2, value: 15, icon: "📊" },
-        { id: "Pandas", group: 2, value: 10 },
-        { id: "NumPy", group: 2, value: 10 },
-        { id: "Python", group: 2, value: 12 },
-        { id: "SQL", group: 2, value: 9 },
+        // Agent Orchestration
+        { id: "Agent Frameworks", group: 2, value: 15, icon: "🤖" },
+        { id: "LangChain", group: 2, value: 10 },
+        { id: "AutoGPT", group: 2, value: 9 },
+        { id: "YAO", group: 2, value: 9 },
+        { id: "SuperAGI", group: 2, value: 8 },
         
-        // Web Tech
-        { id: "Web Tech", group: 3, value: 15, icon: "💻" },
-        { id: "React", group: 3, value: 12 },
+        // Web/SaaS
+        { id: "Web & SaaS", group: 3, value: 15, icon: "💻" },
+        { id: "Next.js", group: 3, value: 12 },
+        { id: "React", group: 3, value: 11 },
         { id: "TypeScript", group: 3, value: 11 },
-        { id: "Node.js", group: 3, value: 11 },
-        { id: "Astro", group: 3, value: 9 },
-        { id: "Next.js", group: 3, value: 10 },
-        { id: "GraphQL", group: 3, value: 8 }
+        { id: "Supabase", group: 3, value: 11 },
+        { id: "Stripe", group: 3, value: 9 },
+        { id: "Prisma", group: 3, value: 9 },
+        { id: "Node.js", group: 3, value: 10 }
     ],
     links: [
-        { source: "Digital Architect", target: "AI & ML", value: 5 },
-        { source: "Digital Architect", target: "Data Science", value: 5 },
-        { source: "Digital Architect", target: "Web Tech", value: 5 },
+        { source: "AI Architect", target: "Voice AI", value: 5 },
+        { source: "AI Architect", target: "Agent Frameworks", value: 5 },
+        { source: "AI Architect", target: "Web & SaaS", value: 5 },
         
-        { source: "AI & ML", target: "TensorFlow", value: 3 },
-        { source: "AI & ML", target: "PyTorch", value: 3 },
-        { source: "AI & ML", target: "Scikit-learn", value: 3 },
-        { source: "AI & ML", target: "LLMs", value: 4 },
-        { source: "AI & ML", target: "OpenAI API", value: 3 },
-        { source: "TensorFlow", target: "Python", value: 2 },
-        { source: "PyTorch", target: "Python", value: 2 },
+        { source: "Voice AI", target: "VAPI", value: 3 },
+        { source: "Voice AI", target: "ElevenLabs", value: 3 },
+        { source: "Voice AI", target: "OpenAI Realtime", value: 3 },
+        { source: "Voice AI", target: "OpenAI", value: 4 },
+        { source: "VAPI", target: "OpenAI", value: 2 },
         
-        { source: "Data Science", target: "Pandas", value: 3 },
-        { source: "Data Science", target: "NumPy", value: 3 },
-        { source: "Data Science", target: "Python", value: 4 },
-        { source: "Data Science", target: "SQL", value: 3 },
+        { source: "Agent Frameworks", target: "LangChain", value: 3 },
+        { source: "Agent Frameworks", target: "AutoGPT", value: 3 },
+        { source: "Agent Frameworks", target: "YAO", value: 3 },
+        { source: "Agent Frameworks", target: "SuperAGI", value: 3 },
+        { source: "LangChain", target: "OpenAI", value: 2 },
         
-        { source: "Web Tech", target: "React", value: 3 },
-        { source: "Web Tech", target: "TypeScript", value: 3 },
-        { source: "Web Tech", target: "Node.js", value: 3 },
-        { source: "Web Tech", target: "Astro", value: 3 },
-        { source: "Web Tech", target: "Next.js", value: 3 },
-        { source: "Web Tech", target: "GraphQL", value: 2 },
+        { source: "Web & SaaS", target: "Next.js", value: 3 },
+        { source: "Web & SaaS", target: "React", value: 3 },
+        { source: "Web & SaaS", target: "TypeScript", value: 3 },
+        { source: "Web & SaaS", target: "Supabase", value: 3 },
+        { source: "Web & SaaS", target: "Stripe", value: 3 },
+        { source: "Web & SaaS", target: "Prisma", value: 3 },
+        { source: "Web & SaaS", target: "Node.js", value: 3 },
         { source: "React", target: "TypeScript", value: 2 },
         { source: "Next.js", target: "React", value: 2 },
-        { source: "Node.js", target: "TypeScript", value: 2 }
+        { source: "Node.js", target: "TypeScript", value: 2 },
+        { source: "Supabase", target: "Prisma", value: 2 }
     ]
 };
 ---
