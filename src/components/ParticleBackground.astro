@@ -1,0 +1,154 @@
+---
+/**
+ * Persistent particle background that renders behind all page content.
+ * Theme-aware: gold particles on dark mode, blue/teal on light mode.
+ */
+---
+
+<canvas id="global-particles" class="particle-canvas"></canvas>
+
+<script is:inline>
+document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('global-particles');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+
+    // Theme colors
+    const themeColors = {
+        dark: { r: 212, g: 175, b: 55 },   // Gold
+        light: { r: 59, g: 130, b: 246 }    // Blue
+    };
+
+    function getColor() {
+        return themeColors[currentTheme] || themeColors.dark;
+    }
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = document.documentElement.scrollHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Re-measure on scroll to catch dynamic content
+    let resizeTimeout;
+    window.addEventListener('scroll', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            const newHeight = document.documentElement.scrollHeight;
+            if (Math.abs(canvas.height - newHeight) > 100) {
+                canvas.height = newHeight;
+                initParticles();
+            }
+        }, 200);
+    });
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 0.5;
+            this.speedX = Math.random() * 0.6 - 0.3;
+            this.speedY = Math.random() * 0.6 - 0.3;
+            this.opacity = Math.random() * 0.4 + 0.1;
+        }
+
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+
+            if (this.x > canvas.width) this.x = 0;
+            if (this.x < 0) this.x = canvas.width;
+            if (this.y > canvas.height) this.y = 0;
+            if (this.y < 0) this.y = canvas.height;
+        }
+
+        draw() {
+            const c = getColor();
+            ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${this.opacity})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    function initParticles() {
+        particles = [];
+        // Scale particle count with page height
+        const count = Math.min(120, Math.floor(canvas.height / 30));
+        for (let i = 0; i < count; i++) {
+            particles.push(new Particle());
+        }
+    }
+
+    function drawConnections() {
+        const c = getColor();
+        // Only draw connections for particles near the viewport
+        const scrollY = window.scrollY;
+        const viewTop = scrollY - 100;
+        const viewBottom = scrollY + window.innerHeight + 100;
+
+        const visibleParticles = particles.filter(p => p.y > viewTop && p.y < viewBottom);
+        
+        for (let i = 0; i < visibleParticles.length; i++) {
+            for (let j = i + 1; j < visibleParticles.length; j++) {
+                const dx = visibleParticles[i].x - visibleParticles[j].x;
+                const dy = visibleParticles[i].y - visibleParticles[j].y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < 120) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${(1 - distance / 120) * 0.15})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.moveTo(visibleParticles[i].x, visibleParticles[i].y);
+                    ctx.lineTo(visibleParticles[j].x, visibleParticles[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (const p of particles) {
+            p.update();
+            p.draw();
+        }
+        drawConnections();
+        requestAnimationFrame(animate);
+    }
+
+    initParticles();
+    animate();
+
+    // Listen for theme changes
+    document.addEventListener('theme-changed', (e) => {
+        currentTheme = e.detail.theme;
+    });
+
+    // Observe DOM attribute changes for theme
+    const observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+            if (mutation.attributeName === 'data-theme') {
+                currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+            }
+        }
+    });
+    observer.observe(document.documentElement, { attributes: true });
+});
+</script>
+
+<style>
+    .particle-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 0;
+    }
+</style>

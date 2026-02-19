@@ -1,6 +1,7 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
 import ChatWidget from '../components/ChatWidget.tsx';
+import ParticleBackground from '../components/ParticleBackground.astro';
 import '../styles/animations.css';
 import '../styles/mobile.css';
 import { UX_CONFIG } from '../utils/ux';
@@ -45,7 +46,7 @@ html, body {
     max-width: 100%;
     overflow-x: hidden;
     scroll-behavior: smooth;
-    background: linear-gradient(135deg, var(--bg-primary-dark), #1E1E1E);
+    background: var(--bg-primary-dark);
     color: var(--text-primary-dark);
 }
 .app-container {
@@ -56,9 +57,9 @@ html, body {
 }
 .content-wrapper {
     width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 1rem;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
     flex-grow: 1;
 }
 `;
@@ -188,12 +189,63 @@ html, body {
 		</script>
 	</head>
 	<body>
+		<ParticleBackground />
 		<div class="app-container">
 			<div class="content-wrapper">
 				<slot />
 			</div>
 		</div>
 		<ChatWidget client:visible />
+
+		<script is:inline>
+		// Parallax section scrolling
+		document.addEventListener('DOMContentLoaded', () => {
+			const sections = document.querySelectorAll('main > section, main section');
+			
+			// Add parallax data attributes
+			sections.forEach((section, index) => {
+				section.style.transition = 'transform 0.1s ease-out, opacity 0.3s ease';
+				section.style.willChange = 'transform, opacity';
+			});
+
+			const handleScroll = () => {
+				const scrollY = window.scrollY;
+				const viewHeight = window.innerHeight;
+				
+				sections.forEach((section) => {
+					const rect = section.getBoundingClientRect();
+					const sectionTop = rect.top;
+					const sectionHeight = rect.height;
+					
+					// Only apply parallax to sections in/near viewport
+					if (sectionTop < viewHeight + 200 && sectionTop + sectionHeight > -200) {
+						// Subtle parallax: section moves slightly slower than scroll
+						const parallaxOffset = (sectionTop / viewHeight) * 20;
+						section.style.transform = `translateY(${parallaxOffset}px)`;
+						
+						// Fade in as it enters viewport
+						const opacity = Math.min(1, Math.max(0.3, 1 - (sectionTop / viewHeight) * 0.3));
+						section.style.opacity = sectionTop < viewHeight ? '1' : String(opacity);
+					}
+				});
+			};
+
+			// Use requestAnimationFrame for smooth parallax
+			let ticking = false;
+			window.addEventListener('scroll', () => {
+				if (!ticking) {
+					requestAnimationFrame(() => {
+						handleScroll();
+						ticking = false;
+					});
+					ticking = true;
+				}
+			});
+
+			// Initial call
+			handleScroll();
+		});
+		</script>
 	</body>
 </html>
 
@@ -256,11 +308,7 @@ html, body {
 
     html {
         font-family: 'Inter', system-ui, sans-serif;
-        background: linear-gradient(
-            135deg, 
-            var(--bg-primary), 
-            var(--bg-secondary)
-        );
+        background: var(--bg-primary);
         color: var(--text-primary);
         line-height: 1.6;
     }
@@ -277,19 +325,17 @@ html, body {
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        background: linear-gradient(
-            to bottom right, 
-            color-mix(in srgb, var(--bg-primary) 90%, transparent),
-            color-mix(in srgb, var(--bg-secondary) 90%, transparent)
-        );
+        position: relative;
+        z-index: 1;
+        background: transparent;
         transition: all 0.3s ease;
     }
 
     .content-wrapper {
         width: 100%;
-        max-width: 1440px;
-        margin: 0 auto;
-        padding: 0 1rem;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
         flex-grow: 1;
     }
 

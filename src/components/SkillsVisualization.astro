@@ -77,16 +77,12 @@ const skillsData = {
 ---
 
 <section id="skills" class="skills-visualization-section">
-    <div class="skills-header">
-        <h2 class="section-title">Technical Neural Network</h2>
-        <p class="section-subtitle">Interactive Proficiency Map</p>
-    </div>
+    <h2 class="section-title">Technical Neural Network</h2>
+    <p class="section-subtitle">Interactive Proficiency Map</p>
 
     <div class="canvas-container theme-hover">
         <canvas id="skills-canvas"></canvas>
-        <div class="overlay-instruction">
-            <span>Drag nodes to explore • Scroll to zoom</span>
-        </div>
+        <span class="overlay-instruction">Drag nodes to explore • Scroll to zoom</span>
         <div id="tooltip" class="skill-tooltip"></div>
     </div>
 </section>
@@ -112,12 +108,11 @@ const skillsData = {
     const container = canvas.parentElement;
     const tooltip = document.getElementById('tooltip');
     
-    // Check if container exists before proceeding
     if (container) {
+        const isMobile = window.innerWidth <= 768;
         let width = container.clientWidth;
-        let height = 600;
+        let height = isMobile ? 350 : 600;
         
-        // Set canvas resolution for retina displays
         const scale = window.devicePixelRatio || 1;
         canvas.width = width * scale;
         canvas.height = height * scale;
@@ -127,13 +122,10 @@ const skillsData = {
         const context = canvas.getContext('2d');
         if (context) context.scale(scale, scale);
 
-        // Color scales
         const colorScale = d3.scaleOrdinal<string>()
             .domain(['1', '2', '3', '4'])
             .range(['#FF6B6B', '#4ECDC4', '#45B7D1', '#D4AF37']);
 
-        // @ts-ignore - Data comes from Astro frontmatter which is effectively global here or passed as json
-        // We'll reconstruct the data here for the script to use directly to avoid serializing issues
         const nodes: Node[] = [
             { id: "Digital Architect", group: 4, value: 20, icon: "👑" },
             { id: "AI & ML", group: 1, value: 15, icon: "🤖" },
@@ -154,7 +146,7 @@ const skillsData = {
             { id: "Astro", group: 3, value: 9 },
             { id: "Next.js", group: 3, value: 10 },
             { id: "GraphQL", group: 3, value: 8 }
-        ].map(d => ({...d})); // Clone to avoid mutation issues if re-run
+        ].map(d => ({...d}));
 
         const links: Link[] = [
             { source: "Digital Architect", target: "AI & ML", value: 5 },
@@ -182,11 +174,18 @@ const skillsData = {
             { source: "Node.js", target: "TypeScript", value: 2 }
         ].map(d => ({...d}));
 
+        // Adjust force parameters for screen size
+        const linkDist = isMobile ? 60 : 100;
+        const chargeStr = isMobile ? -150 : -300;
+        const nodeScale = isMobile ? 1.0 : 1.5;
+        const fontSize = isMobile ? 9 : 12;
+        const iconSize = isMobile ? 12 : 16;
+
         const simulation = d3.forceSimulation(nodes)
-            .force("link", d3.forceLink(links).id((d: any) => d.id).distance(100))
-            .force("charge", d3.forceManyBody().strength(-300))
+            .force("link", d3.forceLink(links).id((d: any) => d.id).distance(linkDist))
+            .force("charge", d3.forceManyBody().strength(chargeStr))
             .force("center", d3.forceCenter(width / 2, height / 2))
-            .force("collide", d3.forceCollide().radius((d: any) => d.value * 2 + 5));
+            .force("collide", d3.forceCollide().radius((d: any) => d.value * nodeScale + 5));
 
         // Drag functions
         const drag = (simulation: any) => {
@@ -212,7 +211,6 @@ const skillsData = {
             return d3.drag()
                 .subject((event) => {
                     const [x, y] = [event.x, event.y];
-                    // Find node closest to pointer
                     let subject = null;
                     let distance = Infinity;
                     for (const node of nodes) {
@@ -229,23 +227,19 @@ const skillsData = {
                 .on("end", dragended);
         };
 
-        // Attach drag handler
         d3.select(canvas).call(drag(simulation) as any);
 
-        // Interaction state
         let hoverNode: any = null;
 
         d3.select(canvas).on("mousemove", (event) => {
             const [mouseX, mouseY] = d3.pointer(event);
             
-            // Find hover node
             let prevHover = hoverNode;
             hoverNode = null;
-            let minDist = Infinity;
             
             for (const node of nodes) {
                 const dist = Math.sqrt((mouseX - node.x!) ** 2 + (mouseY - node.y!) ** 2);
-                if (dist < node.value * 2 + 5) { // Hit radius
+                if (dist < node.value * nodeScale + 5) {
                     hoverNode = node;
                     break;
                 }
@@ -254,7 +248,6 @@ const skillsData = {
             if (hoverNode !== prevHover) {
                 canvas.style.cursor = hoverNode ? 'pointer' : 'default';
                 
-                // Show/hide tooltip
                 if (hoverNode && tooltip) {
                     tooltip.style.opacity = '1';
                     tooltip.innerHTML = `<strong>${hoverNode.id}</strong>`;
@@ -268,7 +261,6 @@ const skillsData = {
             if (hoverNode) restart();
         });
 
-        // Loop animation
         function restart() {
             if (!context) return;
             context.clearRect(0, 0, width, height);
@@ -305,14 +297,13 @@ const skillsData = {
             // Draw nodes
             nodes.forEach((node: any) => {
                 context.beginPath();
-                const radius = node.value * 1.5;
+                const radius = node.value * nodeScale;
                 const isHovered = hoverNode === node;
                 const isConnected = hoverNode && links.some((l: any) => 
                     (l.source.id === hoverNode.id && l.target.id === node.id) ||
                     (l.target.id === hoverNode.id && l.source.id === node.id)
                 );
 
-                // Pulse effect
                 const pulse = Math.sin(Date.now() / 1000 + node.index!) * 1.5;
                 
                 context.arc(node.x, node.y, isHovered ? radius + 5 : radius + pulse, 0, 2 * Math.PI);
@@ -333,19 +324,18 @@ const skillsData = {
                 context.lineWidth = 2;
                 context.stroke();
 
-                // Draw icon or text
+                // Draw text labels
                 context.fillStyle = "#fff";
-                context.font = `${isHovered ? 'bold ' : ''}12px Inter`;
+                context.font = `${isHovered ? 'bold ' : ''}${fontSize}px Inter`;
                 context.textAlign = "center";
                 context.textBaseline = "middle";
                 
-                // Show text if large node or hovered/connected
                 if (node.value > 12 || isHovered || isConnected) {
-                    context.fillText(node.id, node.x, node.y + radius + 15);
+                    context.fillText(node.id, node.x, node.y + radius + 14);
                 }
                 
                 if (node.icon) {
-                     context.font = "16px Arial";
+                     context.font = `${iconSize}px Arial`;
                      context.fillText(node.icon, node.x, node.y);
                 }
             });
@@ -353,10 +343,23 @@ const skillsData = {
 
         d3.timer(restart);
 
-        // Handle resize
+        // Responsive resize
         window.addEventListener('resize', () => {
-             // Re-measuring container width would require logic here
-             // specific to resizing the canvas and simulation center
+            const newMobile = window.innerWidth <= 768;
+            width = container.clientWidth;
+            height = newMobile ? 350 : 600;
+            
+            const s = window.devicePixelRatio || 1;
+            canvas.width = width * s;
+            canvas.height = height * s;
+            canvas.style.width = `${width}px`;
+            canvas.style.height = `${height}px`;
+            
+            const ctx = canvas.getContext('2d');
+            if (ctx) ctx.scale(s, s);
+            
+            simulation.force("center", d3.forceCenter(width / 2, height / 2));
+            simulation.alpha(0.3).restart();
         });
     }
 </script>
@@ -372,26 +375,25 @@ const skillsData = {
         border-radius: 16px;
         border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
         transition: background-color var(--transitionDuration) ease;
-    }
-
-    .skills-header {
         text-align: center;
-        margin-bottom: 2rem;
-        position: relative;
-        z-index: 2;
     }
 
     .section-title {
         font-size: 2.5rem;
         color: var(--primary);
-        margin: 0;
+        margin: 0 0 0.5rem;
         font-family: 'Orbitron', sans-serif;
+    }
+
+    .section-subtitle {
+        color: var(--text-secondary);
+        opacity: 0.7;
+        margin: 0 0 2rem;
     }
 
     .canvas-container {
         position: relative;
         width: 100%;
-        height: 600px;
         background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
         border-radius: 12px;
         overflow: hidden;
@@ -403,13 +405,18 @@ const skillsData = {
         cursor: grabbing;
     }
 
+    #skills-canvas {
+        display: block;
+        width: 100%;
+    }
+
     .overlay-instruction {
         position: absolute;
-        bottom: 1rem;
+        bottom: 0.75rem;
         left: 50%;
         transform: translateX(-50%);
         color: rgba(255,255,255,0.5);
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         pointer-events: none;
     }
 
@@ -427,4 +434,26 @@ const skillsData = {
         backdrop-filter: blur(4px);
         border: 1px solid rgba(255,255,255,0.2);
     }
+
+    @media (max-width: 768px) {
+        .skills-visualization-section {
+            margin: 2rem 0;
+            padding: 1.5rem 1rem;
+            max-width: 100%;
+            border-radius: 0;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+        }
+
+        .canvas-container {
+            border-radius: 8px;
+        }
+
+        .overlay-instruction {
+            font-size: 0.65rem;
+        }
+    }
 </style>
+

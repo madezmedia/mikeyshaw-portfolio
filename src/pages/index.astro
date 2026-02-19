@@ -39,10 +39,15 @@ import DesiredProjects from '../components/DesiredProjects.astro';
 
 <style>
     .portfolio-container {
-        max-width: 1200px;
+        width: 100%;
+        max-width: 100%;
         margin: 0 auto;
-        padding: 2rem;
-        background: var(--background-dark);
-        color: var(--text-light);
+        padding: 0 2rem;
+    }
+
+    @media (max-width: 768px) {
+        .portfolio-container {
+            padding: 0;
+        }
     }
 </style>

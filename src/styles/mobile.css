@@ -1,53 +1,138 @@
-/* Mobile Optimization Styles */
+/* ============================================
+   Global Responsive Layout
+   ============================================ */
+
+/* Desktop: allow sections to breathe wide */
+.about-section,
+.projects-grid-section,
+.github-stats-section,
+.contact-section,
+.desired-projects-section,
+.company-profile-section,
+.skills-visualization-section,
+.tech-stack-section,
+.contact-form-section,
+.footer-section {
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+/* Navbar inner content can stay constrained for readability */
+.navbar .nav-inner {
+    max-width: 100%;
+}
+
+/* ============================================
+   Mobile Optimization (≤768px)
+   ============================================ */
 @media (max-width: 768px) {
     /* Global Mobile Adjustments */
     body {
         font-size: 14px;
     }
 
-    /* Ensure full-width sections */
-    .content-wrapper > section {
-        width: 100%;
-        padding: 1rem;
-        margin: 0;
+    /* Full-width sections with no border-radius */
+    .about-section,
+    .projects-grid-section,
+    .github-stats-section,
+    .contact-section,
+    .desired-projects-section,
+    .company-profile-section,
+    .skills-visualization-section,
+    .tech-stack-section,
+    .contact-form-section {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        border-radius: 0 !important;
     }
 
-    /* Responsive Grid Layouts */
-    .grid-container {
-        grid-template-columns: 1fr !important;
-        gap: 1rem;
-    }
-
-    /* Component Spacing */
-    .component-section {
-        margin: 1rem 0;
-        padding: 1rem;
-    }
-
-    /* Typography Adjustments */
-    h1 { font-size: 2rem; }
+    /* Typography Scale */
+    h1 { font-size: 1.75rem; }
     h2 { font-size: 1.5rem; }
     h3 { font-size: 1.2rem; }
 
-    /* Flexible Images */
+    /* Single-column grids */
+    .company-profile-grid,
+    .about-content,
+    .contact-container {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Avatar sizing */
+    .avatar-frame {
+        width: 200px !important;
+        height: 200px !important;
+    }
+
+    /* Responsive images */
     img {
         max-width: 100%;
         height: auto;
     }
 
-    /* Responsive Flexbox */
-    .flex-container {
-        flex-direction: column;
+    /* Ensure github stats stack */
+    .github-stats-images {
+        grid-template-columns: 1fr !important;
     }
 
-    .flex-container > * {
-        width: 100%;
-        margin-bottom: 1rem;
+    /* Achievements / expertise grid */
+    .expertise-grid,
+    .achievements-grid {
+        grid-template-columns: 1fr !important;
     }
 
-    /* Scrollable Containers */
-    .scrollable-container {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+    /* Card padding adjustment */
+    .connection-card {
+        padding: 1rem !important;
+    }
+
+    .connection-icon-container {
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    .connection-icon {
+        font-size: 1.8rem !important;
+    }
+
+    /* Section margins */
+    .about-section,
+    .projects-grid-section,
+    .github-stats-section,
+    .contact-section,
+    .desired-projects-section,
+    .company-profile-section,
+    .skills-visualization-section,
+    .tech-stack-section {
+        margin-top: 2rem !important;
+        margin-bottom: 2rem !important;
+    }
+}
+
+/* ============================================
+   Small Mobile (≤480px) 
+   ============================================ */
+@media (max-width: 480px) {
+    body {
+        font-size: 13px;
+    }
+
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.3rem; }
+
+    .about-section,
+    .projects-grid-section,
+    .github-stats-section,
+    .contact-section,
+    .desired-projects-section,
+    .company-profile-section,
+    .skills-visualization-section,
+    .tech-stack-section,
+    .contact-form-section {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
     }
 }

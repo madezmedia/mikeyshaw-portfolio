@@ -28,11 +28,10 @@ const angleStep = 360 / technologies.length;
 ---
 
 <section class="tech-stack-section">
-    <div class="tech-header">
-        <h2 class="section-title">Core Technologies</h2>
-        <p class="section-subtitle">Holographic Proficiency Engine</p>
-    </div>
+    <h2 class="section-title">Core Technologies</h2>
+    <p class="section-subtitle">Holographic Proficiency Engine</p>
 
+    <!-- 3D Cylinder for desktop -->
     <div class="cylinder-container theme-hover">
         <div class="cylinder">
             {technologies.map((tech, index) => (
@@ -55,6 +54,20 @@ const angleStep = 360 / technologies.length;
             ))}
         </div>
     </div>
+
+    <!-- Flat grid for mobile -->
+    <div class="mobile-tech-grid">
+        {technologies.map((tech) => (
+            <div class="mobile-tech-item" style={`--color: ${tech.color}`}>
+                <div class="mobile-icon-wrapper">
+                    <Fragment
+                        set:html={`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">${tech.icon.svg}</svg>`}
+                    />
+                </div>
+                <span class="mobile-tech-name">{tech.name}</span>
+            </div>
+        ))}
+    </div>
 </section>
 
 <style define:vars={{
@@ -66,19 +79,13 @@ const angleStep = 360 / technologies.length;
         padding: 4rem 2rem;
         perspective: 1000px;
         overflow: hidden;
-    }
-
-    .tech-header {
         text-align: center;
-        margin-bottom: 4rem;
-        position: relative;
-        z-index: 10;
     }
 
     .section-title {
         font-size: 2.5rem;
         color: var(--primary);
-        margin: 0;
+        margin: 0 0 0.5rem;
         font-family: 'Orbitron', sans-serif;
         text-shadow: 0 0 10px rgba(var(--primary-rgb), 0.5);
     }
@@ -86,7 +93,12 @@ const angleStep = 360 / technologies.length;
     .section-subtitle {
         color: var(--text-secondary);
         opacity: 0.7;
-        margin-top: 0.5rem;
+        margin: 0 0 3rem;
+    }
+
+    /* Mobile grid - hidden on desktop */
+    .mobile-tech-grid {
+        display: none;
     }
 
     .cylinder-container {
@@ -159,14 +171,73 @@ const angleStep = 360 / technologies.length;
     }
 
     @media (max-width: 768px) {
-        .cylinder-container {
-            mask-image: none;
-            height: 250px;
+        .tech-stack-section {
+            margin: 2rem 0;
+            padding: 2rem 1rem;
+            width: 100%;
+            max-width: 100%;
+            border-radius: 0;
         }
 
-        .cylinder {
-            /* Reduce radius on mobile */
-            transform: scale(0.6) rotateX(-5deg); 
+        .section-title {
+            font-size: 1.8rem;
+        }
+
+        .section-subtitle {
+            margin-bottom: 2rem;
+        }
+
+        /* Hide 3D on mobile, show grid */
+        .cylinder-container {
+            display: none;
+        }
+
+        .mobile-tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .mobile-tech-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 0.5rem;
+            background: color-mix(in srgb, var(--color) 8%, transparent);
+            border: 1px solid color-mix(in srgb, var(--color) 25%, transparent);
+            border-radius: 12px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .mobile-tech-item:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-icon-wrapper {
+            width: 40px;
+            height: 40px;
+        }
+
+        .mobile-icon-wrapper svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--color);
+        }
+
+        .mobile-tech-name {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-align: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .mobile-tech-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
         }
     }
 </style>
+
