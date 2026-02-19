@@ -132,13 +132,29 @@ const {
 
 <style>
     :root {
-        --hero-bg-dark: #121212;
-        --hero-bg-gradient-dark: color-mix(in srgb, #121212 95%, #D4AF37);
-        --hero-text-primary-dark: #E0E0E0;
-        --hero-text-secondary-dark: #C0C0C0;
-        --hero-accent-dark: #D4AF37;
-        --hero-terminal-bg-dark: #1E1E1E;
-        --hero-terminal-header-dark: #2C2C2C;
+        --hero-bg: #121212;
+        --hero-text-primary: #E0E0E0;
+        --hero-text-secondary: #C0C0C0;
+        --hero-accent: #D4AF37;
+        --hero-terminal-bg: #1E1E1E;
+        --hero-terminal-header: #2C2C2C;
+        --hero-code-keyword: #708090;
+        --hero-code-method: #C0C0C0;
+        --hero-code-comment: #708090;
+        --hero-btn-text: #121212;
+    }
+
+    :root[data-theme='light'] {
+        --hero-bg: #F8F9FA;
+        --hero-text-primary: #212529;
+        --hero-text-secondary: #495057;
+        --hero-accent: #28A745;
+        --hero-terminal-bg: #FFFFFF;
+        --hero-terminal-header: #E9ECEF;
+        --hero-code-keyword: #6F42C1;
+        --hero-code-method: #495057;
+        --hero-code-comment: #6C757D;
+        --hero-btn-text: #FFFFFF;
     }
 
     .advanced-hero {
@@ -146,7 +162,7 @@ const {
         display: flex;
         align-items: center;
         background: transparent;
-        color: var(--hero-text-primary-dark);
+        color: var(--hero-text-primary);
         overflow: hidden;
         position: relative;
     }
@@ -171,19 +187,21 @@ const {
     }
 
     .code-terminal {
-        background: var(--hero-terminal-bg-dark);
+        background: var(--hero-terminal-bg);
         border-radius: 10px;
         overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         max-width: 400px;
         margin-bottom: 0.5rem;
+        transition: background 0.3s ease, box-shadow 0.3s ease;
     }
 
     .terminal-header {
         display: flex;
         align-items: center;
-        background: var(--hero-terminal-header-dark);
+        background: var(--hero-terminal-header);
         padding: 8px;
+        transition: background 0.3s ease;
     }
 
     .terminal-dot {
@@ -200,13 +218,14 @@ const {
         padding: 0.75rem;
         font-family: 'Courier New', monospace;
         font-size: 0.85rem;
-        color: var(--hero-text-primary-dark);
+        color: var(--hero-text-primary);
+        transition: color 0.3s ease;
     }
 
-    .terminal-prompt { color: #C0C0C0; }
-    .terminal-path { color: var(--hero-accent-dark); }
-    .terminal-command { color: #708090; }
-    .terminal-result { color: var(--hero-text-primary-dark); }
+    .terminal-prompt { color: var(--hero-text-secondary); }
+    .terminal-path { color: var(--hero-accent); }
+    .terminal-command { color: var(--hero-code-keyword); }
+    .terminal-result { color: var(--hero-text-primary); }
 
     .hero-title {
         display: flex;
@@ -221,7 +240,7 @@ const {
     .cursor {
         display: inline-block;
         width: 10px;
-        background-color: var(--hero-accent-dark);
+        background-color: var(--hero-accent);
         animation: blink 1s infinite;
     }
 
@@ -232,7 +251,7 @@ const {
 
     .hero-description {
         max-width: 500px;
-        color: var(--hero-text-secondary-dark);
+        color: var(--hero-text-secondary);
         opacity: 0.8;
         font-size: 0.95rem;
         line-height: 1.6;
@@ -256,12 +275,14 @@ const {
     }
 
     .btn-primary {
-        background: var(--hero-accent-dark);
-        color: var(--hero-bg-dark);
+        background: var(--hero-accent);
+        color: var(--hero-btn-text);
+        transition: background 0.3s ease, color 0.3s ease;
     }
     .btn-secondary {
-        border: 2px solid var(--hero-accent-dark);
-        color: var(--hero-accent-dark);
+        border: 2px solid var(--hero-accent);
+        color: var(--hero-accent);
+        transition: border-color 0.3s ease, color 0.3s ease;
     }
 
     .hero-visual {
@@ -271,26 +292,27 @@ const {
     }
 
     .code-background {
-        background: var(--hero-terminal-bg-dark);
+        background: var(--hero-terminal-bg);
         border-radius: 10px;
         padding: 2rem;
-        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
         max-width: 500px;
+        transition: background 0.3s ease, box-shadow 0.3s ease;
     }
 
     .code-snippet {
         font-family: 'Courier New', monospace;
         font-size: 0.9rem;
-        color: var(--hero-text-primary-dark);
+        color: var(--hero-text-primary);
         margin: 0;
         white-space: pre-wrap;
     }
 
-    .keyword { color: #708090; }
-    .class-name { color: var(--hero-accent-dark); }
-    .method { color: #C0C0C0; }
-    .comment { color: #708090; opacity: 0.7; }
-    .string { color: var(--hero-accent-dark); }
+    .keyword { color: var(--hero-code-keyword); }
+    .class-name { color: var(--hero-accent); }
+    .method { color: var(--hero-code-method); }
+    .comment { color: var(--hero-code-comment); opacity: 0.7; }
+    .string { color: var(--hero-accent); }
 
     @media (max-width: 1024px) {
         .hero-grid {
