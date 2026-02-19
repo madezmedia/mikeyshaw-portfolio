@@ -53,29 +53,7 @@ export const PROJECTS: Project[] = [
         ],
         featured: true
     },
-    {
-        id: 'sales-processing-agent',
-        name: 'Sales Processing Agent',
-        shortDescription: 'AI Agent Command Center for Automated Sales Workflows',
-        fullDescription: 'Multi-agent orchestration system for sales automation with agent dashboard, pipeline health monitoring, task queue management, and live activity feeds. Handles prospecting, outreach, and follow-up automatically.',
-        category: ['Agent Orchestration', 'Sales Automation', 'AI'],
-        coverImage: '/icons/openai.svg',
-        technologies: [
-            { name: 'OpenAI', icon: '/icons/openai.svg' },
-            { name: 'Next.js', icon: '/icons/nextjs.svg' },
-            { name: 'TypeScript', icon: '/icons/typescript.svg' },
-            { name: 'Node.js', icon: '/icons/nodejs.svg' }
-        ],
-        statistics: [
-            { label: 'System Status', value: 'Live', icon: '🟢', color: '#28A745' },
-            { label: 'Queue Processing', value: 'Active', icon: '⚙️', color: '#D4AF37' },
-            { label: 'Agent Monitoring', value: 'Real-time', icon: '📡', color: '#708090' }
-        ],
-        links: [
-            { type: 'live', url: 'https://sales-processing-agent.vercel.app/dashboard/agents' }
-        ],
-        featured: true
-    },
+
     {
         id: 'sonicbrand-ai',
         name: 'SonicBrand AI',
@@ -100,29 +78,7 @@ export const PROJECTS: Project[] = [
         ],
         featured: true
     },
-    {
-        id: 'ownerscout',
-        name: 'OwnerScout',
-        shortDescription: 'AI-Powered Lead Generation for Restaurants',
-        fullDescription: 'Lead generation tool for finding independent restaurants with Google Places API integration, AI analysis, tech stack detection, and multi-tier caching achieving 80-95% API cost reduction with 9x faster search performance.',
-        category: ['Lead Gen', 'API Integration', 'Performance'],
-        coverImage: '/icons/openai.svg',
-        technologies: [
-            { name: 'Next.js', icon: '/icons/nextjs.svg' },
-            { name: 'TypeScript', icon: '/icons/typescript.svg' },
-            { name: 'OpenAI', icon: '/icons/openai.svg' },
-            { name: 'Vercel', icon: '/icons/vercel.svg' }
-        ],
-        statistics: [
-            { label: 'API Cost Reduction', value: '80-95%', icon: '💰', color: '#28A745' },
-            { label: 'Search Speed', value: '9x Faster', icon: '⚡', color: '#D4AF37' },
-            { label: 'Caching', value: 'Multi-tier', icon: '🗄️', color: '#708090' }
-        ],
-        links: [
-            { type: 'live', url: 'https://ownerscout.vercel.app' }
-        ],
-        featured: true
-    },
+
     {
         id: 'yao-social-media',
         name: 'YAO Social Media Team',
