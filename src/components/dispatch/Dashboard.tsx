@@ -53,17 +53,17 @@ function ProgressBar({ value, max, color }: { value: number; max: number; color:
 function Header({ alertsOpen, setAlertsOpen, unread }: { alertsOpen: boolean; setAlertsOpen: (v: boolean) => void; unread: number }) {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur-md">
-      <div className="flex items-center justify-between px-6 py-3">
+      <div className="flex items-center justify-between px-3 py-2 sm:px-6 sm:py-3">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 text-sm font-extrabold text-background shadow-lg shadow-amber-500/20">
+          <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 text-xs sm:text-sm font-extrabold text-background shadow-lg shadow-amber-500/20">
             CP
           </div>
           <div>
-            <h1 className="text-lg font-bold text-foreground leading-tight">Core Pumping Solutions</h1>
+            <h1 className="text-sm sm:text-lg font-bold text-foreground leading-tight">Core Pumping Solutions</h1>
             <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-amber-400">Dispatch Command Center</p>
           </div>
         </div>
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-2 sm:gap-5">
           <LiveClock />
           <div className="relative">
             <Button variant="ghost" size="icon" className="relative" onClick={() => setAlertsOpen(!alertsOpen)}>
@@ -75,7 +75,7 @@ function Header({ alertsOpen, setAlertsOpen, unread }: { alertsOpen: boolean; se
               )}
             </Button>
           </div>
-          <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-amber-500 bg-amber-500/15 text-xs font-bold text-amber-400">
+          <div className="flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-full border-2 border-amber-500 bg-amber-500/15 text-xs font-bold text-amber-400">
             MS
           </div>
         </div>
@@ -90,7 +90,7 @@ function FleetCard({ truck, isSelected, onClick }: { truck: typeof mockData.truc
   const job = truck.currentJob ? mockData.jobs.find(j => j.id === truck.currentJob) : null;
   return (
     <Card
-      className={`cursor-pointer transition-all duration-200 hover:shadow-lg ${
+      className={`cursor-pointer transition-all duration-200 hover:shadow-lg snap-start flex-shrink-0 w-[160px] sm:w-auto ${
         isSelected
           ? 'border-amber-500/60 bg-amber-500/5 shadow-lg shadow-amber-500/10 ring-1 ring-amber-500/30'
           : 'border-border bg-card hover:border-amber-500/20'
@@ -206,7 +206,7 @@ function StatsCards() {
     { label: 'Fleet Utilization', value: s.fleetUtilization, max: 100, icon: Truck, color: '#F59E0B', prefix: '', suffix: '%' },
   ];
   return (
-    <div className="grid grid-cols-5 gap-3">
+    <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-1 sm:pb-0 sm:grid sm:grid-cols-5 -mx-2 px-2 sm:mx-0 sm:px-0 snap-x snap-mandatory">
       {cards.map(c => (
         <Card key={c.label} className="border-border bg-card">
           <CardContent className="p-4">
@@ -305,8 +305,8 @@ function JobDetail({ job, onClose }: { job: typeof mockData.jobs[0] | undefined;
           <X className="h-4 w-4" />
         </Button>
       </div>
-      <ScrollArea className="h-[calc(100vh-380px)] min-h-[400px]">
-        <div className="p-4 space-y-4">
+      <ScrollArea className="h-[calc(100vh-300px)] sm:h-[calc(100vh-380px)] min-h-[250px] sm:min-h-[400px]">
+        <div className="p-2 sm:p-4 space-y-3 sm:space-y-4">
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">Customer</p>
             <p className="text-sm font-semibold text-foreground">{job.customer}</p>
@@ -397,7 +397,7 @@ function AlertsPanel({ open, onClose }: { open: boolean; onClose: () => void }) 
   };
   return (
     <div className="fixed inset-0 z-50" onClick={onClose}>
-      <div className="absolute top-14 right-20 w-96" onClick={e => e.stopPropagation()}>
+      <div className="absolute top-14 right-2 sm:right-20 w-[calc(100vw-16px)] sm:w-96" onClick={e => e.stopPropagation()}>
         <Card className="border-border bg-card shadow-2xl shadow-black/50">
           <div className="flex items-center justify-between px-4 py-3 border-b border-border">
             <span className="text-sm font-bold text-foreground">Notifications</span>
@@ -446,9 +446,9 @@ export default function Dashboard() {
       <Header alertsOpen={alertsOpen} setAlertsOpen={setAlertsOpen} unread={unread} />
       <AlertsPanel open={alertsOpen} onClose={() => setAlertsOpen(false)} />
 
-      <div className="p-4 space-y-4">
+      <div className="p-2 sm:p-4 space-y-3 sm:space-y-4">
         {/* Fleet */}
-        <div className="grid grid-cols-5 gap-3">
+        <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-1 sm:pb-0 sm:grid sm:grid-cols-5 -mx-2 px-2 sm:mx-0 sm:px-0 snap-x snap-mandatory">
           {mockData.trucks.map(t => (
             <FleetCard key={t.id} truck={t} isSelected={selectedTruckId === t.id} onClick={() => setSelectedTruckId(t.id)} />
           ))}
@@ -458,8 +458,8 @@ export default function Dashboard() {
         <StatsCards />
 
         {/* Main Area */}
-        <div className="grid grid-cols-3 gap-4">
-          <div className="col-span-2 space-y-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-4">
+          <div className="col-span-1 lg:col-span-2 space-y-3 sm:space-y-4">
             <Schedule selectedJobId={selectedJobId} onSelectJob={handleSelectJob} />
             <JobsTable selectedJobId={selectedJobId} onSelectJob={handleSelectJob} />
           </div>
@@ -470,7 +470,7 @@ export default function Dashboard() {
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-border bg-card px-6 py-2 flex items-center justify-between text-[11px] text-muted-foreground">
+      <footer className="border-t border-border bg-card px-3 sm:px-6 py-2 flex flex-col sm:flex-row items-center justify-between gap-1 sm:gap-0 text-[10px] sm:text-[11px] text-muted-foreground">
         <div className="flex items-center gap-4">
           <span><span className="inline-block w-2 h-2 rounded-full bg-emerald-500 mr-1" />{mockData.trucks.filter(t => t.status === 'available').length} Available</span>
           <span><span className="inline-block w-2 h-2 rounded-full bg-amber-500 mr-1" />{mockData.trucks.filter(t => t.status === 'on-job').length} On Job</span>
