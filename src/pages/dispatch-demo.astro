@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Dashboard from '../components/dispatch/Dashboard.tsx';
+
+const title = "Core Pumping Solutions — Dispatch Dashboard Demo | Michael Shaw";
+const description = "Interactive dispatch dashboard demo built for Core Pumping Solutions — real-time fleet tracking, job scheduling, and operations management.";
+---
+
+<Layout title={title} description={description}>
+  <div class="w-full" style="margin: 0; max-width: 100%;">
+    <Dashboard client:load />
+  </div>
+</Layout>

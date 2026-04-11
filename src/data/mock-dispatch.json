@@ -1,0 +1,170 @@
+{
+  "company": "Core Pumping Solutions",
+  "date": "2026-04-11",
+  "trucks": [
+    { "id": "CP-01", "type": "38m Boom", "operator": "Dave Miller", "phone": "(704) 555-0101", "status": "on-job", "currentJob": "1247", "hoursToday": 6.5, "location": { "lat": 35.211, "lng": -80.843 } },
+    { "id": "CP-02", "type": "32m Boom", "operator": "Marcus Johnson", "phone": "(704) 555-0102", "status": "en-route", "currentJob": "1248", "hoursToday": 3.0, "location": { "lat": 35.278, "lng": -80.762 } },
+    { "id": "CP-03", "type": "Line Pump", "operator": "Tony Reeves", "phone": "(704) 555-0103", "status": "available", "currentJob": null, "hoursToday": 0, "location": { "lat": 35.323, "lng": -80.738 } },
+    { "id": "CP-04", "type": "42m Boom", "operator": "James Wright", "phone": "(704) 555-0104", "status": "on-job", "currentJob": "1249", "hoursToday": 7.0, "location": { "lat": 35.189, "lng": -80.912 } },
+    { "id": "CP-05", "type": "Line Pump", "operator": "Keith Brooks", "phone": "(704) 555-0105", "status": "maintenance", "currentJob": null, "hoursToday": 0, "location": { "lat": 35.320, "lng": -80.700 } }
+  ],
+  "jobs": [
+    {
+      "id": "1247",
+      "customer": "Lithko",
+      "contact": "Mike Torres",
+      "contactPhone": "(704) 555-2001",
+      "address": "4201 South Blvd, Charlotte, NC 28209",
+      "truck": "CP-01",
+      "pumpType": "38m Boom",
+      "startTime": "06:30",
+      "endTime": "11:00",
+      "yards": 120,
+      "rate": 8.50,
+      "status": "in-progress",
+      "specialInstructions": "Access via rear entrance on Marsh Rd. Call 30 min before arrival.",
+      "notes": "3-story foundation pour. Concrete supplier: Thomas Concrete.",
+      "timeline": [
+        { "step": "Booked", "time": "Apr 8, 2:15 PM", "done": true },
+        { "step": "Confirmed", "time": "Apr 9, 9:00 AM", "done": true },
+        { "step": "En Route", "time": "6:10 AM", "done": true },
+        { "step": "On Site", "time": "6:32 AM", "done": true },
+        { "step": "Pumping", "time": "6:45 AM", "done": true },
+        { "step": "Complete", "time": "—", "done": false }
+      ]
+    },
+    {
+      "id": "1248",
+      "customer": "Site Prep LLC",
+      "contact": "Sarah Kim",
+      "contactPhone": "(704) 555-2002",
+      "address": "8900 Harris Blvd, Charlotte, NC 28215",
+      "truck": "CP-02",
+      "pumpType": "32m Boom",
+      "startTime": "09:30",
+      "endTime": "12:30",
+      "yards": 85,
+      "rate": 7.50,
+      "status": "en-route",
+      "specialInstructions": "New subdivision entrance on Harris Blvd. Look for orange cones.",
+      "notes": "Slab on grade. Single pour.",
+      "timeline": [
+        { "step": "Booked", "time": "Apr 9, 11:00 AM", "done": true },
+        { "step": "Confirmed", "time": "Apr 9, 3:30 PM", "done": true },
+        { "step": "En Route", "time": "9:05 AM", "done": true },
+        { "step": "On Site", "time": "—", "done": false },
+        { "step": "Pumping", "time": "—", "done": false },
+        { "step": "Complete", "time": "—", "done": false }
+      ]
+    },
+    {
+      "id": "1249",
+      "customer": "Cato Builders",
+      "contact": "Ray Cato",
+      "contactPhone": "(704) 555-2003",
+      "address": "3100 Westinghouse Blvd, Charlotte, NC 28273",
+      "truck": "CP-04",
+      "pumpType": "42m Boom",
+      "startTime": "06:00",
+      "endTime": "12:00",
+      "yards": 200,
+      "rate": 9.00,
+      "status": "in-progress",
+      "specialInstructions": "Industrial park — Gate code 4521. Park in Lot B.",
+      "notes": "Large warehouse foundation. Multiple loads from Argos USA.",
+      "timeline": [
+        { "step": "Booked", "time": "Apr 7, 4:00 PM", "done": true },
+        { "step": "Confirmed", "time": "Apr 8, 8:00 AM", "done": true },
+        { "step": "En Route", "time": "5:35 AM", "done": true },
+        { "step": "On Site", "time": "5:58 AM", "done": true },
+        { "step": "Pumping", "time": "6:12 AM", "done": true },
+        { "step": "Complete", "time": "—", "done": false }
+      ]
+    },
+    {
+      "id": "1250",
+      "customer": "Samet Construction",
+      "contact": "Greg Phillips",
+      "contactPhone": "(704) 555-2004",
+      "address": "100 N Tryon St, Concord, NC 28025",
+      "truck": null,
+      "pumpType": "38m Boom",
+      "startTime": "13:00",
+      "endTime": "17:00",
+      "yards": 150,
+      "rate": 8.50,
+      "status": "confirmed",
+      "specialInstructions": "Downtown Concord — street parking only. Allow extra setup time.",
+      "notes": "Commercial build-out. Need boom reach of 35m+.",
+      "timeline": [
+        { "step": "Booked", "time": "Apr 10, 10:00 AM", "done": true },
+        { "step": "Confirmed", "time": "Apr 10, 2:00 PM", "done": true },
+        { "step": "En Route", "time": "—", "done": false },
+        { "step": "On Site", "time": "—", "done": false },
+        { "step": "Pumping", "time": "—", "done": false },
+        { "step": "Complete", "time": "—", "done": false }
+      ]
+    },
+    {
+      "id": "1251",
+      "customer": "Reynolds Construction",
+      "contact": "Tom Reynolds",
+      "contactPhone": "(704) 555-2005",
+      "address": "4500 Park Rd, Charlotte, NC 28209",
+      "truck": "CP-03",
+      "pumpType": "Line Pump",
+      "startTime": "11:00",
+      "endTime": "14:00",
+      "yards": 75,
+      "rate": 6.00,
+      "status": "scheduled",
+      "specialInstructions": "Residential addition in back yard — line pump required.",
+      "notes": "Homeowner present. Keep noise to minimum before 8 AM not applicable.",
+      "timeline": [
+        { "step": "Booked", "time": "Apr 10, 4:30 PM", "done": true },
+        { "step": "Confirmed", "time": "—", "done": false },
+        { "step": "En Route", "time": "—", "done": false },
+        { "step": "On Site", "time": "—", "done": false },
+        { "step": "Pumping", "time": "—", "done": false },
+        { "step": "Complete", "time": "—", "done": false }
+      ]
+    },
+    {
+      "id": "1252",
+      "customer": "Rodgers Builders",
+      "contact": "Lisa Rodgers",
+      "contactPhone": "(803) 555-2006",
+      "address": "Fort Mill, SC 29708",
+      "truck": null,
+      "pumpType": "42m Boom",
+      "startTime": "15:30",
+      "endTime": "18:30",
+      "yards": 180,
+      "rate": 9.00,
+      "status": "tentative",
+      "specialInstructions": "New development off I-77 exit 85. Follow signs to Lot 42.",
+      "notes": "Awaiting concrete confirmation from Santee Cooper.",
+      "timeline": [
+        { "step": "Booked", "time": "—", "done": false },
+        { "step": "Confirmed", "time": "—", "done": false },
+        { "step": "En Route", "time": "—", "done": false },
+        { "step": "On Site", "time": "—", "done": false },
+        { "step": "Pumping", "time": "—", "false": false },
+        { "step": "Complete", "time": "—", "done": false }
+      ]
+    }
+  ],
+  "alerts": [
+    { "id": 1, "type": "warning", "message": "CP-03 reported mechanical issue — alternator belt", "time": "10:32 AM", "read": false },
+    { "id": 2, "type": "info", "message": "Lithko confirming tomorrow's 8 AM pour at South Blvd", "time": "9:45 AM", "read": false },
+    { "id": 3, "type": "new", "message": "New job request from Reynolds Construction — 75 yds line pump", "time": "8:15 AM", "read": false },
+    { "id": 4, "type": "success", "message": "Job #1249 (Cato Builders) — 200 yds pumped successfully", "time": "11:50 AM", "read": true }
+  ],
+  "stats": {
+    "jobsToday": 6,
+    "yardsPumped": 487,
+    "revenueToday": 4850,
+    "onTimeRate": 94,
+    "fleetUtilization": 80
+  }
+}
