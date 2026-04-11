@@ -1,40 +1,26 @@
 import { useState, useEffect, useCallback } from 'react';
 import mockData from '../../data/mock-dispatch.json';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import {
+  Bell, Truck, Clock, DollarSign, BarChart3, MapPin, Phone,
+  CalendarDays, AlertTriangle, Info, Plus, CheckCircle2, Circle,
+  Wrench, Navigation, X
+} from 'lucide-react';
 
-/* ── Design Tokens ── */
-const D = {
-  bg: '#0B1120', surface: '#131B2E', surfaceHover: '#1A2540',
-  border: '#1E2D4A', borderLight: '#2A3A5C',
-  amber: '#F59E0B', amberDim: 'rgba(245,158,11,0.12)', amberGlow: 'rgba(245,158,11,0.25)',
-  green: '#10B981', greenDim: 'rgba(16,185,129,0.12)',
-  blue: '#3B82F6', blueDim: 'rgba(59,130,246,0.12)',
-  red: '#EF4444', redDim: 'rgba(239,68,68,0.12)',
-  slate: '#64748B', slateLight: '#94A3B8', slateBright: '#CBD5E1',
-  white: '#F1F5F9',
-  radius: '10px', radiusLg: '14px',
-};
-
-const statusConfig: Record<string, { bg: string; text: string; dot: string; label: string }> = {
-  'on-job':      { bg: D.amberDim,  text: D.amber, dot: D.amber,  label: 'On Job' },
-  'en-route':    { bg: D.blueDim,   text: D.blue,  dot: D.blue,   label: 'En Route' },
-  'available':   { bg: D.greenDim,  text: D.green, dot: D.green,  label: 'Available' },
-  'maintenance': { bg: D.redDim,    text: D.red,   dot: D.red,    label: 'Down' },
-  'in-progress': { bg: D.amberDim,  text: D.amber, dot: D.amber,  label: 'In Progress' },
-  'confirmed':   { bg: D.greenDim,  text: D.green, dot: D.green,  label: 'Confirmed' },
-  'scheduled':   { bg: D.blueDim,   text: D.blue,  dot: D.blue,   label: 'Scheduled' },
-  'tentative':   { bg: 'rgba(100,116,139,0.12)', text: D.slate, dot: D.slate, label: 'Tentative' },
-};
-
-/* ── Shared Styles ── */
-const cardStyle: React.CSSProperties = {
-  background: `linear-gradient(135deg, ${D.surface} 0%, ${D.surfaceHover} 100%)`,
-  border: `1px solid ${D.border}`,
-  borderRadius: D.radiusLg,
-  backdropFilter: 'blur(8px)',
-};
-
-const labelStyle: React.CSSProperties = {
-  fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' as const, color: D.slate,
+/* ── Status Config ── */
+const statusConfig: Record<string, { variant: 'default' | 'secondary' | 'destructive' | 'outline'; className: string; label: string; color: string; bg: string }> = {
+  'on-job':      { variant: 'default',   className: 'bg-amber-500/15 text-amber-400 border-amber-500/30 hover:bg-amber-500/20', label: 'On Job',       color: '#F59E0B', bg: 'rgba(245,158,11,0.08)' },
+  'en-route':    { variant: 'secondary', className: 'bg-blue-500/15 text-blue-400 border-blue-500/30 hover:bg-blue-500/20',     label: 'En Route',     color: '#3B82F6', bg: 'rgba(59,130,246,0.08)' },
+  'available':   { variant: 'secondary', className: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/20', label: 'Available', color: '#10B981', bg: 'rgba(16,185,129,0.08)' },
+  'maintenance': { variant: 'destructive', className: 'bg-red-500/15 text-red-400 border-red-500/30 hover:bg-red-500/20',       label: 'Down',         color: '#EF4444', bg: 'rgba(239,68,68,0.08)' },
+  'in-progress': { variant: 'default',   className: 'bg-amber-500/15 text-amber-400 border-amber-500/30 hover:bg-amber-500/20', label: 'In Progress',  color: '#F59E0B', bg: 'rgba(245,158,11,0.08)' },
+  'confirmed':   { variant: 'secondary', className: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/20', label: 'Confirmed', color: '#10B981', bg: 'rgba(16,185,129,0.08)' },
+  'scheduled':   { variant: 'secondary', className: 'bg-sky-500/15 text-sky-400 border-sky-500/30 hover:bg-sky-500/20',         label: 'Scheduled',    color: '#0EA5E9', bg: 'rgba(14,165,233,0.08)' },
+  'tentative':   { variant: 'outline',   className: 'bg-slate-500/15 text-slate-400 border-slate-500/30',                        label: 'Tentative',    color: '#64748B', bg: 'rgba(100,116,139,0.08)' },
 };
 
 /* ── Live Clock ── */
@@ -42,13 +28,23 @@ function LiveClock() {
   const [time, setTime] = useState(new Date());
   useEffect(() => { const t = setInterval(() => setTime(new Date()), 1000); return () => clearInterval(t); }, []);
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-      <span style={{ fontSize: 13, color: D.slateLight }}>
+    <div className="flex items-center gap-3">
+      <CalendarDays className="w-4 h-4 text-muted-foreground" />
+      <span className="text-sm text-muted-foreground">
         {time.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
       </span>
-      <span style={{ fontFamily: 'monospace', fontSize: 16, color: D.white, fontVariantNumeric: 'tabular-nums', letterSpacing: 1 }}>
+      <span className="font-mono text-base text-foreground tabular-nums tracking-wider">
         {time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
       </span>
+    </div>
+  );
+}
+
+/* ── Mini Progress Bar ── */
+function ProgressBar({ value, max, color }: { value: number; max: number; color: string }) {
+  return (
+    <div className="w-full h-1.5 rounded-full bg-border overflow-hidden">
+      <div className="h-full rounded-full transition-all duration-500" style={{ width: `${Math.min((value / max) * 100, 100)}%`, background: color }} />
     </div>
   );
 }
@@ -56,46 +52,33 @@ function LiveClock() {
 /* ── Header ── */
 function Header({ alertsOpen, setAlertsOpen, unread }: { alertsOpen: boolean; setAlertsOpen: (v: boolean) => void; unread: number }) {
   return (
-    <header style={{
-      background: `linear-gradient(180deg, ${D.surface} 0%, ${D.bg} 100%)`,
-      borderBottom: `1px solid ${D.border}`,
-      padding: '12px 24px',
-      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-      position: 'sticky', top: 0, zIndex: 50,
-    }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-        <div style={{
-          width: 42, height: 42, borderRadius: 10,
-          background: `linear-gradient(135deg, ${D.amber} 0%, #D97706 100%)`,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontWeight: 800, fontSize: 14, color: D.bg, letterSpacing: -0.5,
-          boxShadow: `0 0 20px ${D.amberGlow}`,
-        }}>CP</div>
-        <div>
-          <h1 style={{ fontSize: 17, fontWeight: 700, color: D.white, lineHeight: 1.2 }}>Core Pumping Solutions</h1>
-          <p style={{ fontSize: 10, color: D.amber, fontWeight: 600, letterSpacing: 2, textTransform: 'uppercase' }}>Dispatch Command Center</p>
+    <header className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur-md">
+      <div className="flex items-center justify-between px-6 py-3">
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 text-sm font-extrabold text-background shadow-lg shadow-amber-500/20">
+            CP
+          </div>
+          <div>
+            <h1 className="text-lg font-bold text-foreground leading-tight">Core Pumping Solutions</h1>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-amber-400">Dispatch Command Center</p>
+          </div>
         </div>
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-        <LiveClock />
-        <button onClick={() => setAlertsOpen(!alertsOpen)} style={{ position: 'relative', background: 'none', border: 'none', cursor: 'pointer', padding: 8, borderRadius: 8 }}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={D.slateLight} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-          </svg>
-          {unread > 0 && <span style={{
-            position: 'absolute', top: 2, right: 2,
-            background: D.red, color: '#fff', fontSize: 10, fontWeight: 700,
-            borderRadius: '50%', width: 18, height: 18,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: `0 0 8px ${D.redDim}`,
-          }}>{unread}</span>}
-        </button>
-        <div style={{
-          width: 36, height: 36, borderRadius: '50%',
-          background: D.amberDim, border: `2px solid ${D.amber}`,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          color: D.amber, fontWeight: 700, fontSize: 12,
-        }}>MS</div>
+        <div className="flex items-center gap-5">
+          <LiveClock />
+          <div className="relative">
+            <Button variant="ghost" size="icon" className="relative" onClick={() => setAlertsOpen(!alertsOpen)}>
+              <Bell className="h-5 w-5 text-muted-foreground" />
+              {unread > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-[10px] font-bold text-destructive-foreground shadow-lg shadow-destructive/30">
+                  {unread}
+                </span>
+              )}
+            </Button>
+          </div>
+          <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-amber-500 bg-amber-500/15 text-xs font-bold text-amber-400">
+            MS
+          </div>
+        </div>
       </div>
     </header>
   );
@@ -106,34 +89,42 @@ function FleetCard({ truck, isSelected, onClick }: { truck: typeof mockData.truc
   const sc = statusConfig[truck.status] || statusConfig.available;
   const job = truck.currentJob ? mockData.jobs.find(j => j.id === truck.currentJob) : null;
   return (
-    <button onClick={onClick} style={{
-      ...cardStyle,
-      padding: 16, textAlign: 'left' as const, width: '100%', cursor: 'pointer',
-      borderColor: isSelected ? D.amber : D.border,
-      boxShadow: isSelected ? `0 0 20px ${D.amberGlow}, inset 0 1px 0 rgba(255,255,255,0.05)` : '0 2px 8px rgba(0,0,0,0.2)',
-      transition: 'all 0.2s ease',
-    }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
-        <span style={{ fontSize: 18, fontWeight: 800, color: D.white }}>{truck.id}</span>
-        <span style={{
-          background: sc.bg, color: sc.text, padding: '3px 10px', borderRadius: 20,
-          fontSize: 10, fontWeight: 600, display: 'flex', alignItems: 'center', gap: 6,
-        }}>
-          <span style={{ width: 6, height: 6, borderRadius: '50%', background: sc.dot,
-            boxShadow: truck.status === 'on-job' ? `0 0 6px ${sc.dot}` : 'none',
-            animation: truck.status === 'on-job' ? 'pulse 2s infinite' : 'none' }} />
-          {sc.label}
-        </span>
-      </div>
-      <div style={{ fontSize: 12, color: D.slateLight, marginBottom: 4 }}>{truck.type}</div>
-      <div style={{ fontSize: 12, color: D.slate, marginBottom: 6 }}>{truck.operator}</div>
-      {job && <div style={{ fontSize: 11, color: D.amber, opacity: 0.8 }}>#{job.id} {job.customer}</div>}
-      <div style={{ fontSize: 11, color: D.slate, marginTop: 4 }}>
-        {truck.hoursToday > 0 ? (
-          <span style={{ color: D.green }}>{truck.hoursToday} hrs today</span>
-        ) : 'No hours'}
-      </div>
-    </button>
+    <Card
+      className={`cursor-pointer transition-all duration-200 hover:shadow-lg ${
+        isSelected
+          ? 'border-amber-500/60 bg-amber-500/5 shadow-lg shadow-amber-500/10 ring-1 ring-amber-500/30'
+          : 'border-border bg-card hover:border-amber-500/20'
+      }`}
+      onClick={onClick}
+    >
+      <CardContent className="p-4">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <Truck className="w-4 h-4 text-muted-foreground" />
+            <span className="text-lg font-extrabold text-foreground">{truck.id}</span>
+          </div>
+          <Badge variant="outline" className={`${sc.className} text-[10px] gap-1.5`}>
+            <span className={`w-1.5 h-1.5 rounded-full ${truck.status === 'on-job' ? 'animate-pulse' : ''}`} style={{ background: sc.color }} />
+            {sc.label}
+          </Badge>
+        </div>
+        <p className="text-xs text-muted-foreground">{truck.type}</p>
+        <p className="text-xs text-muted-foreground mt-0.5">{truck.operator}</p>
+        {job && (
+          <p className="text-[11px] text-amber-400/80 mt-2 font-medium">
+            #{job.id} {job.customer}
+          </p>
+        )}
+        <Separator className="my-2 opacity-50" />
+        <p className="text-xs">
+          {truck.hoursToday > 0 ? (
+            <span className="text-emerald-400 font-medium">{truck.hoursToday} hrs today</span>
+          ) : (
+            <span className="text-muted-foreground">No hours today</span>
+          )}
+        </p>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -141,66 +132,66 @@ function FleetCard({ truck, isSelected, onClick }: { truck: typeof mockData.truc
 function Schedule({ selectedJobId, onSelectJob }: { selectedJobId: string | null; onSelectJob: (id: string) => void }) {
   const hours = Array.from({ length: 13 }, (_, i) => i + 6);
   const toMin = (t: string) => { const [h, m] = t.split(':').map(Number); return h * 60 + (m || 0); };
-  return (
-    <div style={{ ...cardStyle, padding: 20 }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
-        <h3 style={{ fontSize: 12, fontWeight: 700, color: D.slate, letterSpacing: 1, textTransform: 'uppercase' }}>Today's Schedule</h3>
-        <span style={{ fontSize: 11, color: D.slate }}>{mockData.jobs.length} jobs scheduled</span>
-      </div>
-      <div style={{ position: 'relative', overflowX: 'auto' }}>
-        <div style={{ display: 'flex', borderBottom: `1px solid ${D.border}`, marginBottom: 8, minWidth: 700 }}>
-          {hours.map(h => (
-            <div key={h} style={{ flex: 1, fontSize: 10, color: D.slate, textAlign: 'center', paddingBottom: 6 }}>
-              {h > 12 ? h - 12 : h}{h >= 12 ? 'PM' : 'AM'}
-            </div>
-          ))}
-        </div>
-        <div style={{ position: 'relative', minWidth: 700, height: 210 }}>
-          {hours.map(h => (
-            <div key={h} style={{ position: 'absolute', top: 0, bottom: 0, left: `${((h - 6) / 12) * 100}%`, borderLeft: `1px solid ${D.border}`, opacity: 0.5 }} />
-          ))}
-          {/* Now indicator */}
-          {(() => {
-            const now = new Date(); const nowMin = now.getHours() * 60 + now.getMinutes();
-            if (nowMin >= 360 && nowMin <= 1080) {
-              const left = ((nowMin - 360) / 720) * 100;
-              return <div style={{ position: 'absolute', top: -4, bottom: 0, left: `${left}%`, borderLeft: `2px solid ${D.red}`, zIndex: 5 }}>
-                <div style={{ position: 'absolute', top: -2, left: -4, width: 6, height: 6, borderRadius: '50%', background: D.red }} />
-              </div>;
-            }
-            return null;
-          })()}
-          {mockData.jobs.map((job, idx) => {
-            const start = toMin(job.startTime); const end = toMin(job.endTime);
-            const left = ((start - 360) / 720) * 100; const width = ((end - start) / 720) * 100;
-            const sc = statusConfig[job.status] || statusConfig.scheduled;
-            const isSelected = selectedJobId === job.id;
-            return (
-              <button key={job.id} onClick={() => onSelectJob(job.id)} style={{
-                position: 'absolute', left: `${left}%`, width: `${width}%`, top: idx * 34,
-                borderRadius: 6, padding: '4px 8px', textAlign: 'left', cursor: 'pointer',
-                background: sc.bg, border: isSelected ? `2px solid ${sc.text}` : `1px solid ${D.border}`,
-                boxShadow: isSelected ? `0 0 12px ${sc.bg}` : 'none',
-                transition: 'all 0.15s ease', zIndex: isSelected ? 3 : 1,
-              }}>
-                <div style={{ fontSize: 11, fontWeight: 600, color: D.white, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>#{job.id} {job.customer}</div>
-                <div style={{ fontSize: 10, color: sc.text }}>{job.truck || 'TBD'} · {job.yards} yds</div>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
-}
 
-/* ── Mini Bar Chart ── */
-function MiniBar({ value, max, color }: { value: number; max: number; color: string }) {
-  const pct = Math.min((value / max) * 100, 100);
   return (
-    <div style={{ width: '100%', height: 4, background: D.border, borderRadius: 2, overflow: 'hidden' }}>
-      <div style={{ width: `${pct}%`, height: '100%', background: color, borderRadius: 2, transition: 'width 0.5s ease' }} />
-    </div>
+    <Card className="border-border bg-card">
+      <CardHeader className="pb-3">
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Today's Schedule</CardTitle>
+          <span className="text-xs text-muted-foreground">{mockData.jobs.length} jobs</span>
+        </div>
+      </CardHeader>
+      <CardContent className="pb-4">
+        <div className="relative overflow-x-auto">
+          <div className="flex border-b border-border mb-2 min-w-[700px]">
+            {hours.map(h => (
+              <div key={h} className="flex-1 text-center pb-2 text-[10px] text-muted-foreground font-medium">
+                {h > 12 ? h - 12 : h}{h >= 12 ? 'PM' : 'AM'}
+              </div>
+            ))}
+          </div>
+          <div className="relative min-w-[700px]" style={{ height: 210 }}>
+            {hours.map(h => (
+              <div key={h} className="absolute top-0 bottom-0 border-l border-border/40" style={{ left: `${((h - 6) / 12) * 100}%` }} />
+            ))}
+            {/* Now line */}
+            {(() => {
+              const now = new Date(); const nowMin = now.getHours() * 60 + now.getMinutes();
+              if (nowMin >= 360 && nowMin <= 1080) {
+                return (
+                  <div className="absolute top-0 bottom-0 z-10" style={{ left: `${((nowMin - 360) / 720) * 100}%`, borderLeft: '2px solid #EF4444' }}>
+                    <div className="absolute -top-1 left-[-4px] w-2 h-2 rounded-full bg-red-500 shadow-lg shadow-red-500/50" />
+                  </div>
+                );
+              }
+              return null;
+            })()}
+            {mockData.jobs.map((job, idx) => {
+              const start = toMin(job.startTime); const end = toMin(job.endTime);
+              const left = ((start - 360) / 720) * 100; const width = ((end - start) / 720) * 100;
+              const sc = statusConfig[job.status] || statusConfig.scheduled;
+              const sel = selectedJobId === job.id;
+              return (
+                <button
+                  key={job.id}
+                  onClick={() => onSelectJob(job.id)}
+                  className={`absolute rounded-lg px-2 py-1.5 text-left transition-all duration-150 cursor-pointer overflow-hidden ${
+                    sel ? 'ring-2 ring-amber-400 z-20 shadow-lg' : 'hover:brightness-125'
+                  }`}
+                  style={{
+                    left: `${left}%`, width: `${width}%`, top: idx * 34,
+                    background: sc.bg, border: sel ? `1px solid ${sc.color}` : '1px solid rgba(255,255,255,0.06)',
+                  }}
+                >
+                  <div className="text-[11px] font-semibold text-foreground truncate">#{job.id} {job.customer}</div>
+                  <div className="text-[10px] font-medium" style={{ color: sc.color }}>{job.truck || 'TBD'} · {job.yards} yds</div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -208,22 +199,29 @@ function MiniBar({ value, max, color }: { value: number; max: number; color: str
 function StatsCards() {
   const s = mockData.stats;
   const cards = [
-    { label: 'Jobs Today', value: s.jobsToday, max: 10, color: D.amber, prefix: '' },
-    { label: 'Yards Pumped', value: s.yardsPumped, max: 800, color: D.blue, prefix: '' },
-    { label: 'Revenue Today', value: s.revenueToday, max: 8000, color: D.green, prefix: '$' },
-    { label: 'On-Time Rate', value: s.onTimeRate, max: 100, color: D.green, prefix: '', suffix: '%' },
-    { label: 'Fleet Utilization', value: s.fleetUtilization, max: 100, color: D.amber, prefix: '', suffix: '%' },
+    { label: 'Jobs Today', value: s.jobsToday, max: 10, icon: CalendarDays, color: '#F59E0B', prefix: '' },
+    { label: 'Yards Pumped', value: s.yardsPumped, max: 800, icon: BarChart3, color: '#3B82F6', prefix: '' },
+    { label: 'Revenue Today', value: s.revenueToday, max: 8000, icon: DollarSign, color: '#10B981', prefix: '$' },
+    { label: 'On-Time Rate', value: s.onTimeRate, max: 100, icon: Clock, color: '#10B981', prefix: '', suffix: '%' },
+    { label: 'Fleet Utilization', value: s.fleetUtilization, max: 100, icon: Truck, color: '#F59E0B', prefix: '', suffix: '%' },
   ];
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12 }}>
+    <div className="grid grid-cols-5 gap-3">
       {cards.map(c => (
-        <div key={c.label} style={{ ...cardStyle, padding: 16 }}>
-          <div style={{ ...labelStyle, marginBottom: 8 }}>{c.label}</div>
-          <div style={{ fontSize: 28, fontWeight: 800, color: D.white, lineHeight: 1, marginBottom: 10 }}>
-            {c.prefix}{c.value.toLocaleString()}{c.suffix || ''}
-          </div>
-          <MiniBar value={c.value} max={c.max} color={c.color} />
-        </div>
+        <Card key={c.label} className="border-border bg-card">
+          <CardContent className="p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <c.icon className="w-3.5 h-3.5 text-muted-foreground" />
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{c.label}</span>
+            </div>
+            <p className="text-2xl font-extrabold text-foreground">
+              {c.prefix}{c.value.toLocaleString()}{c.suffix || ''}
+            </p>
+            <div className="mt-3">
+              <ProgressBar value={c.value} max={c.max} color={c.color} />
+            </div>
+          </CardContent>
+        </Card>
       ))}
     </div>
   );
@@ -231,144 +229,198 @@ function StatsCards() {
 
 /* ── Jobs Table ── */
 function JobsTable({ selectedJobId, onSelectJob }: { selectedJobId: string | null; onSelectJob: (id: string) => void }) {
-  const cols = ['Job #', 'Customer', 'Location', 'Truck', 'Time', 'Yards', 'Status'];
   return (
-    <div style={{ ...cardStyle, overflow: 'hidden' }}>
-      <div style={{ padding: '16px 20px 8px' }}>
-        <h3 style={{ fontSize: 12, fontWeight: 700, color: D.slate, letterSpacing: 1, textTransform: 'uppercase' }}>Active Jobs</h3>
-      </div>
-      <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
-        <thead>
-          <tr style={{ borderBottom: `1px solid ${D.border}` }}>
-            {cols.map(c => <th key={c} style={{ textAlign: 'left', padding: '8px 12px', fontSize: 10, fontWeight: 600, color: D.slate, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{c}</th>)}
-          </tr>
-        </thead>
-        <tbody>
-          {mockData.jobs.map(job => {
-            const sc = statusConfig[job.status] || statusConfig.scheduled;
-            const sel = selectedJobId === job.id;
-            return (
-              <tr key={job.id} onClick={() => onSelectJob(job.id)} style={{
-                cursor: 'pointer', transition: 'background 0.15s',
-                background: sel ? D.amberDim : 'transparent',
-                borderBottom: `1px solid ${D.border}`,
-              }}
-                onMouseEnter={e => { if (!sel) (e.currentTarget as HTMLElement).style.background = D.surfaceHover; }}
-                onMouseLeave={e => { if (!sel) (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
-              >
-                <td style={{ padding: '10px 12px', fontFamily: 'monospace', color: D.amber, fontWeight: 600 }}>#{job.id}</td>
-                <td style={{ padding: '10px 12px', color: D.white, fontWeight: 500 }}>{job.customer}</td>
-                <td style={{ padding: '10px 12px', color: D.slateLight, fontSize: 12 }}>{job.address.split(',')[0]}</td>
-                <td style={{ padding: '10px 12px', color: D.slateLight }}>{job.truck || '—'}</td>
-                <td style={{ padding: '10px 12px', color: D.slateLight, fontVariantNumeric: 'tabular-nums' }}>{job.startTime}–{job.endTime}</td>
-                <td style={{ padding: '10px 12px', color: D.slateLight }}>{job.yards}</td>
-                <td style={{ padding: '10px 12px' }}>
-                  <span style={{ background: sc.bg, color: sc.text, padding: '3px 10px', borderRadius: 20, fontSize: 10, fontWeight: 600 }}>{sc.label}</span>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+    <Card className="border-border bg-card overflow-hidden">
+      <CardHeader className="pb-2">
+        <CardTitle className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Active Jobs</CardTitle>
+      </CardHeader>
+      <CardContent className="p-0">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b border-border text-[10px] uppercase tracking-wider text-muted-foreground">
+              <th className="text-left px-4 py-2 font-semibold">Job #</th>
+              <th className="text-left px-4 py-2 font-semibold">Customer</th>
+              <th className="text-left px-4 py-2 font-semibold">Location</th>
+              <th className="text-left px-4 py-2 font-semibold">Truck</th>
+              <th className="text-left px-4 py-2 font-semibold">Time</th>
+              <th className="text-left px-4 py-2 font-semibold">Yards</th>
+              <th className="text-left px-4 py-2 font-semibold">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {mockData.jobs.map(job => {
+              const sc = statusConfig[job.status] || statusConfig.scheduled;
+              const sel = selectedJobId === job.id;
+              return (
+                <tr
+                  key={job.id}
+                  onClick={() => onSelectJob(job.id)}
+                  className={`cursor-pointer border-b border-border/50 transition-colors ${
+                    sel ? 'bg-amber-500/8' : 'hover:bg-muted/50'
+                  }`}
+                >
+                  <td className="px-4 py-3 font-mono font-semibold text-amber-400">#{job.id}</td>
+                  <td className="px-4 py-3 font-medium text-foreground">{job.customer}</td>
+                  <td className="px-4 py-3 text-xs text-muted-foreground">{job.address.split(',')[0]}</td>
+                  <td className="px-4 py-3 text-muted-foreground">{job.truck || '—'}</td>
+                  <td className="px-4 py-3 text-muted-foreground font-mono text-xs tabular-nums">{job.startTime}–{job.endTime}</td>
+                  <td className="px-4 py-3 text-muted-foreground">{job.yards}</td>
+                  <td className="px-4 py-3">
+                    <Badge variant="outline" className={`${sc.className} text-[10px]`}>{sc.label}</Badge>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </CardContent>
+    </Card>
   );
 }
 
 /* ── Job Detail Panel ── */
 function JobDetail({ job, onClose }: { job: typeof mockData.jobs[0] | undefined; onClose: () => void }) {
   if (!job) return (
-    <div style={{ ...cardStyle, padding: 40, textAlign: 'center' as const }}>
-      <div style={{ fontSize: 32, marginBottom: 8 }}>📋</div>
-      <p style={{ color: D.slate, fontSize: 13 }}>Select a job to view details</p>
-    </div>
+    <Card className="border-border bg-card h-full">
+      <CardContent className="flex flex-col items-center justify-center p-8 text-center h-full min-h-[300px]">
+        <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mb-3">
+          <CalendarDays className="w-6 h-6 text-muted-foreground" />
+        </div>
+        <p className="text-sm text-muted-foreground">Select a job to view details</p>
+      </CardContent>
+    </Card>
   );
+
   const revenue = job.yards * job.rate;
   const sc = statusConfig[job.status] || statusConfig.scheduled;
+
   return (
-    <div style={{ ...cardStyle, overflow: 'hidden' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 18px', borderBottom: `1px solid ${D.border}`, background: `linear-gradient(135deg, ${sc.bg} 0%, transparent 100%)` }}>
-        <div>
-          <span style={{ fontSize: 15, fontWeight: 700, color: D.white }}>Job #{job.id}</span>
-          <span style={{ marginLeft: 10, background: sc.bg, color: sc.text, padding: '2px 10px', borderRadius: 20, fontSize: 10, fontWeight: 600 }}>{sc.label}</span>
+    <Card className="border-border bg-card overflow-hidden">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-border" style={{ background: `linear-gradient(135deg, ${sc.bg} 0%, transparent 100%)` }}>
+        <div className="flex items-center gap-2">
+          <span className="text-base font-bold text-foreground">Job #{job.id}</span>
+          <Badge variant="outline" className={`${sc.className} text-[10px]`}>{sc.label}</Badge>
         </div>
-        <button onClick={onClose} style={{ background: 'none', border: 'none', color: D.slate, fontSize: 20, cursor: 'pointer' }}>×</button>
+        <Button variant="ghost" size="icon" className="h-6 w-6" onClick={onClose}>
+          <X className="h-4 w-4" />
+        </Button>
       </div>
-      <div style={{ padding: 18, display: 'flex', flexDirection: 'column', gap: 14 }}>
-        <div>
-          <div style={labelStyle}>Customer</div>
-          <div style={{ fontSize: 14, fontWeight: 600, color: D.white, marginTop: 2 }}>{job.customer}</div>
-          <div style={{ fontSize: 12, color: D.slateLight }}>{job.contact} · {job.contactPhone}</div>
-        </div>
-        <div>
-          <div style={labelStyle}>Location</div>
-          <div style={{ fontSize: 13, color: D.slateBright, marginTop: 2 }}>{job.address}</div>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-          <div><div style={labelStyle}>Pump</div><div style={{ fontSize: 13, color: D.white, marginTop: 2 }}>{job.pumpType}</div></div>
-          <div><div style={labelStyle}>Truck</div><div style={{ fontSize: 13, color: D.white, marginTop: 2 }}>{job.truck || 'Unassigned'}</div></div>
-          <div><div style={labelStyle}>Yardage</div><div style={{ fontSize: 13, color: D.white, marginTop: 2 }}>{job.yards} yds</div></div>
-          <div><div style={labelStyle}>Revenue</div><div style={{ fontSize: 14, fontWeight: 700, color: D.green, marginTop: 2 }}>${revenue.toLocaleString()}</div></div>
-        </div>
-        {job.specialInstructions && (
-          <div style={{ background: D.amberDim, borderRadius: 8, padding: 10, borderLeft: `3px solid ${D.amber}` }}>
-            <div style={{ ...labelStyle, color: D.amber, marginBottom: 4 }}>Special Instructions</div>
-            <div style={{ fontSize: 12, color: D.slateBright }}>{job.specialInstructions}</div>
-          </div>
-        )}
-        <div>
-          <div style={{ ...labelStyle, marginBottom: 8 }}>Status Timeline</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-            {job.timeline.map((step, i) => (
-              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <div style={{
-                  width: 10, height: 10, borderRadius: '50%', flexShrink: 0,
-                  background: step.done ? D.green : 'transparent',
-                  border: `2px solid ${step.done ? D.green : D.border}`,
-                  boxShadow: step.done ? `0 0 6px ${D.greenDim}` : 'none',
-                }} />
-                <span style={{ fontSize: 12, color: step.done ? D.white : D.slate, flex: 1 }}>{step.step}</span>
-                <span style={{ fontSize: 11, color: D.slate, fontVariantNumeric: 'tabular-nums' }}>{step.time}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-        {job.notes && (
+      <ScrollArea className="h-[calc(100vh-380px)] min-h-[400px]">
+        <div className="p-4 space-y-4">
           <div>
-            <div style={labelStyle}>Notes</div>
-            <div style={{ fontSize: 12, color: D.slateLight, marginTop: 2 }}>{job.notes}</div>
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">Customer</p>
+            <p className="text-sm font-semibold text-foreground">{job.customer}</p>
+            <div className="flex items-center gap-1.5 mt-1">
+              <Phone className="w-3 h-3 text-muted-foreground" />
+              <span className="text-xs text-muted-foreground">{job.contact} · {job.contactPhone}</span>
+            </div>
           </div>
-        )}
-      </div>
-    </div>
+
+          <div>
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">Location</p>
+            <div className="flex items-start gap-1.5">
+              <MapPin className="w-3 h-3 text-muted-foreground mt-0.5 flex-shrink-0" />
+              <span className="text-xs text-muted-foreground">{job.address}</span>
+            </div>
+          </div>
+
+          <Separator />
+
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Pump Type</p>
+              <p className="text-sm text-foreground mt-0.5">{job.pumpType}</p>
+            </div>
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Truck</p>
+              <p className="text-sm text-foreground mt-0.5">{job.truck || 'Unassigned'}</p>
+            </div>
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Yardage</p>
+              <p className="text-sm text-foreground mt-0.5">{job.yards} yds</p>
+            </div>
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Revenue</p>
+              <p className="text-sm font-bold text-emerald-400 mt-0.5">${revenue.toLocaleString()}</p>
+            </div>
+          </div>
+
+          {job.specialInstructions && (
+            <div className="rounded-lg bg-amber-500/8 border-l-[3px] border-amber-500 p-3">
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-amber-400 mb-1">Special Instructions</p>
+              <p className="text-xs text-muted-foreground">{job.specialInstructions}</p>
+            </div>
+          )}
+
+          <div>
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-2">Status Timeline</p>
+            <div className="space-y-2">
+              {job.timeline.map((step, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  {step.done ? (
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
+                  ) : (
+                    <Circle className="w-3.5 h-3.5 text-muted-foreground/50 flex-shrink-0" />
+                  )}
+                  <span className={`text-xs flex-1 ${step.done ? 'text-foreground' : 'text-muted-foreground'}`}>
+                    {step.step}
+                  </span>
+                  <span className="text-[10px] text-muted-foreground font-mono tabular-nums">{step.time}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {job.notes && (
+            <>
+              <Separator />
+              <div>
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">Notes</p>
+                <p className="text-xs text-muted-foreground">{job.notes}</p>
+              </div>
+            </>
+          )}
+        </div>
+      </ScrollArea>
+    </Card>
   );
 }
 
 /* ── Alerts Panel ── */
 function AlertsPanel({ open, onClose }: { open: boolean; onClose: () => void }) {
   if (!open) return null;
-  const typeColor: Record<string, string> = { warning: D.amber, info: D.blue, new: D.green, success: D.green };
+  const typeConfig: Record<string, { icon: typeof AlertTriangle; color: string }> = {
+    warning: { icon: AlertTriangle, color: '#F59E0B' },
+    info:    { icon: Info,          color: '#3B82F6' },
+    new:     { icon: Plus,          color: '#10B981' },
+    success: { icon: CheckCircle2,  color: '#10B981' },
+  };
   return (
-    <div style={{ position: 'fixed', inset: 0, zIndex: 50 }} onClick={onClose}>
-      <div style={{
-        position: 'absolute', top: 56, right: 80, width: 380,
-        background: D.surface, border: `1px solid ${D.border}`, borderRadius: D.radiusLg,
-        boxShadow: '0 20px 60px rgba(0,0,0,0.5)', overflow: 'hidden',
-      }} onClick={e => e.stopPropagation()}>
-        <div style={{ padding: '12px 16px', borderBottom: `1px solid ${D.border}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontWeight: 700, color: D.white, fontSize: 14 }}>Notifications</span>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', color: D.slate, fontSize: 18, cursor: 'pointer' }}>×</button>
-        </div>
-        <div style={{ maxHeight: 320, overflowY: 'auto' }}>
-          {mockData.alerts.map(alert => (
-            <div key={alert.id} style={{
-              padding: '12px 16px', borderLeft: `3px solid ${typeColor[alert.type] || D.slate}`,
-              borderBottom: `1px solid ${D.border}`, background: !alert.read ? D.amberDim : 'transparent',
-            }}>
-              <div style={{ fontSize: 13, color: D.white, lineHeight: 1.4 }}>{alert.message}</div>
-              <div style={{ fontSize: 11, color: D.slate, marginTop: 4 }}>{alert.time}</div>
-            </div>
-          ))}
-        </div>
+    <div className="fixed inset-0 z-50" onClick={onClose}>
+      <div className="absolute top-14 right-20 w-96" onClick={e => e.stopPropagation()}>
+        <Card className="border-border bg-card shadow-2xl shadow-black/50">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-border">
+            <span className="text-sm font-bold text-foreground">Notifications</span>
+            <Button variant="ghost" size="icon" className="h-6 w-6" onClick={onClose}><X className="h-4 w-4" /></Button>
+          </div>
+          <ScrollArea className="max-h-80">
+            {mockData.alerts.map(alert => {
+              const tc = typeConfig[alert.type] || typeConfig.info;
+              return (
+                <div
+                  key={alert.id}
+                  className={`px-4 py-3 border-l-[3px] border-b border-border/50 transition-colors ${
+                    !alert.read ? 'bg-amber-500/5' : ''
+                  }`}
+                  style={{ borderLeftColor: tc.color }}
+                >
+                  <p className="text-xs text-foreground leading-relaxed">{alert.message}</p>
+                  <p className="text-[10px] text-muted-foreground mt-1">{alert.time}</p>
+                </div>
+              );
+            })}
+          </ScrollArea>
+        </Card>
       </div>
     </div>
   );
@@ -390,14 +442,13 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div style={{ minHeight: '100vh', background: D.bg, color: D.white, fontFamily: "'Inter', system-ui, -apple-system, sans-serif" }}>
-      <style>{`@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } } * { box-sizing: border-box; } button { font-family: inherit; }`}</style>
+    <div className="min-h-screen bg-background text-foreground">
       <Header alertsOpen={alertsOpen} setAlertsOpen={setAlertsOpen} unread={unread} />
       <AlertsPanel open={alertsOpen} onClose={() => setAlertsOpen(false)} />
 
-      <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 16 }}>
-        {/* Fleet Cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12 }}>
+      <div className="p-4 space-y-4">
+        {/* Fleet */}
+        <div className="grid grid-cols-5 gap-3">
           {mockData.trucks.map(t => (
             <FleetCard key={t.id} truck={t} isSelected={selectedTruckId === t.id} onClick={() => setSelectedTruckId(t.id)} />
           ))}
@@ -407,8 +458,8 @@ export default function Dashboard() {
         <StatsCards />
 
         {/* Main Area */}
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 16 }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        <div className="grid grid-cols-3 gap-4">
+          <div className="col-span-2 space-y-4">
             <Schedule selectedJobId={selectedJobId} onSelectJob={handleSelectJob} />
             <JobsTable selectedJobId={selectedJobId} onSelectJob={handleSelectJob} />
           </div>
@@ -419,18 +470,14 @@ export default function Dashboard() {
       </div>
 
       {/* Footer */}
-      <footer style={{
-        background: D.surface, borderTop: `1px solid ${D.border}`,
-        padding: '8px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        fontSize: 11, color: D.slate,
-      }}>
-        <span>
-          <span style={{ color: D.green }}>●</span> {mockData.trucks.filter(t => t.status === 'available').length} Available &nbsp;
-          <span style={{ color: D.amber }}>●</span> {mockData.trucks.filter(t => t.status === 'on-job').length} On Job &nbsp;
-          <span style={{ color: D.blue }}>●</span> {mockData.trucks.filter(t => t.status === 'en-route').length} En Route &nbsp;
-          <span style={{ color: D.red }}>●</span> {mockData.trucks.filter(t => t.status === 'maintenance').length} Down
-        </span>
-        <span>Core Dispatch v1.0 — Built by <strong style={{ color: D.amber }}>Michael Shaw</strong></span>
+      <footer className="border-t border-border bg-card px-6 py-2 flex items-center justify-between text-[11px] text-muted-foreground">
+        <div className="flex items-center gap-4">
+          <span><span className="inline-block w-2 h-2 rounded-full bg-emerald-500 mr-1" />{mockData.trucks.filter(t => t.status === 'available').length} Available</span>
+          <span><span className="inline-block w-2 h-2 rounded-full bg-amber-500 mr-1" />{mockData.trucks.filter(t => t.status === 'on-job').length} On Job</span>
+          <span><span className="inline-block w-2 h-2 rounded-full bg-blue-500 mr-1" />{mockData.trucks.filter(t => t.status === 'en-route').length} En Route</span>
+          <span><span className="inline-block w-2 h-2 rounded-full bg-red-500 mr-1" />{mockData.trucks.filter(t => t.status === 'maintenance').length} Down</span>
+        </div>
+        <span>Core Dispatch v1.0 — Built by <strong className="text-amber-400">Michael Shaw</strong></span>
       </footer>
     </div>
   );
