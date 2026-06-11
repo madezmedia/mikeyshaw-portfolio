@@ -17,11 +17,11 @@ import { ChatWidget } from '../components/ChatWidget';
     <nav class="fixed top-0 left-0 w-full z-50 mix-blend-difference flex justify-between items-center px-12 md:px-[60px] py-6">
         <div class="font-headline-md text-2xl font-black tracking-tighter text-white">SHAW.AI</div>
         <div class="hidden md:flex gap-12 items-center">
-            <a class="font-label-mono text-xs uppercase tracking-[0.3em] text-white hover:text-accent-yellow transition-colors" href="#summary">01 Summary</a>
-            <a class="font-label-mono text-xs uppercase tracking-[0.3em] text-white hover:text-capabilities transition-colors" href="#capabilities">02 Skills</a>
+            <a class="font-label-mono text-xs uppercase tracking-[0.3em] text-white hover:text-accent-yellow transition-colors animate-fade-in" href="#summary">01 Summary</a>
+            <a class="font-label-mono text-xs uppercase tracking-[0.3em] text-white hover:text-capabilities transition-colors animate-fade-in" href="#capabilities">02 Skills</a>
             <a class="font-label-mono text-xs uppercase tracking-[0.3em] text-white hover:text-accent-pink transition-colors" href="#experience">03 Exp</a>
             <a class="font-label-mono text-xs uppercase tracking-[0.3em] text-white hover:text-accent-cyan transition-colors" href="#projects">04 Work</a>
-            <button class="border-2 border-white px-8 py-2 font-button-custom text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-all">Hire</button>
+            <button class="border-2 border-white px-8 py-2 font-button-custom text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-all rounded-none">Hire</button>
         </div>
     </nav>
 
@@ -31,24 +31,24 @@ import { ChatWidget } from '../components/ChatWidget';
     <main class="w-full">
         <!-- Editorial Hero -->
         <section class="min-h-screen editorial-grid pt-32 relative overflow-hidden" id="hero">
-            <div class="overlap-1 flex flex-col justify-center">
-                <span class="font-label-mono text-accent-cyan mb-4 tracking-[0.5em] uppercase">Portfolio 2026</span>
+            <div class="overlap-1 flex flex-col justify-center reveal-item opacity-0">
+                <span class="font-label-mono text-accent-cyan mb-4 tracking-[0.5em] uppercase text-xs">ENGINEERING HIGH-AGENCY INTELLIGENCE</span>
                 <h1 class="font-display-xl text-[12vw] leading-[0.85] font-black tracking-tighter mix-blend-difference">
                     MIKEY<br/><span class="text-accent-yellow">SHAW</span>
                 </h1>
                 <div class="h-1 w-32 bg-accent-pink mt-8"></div>
             </div>
             
-            <div class="overlap-2 relative">
+            <div class="overlap-2 relative reveal-item opacity-0">
                 <div class="absolute -top-10 -left-10 w-full h-full border-8 border-accent-pink opacity-20"></div>
                 <img 
                     alt="Mikey Shaw" 
-                    class="w-full h-[600px] object-cover grayscale contrast-150 brightness-75 hover:grayscale-0 transition-all duration-700" 
+                    class="w-full h-[600px] object-cover grayscale contrast-150 brightness-75 hover:grayscale-0 transition-all duration-700 rounded-none" 
                     src="/radical-cv.png"
                 />
-                <div class="absolute bottom-10 right-10 p-8 bg-accent-cyan text-black max-w-md stagger-card">
+                <div class="absolute bottom-10 right-10 p-8 bg-accent-cyan text-black max-w-md stagger-card rounded-none">
                     <p class="font-headline-md leading-tight font-bold text-lg">
-                        Architecting Digital Elegance &amp; Intelligence at the intersection of high-end design and complex technical engineering.
+                        Architecting elite digital surfaces and autonomous AI systems. Engineered to make your competitors' stacks look obsolete.
                     </p>
                 </div>
             </div>
@@ -62,31 +62,31 @@ import { ChatWidget } from '../components/ChatWidget';
         <!-- Asymmetrical Summary -->
         <section class="px-6 md:px-[60px] py-24 grid grid-cols-12 gap-8 md:gap-12 relative" id="summary">
             <div class="col-span-12 md:col-span-5 relative">
-                <div class="absolute -top-20 -left-10 text-[20rem] font-black opacity-5 text-white select-none">01</div>
-                <h2 class="font-headline-lg text-6xl uppercase font-black mb-12 leading-none">Summary<span class="text-accent-pink">.</span></h2>
-                <div class="bg-accent-yellow h-2 w-24 mb-12"></div>
-                <p class="font-body-lg text-2xl leading-relaxed mb-8 border-l-8 border-accent-cyan pl-8">
-                    As a Creative Technologist, I bridge the gap between abstract strategy and executable code. My work focuses on building digital ecosystems that are as intellectually rigorous as they are visually stunning.
+                <div class="absolute -top-20 -left-10 text-[20rem] font-black opacity-5 text-white select-none pointer-events-none">01</div>
+                <h2 class="font-headline-lg text-6xl uppercase font-black mb-12 leading-none reveal-item opacity-0">The Philosophy of Execution<span class="text-accent-pink">.</span></h2>
+                <div class="bg-accent-yellow h-2 w-24 mb-12 reveal-item opacity-0"></div>
+                <p class="font-body-lg text-2xl leading-relaxed mb-8 border-l-8 border-accent-cyan pl-8 reveal-item opacity-0">
+                    I bridge the gap between design vision and mathematical execution. I build digital assets that do not just perform—they command attention and outlast market cycles.
                 </p>
             </div>
             <div class="col-span-12 md:col-span-7 flex flex-col justify-end">
-                <p class="font-body-md text-secondary max-w-xl mb-12 text-gray-400">
+                <p class="font-body-md text-secondary max-w-xl mb-12 text-gray-400 reveal-item opacity-0">
                     I lead multidisciplinary teams to deliver high-impact products, leveraging emerging technologies to solve modern brand challenges. My philosophy is rooted in the belief that great technology should be invisible, leaving only the experience behind.
                 </p>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="aspect-square bg-surface-container p-6 flex flex-col justify-between hover:bg-accent-cyan hover:text-black transition-colors group">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal-item opacity-0">
+                    <div class="aspect-square bg-surface-container p-6 flex flex-col justify-between hover:bg-accent-cyan hover:text-black transition-colors group rounded-none">
                         <span class="material-symbols-outlined text-4xl" data-icon="terminal">terminal</span>
                         <span class="font-label-mono text-[10px] tracking-widest uppercase">Technical Rigor</span>
                     </div>
-                    <div class="aspect-square border-2 border-accent-pink p-6 flex flex-col justify-between hover:bg-accent-pink hover:text-white transition-colors">
+                    <div class="aspect-square border-2 border-accent-pink p-6 flex flex-col justify-between hover:bg-accent-pink hover:text-white transition-colors rounded-none">
                         <span class="material-symbols-outlined text-4xl" data-icon="palette">palette</span>
                         <span class="font-label-mono text-[10px] tracking-widest uppercase">Design Intuition</span>
                     </div>
-                    <div class="aspect-square border-2 border-accent-yellow p-6 flex flex-col justify-between hover:bg-accent-yellow hover:text-black transition-colors">
+                    <div class="aspect-square border-2 border-accent-yellow p-6 flex flex-col justify-between hover:bg-accent-yellow hover:text-black transition-colors rounded-none">
                         <span class="material-symbols-outlined text-4xl" data-icon="auto_awesome">auto_awesome</span>
                         <span class="font-label-mono text-[10px] tracking-widest uppercase">Emerging Tech</span>
                     </div>
-                    <div class="aspect-square bg-white text-black p-6 flex flex-col justify-between stagger-card">
+                    <div class="aspect-square bg-white text-black p-6 flex flex-col justify-between stagger-card rounded-none">
                         <span class="material-symbols-outlined text-4xl" data-icon="campaign">campaign</span>
                         <span class="font-label-mono text-[10px] tracking-widest uppercase">Brand Narrative</span>
                     </div>
@@ -95,12 +95,12 @@ import { ChatWidget } from '../components/ChatWidget';
         </section>
 
         <!-- Company Profile (Astro Component) -->
-        <section class="w-full">
+        <section class="w-full reveal-item opacity-0">
             <CompanyProfile />
         </section>
 
         <!-- Desired Projects & Market Target -->
-        <section class="w-full">
+        <section class="w-full reveal-item opacity-0">
             <DesiredProjects />
         </section>
 
@@ -108,22 +108,22 @@ import { ChatWidget } from '../components/ChatWidget';
         <section class="bg-accent-cyan py-24 px-6 md:px-[60px] overflow-hidden relative" id="capabilities">
             <div class="absolute top-0 right-0 p-4 font-label-mono text-[15rem] leading-none opacity-10 text-black font-black select-none pointer-events-none">02</div>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
-                <div class="group">
+                <div class="group reveal-item opacity-0">
                     <div class="text-black font-black text-4xl mb-4">01</div>
                     <h3 class="font-headline-md text-black uppercase font-bold mb-4">Strategic Design</h3>
                     <p class="font-body-md text-black/75">Mapping user journeys to business goals through high-fidelity prototyping and data-driven insights.</p>
                 </div>
-                <div class="group">
+                <div class="group reveal-item opacity-0">
                     <div class="text-black font-black text-4xl mb-4">02</div>
                     <h3 class="font-headline-md text-black uppercase font-bold mb-4">Technical Leadership</h3>
                     <p class="font-body-md text-black/75">Architecting scalable frontend systems and leading engineering teams with a design-first mindset.</p>
                 </div>
-                <div class="group">
+                <div class="group reveal-item opacity-0">
                     <div class="text-black font-black text-4xl mb-4">03</div>
                     <h3 class="font-headline-md text-black uppercase font-bold mb-4">Emerging Tech</h3>
                     <p class="font-body-md text-black/75">Exploration of AI/ML integration, WebGL, and spatial computing to push the boundaries of digital interaction.</p>
                 </div>
-                <div class="group">
+                <div class="group reveal-item opacity-0">
                     <div class="text-black font-black text-4xl mb-4">04</div>
                     <h3 class="font-headline-md text-black uppercase font-bold mb-4">Brand Narrative</h3>
                     <p class="font-body-md text-black/75">Translating brand values into living, breathing digital identities that resonate across all touchpoints.</p>
@@ -134,20 +134,24 @@ import { ChatWidget } from '../components/ChatWidget';
         <!-- Dynamic Skills Visualization -->
         <section class="px-6 md:px-[60px] py-24 bg-[#151515]">
             <div class="max-w-[1440px] mx-auto">
-                <h3 class="font-label-mono text-accent-yellow tracking-[0.5em] uppercase text-xs mb-8">System Engineering</h3>
-                <h2 class="font-headline-lg text-5xl uppercase font-black text-white mb-16">Interactive Skills Architecture</h2>
-                <SkillsVisualization />
+                <h3 class="font-label-mono text-accent-yellow tracking-[0.5em] uppercase text-xs mb-8 reveal-item opacity-0">System Engineering</h3>
+                <h2 class="font-headline-lg text-5xl uppercase font-black text-white mb-16 reveal-item opacity-0">Interactive Skills Architecture</h2>
+                <div class="reveal-item opacity-0">
+                    <SkillsVisualization />
+                </div>
             </div>
         </section>
 
         <!-- Projects Grid Section (Featured Work) -->
         <section class="px-6 md:px-[60px] py-24" id="projects">
             <div class="max-w-[1440px] mx-auto">
-                <div class="flex flex-col md:flex-row items-baseline gap-8 mb-16 border-b border-white/10 pb-8">
+                <div class="flex flex-col md:flex-row items-baseline gap-8 mb-16 border-b border-white/10 pb-8 reveal-item opacity-0">
                     <h2 class="font-display-xl text-6xl font-black uppercase tracking-tighter">Featured Work</h2>
                     <span class="font-label-mono text-accent-pink tracking-[0.5em] uppercase text-xs">Selected Deployments</span>
                 </div>
-                <ProjectsGrid />
+                <div class="reveal-item opacity-0">
+                    <ProjectsGrid />
+                </div>
             </div>
         </section>
 
@@ -155,14 +159,14 @@ import { ChatWidget } from '../components/ChatWidget';
         <section class="px-6 md:px-[60px] py-24 bg-[#111111]">
             <div class="max-w-[1440px] mx-auto">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                    <div class="lg:col-span-4 flex flex-col justify-center">
+                    <div class="lg:col-span-4 flex flex-col justify-center reveal-item opacity-0">
                         <span class="font-label-mono text-accent-cyan text-xs uppercase tracking-[0.4em] mb-4">Telemetry</span>
                         <h2 class="font-headline-lg text-4xl font-black uppercase leading-none mb-6">Open Design &amp; Engine Output</h2>
                         <p class="font-body-md text-gray-400">
                             Live system activity, codebase statistics, and recent commit volumes across our core repositories.
                         </p>
                     </div>
-                    <div class="lg:col-span-8">
+                    <div class="lg:col-span-8 reveal-item opacity-0">
                         <GitHubStats />
                     </div>
                 </div>
@@ -172,14 +176,14 @@ import { ChatWidget } from '../components/ChatWidget';
         <!-- Experience - High Contrast Editorial -->
         <section class="px-6 md:px-[60px] py-24 bg-white text-black" id="experience">
             <div class="max-w-[1440px] mx-auto">
-                <div class="flex items-baseline gap-8 mb-24">
+                <div class="flex items-baseline gap-8 mb-24 reveal-item opacity-0">
                     <h2 class="font-display-xl text-7xl md:text-8xl font-black tracking-tighter uppercase leading-none">Career</h2>
                     <span class="font-label-mono text-accent-pink tracking-[0.5em] uppercase text-xs">03 Experience</span>
                 </div>
                 
                 <div class="space-y-24">
                     <!-- Entry 1 -->
-                    <div class="grid grid-cols-12 gap-8 border-b-2 border-black pb-12">
+                    <div class="grid grid-cols-12 gap-8 border-b-2 border-black pb-12 reveal-item opacity-0">
                         <div class="col-span-12 md:col-span-4">
                             <span class="font-label-mono text-xs uppercase text-accent-pink mb-4 block">2021 — PRESENT</span>
                             <h3 class="font-headline-md text-3xl md:text-4xl font-bold uppercase mb-2">Principal Creative Technologist</h3>
@@ -202,7 +206,7 @@ import { ChatWidget } from '../components/ChatWidget';
                     </div>
 
                     <!-- Entry 2 -->
-                    <div class="grid grid-cols-12 gap-8 border-b-2 border-black pb-12">
+                    <div class="grid grid-cols-12 gap-8 border-b-2 border-black pb-12 reveal-item opacity-0">
                         <div class="col-span-12 md:col-span-4">
                             <span class="font-label-mono text-xs uppercase text-accent-cyan mb-4 block">2018 — 2021</span>
                             <h3 class="font-headline-md text-3xl md:text-4xl font-bold uppercase mb-2">Senior Technical Designer</h3>
@@ -216,7 +220,7 @@ import { ChatWidget } from '../components/ChatWidget';
                     </div>
 
                     <!-- Entry 3 -->
-                    <div class="grid grid-cols-12 gap-8 border-b-2 border-black pb-12">
+                    <div class="grid grid-cols-12 gap-8 border-b-2 border-black pb-12 reveal-item opacity-0">
                         <div class="col-span-12 md:col-span-4">
                             <span class="font-label-mono text-xs uppercase text-accent-yellow mb-4 block">2015 — 2018</span>
                             <h3 class="font-headline-md text-3xl md:text-4xl font-bold uppercase mb-2">Creative Developer</h3>
@@ -234,8 +238,8 @@ import { ChatWidget } from '../components/ChatWidget';
 
         <!-- Education & Dynamic Contact Section -->
         <section class="px-6 md:px-[60px] py-24 grid grid-cols-12 gap-12 items-center" id="education">
-            <div class="col-span-12 md:col-span-6 space-y-12">
-                <h2 class="font-label-mono text-accent-yellow tracking-[1em] uppercase">04 Education</h2>
+            <div class="col-span-12 md:col-span-6 space-y-12 reveal-item opacity-0">
+                <h2 class="font-label-mono text-accent-yellow tracking-[1em] uppercase text-xs">04 Education</h2>
                 <div class="space-y-12">
                     <div>
                         <p class="font-label-mono text-secondary text-xs mb-2 uppercase tracking-widest text-gray-400">MSc Human-Computer Interaction</p>
@@ -251,26 +255,26 @@ import { ChatWidget } from '../components/ChatWidget';
                 </div>
             </div>
             
-            <div class="col-span-12 md:col-span-6 bg-accent-pink p-8 md:p-12 text-black stagger-card relative">
+            <div class="col-span-12 md:col-span-6 bg-accent-pink p-8 md:p-12 text-black stagger-card relative rounded-none reveal-item opacity-0">
                 <div class="absolute -top-6 -right-6 w-12 h-12 bg-accent-yellow"></div>
-                <h3 class="font-headline-lg text-4xl md:text-5xl uppercase font-black mb-6 leading-none">Let's build<br/>the future.</h3>
+                <h3 class="font-headline-lg text-4xl md:text-5xl uppercase font-black mb-6 leading-none">obliterate<br/>the standard.</h3>
                 <p class="font-body-md mb-12 opacity-80 max-w-sm">
                     Open for high-impact collaborations and technical consulting roles globally.
                 </p>
-                <a class="inline-block bg-black text-white px-10 py-5 font-button-custom text-xs uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all" href="mailto:hello@mikeyshaw.work">Get in touch</a>
+                <a class="inline-block bg-black text-white px-10 py-5 font-button-custom text-xs uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all rounded-none" href="mailto:hello@mikeyshaw.work">Initiate System Architecture Brief</a>
             </div>
         </section>
 
         <!-- Blog Feed & Outreach -->
         <section class="px-6 md:px-[60px] py-24 bg-[#121212]">
-            <div class="max-w-[1440px] mx-auto">
+            <div class="max-w-[1440px] mx-auto reveal-item opacity-0">
                 <BlogFeed />
             </div>
         </section>
 
         <!-- Interactive Contact Form -->
         <section class="px-6 md:px-[60px] py-24 bg-black">
-            <div class="max-w-[1440px] mx-auto">
+            <div class="max-w-[1440px] mx-auto reveal-item opacity-0">
                 <ContactSection />
             </div>
         </section>

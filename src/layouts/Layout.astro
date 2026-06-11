@@ -247,6 +247,67 @@ html, body {
 			handleScroll();
 		});
 		</script>
+		
+		<!-- Anime.js Integration for Micro-Interactions -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" is:inline></script>
+		<script is:inline>
+		document.addEventListener('DOMContentLoaded', () => {
+			if (typeof anime === 'undefined') return;
+
+			// 1. Spring micro-interactions for cards and buttons
+			const springElements = document.querySelectorAll('.stagger-card, .tech-badge, nav button, nav a, .project-card, button, a.inline-block');
+			
+			springElements.forEach(el => {
+				el.addEventListener('mouseenter', () => {
+					anime({
+						targets: el,
+						scale: 1.03,
+						translateY: -4,
+						rotateZ: el.classList.contains('stagger-card') ? -0.5 : 0,
+						duration: 400,
+						easing: 'easeOutElastic(1.2, 0.6)'
+					});
+				});
+				
+				el.addEventListener('mouseleave', () => {
+					anime({
+						targets: el,
+						scale: 1.0,
+						translateY: 0,
+						rotateZ: 0,
+						duration: 300,
+						easing: 'easeOutQuad'
+					});
+				});
+			});
+
+			// 2. Scroll-driven staggered entry reveals
+			const sections = document.querySelectorAll('section');
+			
+			const revealObserver = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						const items = entry.target.querySelectorAll('.reveal-item');
+						if (items.length > 0) {
+							anime({
+								targets: items,
+								opacity: [0, 1],
+								translateY: [40, 0],
+								delay: anime.stagger(120),
+								duration: 800,
+								easing: 'easeOutQuad'
+							});
+						}
+						revealObserver.unobserve(entry.target);
+					}
+				});
+			}, { threshold: 0.1 });
+
+			sections.forEach(sec => {
+				revealObserver.observe(sec);
+			});
+		});
+		</script>
 	</body>
 </html>
 
