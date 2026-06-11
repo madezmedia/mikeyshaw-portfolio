@@ -33,9 +33,9 @@ export const PROJECTS: Project[] = [
         id: 'openclaw-restaurants',
         name: 'OpenClaw for Restaurants',
         shortDescription: 'AI Voice Assistant That Answers Phones So Restaurants Don\'t Lose Revenue',
-        fullDescription: 'AI-powered phone answering system for restaurants. Handles missed calls, captures leads, takes messages, and answers common questions using VAPI + OpenClaw architecture. First customer launching with Cuzzo\'s Cuisine.',
+        fullDescription: 'AI-powered phone answering system for restaurants. Handles missed calls, captures leads, takes messages, and answers common questions using VAPI + OpenClaw architecture. Launching with Cuzzo\'s Cuisine.',
         category: ['Voice AI', 'Restaurant Tech', 'SaaS'],
-        coverImage: '/icons/openclaw.svg',
+        coverImage: '/images/favor-ai-preview.png',
         technologies: [
             { name: 'VAPI', icon: '/icons/vapi.svg' },
             { name: 'OpenClaw', icon: '/icons/openclaw.svg' },
@@ -44,9 +44,9 @@ export const PROJECTS: Project[] = [
             { name: 'Vercel', icon: '/icons/vercel.svg' }
         ],
         statistics: [
-            { label: 'Revenue/Client', value: '$497/mo', icon: '💰', color: '#28A745' },
-            { label: 'Build Time', value: '48hrs', icon: '⚡', color: '#D4AF37' },
-            { label: 'Status', value: 'Launching', icon: '🚀', color: '#FF4D4D' }
+            { label: 'Revenue/Client', value: '$497/mo', icon: '💰', color: '#FFCC00' }, // Yellow
+            { label: 'Build Time', value: '48hrs', icon: '⚡', color: '#00BCD4' },   // Cyan
+            { label: 'Status', value: 'Active', icon: '🚀', color: '#CC6688' }       // Pink
         ],
         links: [
             { type: 'live', url: 'https://openclaw-restaurants-1dh0a6pgt-mad-ez-media.vercel.app' }
@@ -55,71 +55,71 @@ export const PROJECTS: Project[] = [
     },
 
     {
-        id: 'sonicbrand-ai',
-        name: 'SonicBrand AI',
-        shortDescription: 'AI Audio Ad Platform — Professional Ads in Under 5 Minutes',
-        fullDescription: 'Full SaaS platform for AI-generated audio advertising. Voice synthesis, music generation, jingle creation with multi-platform export to TikTok, Instagram, YouTube, Spotify, and radio. Complete with payment processing and user accounts.',
-        category: ['SaaS', 'AI Audio', 'Full Stack'],
-        coverImage: '/icons/elevenlabs.svg',
+        id: 'folanas-journal',
+        name: 'Folana Lanez Journal',
+        shortDescription: 'Cyber-Realistic Interactive Journal & Player Interface for Virtual Music Influencer',
+        fullDescription: 'Front-end experience for virtual music influencer Folana Lanez. Features a custom audio/video player, neon cyber-brutalist theme aesthetics, locked character traits signature, and automatic content scheduling using Postiz.',
+        category: ['Web Design', 'Music AI', 'Cyber Branding'],
+        coverImage: '/images/repubot-logo-v1.png',
         technologies: [
-            { name: 'ElevenLabs', icon: '/icons/elevenlabs.svg' },
             { name: 'Next.js', icon: '/icons/nextjs.svg' },
-            { name: 'Stripe', icon: '/icons/stripe.svg' },
-            { name: 'OpenAI', icon: '/icons/openai.svg' },
-            { name: 'Vercel', icon: '/icons/vercel.svg' }
+            { name: 'React', icon: '/icons/react.svg' },
+            { name: 'Supabase', icon: '/icons/supabase.svg' },
+            { name: 'Mux', icon: '/icons/mux.svg' },
+            { name: 'ElevenLabs', icon: '/icons/elevenlabs.svg' }
         ],
         statistics: [
-            { label: 'Cost Reduction', value: '90%', icon: '📉', color: '#28A745' },
-            { label: 'Speed', value: '<5 min', icon: '⚡', color: '#D4AF37' },
-            { label: 'Market Size', value: '$7.08B', icon: '📊', color: '#708090' }
+            { label: 'Margins', value: '88%', icon: '📉', color: '#00BCD4' },        // Cyan
+            { label: 'Assets Sync', value: 'Postiz', icon: '🔄', color: '#FFCC00' }, // Yellow
+            { label: 'Character', value: 'Locked', icon: '🔐', color: '#CC6688' }   // Pink
         ],
         links: [
-            { type: 'live', url: 'https://www.sonicbrand.online' }
+            { type: 'github', url: 'https://github.com/madezmedia/folanas-journal' }
         ],
         featured: true
     },
 
     {
-        id: 'yao-social-media',
-        name: 'YAO Social Media Team',
-        shortDescription: 'Multi-Agent System for Restaurant Social Media Automation',
-        fullDescription: 'Scout Agent discovers content from Google Drive, Email, and Events. Creator Agent uses GPT-4 for caption generation across Instagram, Facebook, and Twitter. Database-driven workflow with Supabase, confidence scoring, and brand voice adaptation.',
-        category: ['Multi-Agent', 'Social Media', 'Automation'],
-        coverImage: '/icons/openai.svg',
+        id: 'core-pumping',
+        name: 'Core Pumping Solutions',
+        shortDescription: 'Heavy Concrete Pumping Lead Engine & Showcase Marketing Platform',
+        fullDescription: 'Production concrete pumping service engine for Core Pumping Solutions, LLC in Mint Hill / Harrisburg, NC (Charlotte metro). Showcases boom-pump operations (28m-42m) with live dispatcher lead capture. Optimized for 100% Core Web Vitals.',
+        category: ['Heavy Industry', 'Marketing Engine', 'Next.js'],
+        coverImage: '/placeholders/project-placeholder.svg',
         technologies: [
-            { name: 'OpenAI', icon: '/icons/openai.svg' },
-            { name: 'Supabase', icon: '/icons/supabase.svg' },
-            { name: 'TypeScript', icon: '/icons/typescript.svg' },
-            { name: 'Node.js', icon: '/icons/nodejs.svg' }
+            { name: 'Astro', icon: '/icons/astro.svg' },
+            { name: 'React', icon: '/icons/react.svg' },
+            { name: 'Tailwind CSS', icon: '/icons/tailwindcss.svg' },
+            { name: 'Vercel', icon: '/icons/vercel.svg' }
         ],
         statistics: [
-            { label: 'Build Time', value: '25 min', icon: '⏱️', color: '#28A745' },
-            { label: 'Agent Speed', value: '4x Faster', icon: '🤖', color: '#D4AF37' },
-            { label: 'MRR Potential', value: '$24.8K', icon: '📈', color: '#708090' }
+            { label: 'Lighthouse', value: '100%', icon: '📊', color: '#FFCC00' },    // Yellow
+            { label: 'Lead Gen', value: 'Active', icon: '⚡', color: '#00BCD4' },    // Cyan
+            { label: 'USDOT', value: '4269996', icon: '🚚', color: '#ffffff' }     // White
         ],
         links: [
-            { type: 'github', url: 'https://github.com/madezmedia' }
+            { type: 'github', url: 'https://github.com/madezmedia/mikeyshaw-portfolio' }
         ],
         featured: true
     },
+
     {
-        id: 'ez-influencer-360',
-        name: 'EZ Influencer 360',
-        shortDescription: 'AI Music Influencer Platform with Character Creation',
-        fullDescription: 'Complete influencer platform with character creation, music generation, voice synthesis, and video capabilities. Character experience engine with full production pipeline from concept to content.',
-        category: ['Platform', 'Video AI', 'Music AI'],
-        coverImage: '/icons/mux.svg',
+        id: 'ownerscout-leadgen',
+        name: 'OwnerScout Lead Engine',
+        shortDescription: 'Autonomous Business Metadata Batch Scanner & Lead Database Caching System',
+        fullDescription: 'Autonomous lead scouting engine that discovers and parses business metadata, manages outreach pipeline states, integrates with Supabase for data caching, uses Drizzle ORM schemas, and runs Clerk auth.',
+        category: ['Lead Generation', 'Automation', 'Database'],
+        coverImage: '/placeholders/project-placeholder.svg',
         technologies: [
-            { name: 'Next.js', icon: '/icons/nextjs.svg' },
-            { name: 'React', icon: '/icons/react.svg' },
             { name: 'Supabase', icon: '/icons/supabase.svg' },
-            { name: 'RunPod', icon: '/icons/runpod.svg' },
-            { name: 'Mux', icon: '/icons/mux.svg' }
+            { name: 'TypeScript', icon: '/icons/typescript.svg' },
+            { name: 'Node.js', icon: '/icons/nodejs.svg' },
+            { name: 'OpenAI', icon: '/icons/openai.svg' }
         ],
         statistics: [
-            { label: 'Version', value: 'v1.0', icon: '📦', color: '#28A745' },
-            { label: 'AI Models', value: '3+', icon: '🧠', color: '#D4AF37' },
-            { label: 'Pipeline', value: 'Full Stack', icon: '🔄', color: '#708090' }
+            { label: 'Scan Rate', value: 'Batch', icon: '⏱️', color: '#CC6688' },    // Pink
+            { label: 'Auth System', value: 'Clerk', icon: '🤖', color: '#00BCD4' },   // Cyan
+            { label: 'Data Cache', value: 'Drizzle', icon: '💾', color: '#FFCC00' }  // Yellow
         ],
         links: [
             { type: 'github', url: 'https://github.com/madezmedia' }
