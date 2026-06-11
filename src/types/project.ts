@@ -30,35 +30,10 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
     {
-        id: 'openclaw-restaurants',
-        name: 'OpenClaw for Restaurants',
-        shortDescription: 'AI Voice Assistant That Answers Phones So Restaurants Don\'t Lose Revenue',
-        fullDescription: 'AI-powered phone answering system for restaurants. Handles missed calls, captures leads, takes messages, and answers common questions using VAPI + OpenClaw architecture. Launching with Cuzzo\'s Cuisine.',
-        category: ['Voice AI', 'Restaurant Tech', 'SaaS'],
-        coverImage: '/images/favor-ai-preview.png',
-        technologies: [
-            { name: 'VAPI', icon: '/icons/vapi.svg' },
-            { name: 'OpenClaw', icon: '/icons/openclaw.svg' },
-            { name: 'Supabase', icon: '/icons/supabase.svg' },
-            { name: 'Next.js', icon: '/icons/nextjs.svg' },
-            { name: 'Vercel', icon: '/icons/vercel.svg' }
-        ],
-        statistics: [
-            { label: 'Revenue/Client', value: '$497/mo', icon: '💰', color: '#FFCC00' }, // Yellow
-            { label: 'Build Time', value: '48hrs', icon: '⚡', color: '#00BCD4' },   // Cyan
-            { label: 'Status', value: 'Active', icon: '🚀', color: '#CC6688' }       // Pink
-        ],
-        links: [
-            { type: 'live', url: 'https://openclaw-restaurants-1dh0a6pgt-mad-ez-media.vercel.app' }
-        ],
-        featured: true
-    },
-
-    {
         id: 'folanas-journal',
         name: 'Folana Lanez Journal',
         shortDescription: 'Cyber-Realistic Interactive Journal & Player Interface for Virtual Music Influencer',
-        fullDescription: 'Front-end experience for virtual music influencer Folana Lanez. Features a custom audio/video player, neon cyber-brutalist theme aesthetics, locked character traits signature, and automatic content scheduling using Postiz.',
+        fullDescription: 'Production-ready cyber-realistic journal and showcase platform for virtual music influencer Folana Lanez. Built with Next.js 15, custom media player elements, neon branding guidelines, and automated scheduling via Postiz.',
         category: ['Web Design', 'Music AI', 'Cyber Branding'],
         coverImage: '/images/repubot-logo-v1.png',
         technologies: [
@@ -69,60 +44,83 @@ export const PROJECTS: Project[] = [
             { name: 'ElevenLabs', icon: '/icons/elevenlabs.svg' }
         ],
         statistics: [
-            { label: 'Margins', value: '88%', icon: '📉', color: '#00BCD4' },        // Cyan
-            { label: 'Assets Sync', value: 'Postiz', icon: '🔄', color: '#FFCC00' }, // Yellow
-            { label: 'Character', value: 'Locked', icon: '🔐', color: '#CC6688' }   // Pink
+            { label: 'Commits', value: '4', icon: '📝', color: '#00BCD4' },          // Cyan
+            { label: 'Assets', value: 'Postiz', icon: '🔄', color: '#FFCC00' },       // Yellow
+            { label: 'Status', value: 'Active', icon: '🚀', color: '#CC6688' }        // Pink
         ],
         links: [
             { type: 'github', url: 'https://github.com/madezmedia/folanas-journal' }
         ],
         featured: true
     },
-
     {
-        id: 'core-pumping',
-        name: 'Core Pumping Solutions',
-        shortDescription: 'Heavy Concrete Pumping Lead Engine & Showcase Marketing Platform',
-        fullDescription: 'Production concrete pumping service engine for Core Pumping Solutions, LLC in Mint Hill / Harrisburg, NC (Charlotte metro). Showcases boom-pump operations (28m-42m) with live dispatcher lead capture. Optimized for 100% Core Web Vitals.',
-        category: ['Heavy Industry', 'Marketing Engine', 'Next.js'],
+        id: 'acmi-memory-interface',
+        name: 'Agentic Context Memory Interface (ACMI)',
+        shortDescription: 'Open-Source Persistent Memory & State Protocol for Autonomous AI Agents',
+        fullDescription: 'The open-source state protocol (MIT) giving AI agents persistent Profile, Signals, and Timeline memory slots. Features a TypeScript SDK, CLI commands, and a model context protocol (acmi-mcp) server for cross-agent coordination.',
+        category: ['Protocol', 'AI Memory', 'TypeScript SDK'],
         coverImage: '/placeholders/project-placeholder.svg',
         technologies: [
-            { name: 'Astro', icon: '/icons/astro.svg' },
-            { name: 'React', icon: '/icons/react.svg' },
-            { name: 'Tailwind CSS', icon: '/icons/tailwindcss.svg' },
+            { name: 'TypeScript', icon: '/icons/typescript.svg' },
+            { name: 'Node.js', icon: '/icons/nodejs.svg' },
+            { name: 'Redis', icon: '/icons/openclaw.svg' },
             { name: 'Vercel', icon: '/icons/vercel.svg' }
         ],
         statistics: [
-            { label: 'Lighthouse', value: '100%', icon: '📊', color: '#FFCC00' },    // Yellow
-            { label: 'Lead Gen', value: 'Active', icon: '⚡', color: '#00BCD4' },    // Cyan
-            { label: 'USDOT', value: '4269996', icon: '🚚', color: '#ffffff' }     // White
+            { label: 'Spec Version', value: 'v1.4.0', icon: '📄', color: '#FFCC00' }, // Yellow
+            { label: 'SDK', value: 'TS/Node', icon: '📦', color: '#00BCD4' },        // Cyan
+            { label: 'License', value: 'MIT', icon: '🔐', color: '#ffffff' }         // White
         ],
         links: [
-            { type: 'github', url: 'https://github.com/madezmedia/mikeyshaw-portfolio' }
+            { type: 'github', url: 'https://github.com/madezmedia/acmi' }
         ],
         featured: true
     },
-
     {
-        id: 'ownerscout-leadgen',
-        name: 'OwnerScout Lead Engine',
-        shortDescription: 'Autonomous Business Metadata Batch Scanner & Lead Database Caching System',
-        fullDescription: 'Autonomous lead scouting engine that discovers and parses business metadata, manages outreach pipeline states, integrates with Supabase for data caching, uses Drizzle ORM schemas, and runs Clerk auth.',
-        category: ['Lead Generation', 'Automation', 'Database'],
-        coverImage: '/placeholders/project-placeholder.svg',
+        id: 'ez-influencer-360',
+        name: 'EZ Influencer 360',
+        shortDescription: 'Autonomous AI Creator & Music Influencer Showcase Platform',
+        fullDescription: 'Production creator platform hosting automated video generation pipelines, Fanvue subscription automation, content dispatchers, and multi-agent coordination hooks powered by ACMI memory layers.',
+        category: ['SaaS', 'AI Video', 'Influencer Tech'],
+        coverImage: '/images/favor-ai-preview.png',
         technologies: [
-            { name: 'Supabase', icon: '/icons/supabase.svg' },
-            { name: 'TypeScript', icon: '/icons/typescript.svg' },
-            { name: 'Node.js', icon: '/icons/nodejs.svg' },
-            { name: 'OpenAI', icon: '/icons/openai.svg' }
+            { name: 'Next.js', icon: '/icons/nextjs.svg' },
+            { name: 'React', icon: '/icons/react.svg' },
+            { name: 'RunPod', icon: '/icons/runpod.svg' },
+            { name: 'Mux', icon: '/icons/mux.svg' },
+            { name: 'Supabase', icon: '/icons/supabase.svg' }
         ],
         statistics: [
-            { label: 'Scan Rate', value: 'Batch', icon: '⏱️', color: '#CC6688' },    // Pink
-            { label: 'Auth System', value: 'Clerk', icon: '🤖', color: '#00BCD4' },   // Cyan
-            { label: 'Data Cache', value: 'Drizzle', icon: '💾', color: '#FFCC00' }  // Yellow
+            { label: 'Commits', value: '421', icon: '💻', color: '#CC6688' },        // Pink
+            { label: 'Integrations', value: 'Fanvue', icon: '🔌', color: '#00BCD4' }, // Cyan
+            { label: 'Owner Agent', value: 'Claude', icon: '🤖', color: '#FFCC00' }  // Yellow
         ],
         links: [
-            { type: 'github', url: 'https://github.com/madezmedia' }
+            { type: 'github', url: 'https://github.com/madezmedia/ez-influencer-360' }
+        ],
+        featured: true
+    },
+    {
+        id: 'mad-ez-media',
+        name: 'Mad EZ Media Solutions',
+        shortDescription: 'Enterprise Voice AI Answering Systems & Multi-Agent Restaurant Tech',
+        fullDescription: 'Production deployments of conversational voice AI bots and autonomous multi-agent content generators for local businesses and restaurant networks. Features OpenClaw + VAPI integrations and custom Clerk authentication.',
+        category: ['Voice AI', 'Business Tech', 'Agency Work'],
+        coverImage: '/images/mad-ez-media-logo.png',
+        technologies: [
+            { name: 'VAPI', icon: '/icons/vapi.svg' },
+            { name: 'OpenClaw', icon: '/icons/openclaw.svg' },
+            { name: 'Supabase', icon: '/icons/supabase.svg' },
+            { name: 'Stripe', icon: '/icons/stripe.svg' },
+            { name: 'Next.js', icon: '/icons/nextjs.svg' }
+        ],
+        statistics: [
+            { label: 'Apps Live', value: '6', icon: '📱', color: '#FFCC00' },         // Yellow
+            { label: 'Revenue/Client', value: '$497/mo', icon: '💰', color: '#00BCD4' },// Cyan
+            { label: 'Cost Cut', value: '90%', icon: '📉', color: '#CC6688' }         // Pink
+        ],
+        links: [
+            { type: 'live', url: 'https://openclaw-restaurants-1dh0a6pgt-mad-ez-media.vercel.app' }
         ],
         featured: true
     }
