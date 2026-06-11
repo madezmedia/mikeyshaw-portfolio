@@ -73,23 +73,20 @@ const { project } = Astro.props;
     transitionDuration: `${UX_CONFIG.TRANSITION_DURATION}ms`
 }}>
     .project-card {
-        background: color-mix(in srgb, var(--bg-primary) 80%, transparent);
-        border-radius: 16px;
+        background: var(--bg-secondary);
+        border-radius: 0px;
         overflow: hidden;
         transition: 
-            transform 0.3s ease,
-            box-shadow 0.3s ease;
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
         cursor: pointer;
         position: relative;
-        perspective: 1000px;
-        border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+        border: 2px solid var(--accent);
     }
 
     .project-card:hover {
-        transform: scale(1.03) rotateX(2deg);
-        box-shadow: 
-            0 15px 30px color-mix(in srgb, var(--primary) 20%, transparent),
-            0 10px 20px color-mix(in srgb, var(--primary) 10%, transparent);
+        transform: translate(-6px, -6px);
+        box-shadow: 6px 6px 0px var(--accent-pink);
     }
 
     .project-card-inner {
@@ -143,12 +140,13 @@ const { project } = Astro.props;
     .tech-badge {
         width: 40px;
         height: 40px;
-        background: color-mix(in srgb, var(--accent) 10%, transparent);
-        border-radius: 8px;
+        background: var(--bg-primary);
+        border: 1px solid var(--accent);
+        border-radius: 0px;
         display: flex;
         justify-content: center;
         align-items: center;
-        transition: transform 0.3s ease;
+        transition: transform 0.2s ease;
     }
 
     .tech-badge:hover {
@@ -197,26 +195,32 @@ const { project } = Astro.props;
 
     .project-link {
         padding: 0.5rem 1rem;
-        border-radius: 8px;
+        border-radius: 0px;
         text-decoration: none;
         font-weight: 600;
-        transition: 
-            background-color var(--transitionDuration) ease,
-            color var(--transitionDuration) ease;
+        border: 2px solid var(--accent);
+        transition: all 0.2s ease;
     }
 
     .project-link.github {
-        background: color-mix(in srgb, var(--accent) 10%, transparent);
+        background: transparent;
         color: var(--text-primary);
     }
 
-    .project-link.live {
-        background: var(--primary);
+    .project-link.github:hover {
+        background: var(--accent);
         color: var(--bg-primary);
     }
 
-    .project-link:hover {
-        opacity: 0.9;
+    .project-link.live {
+        background: var(--accent-yellow);
+        color: #000000;
+        border-color: var(--accent-yellow);
+    }
+
+    .project-link.live:hover {
+        background: transparent;
+        color: var(--accent-yellow);
     }
 
     @media (max-width: 768px) {

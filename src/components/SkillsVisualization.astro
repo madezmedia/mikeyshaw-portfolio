@@ -1,24 +1,10 @@
 ---
 import { UX_CONFIG } from '../utils/ux';
 
-interface SkillNode {
-    id: string;
-    group: number;
-    value: number;
-    icon?: string;
-    description?: string;
-}
-
-interface SkillLink {
-    source: string;
-    target: string;
-    value: number;
-}
-
-// Data transformation for force graph
+// Data mapping to the client-side D3 network
 const skillsData = {
     nodes: [        
-        // Groups: 1=Voice AI, 2=Agent Frameworks, 3=Web/SaaS, 4=Core
+        // Groups: 1=Voice AI (Cyan), 2=Agent Frameworks (Pink), 3=Web/SaaS (Yellow), 4=Core (White)
         { id: "AI Architect", group: 4, value: 20, icon: "👑" },
         
         // Voice AI
@@ -77,333 +63,266 @@ const skillsData = {
 };
 ---
 
-<section id="skills" class="skills-visualization-section">
-    <h2 class="section-title">Technical Neural Network</h2>
-    <p class="section-subtitle">Interactive Proficiency Map</p>
-
-    <div class="canvas-container theme-hover">
+<div class="skills-visualization-container w-full">
+    <div class="canvas-container">
         <canvas id="skills-canvas"></canvas>
         <span class="overlay-instruction">Drag nodes to explore • Scroll to zoom</span>
         <div id="tooltip" class="skill-tooltip"></div>
     </div>
-</section>
+</div>
 
-<script>
-    import * as d3 from 'd3';
+<script define:vars={{skillsData}} is:inline>
+    // Dynamically retrieve skillsData passed from Astro frontmatter
+    const { nodes: rawNodes, links: rawLinks } = skillsData;
 
-    // Type definitions for D3 nodes and links
-    interface Node extends d3.SimulationNodeDatum {
-        id: string;
-        group: number;
-        value: number;
-        icon?: string;
-    }
+    // Wait for D3 to load
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typeof d3 === 'undefined') return;
 
-    interface Link extends d3.SimulationLinkDatum<Node> {
-        source: string | Node;
-        target: string | Node;
-        value: number;
-    }
+        const canvas = document.getElementById('skills-canvas');
+        if (!canvas) return;
 
-    const canvas = document.getElementById('skills-canvas') as HTMLCanvasElement;
-    const container = canvas.parentElement;
-    const tooltip = document.getElementById('tooltip');
-    
-    if (container) {
-        const isMobile = window.innerWidth <= 768;
-        let width = container.clientWidth;
-        let height = isMobile ? 350 : 600;
+        const container = canvas.parentElement;
+        const tooltip = document.getElementById('tooltip');
         
-        const scale = window.devicePixelRatio || 1;
-        canvas.width = width * scale;
-        canvas.height = height * scale;
-        canvas.style.width = `${width}px`;
-        canvas.style.height = `${height}px`;
-        
-        const context = canvas.getContext('2d');
-        if (context) context.scale(scale, scale);
-
-        const colorScale = d3.scaleOrdinal<string>()
-            .domain(['1', '2', '3', '4'])
-            .range(['#FF6B6B', '#4ECDC4', '#45B7D1', '#D4AF37']);
-
-        const nodes: Node[] = [
-            { id: "Digital Architect", group: 4, value: 20, icon: "👑" },
-            { id: "AI & ML", group: 1, value: 15, icon: "🤖" },
-            { id: "TensorFlow", group: 1, value: 10 },
-            { id: "PyTorch", group: 1, value: 10 },
-            { id: "Scikit-learn", group: 1, value: 8 },
-            { id: "LLMs", group: 1, value: 12 },
-            { id: "OpenAI", group: 1, value: 9 },
-            { id: "Data Science", group: 2, value: 15, icon: "📊" },
-            { id: "Pandas", group: 2, value: 10 },
-            { id: "NumPy", group: 2, value: 10 },
-            { id: "Python", group: 2, value: 12 },
-            { id: "SQL", group: 2, value: 9 },
-            { id: "Web Tech", group: 3, value: 15, icon: "💻" },
-            { id: "React", group: 3, value: 12 },
-            { id: "TypeScript", group: 3, value: 11 },
-            { id: "Node.js", group: 3, value: 11 },
-            { id: "Astro", group: 3, value: 9 },
-            { id: "Next.js", group: 3, value: 10 },
-            { id: "GraphQL", group: 3, value: 8 }
-        ].map(d => ({...d}));
-
-        const links: Link[] = [
-            { source: "Digital Architect", target: "AI & ML", value: 5 },
-            { source: "Digital Architect", target: "Data Science", value: 5 },
-            { source: "Digital Architect", target: "Web Tech", value: 5 },
-            { source: "AI & ML", target: "TensorFlow", value: 3 },
-            { source: "AI & ML", target: "PyTorch", value: 3 },
-            { source: "AI & ML", target: "Scikit-learn", value: 3 },
-            { source: "AI & ML", target: "LLMs", value: 4 },
-            { source: "AI & ML", target: "OpenAI", value: 3 },
-            { source: "TensorFlow", target: "Python", value: 2 },
-            { source: "PyTorch", target: "Python", value: 2 },
-            { source: "Data Science", target: "Pandas", value: 3 },
-            { source: "Data Science", target: "NumPy", value: 3 },
-            { source: "Data Science", target: "Python", value: 4 },
-            { source: "Data Science", target: "SQL", value: 3 },
-            { source: "Web Tech", target: "React", value: 3 },
-            { source: "Web Tech", target: "TypeScript", value: 3 },
-            { source: "Web Tech", target: "Node.js", value: 3 },
-            { source: "Web Tech", target: "Astro", value: 3 },
-            { source: "Web Tech", target: "Next.js", value: 3 },
-            { source: "Web Tech", target: "GraphQL", value: 2 },
-            { source: "React", target: "TypeScript", value: 2 },
-            { source: "Next.js", target: "React", value: 2 },
-            { source: "Node.js", target: "TypeScript", value: 2 }
-        ].map(d => ({...d}));
-
-        // Adjust force parameters for screen size
-        const linkDist = isMobile ? 60 : 100;
-        const chargeStr = isMobile ? -150 : -300;
-        const nodeScale = isMobile ? 1.0 : 1.5;
-        const fontSize = isMobile ? 9 : 12;
-        const iconSize = isMobile ? 12 : 16;
-
-        const simulation = d3.forceSimulation(nodes)
-            .force("link", d3.forceLink(links).id((d: any) => d.id).distance(linkDist))
-            .force("charge", d3.forceManyBody().strength(chargeStr))
-            .force("center", d3.forceCenter(width / 2, height / 2))
-            .force("collide", d3.forceCollide().radius((d: any) => d.value * nodeScale + 5));
-
-        // Drag functions
-        const drag = (simulation: any) => {
-            function dragstarted(event: any) {
-                if (!event.active) simulation.alphaTarget(0.3).restart();
-                event.subject.fx = event.subject.x;
-                event.subject.fy = event.subject.y;
-                canvas.style.cursor = 'grabbing';
-            }
+        if (container) {
+            const isMobile = window.innerWidth <= 768;
+            let width = container.clientWidth;
+            let height = isMobile ? 350 : 600;
             
-            function dragged(event: any) {
-                event.subject.fx = event.x;
-                event.subject.fy = event.y;
-            }
-            
-            function dragended(event: any) {
-                if (!event.active) simulation.alphaTarget(0);
-                event.subject.fx = null;
-                event.subject.fy = null;
-                canvas.style.cursor = 'grab';
-            }
-            
-            return d3.drag()
-                .subject((event) => {
-                    const [x, y] = [event.x, event.y];
-                    let subject = null;
-                    let distance = Infinity;
-                    for (const node of nodes) {
-                        const dist = Math.sqrt((x - node.x!) ** 2 + (y - node.y!) ** 2);
-                        if (dist < distance && dist < 30) {
-                            distance = dist;
-                            subject = node;
-                        }
-                    }
-                    return subject;
-                })
-                .on("start", dragstarted)
-                .on("drag", dragged)
-                .on("end", dragended);
-        };
-
-        d3.select(canvas).call(drag(simulation) as any);
-
-        let hoverNode: any = null;
-
-        d3.select(canvas).on("mousemove", (event) => {
-            const [mouseX, mouseY] = d3.pointer(event);
-            
-            let prevHover = hoverNode;
-            hoverNode = null;
-            
-            for (const node of nodes) {
-                const dist = Math.sqrt((mouseX - node.x!) ** 2 + (mouseY - node.y!) ** 2);
-                if (dist < node.value * nodeScale + 5) {
-                    hoverNode = node;
-                    break;
-                }
-            }
-
-            if (hoverNode !== prevHover) {
-                canvas.style.cursor = hoverNode ? 'pointer' : 'default';
-                
-                if (hoverNode && tooltip) {
-                    tooltip.style.opacity = '1';
-                    tooltip.innerHTML = `<strong>${hoverNode.id}</strong>`;
-                    tooltip.style.left = `${event.pageX + 10}px`;
-                    tooltip.style.top = `${event.pageY - 10}px`;
-                } else if (tooltip) {
-                    tooltip.style.opacity = '0';
-                }
-            }
-            
-            if (hoverNode) restart();
-        });
-
-        function restart() {
-            if (!context) return;
-            context.clearRect(0, 0, width, height);
-            
-            // Draw links
-            context.save();
-            context.globalAlpha = 0.2;
-            context.strokeStyle = "#999";
-            context.beginPath();
-            links.forEach((link: any) => {
-                context.moveTo(link.source.x, link.source.y);
-                context.lineTo(link.target.x, link.target.y);
-            });
-            context.stroke();
-            context.restore();
-
-            // Draw link highlights (if hover)
-            if (hoverNode) {
-                context.save();
-                context.strokeStyle = "#fff";
-                context.globalAlpha = 0.6;
-                context.lineWidth = 1.5;
-                context.beginPath();
-                links.forEach((link: any) => {
-                    if (link.source.id === hoverNode.id || link.target.id === hoverNode.id) {
-                        context.moveTo(link.source.x, link.source.y);
-                        context.lineTo(link.target.x, link.target.y);
-                    }
-                });
-                context.stroke();
-                context.restore();
-            }
-
-            // Draw nodes
-            nodes.forEach((node: any) => {
-                context.beginPath();
-                const radius = node.value * nodeScale;
-                const isHovered = hoverNode === node;
-                const isConnected = hoverNode && links.some((l: any) => 
-                    (l.source.id === hoverNode.id && l.target.id === node.id) ||
-                    (l.target.id === hoverNode.id && l.source.id === node.id)
-                );
-
-                const pulse = Math.sin(Date.now() / 1000 + node.index!) * 1.5;
-                
-                context.arc(node.x, node.y, isHovered ? radius + 5 : radius + pulse, 0, 2 * Math.PI);
-                context.fillStyle = colorScale(String(node.group));
-                
-                if (isHovered) {
-                    context.shadowBlur = 20;
-                    context.shadowColor = colorScale(String(node.group));
-                } else if (isConnected) {
-                    context.shadowBlur = 10;
-                    context.shadowColor = colorScale(String(node.group));
-                } else {
-                    context.shadowBlur = 0;
-                }
-                
-                context.fill();
-                context.strokeStyle = "#1a1a1a";
-                context.lineWidth = 2;
-                context.stroke();
-
-                // Draw text labels
-                context.fillStyle = "#fff";
-                context.font = `${isHovered ? 'bold ' : ''}${fontSize}px Inter`;
-                context.textAlign = "center";
-                context.textBaseline = "middle";
-                
-                if (node.value > 12 || isHovered || isConnected) {
-                    context.fillText(node.id, node.x, node.y + radius + 14);
-                }
-                
-                if (node.icon) {
-                     context.font = `${iconSize}px Arial`;
-                     context.fillText(node.icon, node.x, node.y);
-                }
-            });
-        }
-
-        d3.timer(restart);
-
-        // Responsive resize
-        window.addEventListener('resize', () => {
-            const newMobile = window.innerWidth <= 768;
-            width = container.clientWidth;
-            height = newMobile ? 350 : 600;
-            
-            const s = window.devicePixelRatio || 1;
-            canvas.width = width * s;
-            canvas.height = height * s;
+            const scale = window.devicePixelRatio || 1;
+            canvas.width = width * scale;
+            canvas.height = height * scale;
             canvas.style.width = `${width}px`;
             canvas.style.height = `${height}px`;
             
-            const ctx = canvas.getContext('2d');
-            if (ctx) ctx.scale(s, s);
-            
-            simulation.force("center", d3.forceCenter(width / 2, height / 2));
-            simulation.alpha(0.3).restart();
-        });
-    }
+            const context = canvas.getContext('2d');
+            if (context) context.scale(scale, scale);
+
+            // Group colors mapping exactly to brand palette:
+            // 1=Voice AI (Cyan), 2=Agent Frameworks (Pink), 3=Web/SaaS (Yellow), 4=Core (White)
+            const colorScale = d3.scaleOrdinal()
+                .domain(['1', '2', '3', '4'])
+                .range(['#00BCD4', '#CC6688', '#FFCC00', '#ffffff']);
+
+            const nodes = rawNodes.map(d => ({...d}));
+            const links = rawLinks.map(d => ({...d}));
+
+            const linkDist = isMobile ? 60 : 100;
+            const chargeStr = isMobile ? -150 : -350;
+            const nodeScale = isMobile ? 1.0 : 1.4;
+            const fontSize = isMobile ? 10 : 12;
+            const iconSize = isMobile ? 12 : 16;
+
+            const simulation = d3.forceSimulation(nodes)
+                .force("link", d3.forceLink(links).id((d) => d.id).distance(linkDist))
+                .force("charge", d3.forceManyBody().strength(chargeStr))
+                .force("center", d3.forceCenter(width / 2, height / 2))
+                .force("collide", d3.forceCollide().radius((d) => d.value * nodeScale + 8));
+
+            // Drag behavior
+            const drag = (sim) => {
+                function dragstarted(event) {
+                    if (!event.active) sim.alphaTarget(0.3).restart();
+                    event.subject.fx = event.subject.x;
+                    event.subject.fy = event.subject.y;
+                    canvas.style.cursor = 'grabbing';
+                }
+                
+                function dragged(event) {
+                    event.subject.fx = event.x;
+                    event.subject.fy = event.y;
+                }
+                
+                function dragended(event) {
+                    if (!event.active) sim.alphaTarget(0);
+                    event.subject.fx = null;
+                    event.subject.fy = null;
+                    canvas.style.cursor = 'grab';
+                }
+                
+                return d3.drag()
+                    .subject((event) => {
+                        const [x, y] = [event.x, event.y];
+                        let subject = null;
+                        let distance = Infinity;
+                        for (const node of nodes) {
+                            const dist = Math.sqrt((x - node.x) ** 2 + (y - node.y) ** 2);
+                            if (dist < distance && dist < 35) {
+                                distance = dist;
+                                subject = node;
+                            }
+                        }
+                        return subject;
+                    })
+                    .on("start", dragstarted)
+                    .on("drag", dragged)
+                    .on("end", dragended);
+            };
+
+            d3.select(canvas).call(drag(simulation));
+
+            let hoverNode = null;
+
+            d3.select(canvas).on("mousemove", (event) => {
+                const [mouseX, mouseY] = d3.pointer(event);
+                
+                let prevHover = hoverNode;
+                hoverNode = null;
+                
+                for (const node of nodes) {
+                    const dist = Math.sqrt((mouseX - node.x) ** 2 + (mouseY - node.y) ** 2);
+                    if (dist < node.value * nodeScale + 8) {
+                        hoverNode = node;
+                        break;
+                    }
+                }
+
+                if (hoverNode !== prevHover) {
+                    canvas.style.cursor = hoverNode ? 'pointer' : 'default';
+                    
+                    if (hoverNode && tooltip) {
+                        tooltip.style.opacity = '1';
+                        tooltip.innerHTML = `<strong>${hoverNode.id}</strong>`;
+                        tooltip.style.left = `${event.pageX + 12}px`;
+                        tooltip.style.top = `${event.pageY - 12}px`;
+                    } else if (tooltip) {
+                        tooltip.style.opacity = '0';
+                    }
+                }
+                
+                if (hoverNode) restart();
+            });
+
+            function restart() {
+                if (!context) return;
+                context.clearRect(0, 0, width, height);
+                
+                // Draw links
+                context.save();
+                context.globalAlpha = 0.15;
+                context.strokeStyle = "#999";
+                context.beginPath();
+                links.forEach((link) => {
+                    context.moveTo(link.source.x, link.source.y);
+                    context.lineTo(link.target.x, link.target.y);
+                });
+                context.stroke();
+                context.restore();
+
+                // Highlight connected links
+                if (hoverNode) {
+                    context.save();
+                    context.strokeStyle = "#00BCD4";
+                    context.globalAlpha = 0.5;
+                    context.lineWidth = 2;
+                    context.beginPath();
+                    links.forEach((link) => {
+                        if (link.source.id === hoverNode.id || link.target.id === hoverNode.id) {
+                            context.moveTo(link.source.x, link.source.y);
+                            context.lineTo(link.target.x, link.target.y);
+                        }
+                    });
+                    context.stroke();
+                    context.restore();
+                }
+
+                // Draw nodes
+                nodes.forEach((node) => {
+                    context.beginPath();
+                    const radius = node.value * nodeScale;
+                    const isHovered = hoverNode === node;
+                    const isConnected = hoverNode && links.some((l) => 
+                        (l.source.id === hoverNode.id && l.target.id === node.id) ||
+                        (l.target.id === hoverNode.id && l.source.id === node.id)
+                    );
+
+                    const pulse = Math.sin(Date.now() / 800 + node.index) * 1.2;
+                    
+                    context.arc(node.x, node.y, isHovered ? radius + 4 : radius + pulse, 0, 2 * Math.PI);
+                    context.fillStyle = colorScale(String(node.group));
+                    
+                    if (isHovered) {
+                        context.shadowBlur = 15;
+                        context.shadowColor = colorScale(String(node.group));
+                    } else if (isConnected) {
+                        context.shadowBlur = 8;
+                        context.shadowColor = colorScale(String(node.group));
+                    } else {
+                        context.shadowBlur = 0;
+                    }
+                    
+                    context.fill();
+                    context.strokeStyle = "#1a1a1a";
+                    context.lineWidth = 2;
+                    context.stroke();
+
+                    // Node titles
+                    context.fillStyle = "#ffffff";
+                    context.font = `${isHovered ? '900 ' : '600 '}${fontSize}px 'JetBrains Mono', monospace`;
+                    context.textAlign = "center";
+                    context.textBaseline = "middle";
+                    
+                    if (node.value > 12 || isHovered || isConnected) {
+                        context.fillText(node.id, node.x, node.y + radius + 15);
+                    }
+                    
+                    if (node.icon) {
+                         context.font = `${iconSize}px Arial`;
+                         context.fillText(node.icon, node.x, node.y);
+                    }
+                });
+            }
+
+            d3.timer(restart);
+
+            // Resizing handler
+            window.addEventListener('resize', () => {
+                const newMobile = window.innerWidth <= 768;
+                width = container.clientWidth;
+                height = newMobile ? 350 : 600;
+                
+                const s = window.devicePixelRatio || 1;
+                canvas.width = width * s;
+                canvas.height = height * s;
+                canvas.style.width = `${width}px`;
+                canvas.style.height = `${height}px`;
+                
+                const ctx = canvas.getContext('2d');
+                if (ctx) ctx.scale(s, s);
+                
+                simulation.force("center", d3.forceCenter(width / 2, height / 2));
+                simulation.alpha(0.3).restart();
+            });
+        }
+    });
 </script>
 
 <style define:vars={{
      transitionDuration: `${UX_CONFIG.TRANSITION_DURATION}ms`
 }}>
-    .skills-visualization-section {
-        max-width: 1200px;
-        margin: 4rem auto;
-        padding: 2rem;
-        background: color-mix(in srgb, var(--bg-primary) 80%, transparent);
-        border-radius: 16px;
-        border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
-        transition: background-color var(--transitionDuration) ease;
-        text-align: center;
-    }
-
-    .section-title {
-        font-size: 2.5rem;
-        color: var(--primary);
-        margin: 0 0 0.5rem;
-        font-family: 'Orbitron', sans-serif;
-    }
-
-    .section-subtitle {
-        color: var(--text-secondary);
-        opacity: 0.7;
-        margin: 0 0 2rem;
+    .skills-visualization-container {
+        width: 100%;
     }
 
     .canvas-container {
         position: relative;
         width: 100%;
-        background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
-        border-radius: 12px;
+        background: radial-gradient(circle at center, #222222 0%, #111111 100%);
+        border-radius: 0px;
+        border: 2px solid var(--accent);
         overflow: hidden;
-        box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
         cursor: grab;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .canvas-container:active {
         cursor: grabbing;
+    }
+
+    .canvas-container:hover {
+        transform: translate(-6px, -6px);
+        box-shadow: 6px 6px 0px var(--accent-yellow);
     }
 
     #skills-canvas {
@@ -416,45 +335,37 @@ const skillsData = {
         bottom: 0.75rem;
         left: 50%;
         transform: translateX(-50%);
-        color: rgba(255,255,255,0.5);
-        font-size: 0.75rem;
+        color: rgba(255,255,255,0.4);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
         pointer-events: none;
+        letter-spacing: 0.05em;
     }
 
     .skill-tooltip {
         position: absolute;
         pointer-events: none;
-        background: rgba(0, 0, 0, 0.8);
-        color: #fff;
-        padding: 5px 10px;
-        border-radius: 4px;
-        font-size: 12px;
+        background: #000000;
+        color: #ffffff;
+        padding: 6px 12px;
+        border-radius: 0px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
         opacity: 0;
-        transition: opacity 0.2s;
+        transition: opacity 0.15s;
         z-index: 10;
-        backdrop-filter: blur(4px);
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 1px solid var(--accent-cyan);
     }
 
     @media (max-width: 768px) {
-        .skills-visualization-section {
-            margin: 2rem 0;
-            padding: 1.5rem 1rem;
-            max-width: 100%;
-            border-radius: 0;
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-        }
-
         .canvas-container {
-            border-radius: 8px;
+            border-radius: 0px;
         }
 
         .overlay-instruction {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
+            width: 90%;
+            text-align: center;
         }
     }
 </style>
-

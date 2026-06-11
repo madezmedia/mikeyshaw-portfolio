@@ -15,47 +15,47 @@ const desiredProjects: DesiredProject[] = [
         title: 'Multi-Agent Orchestration',
         description: '3+ frameworks tested with production systems deployed. LangChain, AutoGPT, SuperAGI, and YAO expertise.',
         tags: ['LangChain', 'AutoGPT', 'SuperAGI'],
-        color: '#FF6B6B'
+        color: '#CC6688' // Pink
     },
     {
         icon: '🎙️',
         title: 'Voice AI Architecture',
         description: 'VAPI + OpenClaw pattern for building conversational AI agents that answer phones and capture leads.',
         tags: ['VAPI', 'ElevenLabs', 'OpenAI Realtime'],
-        color: '#4ECDC4'
+        color: '#00BCD4' // Cyan
     },
     {
         icon: '🍽️',
         title: 'Restaurant Technology',
         description: 'Domain expertise from 3+ products in the restaurant space — phone automation, lead gen, social media.',
         tags: ['OpenClaw', 'OwnerScout', 'YAO'],
-        color: '#FF9900'
+        color: '#FFCC00' // Yellow
     },
     {
         icon: '💳',
         title: 'SaaS Platform Development',
         description: 'Full-stack products with Stripe payments, Supabase auth, multi-tenant architecture, and user workflows.',
         tags: ['Stripe', 'Supabase', 'Next.js'],
-        color: '#D4AF37'
+        color: '#00BCD4' // Cyan
     },
     {
         icon: '⚡',
         title: 'Performance Optimization',
         description: '80-95% API cost reduction through multi-tier caching, rate limiting, and recursive splitting patterns.',
         tags: ['Caching', 'Rate Limiting', '9x Speed'],
-        color: '#45B7D1'
+        color: '#CC6688' // Pink
     },
     {
         icon: '🎵',
         title: 'AI Audio & Media',
         description: 'Voice synthesis, music generation, video AI with production pipelines from concept to published content.',
         tags: ['ElevenLabs', 'RunPod', 'Mux'],
-        color: '#FF4D4D'
+        color: '#FFCC00' // Yellow
     }
 ];
 ---
 
-<section id="desired-projects" class="desired-projects-section">
+<section id="desired-projects" class="desired-projects-section max-w-[1440px] mx-auto px-6 md:px-[60px] py-16">
     <div class="section-header">
         <h2 class="section-title">Expertise & Specializations</h2>
         <p class="section-subtitle">Production-Tested Skills Across AI, Voice, and SaaS</p>
@@ -64,7 +64,7 @@ const desiredProjects: DesiredProject[] = [
     <div class="projects-grid">
         {desiredProjects.map((project) => (
             <div 
-                class="project-card theme-hover"
+                class="project-card"
                 style={`--project-color: ${project.color}`}
             >
                 <div class="icon-container">
@@ -88,72 +88,73 @@ const desiredProjects: DesiredProject[] = [
     transitionDuration: `${UX_CONFIG.TRANSITION_DURATION}ms`
 }}>
     .desired-projects-section {
-        max-width: 1200px;
-        margin: 4rem auto;
-        padding: 2rem;
-        background: color-mix(in srgb, var(--bg-primary) 80%, transparent);
-        border-radius: 16px;
-        border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
-        transition: background-color var(--transitionDuration) ease;
+        width: 100%;
     }
 
     .section-header {
-        text-align: center;
-        margin-bottom: 3rem;
+        text-align: left;
+        margin-bottom: 4rem;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 2rem;
     }
 
     .section-title {
-        font-size: 2.5rem;
-        color: var(--primary);
+        font-family: "Raleway", sans-serif;
+        font-size: 3rem;
+        font-weight: 900;
+        color: var(--accent-yellow);
         margin: 0;
-        font-family: 'Orbitron', sans-serif;
+        letter-spacing: -0.03em;
+        text-transform: uppercase;
     }
 
     .section-subtitle {
-        color: var(--text-secondary);
-        opacity: 0.7;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.85rem;
+        color: var(--accent-cyan);
         margin-top: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
     }
 
     .projects-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
         gap: 2rem;
     }
 
     .project-card {
-        background: color-mix(in srgb, var(--project-color) 10%, transparent);
-        border-radius: 16px;
-        padding: 2rem;
+        background: var(--bg-secondary);
+        border-radius: 0px;
+        padding: 2.5rem;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        text-align: center;
+        align-items: start;
+        text-align: left;
         transition: 
-            transform var(--transitionDuration) ease,
-            box-shadow var(--transitionDuration) ease;
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
         position: relative;
         overflow: hidden;
-        border: 1px solid color-mix(in srgb, var(--project-color) 20%, transparent);
+        border: 2px solid var(--project-color);
     }
 
     .project-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 
-            0 15px 30px color-mix(in srgb, var(--project-color) 20%, transparent),
-            0 10px 20px color-mix(in srgb, var(--project-color) 10%, transparent);
+        transform: translate(-6px, -6px);
+        box-shadow: 6px 6px 0px var(--project-color);
     }
 
     .icon-container {
-        width: 80px;
-        height: 80px;
-        background: color-mix(in srgb, var(--project-color) 20%, transparent);
-        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        background: var(--bg-primary);
+        border-radius: 0px;
+        border: 2px solid var(--project-color);
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-bottom: 1.5rem;
-        transition: transform var(--transitionDuration) ease;
+        margin-bottom: 2rem;
+        transition: transform 0.2s ease;
     }
 
     .project-card:hover .icon-container {
@@ -161,38 +162,50 @@ const desiredProjects: DesiredProject[] = [
     }
 
     .project-icon {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 
     .project-title {
+        font-family: "Raleway", sans-serif;
         font-size: 1.5rem;
+        font-weight: 800;
         color: var(--project-color);
         margin: 0 0 1rem;
-        font-family: 'Orbitron', sans-serif;
     }
 
     .project-description {
-        color: var(--text-secondary);
+        font-family: "Montserrat", sans-serif;
+        color: var(--text-primary);
         font-size: 0.95rem;
         line-height: 1.6;
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
         flex-grow: 1;
     }
 
     .project-tags {
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
         gap: 0.5rem;
     }
 
     .tag {
-        background: color-mix(in srgb, var(--project-color) 15%, transparent);
+        background: var(--bg-primary);
         color: var(--project-color);
         padding: 0.25rem 0.75rem;
-        border-radius: 20px;
-        font-size: 0.8rem;
+        border-radius: 0px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.75rem;
         font-weight: 500;
-        border: 1px solid color-mix(in srgb, var(--project-color) 30%, transparent);
+        border: 1px solid var(--project-color);
+    }
+
+    @media (max-width: 768px) {
+        .projects-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+        }
     }
 </style>

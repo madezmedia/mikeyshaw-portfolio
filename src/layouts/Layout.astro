@@ -199,53 +199,7 @@ html, body {
 		<ChatWidget client:visible />
 
 		<script is:inline>
-		// Parallax section scrolling
-		document.addEventListener('DOMContentLoaded', () => {
-			const sections = document.querySelectorAll('main > section, main section');
-			
-			// Add parallax data attributes
-			sections.forEach((section, index) => {
-				section.style.transition = 'transform 0.1s ease-out, opacity 0.3s ease';
-				section.style.willChange = 'transform, opacity';
-			});
-
-			const handleScroll = () => {
-				const scrollY = window.scrollY;
-				const viewHeight = window.innerHeight;
-				
-				sections.forEach((section) => {
-					const rect = section.getBoundingClientRect();
-					const sectionTop = rect.top;
-					const sectionHeight = rect.height;
-					
-					// Only apply parallax to sections in/near viewport
-					if (sectionTop < viewHeight + 200 && sectionTop + sectionHeight > -200) {
-						// Subtle parallax: section moves slightly slower than scroll
-						const parallaxOffset = (sectionTop / viewHeight) * 20;
-						section.style.transform = `translateY(${parallaxOffset}px)`;
-						
-						// Fade in as it enters viewport
-						const opacity = Math.min(1, Math.max(0.3, 1 - (sectionTop / viewHeight) * 0.3));
-						section.style.opacity = sectionTop < viewHeight ? '1' : String(opacity);
-					}
-				});
-			};
-
-			// Use requestAnimationFrame for smooth parallax
-			let ticking = false;
-			window.addEventListener('scroll', () => {
-				if (!ticking) {
-					requestAnimationFrame(() => {
-						handleScroll();
-						ticking = false;
-					});
-					ticking = true;
-				}
-			});
-
-			// Initial call
-			handleScroll();
-		});
+		// Snappy scroll interactions
 		</script>
 		
 		<!-- Anime.js Integration for Micro-Interactions -->
@@ -315,32 +269,17 @@ html, body {
     transitionDuration: `${UX_CONFIG.TRANSITION_DURATION}ms`
 }}>
     :root {
-        /* Dark Mode Palette */
-        --primary-dark: #D4AF37;     /* Gold */
-        --secondary-dark: #C0C0C0;   /* Silver */
-        --accent-dark: #708090;      /* Slate Gray */
-        --bg-primary-dark: #121212;  /* Deep Black */
-        --bg-secondary-dark: #1E1E1E;/* Soft Black */
-        --text-primary-dark: #E0E0E0;/* Light Gray */
-        --text-secondary-dark: #A0A0A0; /* Medium Gray */
-
-        /* Light Mode Palette */
-        --primary-light: #28A745;    /* Green */
-        --secondary-light: #6C757D;  /* Gray */
-        --accent-light: #28A745;     /* Green */
-        --bg-primary-light: #F8F9FA; /* Light Gray */
-        --bg-secondary-light: #FFFFFF; /* White */
-        --text-primary-light: #212529; /* Dark Gray */
-        --text-secondary-light: #495057; /* Medium Gray */
-
-        /* Default to Dark Mode */
-        --primary: var(--primary-dark);
-        --secondary: var(--secondary-dark);
-        --accent: var(--accent-dark);
-        --bg-primary: var(--bg-primary-dark);
-        --bg-secondary: var(--bg-secondary-dark);
-        --text-primary: var(--text-primary-dark);
-        --text-secondary: var(--text-secondary-dark);
+        /* Brutalist Theme Palette matching global.css */
+        --primary: #ffffff;
+        --secondary: #a1a1a1;
+        --accent: #00BCD4;
+        --accent-yellow: #FFCC00;
+        --accent-pink: #CC6688;
+        --accent-cyan: #00BCD4;
+        --bg-primary: #1a1a1a;
+        --bg-secondary: #2a2a2a;
+        --text-primary: #ffffff;
+        --text-secondary: #a1a1a1;
 
         /* Layout Variables */
         --navbar-height: 80px;
@@ -349,13 +288,13 @@ html, body {
 
     /* Light Mode Overrides */
     :root[data-theme='light'] {
-        --primary: var(--primary-light);
-        --secondary: var(--secondary-light);
-        --accent: var(--accent-light);
-        --bg-primary: var(--bg-primary-light);
-        --bg-secondary: var(--bg-secondary-light);
-        --text-primary: var(--text-primary-light);
-        --text-secondary: var(--text-secondary-light);
+        --primary: #ffffff;
+        --secondary: #a1a1a1;
+        --accent: #00BCD4;
+        --bg-primary: #1a1a1a;
+        --bg-secondary: #2a2a2a;
+        --text-primary: #ffffff;
+        --text-secondary: #a1a1a1;
     }
 
     html, body {
@@ -443,7 +382,7 @@ html, body {
 
     ::-webkit-scrollbar-thumb {
         background: var(--accent);
-        border-radius: 5px;
+        border-radius: 0px;
     }
 
     ::-webkit-scrollbar-thumb:hover {

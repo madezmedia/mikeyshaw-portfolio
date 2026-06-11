@@ -6,55 +6,8 @@ import { PROJECTS } from '../types/project';
 const featuredProjects = PROJECTS.filter(project => project.featured);
 ---
 
-<section id="projects" class="projects-grid-section">
-    <div class="section-header">
-        <h2 class="section-title">Featured Projects</h2>
-        <div class="divider"></div>
-    </div>
-
-    <div class="projects-grid">
-        {featuredProjects.map((project: Project) => (
-            <ProjectCard project={project} />
-        ))}
-    </div>
-</section>
-
-<style>
-    .projects-grid-section {
-        max-width: 1200px;
-        margin: 4rem auto;
-        padding: 2rem;
-    }
-
-    .section-header {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        margin-bottom: 2rem;
-    }
-
-    .section-title {
-        font-size: 2.5rem;
-        color: var(--primary);
-        margin: 0;
-        font-family: 'Orbitron', sans-serif;
-    }
-
-    .divider {
-        flex-grow: 1;
-        height: 2px;
-        background: linear-gradient(to right, var(--primary), transparent);
-    }
-
-    .projects-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 2rem;
-    }
-
-    @media (max-width: 768px) {
-        .projects-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-</style>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full">
+    {featuredProjects.map((project: Project) => (
+        <ProjectCard project={project} />
+    ))}
+</div>

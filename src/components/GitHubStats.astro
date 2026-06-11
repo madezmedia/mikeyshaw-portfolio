@@ -14,39 +14,32 @@ const githubStatsImages = [
         title: 'Repositories per Language'
     },
     {
-        src: `https://github-readme-streak-stats.herokuapp.com/?user=${githubUsername}&theme=dark&hide_border=true&background=121212&ring=D4AF37&fire=D4AF37&currStreakLabel=C0C0C0`,
+        src: `https://github-readme-streak-stats.herokuapp.com/?user=${githubUsername}&theme=dark&hide_border=true&background=1a1a1a&ring=00BCD4&fire=FFCC00&currStreakLabel=FFFFFF&sideNums=CC6688&sideLabels=FFFFFF&dates=00BCD4`,
         alt: 'GitHub Streak Stats',
         title: 'Contribution Streak'
     }
 ];
 ---
 
-<section class="github-stats-section">
-    <div class="github-stats-header">
-        <h2 class="section-title">GitHub Insights</h2>
-        <p class="section-subtitle">Coding Journey & Technical Landscape</p>
+<div class="github-stats-container w-full flex flex-col gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {githubStatsImages.map((image) => (
+            <div class="github-stat-image-container">
+                <img 
+                    data-src={image.src} 
+                    alt={image.alt} 
+                    title={image.title}
+                    loading="lazy"
+                    decoding="async"
+                    width="480"
+                    height="240"
+                    class="github-stat-image"
+                />
+            </div>
+        ))}
     </div>
 
-    <div class="github-stats-grid">
-        <div class="github-stats-images">
-            {githubStatsImages.map((image) => (
-                <div class="github-stat-image-container">
-                    <img 
-                        data-src={image.src} 
-                        alt={image.alt} 
-                        title={image.title}
-                        loading="lazy"
-                        decoding="async"
-                        width="480"
-                        height="240"
-                        class="github-stat-image"
-                    />
-                </div>
-            ))}
-        </div>
-    </div>
-
-    <div class="github-profile-link">
+    <div class="flex justify-start">
         <a 
             href={`https://github.com/${githubUsername}`} 
             target="_blank" 
@@ -56,123 +49,65 @@ const githubStatsImages = [
             Explore Full GitHub Profile
         </a>
     </div>
-</section>
+</div>
 
 <style define:vars={{
     transitionDuration: `${UX_CONFIG.TRANSITION_DURATION}ms`
 }}>
-    .github-stats-section {
-        max-width: 1200px;
-        margin: 4rem auto;
-        padding: 2rem;
-        background: linear-gradient(
-            135deg, 
-            color-mix(in srgb, var(--bg-primary) 90%, transparent),
-            color-mix(in srgb, var(--bg-secondary) 90%, transparent)
-        );
-        border-radius: 16px;
-        border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
-        box-shadow: 
-            0 15px 30px color-mix(in srgb, var(--accent) 10%, transparent),
-            0 10px 20px color-mix(in srgb, var(--accent) 5%, transparent);
-        transition: transform var(--transitionDuration) ease;
-    }
-
-    .github-stats-header {
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-
-    .section-title {
-        font-size: 2.5rem;
-        color: var(--primary);
-        margin: 0;
-        font-family: 'Orbitron', sans-serif;
-        background: linear-gradient(
-            to right, 
-            var(--primary), 
-            color-mix(in srgb, var(--primary) 50%, transparent)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    .section-subtitle {
-        color: var(--text-secondary);
-        opacity: 0.7;
-        margin-top: 0.5rem;
-        text-align: center;
-    }
-
-    .github-stats-images {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
+    .github-stats-container {
+        width: 100%;
     }
 
     .github-stat-image-container {
-        background: color-mix(in srgb, var(--accent) 10%, transparent);
-        border-radius: 12px;
+        background: var(--bg-secondary);
+        border-radius: 0px;
+        border: 2px solid var(--accent);
         overflow: hidden;
         transition: 
-            transform var(--transitionDuration) ease,
-            box-shadow var(--transitionDuration) ease;
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
     }
 
     .github-stat-image-container:hover {
-        transform: scale(1.02);
-        box-shadow: 
-            0 15px 30px color-mix(in srgb, var(--accent) 20%, transparent),
-            0 10px 20px color-mix(in srgb, var(--accent) 10%, transparent);
+        transform: translate(-4px, -4px);
+        box-shadow: 4px 4px 0px var(--accent-pink);
     }
 
     .github-stat-image {
         width: 100%;
         height: auto;
+        display: block;
         object-fit: cover;
-        border-radius: 12px;
-        filter: saturate(0.9) contrast(1.1);
-        transition: filter var(--transitionDuration) ease;
+        border-radius: 0px;
+        filter: saturate(0.85) contrast(1.1);
+        transition: filter 0.2s ease;
     }
 
     .github-stat-image:hover {
         filter: saturate(1.1) contrast(1.2);
     }
 
-    .github-profile-link {
-        display: flex;
-        justify-content: center;
-        margin-top: 2rem;
-    }
-
     .profile-link {
-        background: var(--primary);
-        color: var(--bg-primary);
-        padding: 0.75rem 1.5rem;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.15em;
+        background: var(--accent-yellow);
+        color: #000000;
+        padding: 1rem 2rem;
         text-decoration: none;
-        border-radius: 8px;
-        transition: 
-            transform var(--transitionDuration) ease,
-            box-shadow var(--transitionDuration) ease;
+        border-radius: 0px;
+        border: 2px solid var(--accent-yellow);
+        transition: all 0.2s ease;
+        display: inline-block;
     }
 
     .profile-link:hover {
-        transform: scale(1.05);
-        box-shadow: 
-            0 10px 20px color-mix(in srgb, var(--primary) 30%, transparent),
-            0 6px 10px color-mix(in srgb, var(--primary) 20%, transparent);
-    }
-
-    @media (max-width: 1024px) {
-        .github-stats-images {
-            grid-template-columns: 1fr 1fr;
-        }
-    }
-
-    @media (max-width: 768px) {
-        .github-stats-images {
-            grid-template-columns: 1fr;
-        }
+        background: transparent;
+        color: var(--accent-yellow);
+        transform: translate(-4px, -4px);
+        box-shadow: 4px 4px 0px var(--accent-cyan);
     }
 </style>
 
@@ -190,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
-    }, { rootMargin: '50px' });
+    }, { rootMargin: '100px' });
 
     images.forEach(img => imageObserver.observe(img));
 });

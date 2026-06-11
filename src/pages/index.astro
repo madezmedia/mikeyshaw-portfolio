@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Scene3D from '../components/Scene3D.astro';
@@ -10,6 +11,7 @@ import DesiredProjects from '../components/DesiredProjects.astro';
 import ContactSection from '../components/ContactSection.astro';
 import BlogFeed from '../components/BlogFeed.astro';
 import { ChatWidget } from '../components/ChatWidget';
+import mikeyShaw from '../images/mikey-shaw.png';
 ---
 
 <Layout title="Mikey Shaw | Creative Technologist & AI Architect">
@@ -41,10 +43,15 @@ import { ChatWidget } from '../components/ChatWidget';
             
             <div class="overlap-2 relative reveal-item opacity-0">
                 <div class="absolute -top-10 -left-10 w-full h-full border-8 border-accent-pink opacity-20"></div>
-                <img 
+                <Image 
+                    src={mikeyShaw}
                     alt="Mikey Shaw" 
                     class="w-full h-[600px] object-cover grayscale contrast-150 brightness-75 hover:grayscale-0 transition-all duration-700 rounded-none" 
-                    src="/images/mikey-shaw.png"
+                    width={800}
+                    height={600}
+                    format="avif"
+                    quality="high"
+                    loading="eager"
                 />
                 <div class="absolute bottom-10 right-10 p-8 bg-accent-cyan text-black max-w-md stagger-card rounded-none">
                     <p class="font-headline-md leading-tight font-bold text-lg">
