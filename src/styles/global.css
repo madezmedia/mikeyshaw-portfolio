@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&family=Montserrat:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -8,6 +9,23 @@
 @theme inline {
     --font-heading: var(--font-sans);
     --font-sans: 'Geist Variable', sans-serif;
+
+    /* Radical Editorial Custom Fonts */
+    --font-headline-lg: "Raleway", sans-serif;
+    --font-body-lg: "Montserrat", sans-serif;
+    --font-headline-md: "Raleway", sans-serif;
+    --font-button-custom: "Montserrat", sans-serif;
+    --font-label-mono: "JetBrains Mono", monospace;
+    --font-body-md: "Montserrat", sans-serif;
+    --font-display-xl: "Raleway", sans-serif;
+
+    /* Radical Editorial Custom Colors */
+    --color-accent-yellow: #FFCC00;
+    --color-accent-pink: #CC6688;
+    --color-accent-cyan: #00BCD4;
+    --color-surface-container: #2a2a2a;
+    --color-background-custom: #1a1a1a;
+
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -122,9 +140,33 @@
     @apply border-border outline-ring/50;
     }
   body {
-    @apply bg-background text-foreground;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
     }
   html {
     @apply font-sans;
     }
+
+  /* Radical Editorial Custom Classes */
+  .editorial-grid {
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    gap: 0;
+  }
+  .text-vertical {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+  .blend-multiply { mix-blend-mode: multiply; }
+  .blend-screen { mix-blend-mode: screen; }
+  .overlap-1 { grid-column: 2 / span 12; grid-row: 1 / span 10; z-index: 10; }
+  .overlap-2 { grid-column: 10 / span 14; grid-row: 3 / span 12; z-index: 5; }
+  .stagger-card {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .stagger-card:hover {
+    transform: translateY(-10px) rotate(-1deg);
+  }
 }

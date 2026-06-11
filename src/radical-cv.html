@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mikey Shaw | Creative Technologist</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&amp;family=Montserrat:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #1a1a1a; /* Deep background inspired by MadEZ dark tones */
+            color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: repeat(24, 1fr);
+            gap: 0;
+        }
+        .text-vertical {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+        }
+        .blend-multiply { mix-blend-mode: multiply; }
+        .blend-screen { mix-blend-mode: screen; }
+        .overlap-1 { grid-column: 2 / span 12; grid-row: 1 / span 10; z-index: 10; }
+        .overlap-2 { grid-column: 10 / span 14; grid-row: 3 / span 12; z-index: 5; }
+        .stagger-card {
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .stagger-card:hover {
+            transform: translateY(-10px) rotate(-1deg);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary": "#a1a1a1",
+                      "on-background": "#ffffff",
+                      "accent-yellow": "#FFCC00",
+                      "accent-pink": "#CC6688",
+                      "accent-cyan": "#00BCD4",
+                      "primary": "#ffffff",
+                      "background": "#1a1a1a",
+                      "surface-container": "#2a2a2a"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Raleway"],
+                      "body-lg": ["Montserrat"],
+                      "headline-md": ["Raleway"],
+                      "button": ["Montserrat"],
+                      "label-mono": ["JetBrains Mono"],
+                      "body-md": ["Montserrat"],
+                      "display-xl": ["Raleway"]
+              },
+              "spacing": {
+                      "container-max": "1440px",
+                      "space-xl": "10rem",
+                      "space-lg": "6rem",
+                      "margin-desktop": "60px"
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background selection:bg-accent-cyan selection:text-white">
+<!-- Radical Navigation -->
+<nav class="fixed top-0 left-0 w-full z-50 mix-blend-difference flex justify-between items-center px-margin-desktop py-6">
+<div class="font-headline-md text-2xl font-black tracking-tighter text-white">SHAW.AI</div>
+<div class="flex gap-12 items-center">
+<a class="font-label-mono text-xs uppercase tracking-[0.3em] text-white hover:text-accent-yellow transition-colors" href="#summary">01 Summary</a>
+<a class="font-label-mono text-xs uppercase tracking-[0.3em] text-white hover:text-accent-cyan transition-colors" href="#capabilities">02 Skills</a>
+<a class="font-label-mono text-xs uppercase tracking-[0.3em] text-white hover:text-accent-pink transition-colors" href="#experience">03 Exp</a>
+<button class="border-2 border-white px-8 py-2 font-button text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-all">Hire</button>
+</div>
+</nav>
+<main>
+<!-- Editorial Hero -->
+<section class="min-h-screen editorial-grid pt-32 relative overflow-hidden" id="hero">
+<div class="overlap-1 flex flex-col justify-center">
+<span class="font-label-mono text-accent-cyan mb-4 tracking-[0.5em] uppercase">Portfolio 2024</span>
+<h1 class="font-display-xl text-[12vw] leading-[0.85] font-black tracking-tighter mix-blend-difference">
+                MIKEY<br/><span class="text-accent-yellow">SHAW</span>
+</h1>
+<div class="h-1 w-32 bg-accent-pink mt-8"></div>
+</div>
+<div class="overlap-2 relative">
+<div class="absolute -top-10 -left-10 w-full h-full border-8 border-accent-pink opacity-20"></div>
+<img alt="Mikey Shaw" class="w-full h-full object-cover grayscale contrast-150 brightness-75 hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida/AP1WRLvBCk_3nSof5rDgSHJA8BUq7Vxckt_CCStgTS-r-rJe_6wU-kO3ScOiUo5sJJWDNUAgf1Ev-_2ds8xKkdYnhdJEeWlUBEsRDySmTGbp1ZR1H3EujIPSWaZhCoDsJ3ErqsuM2SgpH6aWKw8YqdqlXc9EQOoym9DOyM0cJ1TEegeTdrtwvWtmPaVqRBKm3Ej00XeLSsh3dmkeNe5HT_pat9zp0gktjKhm0haV2THGQCzlcTbDcPdj4exnSnDq"/>
+<div class="absolute bottom-10 right-10 p-8 bg-accent-cyan text-black max-w-md stagger-card">
+<p class="font-headline-md leading-tight font-bold">
+                    Architecting Digital Elegance &amp; Intelligence at the intersection of high-end design and complex technical engineering.
+                </p>
+</div>
+</div>
+<!-- Vertical Text Decorative -->
+<div class="absolute right-10 top-1/2 -translate-y-1/2 text-vertical font-label-mono text-[10px] tracking-[1em] opacity-30 uppercase">
+            Creative Technologist • Strategic Design • Technical Leadership
+        </div>
+</section>
+<!-- Asymmetrical Summary -->
+<section class="px-margin-desktop py-space-xl grid grid-cols-12 gap-12" id="summary">
+<div class="col-span-12 md:col-span-5 relative">
+<div class="absolute -top-20 -left-10 text-[20rem] font-black opacity-5 text-white select-none">01</div>
+<h2 class="font-headline-lg text-6xl uppercase font-black mb-12 leading-none">Summary<span class="text-accent-pink">.</span></h2>
+<div class="bg-accent-yellow h-2 w-24 mb-12"></div>
+<p class="font-body-lg text-2xl leading-relaxed mb-8 border-l-8 border-accent-cyan pl-8">
+                As a Creative Technologist, I bridge the gap between abstract strategy and executable code. My work focuses on building digital ecosystems that are as intellectually rigorous as they are visually stunning. 
+            </p>
+</div>
+<div class="col-span-12 md:col-span-7 flex flex-col justify-end">
+<p class="font-body-md text-secondary max-w-xl mb-12">
+                I lead multidisciplinary teams to deliver high-impact products, leveraging emerging technologies to solve modern brand challenges. My philosophy is rooted in the belief that great technology should be invisible, leaving only the experience behind.
+            </p>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="aspect-square bg-surface-container p-6 flex flex-col justify-between hover:bg-accent-cyan hover:text-black transition-colors group">
+<span class="material-symbols-outlined text-4xl" data-icon="terminal">terminal</span>
+<span class="font-label-mono text-[10px] tracking-widest uppercase">Technical Rigor</span>
+</div>
+<div class="aspect-square border-2 border-accent-pink p-6 flex flex-col justify-between hover:bg-accent-pink transition-colors">
+<span class="material-symbols-outlined text-4xl" data-icon="palette">palette</span>
+<span class="font-label-mono text-[10px] tracking-widest uppercase">Design Intuition</span>
+</div>
+<div class="aspect-square border-2 border-accent-yellow p-6 flex flex-col justify-between hover:bg-accent-yellow hover:text-black transition-colors">
+<span class="material-symbols-outlined text-4xl" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-label-mono text-[10px] tracking-widest uppercase">Emerging Tech</span>
+</div>
+<div class="aspect-square bg-white text-black p-6 flex flex-col justify-between stagger-card">
+<span class="material-symbols-outlined text-4xl" data-icon="campaign">campaign</span>
+<span class="font-label-mono text-[10px] tracking-widest uppercase">Brand Narrative</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Capabilities Horizontal Strip -->
+<section class="bg-accent-cyan py-32 px-margin-desktop overflow-hidden relative" id="capabilities">
+<div class="absolute top-0 right-0 p-4 font-label-mono text-[15rem] leading-none opacity-10 text-black font-black">02</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
+<div class="group">
+<div class="text-black font-black text-4xl mb-4">01</div>
+<h3 class="font-headline-md text-black uppercase font-bold mb-4">Strategic Design</h3>
+<p class="font-body-md text-black/70">Mapping user journeys to business goals through high-fidelity prototyping and data-driven insights.</p>
+</div>
+<div class="group">
+<div class="text-black font-black text-4xl mb-4">02</div>
+<h3 class="font-headline-md text-black uppercase font-bold mb-4">Technical Leadership</h3>
+<p class="font-body-md text-black/70">Architecting scalable frontend systems and leading engineering teams with a design-first mindset.</p>
+</div>
+<div class="group">
+<div class="text-black font-black text-4xl mb-4">03</div>
+<h3 class="font-headline-md text-black uppercase font-bold mb-4">Emerging Tech</h3>
+<p class="font-body-md text-black/70">Exploration of AI/ML integration, WebGL, and spatial computing to push the boundaries of digital interaction.</p>
+</div>
+<div class="group">
+<div class="text-black font-black text-4xl mb-4">04</div>
+<h3 class="font-headline-md text-black uppercase font-bold mb-4">Brand Narrative</h3>
+<p class="font-body-md text-black/70">Translating brand values into living, breathing digital identities that resonate across all touchpoints.</p>
+</div>
+</div>
+</section>
+<!-- Experience - High Contrast Editorial -->
+<section class="px-margin-desktop py-space-xl bg-white text-black" id="experience">
+<div class="flex items-baseline gap-8 mb-24">
+<h2 class="font-display-xl text-8xl font-black tracking-tighter uppercase leading-none">Career</h2>
+<span class="font-label-mono text-accent-pink tracking-[1em] uppercase">03 Experience</span>
+</div>
+<div class="space-y-32">
+<!-- Entry 1 -->
+<div class="grid grid-cols-12 gap-8 border-b-2 border-black pb-12">
+<div class="col-span-12 md:col-span-4">
+<span class="font-label-mono text-xs uppercase text-accent-pink mb-4 block">2021 — PRESENT</span>
+<h3 class="font-headline-md text-4xl font-bold uppercase mb-2">Principal Creative Technologist</h3>
+<p class="font-label-mono text-sm tracking-widest uppercase opacity-60">Studio Alpha / Remote</p>
+</div>
+<div class="col-span-12 md:col-span-6">
+<p class="font-body-lg mb-8">
+                        Directing the technical strategy for Fortune 500 digital transformation projects. Leading a team of 12 designers and developers to create immersive e-commerce experiences.
+                    </p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-black text-white px-4 py-1 font-label-mono text-[10px] uppercase">Next.js</span>
+<span class="bg-black text-white px-4 py-1 font-label-mono text-[10px] uppercase">Three.js</span>
+<span class="bg-black text-white px-4 py-1 font-label-mono text-[10px] uppercase">AI Integration</span>
+<span class="bg-black text-white px-4 py-1 font-label-mono text-[10px] uppercase">Vercel</span>
+</div>
+</div>
+<div class="col-span-12 md:col-span-2 flex justify-end items-end">
+<span class="material-symbols-outlined text-8xl opacity-10" data-icon="north_east">north_east</span>
+</div>
+</div>
+<!-- Entry 2 -->
+<div class="grid grid-cols-12 gap-8 border-b-2 border-black pb-12">
+<div class="col-span-12 md:col-span-4">
+<span class="font-label-mono text-xs uppercase text-accent-cyan mb-4 block">2018 — 2021</span>
+<h3 class="font-headline-md text-4xl font-bold uppercase mb-2">Senior Technical Designer</h3>
+<p class="font-label-mono text-sm tracking-widest uppercase opacity-60">Modern Labs / NYC</p>
+</div>
+<div class="col-span-12 md:col-span-8">
+<p class="font-body-lg">
+                        Pioneered the use of generative design tools in the agency's creative workflow, reducing asset production time by 40%.
+                    </p>
+</div>
+</div>
+<!-- Entry 3 -->
+<div class="grid grid-cols-12 gap-8 border-b-2 border-black pb-12">
+<div class="col-span-12 md:col-span-4">
+<span class="font-label-mono text-xs uppercase text-accent-yellow mb-4 block">2015 — 2018</span>
+<h3 class="font-headline-md text-4xl font-bold uppercase mb-2">Creative Developer</h3>
+<p class="font-label-mono text-sm tracking-widest uppercase opacity-60">Pixel &amp; Grain / London</p>
+</div>
+<div class="col-span-12 md:col-span-8">
+<p class="font-body-lg">
+                        Crafted award-winning interactive websites and installations for boutique fashion brands and cultural institutions.
+                    </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Education & CTA Overlay -->
+<section class="px-margin-desktop py-space-xl grid grid-cols-12 gap-12 items-center" id="education">
+<div class="col-span-12 md:col-span-6 space-y-12">
+<h2 class="font-label-mono text-accent-yellow tracking-[1em] uppercase">04 Education</h2>
+<div class="space-y-12">
+<div>
+<p class="font-label-mono text-secondary text-xs mb-2 uppercase tracking-widest">MSc Human-Computer Interaction</p>
+<p class="font-headline-md text-2xl font-bold">University College London</p>
+<p class="font-label-mono text-accent-pink mt-1">2014 — 2015</p>
+</div>
+<div class="h-px bg-white/20 w-full"></div>
+<div>
+<p class="font-label-mono text-secondary text-xs mb-2 uppercase tracking-widest">BFA Digital Media Design</p>
+<p class="font-headline-md text-2xl font-bold">Parsons School of Design</p>
+<p class="font-label-mono text-accent-cyan mt-1">2010 — 2014</p>
+</div>
+</div>
+</div>
+<div class="col-span-12 md:col-span-6 bg-accent-pink p-12 text-black stagger-card relative">
+<div class="absolute -top-6 -right-6 w-12 h-12 bg-accent-yellow"></div>
+<h3 class="font-headline-lg text-5xl uppercase font-black mb-6 leading-none">Let's build<br/>the future.</h3>
+<p class="font-body-md mb-12 opacity-80 max-w-sm">
+                Open for high-impact collaborations and technical consulting roles globally.
+            </p>
+<a class="inline-block bg-black text-white px-10 py-5 font-button text-xs uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all" href="mailto:hello@mikeyshaw.work">Get in touch</a>
+</div>
+</section>
+</main>
+<!-- Radical Footer -->
+<footer class="px-margin-desktop py-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="font-headline-lg text-4xl font-black">MS<span class="text-accent-cyan">.</span></div>
+<div class="flex gap-12 font-label-mono text-[10px] tracking-widest uppercase">
+<a class="hover:text-accent-pink" href="#">Privacy</a>
+<a class="hover:text-accent-yellow" href="#">Terms</a>
+<a class="hover:text-accent-cyan" href="#">Guidelines</a>
+</div>
+<div class="font-label-mono text-[9px] opacity-40 uppercase tracking-[0.3em]">
+        © 2024 CREATIVE TECHNOLOGIST STUDIO. ALL RIGHTS RESERVED.
+    </div>
+</footer>
+<script>
+    // Parallax & Reveal effects can be added here
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        // Simple parallax for the hero image
+        const heroImg = document.querySelector('.overlap-2 img');
+        if(heroImg) {
+            heroImg.style.transform = `translateY(${scrolled * 0.1}px)`;
+        }
+    });
+</script>
+</body></html>

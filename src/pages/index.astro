@@ -1,53 +1,294 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
-import HeroSection from '../components/HeroSection.astro';
-import AboutSection from '../components/AboutSection.astro';
-import TechnologyMarquee from '../components/TechnologyMarquee.astro';
-import ProjectsGrid from '../components/ProjectsGrid.astro';
 import Scene3D from '../components/Scene3D.astro';
-import { ChatWidget } from '../components/ChatWidget';
-import BlogFeed from '../components/BlogFeed.astro';
+import ProjectsGrid from '../components/ProjectsGrid.astro';
 import SkillsVisualization from '../components/SkillsVisualization.astro';
-import ContactSection from '../components/ContactSection.astro';
 import GitHubStats from '../components/GitHubStats.astro';
 import CompanyProfile from '../components/CompanyProfile.astro';
-import Footer from '../components/Footer.astro';
 import DesiredProjects from '../components/DesiredProjects.astro';
+import ContactSection from '../components/ContactSection.astro';
+import BlogFeed from '../components/BlogFeed.astro';
+import { ChatWidget } from '../components/ChatWidget';
 ---
 
-<Layout title="Mikey Shaw | AI & Automation Architect">
-    <Navbar />
-    <Scene3D shapeCount={40} complexity={0.8} theme="dark" />
-    
-    <main class="portfolio-container">
-        <HeroSection />
-        <AboutSection />
-        <TechnologyMarquee />
-        <ProjectsGrid />
-        <CompanyProfile />
-        <DesiredProjects />
-        <SkillsVisualization />
-        <GitHubStats />
-        <ContactSection />
-        <BlogFeed />
+<Layout title="Mikey Shaw | Creative Technologist & AI Architect">
+    <!-- Radical Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 mix-blend-difference flex justify-between items-center px-12 md:px-[60px] py-6">
+        <div class="font-headline-md text-2xl font-black tracking-tighter text-white">SHAW.AI</div>
+        <div class="hidden md:flex gap-12 items-center">
+            <a class="font-label-mono text-xs uppercase tracking-[0.3em] text-white hover:text-accent-yellow transition-colors" href="#summary">01 Summary</a>
+            <a class="font-label-mono text-xs uppercase tracking-[0.3em] text-white hover:text-capabilities transition-colors" href="#capabilities">02 Skills</a>
+            <a class="font-label-mono text-xs uppercase tracking-[0.3em] text-white hover:text-accent-pink transition-colors" href="#experience">03 Exp</a>
+            <a class="font-label-mono text-xs uppercase tracking-[0.3em] text-white hover:text-accent-cyan transition-colors" href="#projects">04 Work</a>
+            <button class="border-2 border-white px-8 py-2 font-button-custom text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-all">Hire</button>
+        </div>
+    </nav>
+
+    <!-- 3D Interactive Layer -->
+    <Scene3D shapeCount={50} complexity={0.9} theme="dark" />
+
+    <main class="w-full">
+        <!-- Editorial Hero -->
+        <section class="min-h-screen editorial-grid pt-32 relative overflow-hidden" id="hero">
+            <div class="overlap-1 flex flex-col justify-center">
+                <span class="font-label-mono text-accent-cyan mb-4 tracking-[0.5em] uppercase">Portfolio 2026</span>
+                <h1 class="font-display-xl text-[12vw] leading-[0.85] font-black tracking-tighter mix-blend-difference">
+                    MIKEY<br/><span class="text-accent-yellow">SHAW</span>
+                </h1>
+                <div class="h-1 w-32 bg-accent-pink mt-8"></div>
+            </div>
+            
+            <div class="overlap-2 relative">
+                <div class="absolute -top-10 -left-10 w-full h-full border-8 border-accent-pink opacity-20"></div>
+                <img 
+                    alt="Mikey Shaw" 
+                    class="w-full h-[600px] object-cover grayscale contrast-150 brightness-75 hover:grayscale-0 transition-all duration-700" 
+                    src="/radical-cv.png"
+                />
+                <div class="absolute bottom-10 right-10 p-8 bg-accent-cyan text-black max-w-md stagger-card">
+                    <p class="font-headline-md leading-tight font-bold text-lg">
+                        Architecting Digital Elegance &amp; Intelligence at the intersection of high-end design and complex technical engineering.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Vertical Text Decorative -->
+            <div class="absolute right-10 top-1/2 -translate-y-1/2 text-vertical font-label-mono text-[10px] tracking-[1em] opacity-30 uppercase hidden lg:block">
+                Creative Technologist • Strategic Design • Technical Leadership
+            </div>
+        </section>
+
+        <!-- Asymmetrical Summary -->
+        <section class="px-6 md:px-[60px] py-24 grid grid-cols-12 gap-8 md:gap-12 relative" id="summary">
+            <div class="col-span-12 md:col-span-5 relative">
+                <div class="absolute -top-20 -left-10 text-[20rem] font-black opacity-5 text-white select-none">01</div>
+                <h2 class="font-headline-lg text-6xl uppercase font-black mb-12 leading-none">Summary<span class="text-accent-pink">.</span></h2>
+                <div class="bg-accent-yellow h-2 w-24 mb-12"></div>
+                <p class="font-body-lg text-2xl leading-relaxed mb-8 border-l-8 border-accent-cyan pl-8">
+                    As a Creative Technologist, I bridge the gap between abstract strategy and executable code. My work focuses on building digital ecosystems that are as intellectually rigorous as they are visually stunning.
+                </p>
+            </div>
+            <div class="col-span-12 md:col-span-7 flex flex-col justify-end">
+                <p class="font-body-md text-secondary max-w-xl mb-12 text-gray-400">
+                    I lead multidisciplinary teams to deliver high-impact products, leveraging emerging technologies to solve modern brand challenges. My philosophy is rooted in the belief that great technology should be invisible, leaving only the experience behind.
+                </p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="aspect-square bg-surface-container p-6 flex flex-col justify-between hover:bg-accent-cyan hover:text-black transition-colors group">
+                        <span class="material-symbols-outlined text-4xl" data-icon="terminal">terminal</span>
+                        <span class="font-label-mono text-[10px] tracking-widest uppercase">Technical Rigor</span>
+                    </div>
+                    <div class="aspect-square border-2 border-accent-pink p-6 flex flex-col justify-between hover:bg-accent-pink hover:text-white transition-colors">
+                        <span class="material-symbols-outlined text-4xl" data-icon="palette">palette</span>
+                        <span class="font-label-mono text-[10px] tracking-widest uppercase">Design Intuition</span>
+                    </div>
+                    <div class="aspect-square border-2 border-accent-yellow p-6 flex flex-col justify-between hover:bg-accent-yellow hover:text-black transition-colors">
+                        <span class="material-symbols-outlined text-4xl" data-icon="auto_awesome">auto_awesome</span>
+                        <span class="font-label-mono text-[10px] tracking-widest uppercase">Emerging Tech</span>
+                    </div>
+                    <div class="aspect-square bg-white text-black p-6 flex flex-col justify-between stagger-card">
+                        <span class="material-symbols-outlined text-4xl" data-icon="campaign">campaign</span>
+                        <span class="font-label-mono text-[10px] tracking-widest uppercase">Brand Narrative</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Company Profile (Astro Component) -->
+        <section class="w-full">
+            <CompanyProfile />
+        </section>
+
+        <!-- Desired Projects & Market Target -->
+        <section class="w-full">
+            <DesiredProjects />
+        </section>
+
+        <!-- Capabilities Horizontal Strip -->
+        <section class="bg-accent-cyan py-24 px-6 md:px-[60px] overflow-hidden relative" id="capabilities">
+            <div class="absolute top-0 right-0 p-4 font-label-mono text-[15rem] leading-none opacity-10 text-black font-black select-none pointer-events-none">02</div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
+                <div class="group">
+                    <div class="text-black font-black text-4xl mb-4">01</div>
+                    <h3 class="font-headline-md text-black uppercase font-bold mb-4">Strategic Design</h3>
+                    <p class="font-body-md text-black/75">Mapping user journeys to business goals through high-fidelity prototyping and data-driven insights.</p>
+                </div>
+                <div class="group">
+                    <div class="text-black font-black text-4xl mb-4">02</div>
+                    <h3 class="font-headline-md text-black uppercase font-bold mb-4">Technical Leadership</h3>
+                    <p class="font-body-md text-black/75">Architecting scalable frontend systems and leading engineering teams with a design-first mindset.</p>
+                </div>
+                <div class="group">
+                    <div class="text-black font-black text-4xl mb-4">03</div>
+                    <h3 class="font-headline-md text-black uppercase font-bold mb-4">Emerging Tech</h3>
+                    <p class="font-body-md text-black/75">Exploration of AI/ML integration, WebGL, and spatial computing to push the boundaries of digital interaction.</p>
+                </div>
+                <div class="group">
+                    <div class="text-black font-black text-4xl mb-4">04</div>
+                    <h3 class="font-headline-md text-black uppercase font-bold mb-4">Brand Narrative</h3>
+                    <p class="font-body-md text-black/75">Translating brand values into living, breathing digital identities that resonate across all touchpoints.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Skills Visualization -->
+        <section class="px-6 md:px-[60px] py-24 bg-[#151515]">
+            <div class="max-w-[1440px] mx-auto">
+                <h3 class="font-label-mono text-accent-yellow tracking-[0.5em] uppercase text-xs mb-8">System Engineering</h3>
+                <h2 class="font-headline-lg text-5xl uppercase font-black text-white mb-16">Interactive Skills Architecture</h2>
+                <SkillsVisualization />
+            </div>
+        </section>
+
+        <!-- Projects Grid Section (Featured Work) -->
+        <section class="px-6 md:px-[60px] py-24" id="projects">
+            <div class="max-w-[1440px] mx-auto">
+                <div class="flex flex-col md:flex-row items-baseline gap-8 mb-16 border-b border-white/10 pb-8">
+                    <h2 class="font-display-xl text-6xl font-black uppercase tracking-tighter">Featured Work</h2>
+                    <span class="font-label-mono text-accent-pink tracking-[0.5em] uppercase text-xs">Selected Deployments</span>
+                </div>
+                <ProjectsGrid />
+            </div>
+        </section>
+
+        <!-- GitHub Integration & Performance Metrics -->
+        <section class="px-6 md:px-[60px] py-24 bg-[#111111]">
+            <div class="max-w-[1440px] mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <div class="lg:col-span-4 flex flex-col justify-center">
+                        <span class="font-label-mono text-accent-cyan text-xs uppercase tracking-[0.4em] mb-4">Telemetry</span>
+                        <h2 class="font-headline-lg text-4xl font-black uppercase leading-none mb-6">Open Design &amp; Engine Output</h2>
+                        <p class="font-body-md text-gray-400">
+                            Live system activity, codebase statistics, and recent commit volumes across our core repositories.
+                        </p>
+                    </div>
+                    <div class="lg:col-span-8">
+                        <GitHubStats />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience - High Contrast Editorial -->
+        <section class="px-6 md:px-[60px] py-24 bg-white text-black" id="experience">
+            <div class="max-w-[1440px] mx-auto">
+                <div class="flex items-baseline gap-8 mb-24">
+                    <h2 class="font-display-xl text-7xl md:text-8xl font-black tracking-tighter uppercase leading-none">Career</h2>
+                    <span class="font-label-mono text-accent-pink tracking-[0.5em] uppercase text-xs">03 Experience</span>
+                </div>
+                
+                <div class="space-y-24">
+                    <!-- Entry 1 -->
+                    <div class="grid grid-cols-12 gap-8 border-b-2 border-black pb-12">
+                        <div class="col-span-12 md:col-span-4">
+                            <span class="font-label-mono text-xs uppercase text-accent-pink mb-4 block">2021 — PRESENT</span>
+                            <h3 class="font-headline-md text-3xl md:text-4xl font-bold uppercase mb-2">Principal Creative Technologist</h3>
+                            <p class="font-label-mono text-sm tracking-widest uppercase opacity-60">Studio Alpha / Remote</p>
+                        </div>
+                        <div class="col-span-12 md:col-span-6">
+                            <p class="font-body-lg text-lg mb-8">
+                                Directing the technical strategy for Fortune 500 digital transformation projects. Leading a team of 12 designers and developers to create immersive e-commerce experiences.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-black text-white px-4 py-1 font-label-mono text-[10px] uppercase">Next.js</span>
+                                <span class="bg-black text-white px-4 py-1 font-label-mono text-[10px] uppercase">Three.js</span>
+                                <span class="bg-black text-white px-4 py-1 font-label-mono text-[10px] uppercase">AI Integration</span>
+                                <span class="bg-black text-white px-4 py-1 font-label-mono text-[10px] uppercase">Vercel</span>
+                            </div>
+                        </div>
+                        <div class="col-span-12 md:col-span-2 flex justify-end items-end">
+                            <span class="material-symbols-outlined text-7xl opacity-10" data-icon="north_east">north_east</span>
+                        </div>
+                    </div>
+
+                    <!-- Entry 2 -->
+                    <div class="grid grid-cols-12 gap-8 border-b-2 border-black pb-12">
+                        <div class="col-span-12 md:col-span-4">
+                            <span class="font-label-mono text-xs uppercase text-accent-cyan mb-4 block">2018 — 2021</span>
+                            <h3 class="font-headline-md text-3xl md:text-4xl font-bold uppercase mb-2">Senior Technical Designer</h3>
+                            <p class="font-label-mono text-sm tracking-widest uppercase opacity-60">Modern Labs / NYC</p>
+                        </div>
+                        <div class="col-span-12 md:col-span-8">
+                            <p class="font-body-lg text-lg">
+                                Pioneered the use of generative design tools in the agency's creative workflow, reducing asset production time by 40%.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Entry 3 -->
+                    <div class="grid grid-cols-12 gap-8 border-b-2 border-black pb-12">
+                        <div class="col-span-12 md:col-span-4">
+                            <span class="font-label-mono text-xs uppercase text-accent-yellow mb-4 block">2015 — 2018</span>
+                            <h3 class="font-headline-md text-3xl md:text-4xl font-bold uppercase mb-2">Creative Developer</h3>
+                            <p class="font-label-mono text-sm tracking-widest uppercase opacity-60">Pixel &amp; Grain / London</p>
+                        </div>
+                        <div class="col-span-12 md:col-span-8">
+                            <p class="font-body-lg text-lg">
+                                Crafted award-winning interactive websites and installations for boutique fashion brands and cultural institutions.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education & Dynamic Contact Section -->
+        <section class="px-6 md:px-[60px] py-24 grid grid-cols-12 gap-12 items-center" id="education">
+            <div class="col-span-12 md:col-span-6 space-y-12">
+                <h2 class="font-label-mono text-accent-yellow tracking-[1em] uppercase">04 Education</h2>
+                <div class="space-y-12">
+                    <div>
+                        <p class="font-label-mono text-secondary text-xs mb-2 uppercase tracking-widest text-gray-400">MSc Human-Computer Interaction</p>
+                        <h3 class="font-headline-md text-2xl font-bold">University College London</h3>
+                        <p class="font-label-mono text-accent-pink mt-1">2014 — 2015</p>
+                    </div>
+                    <div class="h-px bg-white/20 w-full"></div>
+                    <div>
+                        <p class="font-label-mono text-secondary text-xs mb-2 uppercase tracking-widest text-gray-400">BFA Digital Media Design</p>
+                        <h3 class="font-headline-md text-2xl font-bold">Parsons School of Design</h3>
+                        <p class="font-label-mono text-accent-cyan mt-1">2010 — 2014</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-span-12 md:col-span-6 bg-accent-pink p-8 md:p-12 text-black stagger-card relative">
+                <div class="absolute -top-6 -right-6 w-12 h-12 bg-accent-yellow"></div>
+                <h3 class="font-headline-lg text-4xl md:text-5xl uppercase font-black mb-6 leading-none">Let's build<br/>the future.</h3>
+                <p class="font-body-md mb-12 opacity-80 max-w-sm">
+                    Open for high-impact collaborations and technical consulting roles globally.
+                </p>
+                <a class="inline-block bg-black text-white px-10 py-5 font-button-custom text-xs uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all" href="mailto:hello@mikeyshaw.work">Get in touch</a>
+            </div>
+        </section>
+
+        <!-- Blog Feed & Outreach -->
+        <section class="px-6 md:px-[60px] py-24 bg-[#121212]">
+            <div class="max-w-[1440px] mx-auto">
+                <BlogFeed />
+            </div>
+        </section>
+
+        <!-- Interactive Contact Form -->
+        <section class="px-6 md:px-[60px] py-24 bg-black">
+            <div class="max-w-[1440px] mx-auto">
+                <ContactSection />
+            </div>
+        </section>
     </main>
 
-    <Footer />
+    <!-- Radical Footer -->
+    <footer class="px-6 md:px-[60px] py-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8 bg-[#1a1a1a]">
+        <div class="font-headline-lg text-4xl font-black">MS<span class="text-accent-cyan">.</span></div>
+        <div class="flex gap-12 font-label-mono text-[10px] tracking-widest uppercase">
+            <a class="hover:text-accent-pink transition-colors" href="#">Privacy</a>
+            <a class="hover:text-accent-yellow transition-colors" href="#">Terms</a>
+            <a class="hover:text-accent-cyan transition-colors" href="#">Guidelines</a>
+        </div>
+        <div class="font-label-mono text-[9px] opacity-40 uppercase tracking-[0.3em]">
+            © 2026 CREATIVE TECHNOLOGIST STUDIO. ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+
+    <!-- Chat Widget (React client-side) -->
     <ChatWidget client:load />
 </Layout>
-
-<style>
-    .portfolio-container {
-        width: 100%;
-        max-width: 100%;
-        margin: 0 auto;
-        padding: 0 2rem;
-    }
-
-    @media (max-width: 768px) {
-        .portfolio-container {
-            padding: 0;
-        }
-    }
-</style>
