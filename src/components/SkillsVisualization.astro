@@ -65,27 +65,42 @@ const skillsData = {
 
 <div class="skills-visualization-container w-full">
     <div class="canvas-container">
-        <canvas id="skills-canvas"></canvas>
+        <canvas id="skills-canvas" data-skills={JSON.stringify(skillsData)}></canvas>
         <span class="overlay-instruction">Drag nodes to explore • Scroll to zoom</span>
         <div id="tooltip" class="skill-tooltip"></div>
     </div>
 </div>
 
-<script define:vars={{skillsData}} is:inline>
-    // Dynamically retrieve skillsData passed from Astro frontmatter
-    const { nodes: rawNodes, links: rawLinks } = skillsData;
+<script>
+    import * as d3 from 'd3';
 
-    // Wait for D3 to load
-    document.addEventListener('DOMContentLoaded', () => {
-        if (typeof d3 === 'undefined') return;
+    interface SkillNode extends d3.SimulationNodeDatum {
+        id: string;
+        group: number;
+        value: number;
+        icon?: string;
+        x?: number;
+        y?: number;
+        fx?: number | null;
+        fy?: number | null;
+    }
 
-        const canvas = document.getElementById('skills-canvas');
-        if (!canvas) return;
+    interface SkillLink extends d3.SimulationLinkDatum<SkillNode> {
+        source: string | SkillNode;
+        target: string | SkillNode;
+        value: number;
+    }
 
+    const canvas = document.getElementById('skills-canvas') as HTMLCanvasElement;
+    if (canvas) {
         const container = canvas.parentElement;
         const tooltip = document.getElementById('tooltip');
         
         if (container) {
+            const rawData = JSON.parse(canvas.dataset.skills || '{}');
+            const rawNodes: any[] = rawData.nodes || [];
+            const rawLinks: any[] = rawData.links || [];
+
             const isMobile = window.innerWidth <= 768;
             let width = container.clientWidth;
             let height = isMobile ? 350 : 600;
@@ -101,68 +116,68 @@ const skillsData = {
 
             // Group colors mapping exactly to brand palette:
             // 1=Voice AI (Cyan), 2=Agent Frameworks (Pink), 3=Web/SaaS (Yellow), 4=Core (White)
-            const colorScale = d3.scaleOrdinal()
+            const colorScale = d3.scaleOrdinal<string>()
                 .domain(['1', '2', '3', '4'])
                 .range(['#00BCD4', '#CC6688', '#FFCC00', '#ffffff']);
 
-            const nodes = rawNodes.map(d => ({...d}));
-            const links = rawLinks.map(d => ({...d}));
+            const nodes: SkillNode[] = rawNodes.map(d => ({...d}));
+            const links: SkillLink[] = rawLinks.map(d => ({...d}));
 
             const linkDist = isMobile ? 60 : 100;
-            const chargeStr = isMobile ? -150 : -350;
+            const chargeStr = isMobile ? -150 : -355;
             const nodeScale = isMobile ? 1.0 : 1.4;
             const fontSize = isMobile ? 10 : 12;
             const iconSize = isMobile ? 12 : 16;
 
-            const simulation = d3.forceSimulation(nodes)
-                .force("link", d3.forceLink(links).id((d) => d.id).distance(linkDist))
+            const simulation = d3.forceSimulation<SkillNode>(nodes)
+                .force("link", d3.forceLink<SkillNode, SkillLink>(links).id((d) => d.id).distance(linkDist))
                 .force("charge", d3.forceManyBody().strength(chargeStr))
                 .force("center", d3.forceCenter(width / 2, height / 2))
-                .force("collide", d3.forceCollide().radius((d) => d.value * nodeScale + 8));
+                .force("collide", d3.forceCollide<SkillNode>().radius((d) => d.value * nodeScale + 8));
 
             // Drag behavior
-            const drag = (sim) => {
-                function dragstarted(event) {
+            const drag = (sim: d3.Simulation<SkillNode, undefined>) => {
+                function dragstarted(event: any) {
                     if (!event.active) sim.alphaTarget(0.3).restart();
                     event.subject.fx = event.subject.x;
                     event.subject.fy = event.subject.y;
                     canvas.style.cursor = 'grabbing';
                 }
                 
-                function dragged(event) {
+                function dragged(event: any) {
                     event.subject.fx = event.x;
                     event.subject.fy = event.y;
                 }
                 
-                function dragended(event) {
+                function dragended(event: any) {
                     if (!event.active) sim.alphaTarget(0);
                     event.subject.fx = null;
                     event.subject.fy = null;
                     canvas.style.cursor = 'grab';
                 }
                 
-                return d3.drag()
+                return d3.drag<HTMLCanvasElement, SkillNode>()
                     .subject((event) => {
                         const [x, y] = [event.x, event.y];
                         let subject = null;
                         let distance = Infinity;
                         for (const node of nodes) {
-                            const dist = Math.sqrt((x - node.x) ** 2 + (y - node.y) ** 2);
+                            const dist = Math.sqrt((x - node.x!) ** 2 + (y - node.y!) ** 2);
                             if (dist < distance && dist < 35) {
                                 distance = dist;
                                 subject = node;
                             }
                         }
-                        return subject;
+                        return subject as any;
                     })
                     .on("start", dragstarted)
                     .on("drag", dragged)
                     .on("end", dragended);
             };
 
-            d3.select(canvas).call(drag(simulation));
+            d3.select(canvas).call(drag(simulation as any) as any);
 
-            let hoverNode = null;
+            let hoverNode: SkillNode | null = null;
 
             d3.select(canvas).on("mousemove", (event) => {
                 const [mouseX, mouseY] = d3.pointer(event);
@@ -171,7 +186,7 @@ const skillsData = {
                 hoverNode = null;
                 
                 for (const node of nodes) {
-                    const dist = Math.sqrt((mouseX - node.x) ** 2 + (mouseY - node.y) ** 2);
+                    const dist = Math.sqrt((mouseX - node.x!) ** 2 + (mouseY - node.y!) ** 2);
                     if (dist < node.value * nodeScale + 8) {
                         hoverNode = node;
                         break;
@@ -204,8 +219,10 @@ const skillsData = {
                 context.strokeStyle = "#999";
                 context.beginPath();
                 links.forEach((link) => {
-                    context.moveTo(link.source.x, link.source.y);
-                    context.lineTo(link.target.x, link.target.y);
+                    const s = link.source as SkillNode;
+                    const t = link.target as SkillNode;
+                    context.moveTo(s.x!, s.y!);
+                    context.lineTo(t.x!, t.y!);
                 });
                 context.stroke();
                 context.restore();
@@ -218,9 +235,11 @@ const skillsData = {
                     context.lineWidth = 2;
                     context.beginPath();
                     links.forEach((link) => {
-                        if (link.source.id === hoverNode.id || link.target.id === hoverNode.id) {
-                            context.moveTo(link.source.x, link.source.y);
-                            context.lineTo(link.target.x, link.target.y);
+                        const s = link.source as SkillNode;
+                        const t = link.target as SkillNode;
+                        if (s.id === hoverNode!.id || t.id === hoverNode!.id) {
+                            context.moveTo(s.x!, s.y!);
+                            context.lineTo(t.x!, t.y!);
                         }
                     });
                     context.stroke();
@@ -232,14 +251,16 @@ const skillsData = {
                     context.beginPath();
                     const radius = node.value * nodeScale;
                     const isHovered = hoverNode === node;
-                    const isConnected = hoverNode && links.some((l) => 
-                        (l.source.id === hoverNode.id && l.target.id === node.id) ||
-                        (l.target.id === hoverNode.id && l.source.id === node.id)
-                    );
+                    const isConnected = hoverNode && links.some((l) => {
+                        const s = l.source as SkillNode;
+                        const t = l.target as SkillNode;
+                        return (s.id === hoverNode!.id && t.id === node.id) ||
+                               (t.id === hoverNode!.id && s.id === node.id);
+                    });
 
-                    const pulse = Math.sin(Date.now() / 800 + node.index) * 1.2;
+                    const pulse = Math.sin(Date.now() / 800 + node.index!) * 1.2;
                     
-                    context.arc(node.x, node.y, isHovered ? radius + 4 : radius + pulse, 0, 2 * Math.PI);
+                    context.arc(node.x!, node.y!, isHovered ? radius + 4 : radius + pulse, 0, 2 * Math.PI);
                     context.fillStyle = colorScale(String(node.group));
                     
                     if (isHovered) {
@@ -264,12 +285,12 @@ const skillsData = {
                     context.textBaseline = "middle";
                     
                     if (node.value > 12 || isHovered || isConnected) {
-                        context.fillText(node.id, node.x, node.y + radius + 15);
+                        context.fillText(node.id, node.x!, node.y! + radius + 15);
                     }
                     
                     if (node.icon) {
                          context.font = `${iconSize}px Arial`;
-                         context.fillText(node.icon, node.x, node.y);
+                         context.fillText(node.icon, node.x!, node.y!);
                     }
                 });
             }
@@ -295,7 +316,7 @@ const skillsData = {
                 simulation.alpha(0.3).restart();
             });
         }
-    });
+    }
 </script>
 
 <style define:vars={{
