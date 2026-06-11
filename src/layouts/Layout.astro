@@ -67,7 +67,7 @@ html, body {
 ---
 
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -147,13 +147,13 @@ html, body {
 			// Advanced Theme Management with UX Considerations
 			const THEME_TRANSITION_DURATION = UX_CONFIG.TRANSITION_DURATION;
 
-			const getStoredTheme = () => localStorage.getItem('theme') || 'dark';
+			const getStoredTheme = () => localStorage.getItem('theme') || 'light';
 			const setStoredTheme = (theme) => localStorage.setItem('theme', theme);
 			
 			const getPreferredTheme = () => {
 				const storedTheme = getStoredTheme();
 				if (storedTheme) return storedTheme;
-				return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+				return 'light';
 			};
 
 			const setTheme = (theme) => {
@@ -270,16 +270,17 @@ html, body {
 }}>
     :root {
         /* Brutalist Theme Palette matching global.css */
-        --primary: #ffffff;
-        --secondary: #a1a1a1;
-        --accent: #00BCD4;
-        --accent-yellow: #FFCC00;
-        --accent-pink: #CC6688;
-        --accent-cyan: #00BCD4;
-        --bg-primary: #1a1a1a;
-        --bg-secondary: #2a2a2a;
-        --text-primary: #ffffff;
-        --text-secondary: #a1a1a1;
+        --primary: #0d1b2a;
+        --secondary: #2d4a3e;
+        --accent: #00B9F1;
+        --accent-yellow: #FCDC00;
+        --accent-pink: #E5007D;
+        --accent-cyan: #00B9F1;
+        --accent-purple: #9C198C;
+        --bg-primary: #fbfaf5;
+        --bg-secondary: #f5f4ed;
+        --text-primary: #0d1b2a;
+        --text-secondary: #2d4a3e;
 
         /* Layout Variables */
         --navbar-height: 80px;
@@ -288,12 +289,23 @@ html, body {
 
     /* Light Mode Overrides */
     :root[data-theme='light'] {
-        --primary: #ffffff;
+        --primary: #0d1b2a;
+        --secondary: #2d4a3e;
+        --accent: #00B9F1;
+        --bg-primary: #fbfaf5;
+        --bg-secondary: #f5f4ed;
+        --text-primary: #0d1b2a;
+        --text-secondary: #2d4a3e;
+    }
+
+    /* Dark Mode Overrides - maps to a refined dark-parchment colorway or matching ink-blue/parchment */
+    :root[data-theme='dark'] {
+        --primary: #fbfaf5;
         --secondary: #a1a1a1;
-        --accent: #00BCD4;
-        --bg-primary: #1a1a1a;
-        --bg-secondary: #2a2a2a;
-        --text-primary: #ffffff;
+        --accent: #00B9F1;
+        --bg-primary: #0d1b2a;
+        --bg-secondary: #14243b;
+        --text-primary: #fbfaf5;
         --text-secondary: #a1a1a1;
     }
 

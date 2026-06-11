@@ -80,49 +80,42 @@ const contactOptions = [
     .contact-section {
         max-width: 1200px;
         margin: 4rem auto;
-        padding: 2rem;
-        background: linear-gradient(
-            135deg, 
-            color-mix(in srgb, var(--bg-primary) 90%, transparent),
-            color-mix(in srgb, var(--bg-secondary) 90%, transparent)
-        );
-        border-radius: 16px;
-        border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
-        box-shadow: 
-            0 15px 30px color-mix(in srgb, var(--accent) 10%, transparent),
-            0 10px 20px color-mix(in srgb, var(--accent) 5%, transparent);
+        padding: 2.5rem;
+        background: var(--bg-secondary);
+        border-radius: 0px;
+        border: 2px solid var(--primary);
+        box-shadow: 6px 6px 0px var(--accent-pink);
         transition: transform var(--transitionDuration) ease;
     }
 
     .contact-header {
         text-align: center;
-        margin-bottom: 2rem;
+        margin-bottom: 3rem;
     }
 
     .section-title {
-        font-size: 2.5rem;
+        font-size: 2.75rem;
         color: var(--primary);
         margin: 0;
-        font-family: 'Orbitron', sans-serif;
-        background: linear-gradient(
-            to right, 
-            var(--primary), 
-            color-mix(in srgb, var(--primary) 50%, transparent)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        font-family: 'Playfair Display', serif;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: -0.02em;
     }
 
     .section-subtitle {
-        color: var(--text-secondary);
-        opacity: 0.7;
+        color: var(--accent-pink);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
         margin-top: 0.5rem;
     }
 
     .contact-container {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 2rem;
+        gap: 2.5rem;
     }
 
     .contact-methods {
@@ -138,8 +131,9 @@ const contactOptions = [
     }
 
     .connection-card {
-        background: color-mix(in srgb, var(--accent) 10%, transparent);
-        border-radius: 16px;
+        background: var(--bg-primary);
+        border-radius: 0px;
+        border: 1px solid var(--primary);
         padding: 1.5rem;
         display: flex;
         align-items: center;
@@ -169,21 +163,20 @@ const contactOptions = [
     }
 
     .connection-card:hover {
-        transform: scale(1.03) rotateX(3deg);
-        box-shadow: 
-            0 15px 30px color-mix(in srgb, var(--primary) 30%, transparent),
-            0 10px 20px color-mix(in srgb, var(--primary) 20%, transparent);
+        transform: translate(-4px, -4px);
+        box-shadow: 4px 4px 0px var(--accent-cyan);
     }
 
     .connection-card:hover::before {
-        opacity: 1;
+        opacity: 0;
     }
 
     .connection-icon-container {
-        background: color-mix(in srgb, var(--primary) 20%, transparent);
+        background: var(--bg-secondary);
         width: 80px;
         height: 80px;
-        border-radius: 50%;
+        border-radius: 0px;
+        border: 1px solid var(--primary);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -191,12 +184,12 @@ const contactOptions = [
     }
 
     .connection-card:hover .connection-icon-container {
-        transform: rotate(360deg);
+        transform: rotate(15deg) scale(1.05);
     }
 
     .connection-icon {
-        font-size: 3rem;
-        opacity: 0.8;
+        font-size: 2.5rem;
+        opacity: 0.9;
     }
 
     .connection-details {
@@ -206,13 +199,16 @@ const contactOptions = [
     .connection-platform {
         margin: 0 0 0.5rem;
         color: var(--primary);
-        font-size: 1.2rem;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.3rem;
+        font-weight: 700;
     }
 
     .connection-description {
         margin: 0 0 1rem;
-        color: var(--text-secondary);
-        opacity: 0.7;
+        color: var(--text-primary);
+        opacity: 0.8;
+        font-size: 0.9rem;
     }
 
     .connection-link {
@@ -221,18 +217,20 @@ const contactOptions = [
         color: var(--bg-primary);
         padding: 0.5rem 1rem;
         text-decoration: none;
-        border-radius: 8px;
-        font-size: 0.9rem;
-        transition: 
-            transform var(--transitionDuration) ease,
-            box-shadow var(--transitionDuration) ease;
+        border-radius: 0px;
+        border: 1px solid var(--primary);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition: all 0.2s ease;
     }
 
     .connection-link:hover {
-        transform: scale(1.05);
-        box-shadow: 
-            0 10px 20px color-mix(in srgb, var(--primary) 30%, transparent),
-            0 6px 10px color-mix(in srgb, var(--primary) 20%, transparent);
+        background: transparent;
+        color: var(--primary);
+        transform: translate(-2px, -2px);
+        box-shadow: 2px 2px 0px var(--accent-yellow);
     }
 
     .social-connect {
@@ -240,14 +238,18 @@ const contactOptions = [
     }
 
     .social-title {
-        color: var(--text-secondary);
+        color: var(--text-primary);
         margin-bottom: 1rem;
-        font-size: 1.2rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
     }
 
     .scheduling-container {
-        background: color-mix(in srgb, var(--accent) 10%, transparent);
-        border-radius: 16px;
+        background: var(--bg-primary);
+        border-radius: 0px;
+        border: 1px solid var(--primary);
         padding: 2rem;
     }
 
@@ -259,12 +261,16 @@ const contactOptions = [
     .scheduling-title {
         color: var(--primary);
         margin: 0;
+        font-family: 'Playfair Display', serif;
         font-size: 1.5rem;
+        font-weight: 700;
     }
 
     .scheduling-subtitle {
-        color: var(--text-secondary);
-        opacity: 0.7;
+        color: var(--accent-pink);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        text-transform: uppercase;
         margin-top: 0.5rem;
     }
 

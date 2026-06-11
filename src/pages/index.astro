@@ -20,15 +20,15 @@ import mikeyShaw from '../images/mikey-shaw.png';
         <div class="font-headline-md text-2xl font-black tracking-tighter text-white">SHAW.AI</div>
         <div class="hidden md:flex gap-12 items-center">
             <a class="font-label-mono text-xs uppercase tracking-[0.3em] text-white hover:text-accent-yellow transition-colors animate-fade-in" href="#summary">01 Summary</a>
-            <a class="font-label-mono text-xs uppercase tracking-[0.3em] text-white hover:text-capabilities transition-colors animate-fade-in" href="#capabilities">02 Skills</a>
+            <a class="font-label-mono text-xs uppercase tracking-[0.3em] text-white hover:text-accent-cyan transition-colors animate-fade-in" href="#capabilities">02 Skills</a>
             <a class="font-label-mono text-xs uppercase tracking-[0.3em] text-white hover:text-accent-pink transition-colors" href="#experience">03 Exp</a>
-            <a class="font-label-mono text-xs uppercase tracking-[0.3em] text-white hover:text-accent-cyan transition-colors" href="#projects">04 Work</a>
+            <a class="font-label-mono text-xs uppercase tracking-[0.3em] text-white hover:text-accent-blue transition-colors" href="#projects">04 Work</a>
             <button class="border-2 border-white px-8 py-2 font-button-custom text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-all rounded-none">Hire</button>
         </div>
     </nav>
 
     <!-- 3D Interactive Layer -->
-    <Scene3D shapeCount={50} complexity={0.9} theme="dark" />
+    <Scene3D shapeCount={50} complexity={0.9} theme="light" />
 
     <main class="w-full">
         <!-- Editorial Hero -->
@@ -46,14 +46,14 @@ import mikeyShaw from '../images/mikey-shaw.png';
                 <Image 
                     src={mikeyShaw}
                     alt="Mikey Shaw" 
-                    class="w-full h-[600px] object-cover grayscale contrast-150 brightness-75 hover:grayscale-0 transition-all duration-700 rounded-none" 
+                    class="w-full h-[600px] object-cover grayscale contrast-125 brightness-95 hover:grayscale-0 transition-all duration-700 rounded-none" 
                     width={800}
                     height={600}
                     format="avif"
                     quality="high"
                     loading="eager"
                 />
-                <div class="absolute bottom-10 right-10 p-8 bg-accent-cyan text-black max-w-md stagger-card rounded-none">
+                <div class="absolute bottom-10 right-10 p-8 bg-accent-cyan text-black max-w-md stagger-card rounded-none border border-black">
                     <p class="font-headline-md leading-tight font-bold text-lg">
                         Architecting elite digital surfaces and autonomous AI systems. Engineered to make your competitors' stacks look obsolete.
                     </p>
@@ -61,7 +61,7 @@ import mikeyShaw from '../images/mikey-shaw.png';
             </div>
 
             <!-- Vertical Text Decorative -->
-            <div class="absolute right-10 top-1/2 -translate-y-1/2 text-vertical font-label-mono text-[10px] tracking-[1em] opacity-30 uppercase hidden lg:block">
+            <div class="absolute right-10 top-1/2 -translate-y-1/2 text-vertical font-label-mono text-[10px] tracking-[1em] opacity-35 uppercase hidden lg:block text-primary">
                 Creative Technologist • Strategic Design • Technical Leadership
             </div>
         </section>
@@ -69,31 +69,31 @@ import mikeyShaw from '../images/mikey-shaw.png';
         <!-- Asymmetrical Summary -->
         <section class="px-6 md:px-[60px] py-24 grid grid-cols-12 gap-8 md:gap-12 relative" id="summary">
             <div class="col-span-12 md:col-span-5 relative">
-                <div class="absolute -top-20 -left-10 text-[20rem] font-black opacity-5 text-white select-none pointer-events-none">01</div>
-                <h2 class="font-headline-lg text-6xl uppercase font-black mb-12 leading-none reveal-item opacity-0">The Philosophy of Execution<span class="text-accent-pink">.</span></h2>
+                <div class="absolute -top-20 -left-10 text-[20rem] font-black opacity-[0.03] text-primary select-none pointer-events-none">01</div>
+                <h2 class="font-headline-lg text-6xl uppercase font-black mb-12 leading-none reveal-item opacity-0 text-primary">The Philosophy of Execution<span class="text-accent-pink">.</span></h2>
                 <div class="bg-accent-yellow h-2 w-24 mb-12 reveal-item opacity-0"></div>
-                <p class="font-body-lg text-2xl leading-relaxed mb-8 border-l-8 border-accent-cyan pl-8 reveal-item opacity-0">
+                <p class="font-body-lg text-2xl leading-relaxed mb-8 border-l-8 border-accent-cyan pl-8 reveal-item opacity-0 text-primary">
                     I bridge the gap between design vision and mathematical execution. I build digital assets that do not just perform—they command attention and outlast market cycles.
                 </p>
             </div>
             <div class="col-span-12 md:col-span-7 flex flex-col justify-end">
-                <p class="font-body-md text-secondary max-w-xl mb-12 text-gray-400 reveal-item opacity-0">
+                <p class="font-body-md max-w-xl mb-12 text-primary/75 reveal-item opacity-0">
                     I lead multidisciplinary teams to deliver high-impact products, leveraging emerging technologies to solve modern brand challenges. My philosophy is rooted in the belief that great technology should be invisible, leaving only the experience behind.
                 </p>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal-item opacity-0">
-                    <div class="aspect-square bg-surface-container p-6 flex flex-col justify-between hover:bg-accent-cyan hover:text-black transition-colors group rounded-none">
-                        <span class="material-symbols-outlined text-4xl" data-icon="terminal">terminal</span>
-                        <span class="font-label-mono text-[10px] tracking-widest uppercase">Technical Rigor</span>
+                    <div class="aspect-square bg-surface-container p-6 flex flex-col justify-between border border-primary/20 hover:bg-accent-cyan hover:text-black transition-colors group rounded-none">
+                        <span class="material-symbols-outlined text-4xl text-primary group-hover:text-black" data-icon="terminal">terminal</span>
+                        <span class="font-label-mono text-[10px] tracking-widest uppercase text-primary group-hover:text-black">Technical Rigor</span>
                     </div>
-                    <div class="aspect-square border-2 border-accent-pink p-6 flex flex-col justify-between hover:bg-accent-pink hover:text-white transition-colors rounded-none">
-                        <span class="material-symbols-outlined text-4xl" data-icon="palette">palette</span>
-                        <span class="font-label-mono text-[10px] tracking-widest uppercase">Design Intuition</span>
+                    <div class="aspect-square border border-accent-pink p-6 flex flex-col justify-between hover:bg-accent-pink hover:text-white transition-colors group rounded-none">
+                        <span class="material-symbols-outlined text-4xl text-accent-pink group-hover:text-white" data-icon="palette">palette</span>
+                        <span class="font-label-mono text-[10px] tracking-widest uppercase text-accent-pink group-hover:text-white">Design Intuition</span>
                     </div>
-                    <div class="aspect-square border-2 border-accent-yellow p-6 flex flex-col justify-between hover:bg-accent-yellow hover:text-black transition-colors rounded-none">
-                        <span class="material-symbols-outlined text-4xl" data-icon="auto_awesome">auto_awesome</span>
-                        <span class="font-label-mono text-[10px] tracking-widest uppercase">Emerging Tech</span>
+                    <div class="aspect-square border border-accent-yellow p-6 flex flex-col justify-between hover:bg-accent-yellow hover:text-black transition-colors group rounded-none">
+                        <span class="material-symbols-outlined text-4xl text-accent-yellow group-hover:text-black" data-icon="auto_awesome">auto_awesome</span>
+                        <span class="font-label-mono text-[10px] tracking-widest uppercase text-accent-yellow group-hover:text-black">Emerging Tech</span>
                     </div>
-                    <div class="aspect-square bg-white text-black p-6 flex flex-col justify-between stagger-card rounded-none">
+                    <div class="aspect-square bg-primary text-primary-foreground p-6 flex flex-col justify-between stagger-card rounded-none">
                         <span class="material-symbols-outlined text-4xl" data-icon="campaign">campaign</span>
                         <span class="font-label-mono text-[10px] tracking-widest uppercase">Brand Narrative</span>
                     </div>
@@ -143,10 +143,10 @@ import mikeyShaw from '../images/mikey-shaw.png';
         </section>
 
         <!-- Dynamic Skills Visualization -->
-        <section class="px-6 md:px-[60px] py-24 bg-[#151515]">
+        <section class="px-6 md:px-[60px] py-24 bg-surface-container border-y border-primary/10">
             <div class="max-w-[1440px] mx-auto">
-                <h3 class="font-label-mono text-accent-yellow tracking-[0.5em] uppercase text-xs mb-8 reveal-item opacity-0">System Engineering</h3>
-                <h2 class="font-headline-lg text-5xl uppercase font-black text-white mb-16 reveal-item opacity-0">Interactive Skills Architecture</h2>
+                <h3 class="font-label-mono text-accent-pink tracking-[0.5em] uppercase text-xs mb-8 reveal-item opacity-0">System Engineering</h3>
+                <h2 class="font-headline-lg text-5xl uppercase font-black text-primary mb-16 reveal-item opacity-0">Interactive Skills Architecture</h2>
                 <div class="reveal-item opacity-0">
                     <SkillsVisualization />
                 </div>
@@ -156,8 +156,8 @@ import mikeyShaw from '../images/mikey-shaw.png';
         <!-- Projects Grid Section (Featured Work) -->
         <section class="px-6 md:px-[60px] py-24" id="projects">
             <div class="max-w-[1440px] mx-auto">
-                <div class="flex flex-col md:flex-row items-baseline gap-8 mb-16 border-b border-white/10 pb-8 reveal-item opacity-0">
-                    <h2 class="font-display-xl text-6xl font-black uppercase tracking-tighter">Featured Work</h2>
+                <div class="flex flex-col md:flex-row items-baseline gap-8 mb-16 border-b border-primary/10 pb-8 reveal-item opacity-0">
+                    <h2 class="font-display-xl text-6xl font-black uppercase tracking-tighter text-primary">Featured Work</h2>
                     <span class="font-label-mono text-accent-pink tracking-[0.5em] uppercase text-xs">Selected Deployments</span>
                 </div>
                 <div class="reveal-item opacity-0">
@@ -167,13 +167,13 @@ import mikeyShaw from '../images/mikey-shaw.png';
         </section>
 
         <!-- GitHub Integration & Performance Metrics -->
-        <section class="px-6 md:px-[60px] py-24 bg-[#111111]">
+        <section class="px-6 md:px-[60px] py-24 bg-surface-container border-y border-primary/10">
             <div class="max-w-[1440px] mx-auto">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
                     <div class="lg:col-span-4 flex flex-col justify-center reveal-item opacity-0">
                         <span class="font-label-mono text-accent-cyan text-xs uppercase tracking-[0.4em] mb-4">Telemetry</span>
-                        <h2 class="font-headline-lg text-4xl font-black uppercase leading-none mb-6">Open Design &amp; Engine Output</h2>
-                        <p class="font-body-md text-gray-400">
+                        <h2 class="font-headline-lg text-4xl font-black uppercase leading-none mb-6 text-primary">Open Design &amp; Engine Output</h2>
+                        <p class="font-body-md text-primary/75">
                             Live system activity, codebase statistics, and recent commit volumes across our core repositories.
                         </p>
                     </div>
@@ -185,60 +185,60 @@ import mikeyShaw from '../images/mikey-shaw.png';
         </section>
 
         <!-- Experience - High Contrast Editorial -->
-        <section class="px-6 md:px-[60px] py-24 bg-white text-black" id="experience">
+        <section class="px-6 md:px-[60px] py-24" id="experience">
             <div class="max-w-[1440px] mx-auto">
                 <div class="flex items-baseline gap-8 mb-24 reveal-item opacity-0">
-                    <h2 class="font-display-xl text-7xl md:text-8xl font-black tracking-tighter uppercase leading-none">Career</h2>
+                    <h2 class="font-display-xl text-7xl md:text-8xl font-black tracking-tighter uppercase leading-none text-primary">Career</h2>
                     <span class="font-label-mono text-accent-pink tracking-[0.5em] uppercase text-xs">03 Experience</span>
                 </div>
                 
                 <div class="space-y-24">
                     <!-- Entry 1 -->
-                    <div class="grid grid-cols-12 gap-8 border-b-2 border-black pb-12 reveal-item opacity-0">
+                    <div class="grid grid-cols-12 gap-8 border-b-2 border-primary pb-12 reveal-item opacity-0">
                         <div class="col-span-12 md:col-span-4">
                             <span class="font-label-mono text-xs uppercase text-accent-pink mb-4 block">2021 — PRESENT</span>
-                            <h3 class="font-headline-md text-3xl md:text-4xl font-bold uppercase mb-2">Principal Creative Technologist</h3>
-                            <p class="font-label-mono text-sm tracking-widest uppercase opacity-60">Studio Alpha / Remote</p>
+                            <h3 class="font-headline-md text-3xl md:text-4xl font-bold uppercase mb-2 text-primary">Principal Creative Technologist</h3>
+                            <p class="font-label-mono text-sm tracking-widest uppercase text-primary/60">Studio Alpha / Remote</p>
                         </div>
                         <div class="col-span-12 md:col-span-6">
-                            <p class="font-body-lg text-lg mb-8">
+                            <p class="font-body-lg text-lg mb-8 text-primary/80">
                                 Directing the technical strategy for Fortune 500 digital transformation projects. Leading a team of 12 designers and developers to create immersive e-commerce experiences.
                             </p>
                             <div class="flex flex-wrap gap-2">
-                                <span class="bg-black text-white px-4 py-1 font-label-mono text-[10px] uppercase">Next.js</span>
-                                <span class="bg-black text-white px-4 py-1 font-label-mono text-[10px] uppercase">Three.js</span>
-                                <span class="bg-black text-white px-4 py-1 font-label-mono text-[10px] uppercase">AI Integration</span>
-                                <span class="bg-black text-white px-4 py-1 font-label-mono text-[10px] uppercase">Vercel</span>
+                                <span class="bg-primary text-primary-foreground px-4 py-1 font-label-mono text-[10px] uppercase">Next.js</span>
+                                <span class="bg-primary text-primary-foreground px-4 py-1 font-label-mono text-[10px] uppercase">Three.js</span>
+                                <span class="bg-primary text-primary-foreground px-4 py-1 font-label-mono text-[10px] uppercase">AI Integration</span>
+                                <span class="bg-primary text-primary-foreground px-4 py-1 font-label-mono text-[10px] uppercase">Vercel</span>
                             </div>
                         </div>
                         <div class="col-span-12 md:col-span-2 flex justify-end items-end">
-                            <span class="material-symbols-outlined text-7xl opacity-10" data-icon="north_east">north_east</span>
+                            <span class="material-symbols-outlined text-7xl text-primary/10" data-icon="north_east">north_east</span>
                         </div>
                     </div>
 
                     <!-- Entry 2 -->
-                    <div class="grid grid-cols-12 gap-8 border-b-2 border-black pb-12 reveal-item opacity-0">
+                    <div class="grid grid-cols-12 gap-8 border-b-2 border-primary pb-12 reveal-item opacity-0">
                         <div class="col-span-12 md:col-span-4">
                             <span class="font-label-mono text-xs uppercase text-accent-cyan mb-4 block">2018 — 2021</span>
-                            <h3 class="font-headline-md text-3xl md:text-4xl font-bold uppercase mb-2">Senior Technical Designer</h3>
-                            <p class="font-label-mono text-sm tracking-widest uppercase opacity-60">Modern Labs / NYC</p>
+                            <h3 class="font-headline-md text-3xl md:text-4xl font-bold uppercase mb-2 text-primary">Senior Technical Designer</h3>
+                            <p class="font-label-mono text-sm tracking-widest uppercase text-primary/60">Modern Labs / NYC</p>
                         </div>
                         <div class="col-span-12 md:col-span-8">
-                            <p class="font-body-lg text-lg">
+                            <p class="font-body-lg text-lg text-primary/80">
                                 Pioneered the use of generative design tools in the agency's creative workflow, reducing asset production time by 40%.
                             </p>
                         </div>
                     </div>
 
                     <!-- Entry 3 -->
-                    <div class="grid grid-cols-12 gap-8 border-b-2 border-black pb-12 reveal-item opacity-0">
+                    <div class="grid grid-cols-12 gap-8 border-b-2 border-primary pb-12 reveal-item opacity-0">
                         <div class="col-span-12 md:col-span-4">
                             <span class="font-label-mono text-xs uppercase text-accent-yellow mb-4 block">2015 — 2018</span>
-                            <h3 class="font-headline-md text-3xl md:text-4xl font-bold uppercase mb-2">Creative Developer</h3>
-                            <p class="font-label-mono text-sm tracking-widest uppercase opacity-60">Pixel &amp; Grain / London</p>
+                            <h3 class="font-headline-md text-3xl md:text-4xl font-bold uppercase mb-2 text-primary">Creative Developer</h3>
+                            <p class="font-label-mono text-sm tracking-widest uppercase text-primary/60">Pixel &amp; Grain / London</p>
                         </div>
                         <div class="col-span-12 md:col-span-8">
-                            <p class="font-body-lg text-lg">
+                            <p class="font-body-lg text-lg text-primary/80">
                                 Crafted award-winning interactive websites and installations for boutique fashion brands and cultural institutions.
                             </p>
                         </div>
@@ -253,38 +253,38 @@ import mikeyShaw from '../images/mikey-shaw.png';
                 <h2 class="font-label-mono text-accent-yellow tracking-[1em] uppercase text-xs">04 Education</h2>
                 <div class="space-y-12">
                     <div>
-                        <p class="font-label-mono text-secondary text-xs mb-2 uppercase tracking-widest text-gray-400">MSc Human-Computer Interaction</p>
-                        <h3 class="font-headline-md text-2xl font-bold">University College London</h3>
+                        <p class="font-label-mono text-xs mb-2 uppercase tracking-widest text-primary/60">MSc Human-Computer Interaction</p>
+                        <h3 class="font-headline-md text-2xl font-bold text-primary">University College London</h3>
                         <p class="font-label-mono text-accent-pink mt-1">2014 — 2015</p>
                     </div>
-                    <div class="h-px bg-white/20 w-full"></div>
+                    <div class="h-px bg-primary/20 w-full"></div>
                     <div>
-                        <p class="font-label-mono text-secondary text-xs mb-2 uppercase tracking-widest text-gray-400">BFA Digital Media Design</p>
-                        <h3 class="font-headline-md text-2xl font-bold">Parsons School of Design</h3>
+                        <p class="font-label-mono text-xs mb-2 uppercase tracking-widest text-primary/60">BFA Digital Media Design</p>
+                        <h3 class="font-headline-md text-2xl font-bold text-primary">Parsons School of Design</h3>
                         <p class="font-label-mono text-accent-cyan mt-1">2010 — 2014</p>
                     </div>
                 </div>
             </div>
             
-            <div class="col-span-12 md:col-span-6 bg-accent-pink p-8 md:p-12 text-black stagger-card relative rounded-none reveal-item opacity-0">
-                <div class="absolute -top-6 -right-6 w-12 h-12 bg-accent-yellow"></div>
+            <div class="col-span-12 md:col-span-6 bg-accent-pink p-8 md:p-12 text-black stagger-card relative rounded-none reveal-item opacity-0 border-2 border-black">
+                <div class="absolute -top-6 -right-6 w-12 h-12 bg-accent-yellow border-2 border-black"></div>
                 <h3 class="font-headline-lg text-4xl md:text-5xl uppercase font-black mb-6 leading-none">obliterate<br/>the standard.</h3>
                 <p class="font-body-md mb-12 opacity-80 max-w-sm">
                     Open for high-impact collaborations and technical consulting roles globally.
                 </p>
-                <a class="inline-block bg-black text-white px-10 py-5 font-button-custom text-xs uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all rounded-none" href="mailto:hello@mikeyshaw.work">Initiate System Architecture Brief</a>
+                <a class="inline-block bg-black text-white px-10 py-5 font-button-custom text-xs uppercase tracking-[0.2em] hover:bg-white hover:text-black transition-all rounded-none border border-black" href="mailto:hello@mikeyshaw.work">Initiate System Architecture Brief</a>
             </div>
         </section>
 
         <!-- Blog Feed & Outreach -->
-        <section class="px-6 md:px-[60px] py-24 bg-[#121212]">
+        <section class="px-6 md:px-[60px] py-24 bg-surface-container border-y border-primary/10">
             <div class="max-w-[1440px] mx-auto reveal-item opacity-0">
                 <BlogFeed />
             </div>
         </section>
 
         <!-- Interactive Contact Form -->
-        <section class="px-6 md:px-[60px] py-24 bg-black">
+        <section class="px-6 md:px-[60px] py-24 bg-surface-container">
             <div class="max-w-[1440px] mx-auto reveal-item opacity-0">
                 <ContactSection />
             </div>
@@ -292,7 +292,7 @@ import mikeyShaw from '../images/mikey-shaw.png';
     </main>
 
     <!-- Radical Footer -->
-    <footer class="px-6 md:px-[60px] py-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8 bg-[#1a1a1a]">
+    <footer class="px-6 md:px-[60px] py-12 border-t border-primary/10 flex flex-col md:flex-row justify-between items-center gap-8 bg-surface-container text-primary">
         <div class="font-headline-lg text-4xl font-black">MS<span class="text-accent-cyan">.</span></div>
         <div class="flex gap-12 font-label-mono text-[10px] tracking-widest uppercase">
             <a class="hover:text-accent-pink transition-colors" href="#">Privacy</a>

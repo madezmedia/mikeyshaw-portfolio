@@ -115,10 +115,10 @@ const skillsData = {
             if (context) context.scale(scale, scale);
 
             // Group colors mapping exactly to brand palette:
-            // 1=Voice AI (Cyan), 2=Agent Frameworks (Pink), 3=Web/SaaS (Yellow), 4=Core (White)
+            // 1=Voice AI (Cyan/Blue), 2=Agent Frameworks (Pink), 3=Web/SaaS (Yellow), 4=Core (Purple)
             const colorScale = d3.scaleOrdinal<string>()
                 .domain(['1', '2', '3', '4'])
-                .range(['#00BCD4', '#CC6688', '#FFCC00', '#ffffff']);
+                .range(['#00B9F1', '#E5007D', '#FCDC00', '#9C198C']);
 
             const nodes: SkillNode[] = rawNodes.map(d => ({...d}));
             const links: SkillLink[] = rawLinks.map(d => ({...d}));
@@ -215,8 +215,8 @@ const skillsData = {
                 
                 // Draw links
                 context.save();
-                context.globalAlpha = 0.15;
-                context.strokeStyle = "#999";
+                context.globalAlpha = 0.12;
+                context.strokeStyle = "#0d1b2a";
                 context.beginPath();
                 links.forEach((link) => {
                     const s = link.source as SkillNode;
@@ -230,8 +230,8 @@ const skillsData = {
                 // Highlight connected links
                 if (hoverNode) {
                     context.save();
-                    context.strokeStyle = "#00BCD4";
-                    context.globalAlpha = 0.5;
+                    context.strokeStyle = "#00B9F1";
+                    context.globalAlpha = 0.6;
                     context.lineWidth = 2;
                     context.beginPath();
                     links.forEach((link) => {
@@ -263,6 +263,7 @@ const skillsData = {
                     context.arc(node.x!, node.y!, isHovered ? radius + 4 : radius + pulse, 0, 2 * Math.PI);
                     context.fillStyle = colorScale(String(node.group));
                     
+                    context.save();
                     if (isHovered) {
                         context.shadowBlur = 15;
                         context.shadowColor = colorScale(String(node.group));
@@ -274,12 +275,13 @@ const skillsData = {
                     }
                     
                     context.fill();
-                    context.strokeStyle = "#1a1a1a";
+                    context.restore();
+                    context.strokeStyle = "#fbfaf5";
                     context.lineWidth = 2;
                     context.stroke();
 
-                    // Node titles
-                    context.fillStyle = "#ffffff";
+                    // Node titles - legibly ink-blue
+                    context.fillStyle = "#0d1b2a";
                     context.font = `${isHovered ? '900 ' : '600 '}${fontSize}px 'JetBrains Mono', monospace`;
                     context.textAlign = "center";
                     context.textBaseline = "middle";
@@ -329,9 +331,9 @@ const skillsData = {
     .canvas-container {
         position: relative;
         width: 100%;
-        background: radial-gradient(circle at center, #222222 0%, #111111 100%);
+        background: radial-gradient(circle at center, #fbfaf5 0%, #f5f4ed 100%);
         border-radius: 0px;
-        border: 2px solid var(--accent);
+        border: 2px solid var(--primary);
         overflow: hidden;
         cursor: grab;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -343,7 +345,7 @@ const skillsData = {
 
     .canvas-container:hover {
         transform: translate(-6px, -6px);
-        box-shadow: 6px 6px 0px var(--accent-yellow);
+        box-shadow: 6px 6px 0px var(--accent-pink);
     }
 
     #skills-canvas {
@@ -356,7 +358,7 @@ const skillsData = {
         bottom: 0.75rem;
         left: 50%;
         transform: translateX(-50%);
-        color: rgba(255,255,255,0.4);
+        color: rgba(13, 27, 42, 0.4);
         font-family: "JetBrains Mono", monospace;
         font-size: 0.7rem;
         pointer-events: none;
@@ -366,8 +368,8 @@ const skillsData = {
     .skill-tooltip {
         position: absolute;
         pointer-events: none;
-        background: #000000;
-        color: #ffffff;
+        background: #fbfaf5;
+        color: #0d1b2a;
         padding: 6px 12px;
         border-radius: 0px;
         font-family: "JetBrains Mono", monospace;
@@ -375,7 +377,7 @@ const skillsData = {
         opacity: 0;
         transition: opacity 0.15s;
         z-index: 10;
-        border: 1px solid var(--accent-cyan);
+        border: 2px solid var(--primary);
     }
 
     @media (max-width: 768px) {

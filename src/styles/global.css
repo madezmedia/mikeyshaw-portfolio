@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&family=Montserrat:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -7,24 +7,27 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --font-heading: var(--font-sans);
-    --font-sans: 'Geist Variable', sans-serif;
+    --font-heading: "Playfair Display", serif;
+    --font-sans: "Outfit", sans-serif;
 
     /* Radical Editorial Custom Fonts */
-    --font-headline-lg: "Raleway", sans-serif;
-    --font-body-lg: "Montserrat", sans-serif;
-    --font-headline-md: "Raleway", sans-serif;
-    --font-button-custom: "Montserrat", sans-serif;
+    --font-headline-lg: "Playfair Display", serif;
+    --font-body-lg: "Outfit", sans-serif;
+    --font-headline-md: "Playfair Display", serif;
+    --font-button-custom: "Outfit", sans-serif;
     --font-label-mono: "JetBrains Mono", monospace;
-    --font-body-md: "Montserrat", sans-serif;
-    --font-display-xl: "Raleway", sans-serif;
+    --font-body-md: "Outfit", sans-serif;
+    --font-display-xl: "Playfair Display", serif;
 
     /* Radical Editorial Custom Colors */
-    --color-accent-yellow: #FFCC00;
-    --color-accent-pink: #CC6688;
-    --color-accent-cyan: #00BCD4;
-    --color-surface-container: #2a2a2a;
-    --color-background-custom: #1a1a1a;
+    --color-accent-yellow: #FCDC00;
+    --color-accent-pink: #E5007D;
+    --color-accent-cyan: #00B9F1;
+    --color-accent-blue: #00B9F1;
+    --color-accent-purple: #9C198C;
+    --color-accent-green: #2d4a3e;
+    --color-surface-container: #f5f4ed;
+    --color-background-custom: #fbfaf5;
 
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
@@ -67,30 +70,30 @@
 }
 
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
+    --background: oklch(0.985 0.005 80);
+    --foreground: oklch(0.15 0.015 240);
+    --card: oklch(0.97 0.005 80);
+    --card-foreground: oklch(0.15 0.015 240);
+    --popover: oklch(0.985 0.005 80);
+    --popover-foreground: oklch(0.15 0.015 240);
+    --primary: oklch(0.15 0.015 240);
+    --primary-foreground: oklch(0.985 0.005 80);
+    --secondary: oklch(0.95 0.005 80);
+    --secondary-foreground: oklch(0.15 0.015 240);
+    --muted: oklch(0.95 0.005 80);
+    --muted-foreground: oklch(0.35 0.01 240);
+    --accent: oklch(0.95 0.005 80);
+    --accent-foreground: oklch(0.15 0.015 240);
     --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
+    --border: oklch(0.85 0.01 240);
+    --input: oklch(0.85 0.01 240);
+    --ring: oklch(0.15 0.015 240);
     --chart-1: oklch(0.87 0 0);
     --chart-2: oklch(0.556 0 0);
     --chart-3: oklch(0.439 0 0);
     --chart-4: oklch(0.371 0 0);
     --chart-5: oklch(0.269 0 0);
-    --radius: 0.625rem;
+    --radius: 0px;
     --sidebar: oklch(0.985 0 0);
     --sidebar-foreground: oklch(0.145 0 0);
     --sidebar-primary: oklch(0.205 0 0);
@@ -102,31 +105,31 @@
 }
 
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
+    --background: oklch(0.15 0.015 240);
+    --foreground: oklch(0.985 0.005 80);
+    --card: oklch(0.18 0.015 240);
+    --card-foreground: oklch(0.985 0.005 80);
+    --popover: oklch(0.15 0.015 240);
+    --popover-foreground: oklch(0.985 0.005 80);
+    --primary: oklch(0.985 0.005 80);
+    --primary-foreground: oklch(0.15 0.015 240);
+    --secondary: oklch(0.18 0.015 240);
+    --secondary-foreground: oklch(0.985 0.005 80);
+    --muted: oklch(0.18 0.015 240);
+    --muted-foreground: oklch(0.7 0.01 80);
+    --accent: oklch(0.18 0.015 240);
+    --accent-foreground: oklch(0.985 0.005 80);
     --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
+    --border: oklch(0.25 0.01 240);
+    --input: oklch(0.25 0.01 240);
+    --ring: oklch(0.985 0.005 80);
     --chart-1: oklch(0.87 0 0);
     --chart-2: oklch(0.556 0 0);
     --chart-3: oklch(0.439 0 0);
     --chart-4: oklch(0.371 0 0);
     --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar: oklch(0.15 0.015 240);
+    --sidebar-foreground: oklch(0.985 0.005 80);
     --sidebar-primary: oklch(0.488 0.243 264.376);
     --sidebar-primary-foreground: oklch(0.985 0 0);
     --sidebar-accent: oklch(0.269 0 0);
@@ -140,13 +143,32 @@
     @apply border-border outline-ring/50;
     }
   body {
-    background-color: #1a1a1a;
-    color: #ffffff;
+    background-color: #fbfaf5;
+    background-image: radial-gradient(rgba(13, 27, 42, 0.05) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: 0 0;
+    color: #0d1b2a;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    position: relative;
     }
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      linear-gradient(rgba(13, 27, 42, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(13, 27, 42, 0.02) 1px, transparent 1px);
+    background-size: 120px 120px;
+    pointer-events: none;
+    z-index: 0;
+  }
   html {
     @apply font-sans;
+    background-color: #fbfaf5;
     }
 
   /* Radical Editorial Custom Classes */

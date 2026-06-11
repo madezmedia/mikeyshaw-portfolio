@@ -15,42 +15,42 @@ const desiredProjects: DesiredProject[] = [
         title: 'Multi-Agent Orchestration',
         description: '3+ frameworks tested with production systems deployed. LangChain, AutoGPT, SuperAGI, and YAO expertise.',
         tags: ['LangChain', 'AutoGPT', 'SuperAGI'],
-        color: '#CC6688' // Pink
+        color: '#E5007D' // Madez Pink
     },
     {
         icon: '🎙️',
         title: 'Voice AI Architecture',
         description: 'VAPI + OpenClaw pattern for building conversational AI agents that answer phones and capture leads.',
         tags: ['VAPI', 'ElevenLabs', 'OpenAI Realtime'],
-        color: '#00BCD4' // Cyan
+        color: '#00B9F1' // Madez Blue
     },
     {
         icon: '🍽️',
         title: 'Restaurant Technology',
         description: 'Domain expertise from 3+ products in the restaurant space — phone automation, lead gen, social media.',
         tags: ['OpenClaw', 'OwnerScout', 'YAO'],
-        color: '#FFCC00' // Yellow
+        color: '#FCDC00' // Madez Yellow
     },
     {
         icon: '💳',
         title: 'SaaS Platform Development',
         description: 'Full-stack products with Stripe payments, Supabase auth, multi-tenant architecture, and user workflows.',
         tags: ['Stripe', 'Supabase', 'Next.js'],
-        color: '#00BCD4' // Cyan
+        color: '#00B9F1' // Madez Blue
     },
     {
         icon: '⚡',
         title: 'Performance Optimization',
         description: '80-95% API cost reduction through multi-tier caching, rate limiting, and recursive splitting patterns.',
         tags: ['Caching', 'Rate Limiting', '9x Speed'],
-        color: '#CC6688' // Pink
+        color: '#E5007D' // Madez Pink
     },
     {
         icon: '🎵',
         title: 'AI Audio & Media',
         description: 'Voice synthesis, music generation, video AI with production pipelines from concept to published content.',
         tags: ['ElevenLabs', 'RunPod', 'Mux'],
-        color: '#FFCC00' // Yellow
+        color: '#9C198C' // Madez Purple
     }
 ];
 ---
@@ -94,15 +94,16 @@ const desiredProjects: DesiredProject[] = [
     .section-header {
         text-align: left;
         margin-bottom: 4rem;
-        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 2px solid var(--primary);
+        opacity: 0.8;
         padding-bottom: 2rem;
     }
 
     .section-title {
-        font-family: "Raleway", sans-serif;
+        font-family: "Playfair Display", serif;
         font-size: 3rem;
         font-weight: 900;
-        color: var(--accent-yellow);
+        color: var(--primary);
         margin: 0;
         letter-spacing: -0.03em;
         text-transform: uppercase;
@@ -111,7 +112,7 @@ const desiredProjects: DesiredProject[] = [
     .section-subtitle {
         font-family: "JetBrains Mono", monospace;
         font-size: 0.85rem;
-        color: var(--accent-cyan);
+        color: var(--accent-pink);
         margin-top: 0.5rem;
         text-transform: uppercase;
         letter-spacing: 0.15em;
