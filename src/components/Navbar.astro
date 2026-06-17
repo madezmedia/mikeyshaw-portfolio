@@ -1,13 +1,14 @@
 ---
 import { THEME_TRANSITION_DURATION } from '../utils/theme';
 
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
 const navLinks = [
-    { name: 'Home', href: '#hero', icon: '🏠', ariaLabel: 'Navigate to Home section' },
-    { name: 'About', href: '#about', icon: '👤', ariaLabel: 'Navigate to About section' },
-    { name: 'Projects', href: '#projects', icon: '💡', ariaLabel: 'Navigate to Projects section' },
-    { name: 'Skills', href: '#skills', icon: '🛠️', ariaLabel: 'Navigate to Skills section' },
-    { name: 'Expertise', href: '#desired-projects', icon: '🎯', ariaLabel: 'Navigate to Expertise section' },
-    { name: 'Contact', href: '#contact', icon: '📞', ariaLabel: 'Navigate to Contact section' }
+    { name: 'Home', href: isHome ? '#hero' : '/#hero', icon: '🏠', ariaLabel: 'Navigate to Home section' },
+    { name: 'About', href: isHome ? '#summary' : '/#summary', icon: '👤', ariaLabel: 'Navigate to About section' },
+    { name: 'Skills', href: isHome ? '#capabilities' : '/#capabilities', icon: '🛠️', ariaLabel: 'Navigate to Skills section' },
+    { name: 'Services', href: isHome ? '#services' : '/#services', icon: '💼', ariaLabel: 'Navigate to Services section' },
+    { name: 'Resume', href: '/resume', icon: '📋', ariaLabel: 'Navigate to Resume page' },
+    { name: 'Contact', href: isHome ? '#contact' : '/#contact', icon: '📞', ariaLabel: 'Navigate to Contact section' }
 ];
 ---
 
