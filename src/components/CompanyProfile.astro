@@ -2,76 +2,70 @@
 import { UX_CONFIG } from '../utils/ux';
 import SocialLinks from './SocialLinks.astro';
 
-const companyDetails = {
-    name: 'Mad EZ Media',
-    tagline: 'AI-Powered Digital Solutions',
-    description: 'A forward-thinking digital agency specializing in voice AI, agent orchestration, SaaS platforms, and AI-driven automation for restaurants and businesses.',
-    logo: '/images/mad-ez-media-logo.png',
-    foundedYear: 2020,
-    expertise: [
-        { name: 'Voice AI Solutions', icon: '🎙️' },
-        { name: 'Agent Orchestration', icon: '🤖' },
-        { name: 'SaaS Platforms', icon: '💳' },
-        { name: 'Restaurant Tech', icon: '🍽️' }
-    ],
-    achievements: [
-        { metric: '6', label: 'Production Apps' },
-        { metric: '$497+', label: 'MRR per Client' },
-        { metric: '90%', label: 'Cost Reduction' }
-    ]
-};
+const engagementSlots = [
+    { slot: "Slot 1", status: "Engaged • Q2–Q3 2026", details: "Active development on creator media automation pipeline" },
+    { slot: "Slot 2", status: "Open • Q3 2026 start", details: "Accepting inbound for custom autonomous agentic fleets", isOpen: true },
+    { slot: "Slot 3", status: "Open • Q4 2026 start", details: "Accepting inbound for enterprise Voice AI systems", isOpen: true }
+];
+
+const systemStats = [
+    { metric: "6+", label: "Production Apps Deployed", color: "#00B9F1" }, // Cyan
+    { metric: "$497+", label: "Avg MRR per Client Client", color: "#E5007D" }, // Pink
+    { metric: "90%", label: "Manual Cost Reduction", color: "#FCDC00" }  // Yellow
+];
 ---
 
 <section class="company-profile-section max-w-[1440px] mx-auto px-6 md:px-[60px] py-16">
     <div class="company-container">
         <div class="company-profile-grid">
-            <div class="company-logo-container">
-                <img 
-                    src={companyDetails.logo} 
-                    alt={`${companyDetails.name} Logo`} 
-                    class="company-logo"
-                    loading="lazy"
-                />
+            <!-- Left side: Active Engagements -->
+            <div class="engagements-panel">
+                <div class="home-eyebrow"><span class="num">N° 02</span>Active Engagements</div>
+                <h3 class="panel-title">Studio Capacity</h3>
+                <p class="panel-desc">
+                    Mikey Shaw operates as a dedicated high-agency engineering studio. We limit active client slots to maintain absolute quality and focus on shipped systems.
+                </p>
+
+                <div class="slots-list">
+                    {engagementSlots.map((slot) => (
+                        <div class={`slot-card ${slot.isOpen ? 'slot-open' : 'slot-closed'}`}>
+                            <div class="slot-header">
+                                <span class="slot-num">{slot.slot}</span>
+                                {slot.isOpen ? (
+                                    <span class="slot-badge-open">Accepting Inbound</span>
+                                ) : (
+                                    <span class="slot-badge-closed">Engaged</span>
+                                )}
+                            </div>
+                            <div class="slot-status">{slot.status}</div>
+                            <p class="slot-details">{slot.details}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
 
-            <div class="company-details">
-                <div class="company-header">
-                    <h2 class="company-name">{companyDetails.name}</h2>
-                    <p class="company-tagline">{companyDetails.tagline}</p>
+            <!-- Right side: System stats -->
+            <div class="stats-panel">
+                <div class="home-eyebrow"><span class="num">N° 04</span>Track Record</div>
+                <h3 class="panel-title">System Metrics</h3>
+                
+                <div class="stats-grid">
+                    {systemStats.map((stat) => (
+                        <div class="stat-card" style={`--stat-color: ${stat.color}`}>
+                            <span class="stat-metric">{stat.metric}</span>
+                            <span class="stat-label">{stat.label}</span>
+                        </div>
+                    ))}
                 </div>
 
-                <div class="company-description-container">
-                    <p class="company-description">
-                        {companyDetails.description}
+                <div class="studio-meta-box">
+                    <h4 class="meta-box-title">Engine Conformance</h4>
+                    <p class="meta-box-text">
+                        We build custom platforms, autonomous characters, voice systems, and protocol-grade infrastructure. We do not ship slide decks. We ship <strong>working systems</strong> that run securely on Tuesday morning when nobody is watching.
                     </p>
-                </div>
-
-                <div class="company-expertise">
-                    <h3 class="section-title">Core Expertise</h3>
-                    <div class="expertise-grid">
-                        {companyDetails.expertise.map(skill => (
-                            <div class="expertise-item">
-                                <span class="expertise-icon">{skill.icon}</span>
-                                <span class="expertise-name">{skill.name}</span>
-                            </div>
-                        ))}
+                    <div class="socials-wrap mt-8">
+                        <SocialLinks />
                     </div>
-                </div>
-
-                <div class="company-achievements">
-                    <h3 class="section-title">Company Milestones</h3>
-                    <div class="achievements-grid">
-                        {companyDetails.achievements.map(achievement => (
-                            <div class="achievement-item">
-                                <span class="achievement-metric">{achievement.metric}</span>
-                                <span class="achievement-label">{achievement.label}</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                <div class="company-socials">
-                    <SocialLinks />
                 </div>
             </div>
         </div>
@@ -86,190 +80,205 @@ const companyDetails = {
     }
 
     .company-container {
-        background: var(--bg-secondary);
-        border-radius: 0px;
-        border: 2px solid var(--accent);
+        background: #ffffff;
+        border-radius: 14px;
+        border: 1px solid rgba(45, 74, 62, 0.1);
         padding: 3rem;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .company-container:hover {
-        transform: translate(-6px, -6px);
-        box-shadow: 6px 6px 0px var(--accent-yellow);
+        box-shadow: 0 8px 24px rgba(45, 74, 62, 0.04);
     }
 
     .company-profile-grid {
         display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: 3rem;
-        align-items: start;
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
     }
 
-    .company-logo-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    @media (min-width: 1024px) {
+        .company-profile-grid {
+            grid-template-columns: 1.1fr 1fr;
+        }
     }
 
-    .company-logo {
-        width: 100%;
-        max-width: 280px;
-        height: auto;
-        border-radius: 0px;
-        border: 4px solid var(--accent-pink);
-        padding: 8px;
-        background: var(--bg-primary);
-    }
-
-    .company-details {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-    }
-
-    .company-header {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .company-name {
-        font-size: 3rem;
-        color: var(--primary);
-        margin: 0;
-        font-family: "Playfair Display", serif;
-        font-weight: 900;
-        letter-spacing: -0.03em;
-    }
-
-    .company-tagline {
+    .home-eyebrow {
         font-family: "JetBrains Mono", monospace;
-        font-size: 0.85rem;
-        color: var(--accent-pink);
-        text-transform: uppercase;
-        letter-spacing: 0.2em;
-        margin: 0;
-    }
-
-    .company-description-container {
-        background: var(--bg-primary);
-        padding: 1.5rem;
-        border-radius: 0px;
-        border-left: 4px solid var(--accent-pink);
-    }
-
-    .company-description {
-        font-family: "Montserrat", sans-serif;
-        color: var(--text-primary);
-        line-height: 1.7;
-        margin: 0;
-        font-size: 1rem;
-    }
-
-    .section-title {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 0.75rem;
-        color: var(--text-secondary);
-        margin-bottom: 1rem;
-        text-transform: uppercase;
-        letter-spacing: 0.25em;
-    }
-
-    .expertise-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-    }
-
-    .expertise-item {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        padding: 1rem;
-        background: var(--bg-primary);
-        border-radius: 0px;
-        border: 1px solid var(--accent);
-        transition: all 0.2s ease;
-    }
-
-    .expertise-item:hover {
-        transform: translate(-3px, -3px);
-        box-shadow: 3px 3px 0px var(--accent-cyan);
-        background: var(--bg-secondary);
-    }
-
-    .expertise-icon {
-        font-size: 1.5rem;
-    }
-
-    .expertise-name {
-        font-family: "Montserrat", sans-serif;
+        font-size: 11px;
         font-weight: 700;
-        font-size: 0.9rem;
-        color: var(--text-primary);
-    }
-
-    .achievements-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-    }
-
-    .achievement-item {
-        display: flex;
-        flex-direction: column;
+        text-transform: uppercase;
+        letter-spacing: .22em;
+        color: var(--accent-pink, #E5007D);
+        display: inline-flex;
         align-items: center;
-        padding: 1.5rem 1rem;
-        background: var(--bg-primary);
-        border-radius: 0px;
-        border: 1px solid var(--accent-pink);
-        text-align: center;
+        gap: 8px;
+        margin-bottom: 16px;
     }
 
-    .achievement-metric {
-        font-family: "Raleway", sans-serif;
+    .home-eyebrow .num {
+        opacity: 0.8;
+    }
+
+    .panel-title {
+        font-family: "Playfair Display", serif;
         font-size: 2.25rem;
         font-weight: 900;
-        color: var(--accent-pink);
-        line-height: 1;
+        color: var(--primary, #2d4a3e);
+        margin: 0 0 1rem;
+        letter-spacing: -0.02em;
+    }
+
+    .panel-desc {
+        font-family: "Outfit", sans-serif;
+        font-size: 0.95rem;
+        color: rgba(45, 74, 62, 0.75);
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+
+    .slots-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .slot-card {
+        background: #faf9f5;
+        border-radius: 10px;
+        padding: 1.5rem;
+        border-top: 4px solid rgba(45, 74, 62, 0.1);
+        transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .slot-open {
+        border-top-color: var(--accent-cyan, #00B9F1);
+        box-shadow: 0 4px 12px rgba(0, 185, 241, 0.04);
+    }
+
+    .slot-open:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 185, 241, 0.08);
+    }
+
+    .slot-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         margin-bottom: 0.5rem;
     }
 
-    .achievement-label {
+    .slot-num {
         font-family: "JetBrains Mono", monospace;
-        font-size: 0.65rem;
+        font-size: 11px;
+        font-weight: 700;
+        color: rgba(45, 74, 62, 0.5);
         text-transform: uppercase;
-        color: var(--text-secondary);
+        letter-spacing: 0.15em;
+    }
+
+    .slot-badge-open {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 9.5px;
+        font-weight: 700;
+        text-transform: uppercase;
         letter-spacing: 0.1em;
+        color: #ffffff;
+        background: var(--accent-cyan, #00B9F1);
+        padding: 2px 8px;
+        border-radius: 9999px;
     }
 
-    .company-socials {
-        margin-top: 0.5rem;
+    .slot-badge-closed {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 9.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: rgba(45, 74, 62, 0.7);
+        background: rgba(45, 74, 62, 0.08);
+        padding: 2px 8px;
+        border-radius: 9999px;
     }
 
-    @media (max-width: 1024px) {
-        .company-profile-grid {
-            grid-template-columns: 1fr;
-            gap: 2.5rem;
-        }
-
-        .company-logo-container {
-            justify-content: start;
-        }
+    .slot-status {
+        font-family: "Outfit", sans-serif;
+        font-weight: 700;
+        font-size: 14.5px;
+        color: var(--primary, #2d4a3e);
+        margin-bottom: 0.25rem;
     }
 
-    @media (max-width: 768px) {
-        .company-container {
-            padding: 1.5rem;
-        }
+    .slot-details {
+        font-family: "Outfit", sans-serif;
+        font-size: 13px;
+        color: rgba(45, 74, 62, 0.65);
+        margin: 0;
+    }
 
-        .company-name {
-            font-size: 2.25rem;
-        }
+    /* Stats Panel */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
 
-        .expertise-grid,
-        .achievements-grid {
-            grid-template-columns: 1fr;
-        }
+    .stat-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem 1rem;
+        background: #faf9f5;
+        border-radius: 10px;
+        border: 1px solid rgba(45, 74, 62, 0.08);
+        text-align: center;
+        border-top: 4px solid var(--stat-color);
+        transition: transform 0.25s;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-2px);
+    }
+
+    .stat-metric {
+        font-family: "Playfair Display", serif;
+        font-size: 2.25rem;
+        font-weight: 900;
+        color: var(--primary, #2d4a3e);
+        line-height: 1.1;
+        margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+        font-family: "Outfit", sans-serif;
+        font-size: 11px;
+        color: rgba(45, 74, 62, 0.6);
+        line-height: 1.3;
+    }
+
+    .studio-meta-box {
+        background: #faf9f5;
+        padding: 1.75rem;
+        border-radius: 10px;
+        border-left: 4px solid var(--accent-pink, #E5007D);
+        border-top: 1px solid rgba(45, 74, 62, 0.05);
+        border-right: 1px solid rgba(45, 74, 62, 0.05);
+        border-bottom: 1px solid rgba(45, 74, 62, 0.05);
+    }
+
+    .meta-box-title {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--accent-pink, #E5007D);
+        margin: 0 0 0.75rem;
+    }
+
+    .meta-box-text {
+        font-family: "Outfit", sans-serif;
+        font-size: 13.5px;
+        color: rgba(45, 74, 62, 0.8);
+        line-height: 1.6;
+        margin: 0;
     }
 </style>

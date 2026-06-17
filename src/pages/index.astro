@@ -15,15 +15,17 @@ import mikeyShaw from '../images/mikey-shaw.png';
 ---
 
 <Layout title="Mikey Shaw | Creative Technologist & AI Architect">
-    <!-- Radical Navigation -->
-    <nav class="fixed top-0 left-0 w-full z-50 bg-[#faf9f5]/85 backdrop-blur-md border-b border-[#2d4a3e]/10 flex justify-between items-center px-12 md:px-[60px] py-4">
-        <div class="font-headline-md text-2xl font-black tracking-tighter text-[#2d4a3e]">SHAW.AI</div>
-        <div class="hidden md:flex gap-12 items-center">
-            <a class="font-label-mono text-xs uppercase tracking-[0.3em] text-[#2d4a3e] hover:text-accent-pink transition-colors animate-fade-in" href="#summary">01 Summary</a>
-            <a class="font-label-mono text-xs uppercase tracking-[0.3em] text-[#2d4a3e] hover:text-accent-cyan transition-colors animate-fade-in" href="#capabilities">02 Skills</a>
-            <a class="font-label-mono text-xs uppercase tracking-[0.3em] text-[#2d4a3e] hover:text-accent-pink transition-colors" href="#experience">03 Exp</a>
-            <a class="font-label-mono text-xs uppercase tracking-[0.3em] text-[#2d4a3e] hover:text-accent-blue transition-colors" href="#projects">04 Work</a>
-            <button class="border-2 border-[#2d4a3e] px-8 py-2 font-button-custom text-xs uppercase tracking-widest hover:bg-[#2d4a3e] hover:text-[#faf9f5] transition-all rounded-none text-[#2d4a3e]">Hire</button>
+    <!-- Sticky Glassmorphic Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-[#faf9f5]/80 backdrop-blur-md border-b border-[#2d4a3e]/10 flex justify-between items-center px-12 md:px-[60px] py-5">
+        <a class="flex items-center gap-1 text-2xl font-black text-[#2d4a3e] no-underline" aria-label="Mikey Shaw — Home" href="/">
+            <span class="font-display font-bold italic tracking-tight">mikey<span class="text-accent-pink">z</span>shaw</span>
+        </a>
+        <div class="hidden md:flex gap-10 items-center">
+            <a class="font-label-mono text-[11px] font-semibold uppercase tracking-[0.25em] text-[#2d4a3e] hover:text-accent-pink transition-colors no-underline" href="#summary">01 Summary</a>
+            <a class="font-label-mono text-[11px] font-semibold uppercase tracking-[0.25em] text-[#2d4a3e] hover:text-accent-cyan transition-colors no-underline" href="#capabilities">02 Skills</a>
+            <a class="font-label-mono text-[11px] font-semibold uppercase tracking-[0.25em] text-[#2d4a3e] hover:text-accent-pink transition-colors no-underline" href="#experience">03 Exp</a>
+            <a class="font-label-mono text-[11px] font-semibold uppercase tracking-[0.25em] text-[#2d4a3e] hover:text-accent-blue transition-colors no-underline" href="#work">04 Work</a>
+            <a class="bg-[#2d4a3e] text-white px-6 py-2.5 font-sans font-bold text-xs uppercase tracking-widest hover:bg-[#3a5c4e] hover:-translate-y-[1px] transition-all rounded-full no-underline" href="mailto:hello@mikeyshaw.work">Initiate Brief</a>
         </div>
     </nav>
 
@@ -31,71 +33,85 @@ import mikeyShaw from '../images/mikey-shaw.png';
     <Scene3D shapeCount={50} complexity={0.9} theme="light" />
 
     <main class="w-full">
-        <!-- Editorial Hero -->
-        <section class="min-h-screen editorial-grid pt-32 relative overflow-hidden" id="hero">
+        <!-- Modern Hero Section -->
+        <section class="min-h-screen editorial-grid pt-36 relative overflow-hidden" id="hero">
             <div class="overlap-1 flex flex-col justify-center reveal-item opacity-0">
-                <span class="font-label-mono text-accent-cyan mb-4 tracking-[0.5em] uppercase text-xs">ENGINEERING HIGH-AGENCY INTELLIGENCE</span>
-                <h1 class="font-display-xl text-[12vw] leading-[0.85] font-black tracking-tighter text-[#2d4a3e]">
-                    MIKEY<br/><span class="text-accent-pink">SHAW</span>
+                <span class="font-label-mono text-accent-pink mb-4 tracking-[0.4em] uppercase text-xs font-semibold">N° 01 • THE STUDIO</span>
+                <h1 class="font-display-xl text-[5.5vw] md:text-[4.2vw] leading-[1.05] font-black tracking-tight text-[#2d4a3e]">
+                    We build <em class="em-gradient font-black">autonomous agentic fleets</em> for digital ecosystems.
                 </h1>
-                <div class="h-1 w-32 bg-accent-pink mt-8"></div>
+                <p class="font-body-md text-lg text-[#2d4a3e]/85 max-w-xl mt-8 leading-relaxed">
+                    Custom media pipelines, persistent memory protocols, and AI-driven discovery engines. We do not ship slide decks. We ship <strong>working systems</strong> that run on autopilot.
+                </p>
+                <div class="flex gap-6 items-center mt-10">
+                    <a class="bg-[#2d4a3e] text-white px-8 py-4 font-bold text-xs uppercase tracking-widest hover:bg-[#3a5c4e] transition-all rounded-full no-underline" href="mailto:hello@mikeyshaw.work">Initiate Architecture Brief →</a>
+                    <a class="font-label-mono text-xs uppercase tracking-widest text-[#2d4a3e] hover:text-accent-pink transition-colors no-underline border-b border-[#2d4a3e]/30 pb-0.5" href="#work">Explore the lab</a>
+                </div>
             </div>
             
-            <div class="overlap-2 relative reveal-item opacity-0">
-                <div class="absolute -top-10 -left-10 w-full h-full border-8 border-accent-pink opacity-20"></div>
-                <Image 
-                    src={mikeyShaw}
-                    alt="Mikey Shaw" 
-                    class="w-full h-[600px] object-cover grayscale contrast-125 brightness-95 hover:grayscale-0 transition-all duration-700 rounded-none" 
-                    width={800}
-                    height={600}
-                    format="avif"
-                    quality="high"
-                    loading="eager"
-                />
-                <div class="absolute bottom-10 right-10 p-8 bg-accent-cyan text-black max-w-md stagger-card rounded-none border border-black">
-                    <p class="font-headline-md leading-tight font-bold text-lg">
-                        Architecting elite digital surfaces and autonomous AI systems. Engineered to make your competitors' stacks look obsolete.
-                    </p>
+            <div class="overlap-2 relative reveal-item opacity-0 flex items-center justify-center">
+                <div class="relative w-full max-w-lg">
+                    <Image 
+                        src={mikeyShaw}
+                        alt="Mikey Shaw" 
+                        class="w-full h-[550px] object-cover grayscale contrast-115 brightness-95 hover:grayscale-0 transition-all duration-700 rounded-2xl border border-[#2d4a3e]/10 shadow-md" 
+                        width={800}
+                        height={600}
+                        format="avif"
+                        quality="high"
+                        loading="eager"
+                    />
+                    <div class="absolute -bottom-6 -left-6 p-6 bg-white/95 backdrop-blur-md text-[#2d4a3e] max-w-xs rounded-xl border border-[#2d4a3e]/10 shadow-lg">
+                        <p class="font-headline-md leading-tight font-bold text-sm">
+                            "If it requires manual button clicks, it is an operational liability."
+                        </p>
+                        <span class="font-label-mono text-[9px] uppercase tracking-wider text-accent-pink mt-2 block">— Execution Philosophy</span>
+                    </div>
                 </div>
             </div>
 
             <!-- Vertical Text Decorative -->
             <div class="absolute right-10 top-1/2 -translate-y-1/2 text-vertical font-label-mono text-[10px] tracking-[1em] opacity-35 uppercase hidden lg:block text-primary">
-                Creative Technologist • Strategic Design • Technical Leadership
+                Autonomous Systems • Technical Leadership • Persistent Protocols
             </div>
         </section>
 
-        <!-- Asymmetrical Summary -->
-        <section class="px-6 md:px-[60px] py-24 grid grid-cols-12 gap-8 md:gap-12 relative" id="summary">
+        <!-- Asymmetrical Summary (Approach) -->
+        <section class="px-6 md:px-[60px] py-28 grid grid-cols-12 gap-8 md:gap-12 relative" id="summary">
             <div class="col-span-12 md:col-span-5 relative">
-                <div class="absolute -top-20 -left-10 text-[20rem] font-black opacity-[0.03] text-primary select-none pointer-events-none">01</div>
-                <h2 class="font-headline-lg text-6xl uppercase font-black mb-12 leading-none reveal-item opacity-0 text-primary">The Philosophy of Execution<span class="text-accent-pink">.</span></h2>
-                <div class="bg-accent-yellow h-2 w-24 mb-12 reveal-item opacity-0"></div>
-                <p class="font-body-lg text-2xl leading-relaxed mb-8 border-l-8 border-accent-cyan pl-8 reveal-item opacity-0 text-primary">
-                    I bridge the gap between design vision and mathematical execution. I build digital assets that do not just perform—they command attention and outlast market cycles.
+                <div class="absolute -top-20 -left-10 text-[20rem] font-black opacity-[0.02] text-primary select-none pointer-events-none">01</div>
+                <div class="home-eyebrow"><span class="num">N° 02</span>The Method</div>
+                <h2 class="font-headline-lg text-5xl uppercase font-black mb-8 leading-none reveal-item opacity-0 text-primary">Philosophy of Execution.</h2>
+                <p class="font-body-lg text-xl leading-relaxed mb-8 border-l-4 border-accent-pink pl-6 reveal-item opacity-0 text-primary">
+                    I don't build playground prototypes. I build production-grade automation systems designed for speed, scale, and operational reliability.
                 </p>
             </div>
+            
             <div class="col-span-12 md:col-span-7 flex flex-col justify-end">
-                <p class="font-body-md max-w-xl mb-12 text-primary/75 reveal-item opacity-0">
-                    I lead multidisciplinary teams to deliver high-impact products, leveraging emerging technologies to solve modern brand challenges. My philosophy is rooted in the belief that great technology should be invisible, leaving only the experience behind.
+                <p class="font-body-md text-base max-w-xl mb-12 text-primary/75 reveal-item opacity-0 leading-relaxed">
+                    My engineering process is structured in three movements. We Architect the data flow and agent schemas; we Build using Next.js 16, Supabase, and Upstash Redis; and we Operate the pipelines on automated cron loops backed by ACMI.
                 </p>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal-item opacity-0">
-                    <div class="aspect-square bg-surface-container p-6 flex flex-col justify-between border border-primary/20 hover:bg-accent-cyan hover:text-black transition-colors group rounded-none">
-                        <span class="material-symbols-outlined text-4xl text-primary group-hover:text-black" data-icon="terminal">terminal</span>
-                        <span class="font-label-mono text-[10px] tracking-widest uppercase text-primary group-hover:text-black">Technical Rigor</span>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal-item opacity-0">
+                    <div class="bg-white border border-[#2d4a3e]/10 p-6 flex flex-col justify-between hover:border-[#2d4a3e]/30 transition-all rounded-xl shadow-sm hover:translate-y-[-2px]">
+                        <div>
+                            <span class="material-symbols-outlined text-3xl text-accent-cyan" data-icon="schema">schema</span>
+                            <h4 class="font-sans font-bold text-sm uppercase tracking-wider text-[#2d4a3e] mt-4 mb-2">01. Architect</h4>
+                        </div>
+                        <p class="font-sans text-xs text-[#2d4a3e]/70 leading-relaxed">Modeling data schemas, agent behaviors, and state-locked generation references before writing code.</p>
                     </div>
-                    <div class="aspect-square border border-accent-pink p-6 flex flex-col justify-between hover:bg-accent-pink hover:text-white transition-colors group rounded-none">
-                        <span class="material-symbols-outlined text-4xl text-accent-pink group-hover:text-white" data-icon="palette">palette</span>
-                        <span class="font-label-mono text-[10px] tracking-widest uppercase text-accent-pink group-hover:text-white">Design Intuition</span>
+                    <div class="bg-white border border-[#2d4a3e]/10 p-6 flex flex-col justify-between hover:border-[#2d4a3e]/30 transition-all rounded-xl shadow-sm hover:translate-y-[-2px]">
+                        <div>
+                            <span class="material-symbols-outlined text-3xl text-accent-pink" data-icon="code">code</span>
+                            <h4 class="font-sans font-bold text-sm uppercase tracking-wider text-[#2d4a3e] mt-4 mb-2">02. Build</h4>
+                        </div>
+                        <p class="font-sans text-xs text-[#2d4a3e]/70 leading-relaxed">Shipping TypeScript codebases with Supabase Postgres and Redis caching for sub-10ms response times.</p>
                     </div>
-                    <div class="aspect-square border border-accent-yellow p-6 flex flex-col justify-between hover:bg-accent-yellow hover:text-black transition-colors group rounded-none">
-                        <span class="material-symbols-outlined text-4xl text-accent-yellow group-hover:text-black" data-icon="auto_awesome">auto_awesome</span>
-                        <span class="font-label-mono text-[10px] tracking-widest uppercase text-accent-yellow group-hover:text-black">Emerging Tech</span>
-                    </div>
-                    <div class="aspect-square bg-primary text-primary-foreground p-6 flex flex-col justify-between stagger-card rounded-none">
-                        <span class="material-symbols-outlined text-4xl" data-icon="campaign">campaign</span>
-                        <span class="font-label-mono text-[10px] tracking-widest uppercase">Brand Narrative</span>
+                    <div class="bg-white border border-[#2d4a3e]/10 p-6 flex flex-col justify-between hover:border-[#2d4a3e]/30 transition-all rounded-xl shadow-sm hover:translate-y-[-2px]">
+                        <div>
+                            <span class="material-symbols-outlined text-3xl text-accent-yellow" data-icon="sync_alt">sync_alt</span>
+                            <h4 class="font-sans font-bold text-sm uppercase tracking-wider text-[#2d4a3e] mt-4 mb-2">03. Operate</h4>
+                        </div>
+                        <p class="font-sans text-xs text-[#2d4a3e]/70 leading-relaxed">Running pipelines on automated loops via launchd, monitored with real-time ACMI event logs.</p>
                     </div>
                 </div>
             </div>
@@ -116,28 +132,28 @@ import mikeyShaw from '../images/mikey-shaw.png';
         </section>
 
         <!-- Capabilities Horizontal Strip -->
-        <section class="bg-accent-cyan py-24 px-6 md:px-[60px] overflow-hidden relative" id="capabilities">
-            <div class="absolute top-0 right-0 p-4 font-label-mono text-[15rem] leading-none opacity-10 text-black font-black select-none pointer-events-none">02</div>
+        <section class="bg-[#2d4a3e] py-24 px-6 md:px-[60px] overflow-hidden relative" id="capabilities">
+            <div class="absolute top-0 right-0 p-4 font-label-mono text-[15rem] leading-none opacity-[0.03] text-white font-black select-none pointer-events-none">03</div>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
                 <div class="group reveal-item opacity-0">
-                    <div class="text-black font-black text-4xl mb-4">01</div>
-                    <h3 class="font-headline-md text-black uppercase font-bold mb-4">Strategic Design</h3>
-                    <p class="font-body-md text-black/75">Mapping user journeys to business goals through high-fidelity prototyping and data-driven insights.</p>
+                    <div class="text-accent-cyan font-black text-4xl mb-4">01</div>
+                    <h3 class="font-headline-md text-white uppercase font-bold mb-4">Autonomous Media</h3>
+                    <p class="font-body-md text-white/75 text-sm leading-relaxed">Integrating Fal.ai, RunPod InfiniteTalk, and Deepgram voice models to generate consistent talking-head content on autopilot.</p>
                 </div>
                 <div class="group reveal-item opacity-0">
-                    <div class="text-black font-black text-4xl mb-4">02</div>
-                    <h3 class="font-headline-md text-black uppercase font-bold mb-4">Technical Leadership</h3>
-                    <p class="font-body-md text-black/75">Architecting scalable frontend systems and leading engineering teams with a design-first mindset.</p>
+                    <div class="text-accent-pink font-black text-4xl mb-4">02</div>
+                    <h3 class="font-headline-md text-white uppercase font-bold mb-4">Agentic Memory (ACMI)</h3>
+                    <p class="font-body-md text-white/75 text-sm leading-relaxed">Deploying the ACMI memory bus protocol to provide agents with Profile, Signals, and Timeline persistence slots.</p>
                 </div>
                 <div class="group reveal-item opacity-0">
-                    <div class="text-black font-black text-4xl mb-4">03</div>
-                    <h3 class="font-headline-md text-black uppercase font-bold mb-4">Emerging Tech</h3>
-                    <p class="font-body-md text-black/75">Exploration of AI/ML integration, WebGL, and spatial computing to push the boundaries of digital interaction.</p>
+                    <div class="text-accent-yellow font-black text-4xl mb-4">03</div>
+                    <h3 class="font-headline-md text-white uppercase font-bold mb-4">Database Modernization</h3>
+                    <p class="font-body-md text-white/75 text-sm leading-relaxed">Upgrading legacy database layers to Supabase PostgreSQL, implementing Redis TTL cache routing for &lt;10ms responses.</p>
                 </div>
                 <div class="group reveal-item opacity-0">
-                    <div class="text-black font-black text-4xl mb-4">04</div>
-                    <h3 class="font-headline-md text-black uppercase font-bold mb-4">Brand Narrative</h3>
-                    <p class="font-body-md text-black/75">Translating brand values into living, breathing digital identities that resonate across all touchpoints.</p>
+                    <div class="text-white font-black text-4xl mb-4">04</div>
+                    <h3 class="font-headline-md text-white uppercase font-bold mb-4">Lead Discovery Engines</h3>
+                    <p class="font-body-md text-white/75 text-sm leading-relaxed">Building geo-targeted crawlers (Places/Yelp) that calculate API costs, analyze tech gaps, and qualify prospects.</p>
                 </div>
             </div>
         </section>
@@ -145,26 +161,14 @@ import mikeyShaw from '../images/mikey-shaw.png';
         <!-- Dynamic Skills Visualization -->
         <section class="px-6 md:px-[60px] py-24 bg-surface-container border-y border-primary/10">
             <div class="max-w-[1440px] mx-auto">
-                <h3 class="font-label-mono text-accent-pink tracking-[0.5em] uppercase text-xs mb-8 reveal-item opacity-0">System Engineering</h3>
-                <h2 class="font-headline-lg text-5xl uppercase font-black text-primary mb-16 reveal-item opacity-0">Interactive Skills Architecture</h2>
-                <div class="reveal-item opacity-0">
+                <h3 class="font-label-mono text-accent-pink tracking-[0.5em] uppercase text-xs mb-8">System Engineering</h3>
+                <h2 class="font-headline-lg text-5xl uppercase font-black text-primary mb-16">Interactive Skills Architecture</h2>
+                <div>
                     <SkillsVisualization />
                 </div>
             </div>
         </section>
 
-        <!-- Projects Grid Section (Featured Work) -->
-        <section class="px-6 md:px-[60px] py-24" id="projects">
-            <div class="max-w-[1440px] mx-auto">
-                <div class="flex flex-col md:flex-row items-baseline gap-8 mb-16 border-b border-primary/10 pb-8 reveal-item opacity-0">
-                    <h2 class="font-display-xl text-6xl font-black uppercase tracking-tighter text-primary">Featured Work</h2>
-                    <span class="font-label-mono text-accent-pink tracking-[0.5em] uppercase text-xs">Selected Deployments</span>
-                </div>
-                <div class="reveal-item opacity-0">
-                    <ProjectsGrid />
-                </div>
-            </div>
-        </section>
 
         <!-- GitHub Integration & Performance Metrics -->
         <section class="px-6 md:px-[60px] py-24 bg-surface-container border-y border-primary/10">

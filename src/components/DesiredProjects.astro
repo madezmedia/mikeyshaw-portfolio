@@ -1,88 +1,225 @@
 ---
 import { UX_CONFIG } from '../utils/ux';
 
-interface DesiredProject {
-    icon: string;
-    title: string;
-    description: string;
-    tags: string[];
-    color: string;
+interface ACMIEntity {
+    id: string;
+    name: string;
+    labelTag: string;
+    status: string;
+    accentColor: string;
+    profile: Record<string, any>;
+    signals: Record<string, any>;
+    timeline: string[];
 }
 
-const desiredProjects: DesiredProject[] = [
+const acmiEntities: ACMIEntity[] = [
     {
-        icon: '🤖',
-        title: 'Multi-Agent Orchestration',
-        description: '3+ frameworks tested with production systems deployed. LangChain, AutoGPT, SuperAGI, and YAO expertise.',
-        tags: ['LangChain', 'AutoGPT', 'SuperAGI'],
-        color: '#E5007D' // Madez Pink
+        id: 'ownerscout',
+        name: 'OwnerScout',
+        labelTag: 'AI Prospecting Engine',
+        status: 'Active • 80% Cost Cut',
+        accentColor: '#00B9F1', // Cyan
+        profile: {
+            "entity": "ownerscout",
+            "purpose": "Restaurant Lead Qualification",
+            "architecture": "Parallel Web Crawler",
+            "stack": ["React 19", "Vite", "Google Places Aggregate API", "Gemini 1.5 Pro"]
+        },
+        signals: {
+            "crawl_status": "Parallel execution active",
+            "signatures_crawled": "50+ tech platform signatures",
+            "leads_scored": "Independence + Commission Bleed gap",
+            "api_efficiency": "50 restaurants prospected for ~$0.91"
+        },
+        timeline: [
+            "→ Integrated Google Places Aggregate API",
+            "→ Deployed parallel website crawler filtering 100+ known chains",
+            "→ Implemented Toast/Square/ChowNow POS & ordering signatures",
+            "→ Wired Gemini AI Vibe Check for automatic cold sales pitches"
+        ]
     },
     {
-        icon: '🎙️',
-        title: 'Voice AI Architecture',
-        description: 'VAPI + OpenClaw pattern for building conversational AI agents that answer phones and capture leads.',
-        tags: ['VAPI', 'ElevenLabs', 'OpenAI Realtime'],
-        color: '#00B9F1' // Madez Blue
+        id: 'ez-influencer',
+        name: 'EZ Influencer 360',
+        labelTag: 'AI Creator Canvas',
+        status: 'Live • 99.9% Uptime',
+        accentColor: '#E5007D', // Pink
+        profile: {
+            "entity": "ez-influencer-360",
+            "purpose": "Visual Multi-Engine Media Pipeline",
+            "canvas": "React Flow Node Workspace",
+            "stack": ["Next.js 14", "Upstash Redis", "Sinkin.ai", "Fal.ai", "RunPod"]
+        },
+        signals: {
+            "generation_engines": "ComfyUI, Seedream 4.0 4K, RunPod InfiniteTalk",
+            "average_speed": "2.3 seconds per 4K generation",
+            "credits_gateway": "Whop-native webhooks reconciled",
+            "affiliate_commission": "20% automated credit referral system"
+        },
+        timeline: [
+            "→ Designed React Flow node canvas with 7 inputs & 9 backend engines",
+            "→ Wired Bytedance Seedream 4.0 (4K resolution) and Seedance video",
+            "→ Integrated RunPod InfiniteTalk lip-sync and gesture engine",
+            "→ Deployed Grok NSFW content routing fallback filter"
+        ]
     },
     {
-        icon: '🍽️',
-        title: 'Restaurant Technology',
-        description: 'Domain expertise from 3+ products in the restaurant space — phone automation, lead gen, social media.',
-        tags: ['OpenClaw', 'OwnerScout', 'YAO'],
-        color: '#FCDC00' // Madez Yellow
+        id: 'folana-cns',
+        name: 'Folana\'s CNS',
+        labelTag: 'Autonomous Influencer CNS',
+        status: 'Daily Loop Running',
+        accentColor: '#FCDC00', // Yellow
+        profile: {
+            "entity": "folanas-journal",
+            "architecture": "5-Layer Central Nervous System",
+            "cadence": "4x daily wake checks via launchd",
+            "stack": ["Next.js 16", "Deepgram aura-2-arcas", "Composio", "Upstash Redis"]
+        },
+        signals: {
+            "voice_synthesis": "breathy aura-2-arcas-en @ 0.96 speed",
+            "overall_health": "68% total project completion (78% pipeline)",
+            "queue_listener": "Upstash Redis inbox-drain system active",
+            "publishing": "Next.js Admin API auto-registration"
+        },
+        timeline: [
+            "→ Hardened 5-Layer CNS (Grounded, Creative, Episodic, State, Tool)",
+            "→ Wired Deepgram vocal synthesis and RunPod gesture video loops",
+            "→ Created launchd automated inbox queue claiming scripts",
+            "→ Autonomously published Ep47 & Ep48 video dispatches to live journal"
+        ]
     },
     {
-        icon: '💳',
-        title: 'SaaS Platform Development',
-        description: 'Full-stack products with Stripe payments, Supabase auth, multi-tenant architecture, and user workflows.',
-        tags: ['Stripe', 'Supabase', 'Next.js'],
-        color: '#00B9F1' // Madez Blue
-    },
-    {
-        icon: '⚡',
-        title: 'Performance Optimization',
-        description: '80-95% API cost reduction through multi-tier caching, rate limiting, and recursive splitting patterns.',
-        tags: ['Caching', 'Rate Limiting', '9x Speed'],
-        color: '#E5007D' // Madez Pink
-    },
-    {
-        icon: '🎵',
-        title: 'AI Audio & Media',
-        description: 'Voice synthesis, music generation, video AI with production pipelines from concept to published content.',
-        tags: ['ElevenLabs', 'RunPod', 'Mux'],
-        color: '#9C198C' // Madez Purple
+        id: 'mad-ez-v2',
+        name: 'Mad EZ Website V2',
+        labelTag: 'Infrastructure Migration',
+        status: 'Deployed • <10ms Cache',
+        accentColor: '#2d4a3e', // Forest
+        profile: {
+            "entity": "Mad-EZ-Website-V2",
+            "purpose": "Agency Portfolio & Onboarding",
+            "optimization": "Next.js 16 + Turbopack build",
+            "stack": ["Next.js 16.1.0", "React 19.1", "Supabase PostgreSQL", "Redis"]
+        },
+        signals: {
+            "build_time": "3-5 seconds (Turbopack enabled, previously 40s)",
+            "caching": "Redis TTL (1-hour expiry, 99% DB call reduction)",
+            "api_response": "Cached endpoints returned in <10ms",
+            "onboarding": "Interactive Yelps & Google Places qualifying agent"
+        },
+        timeline: [
+            "→ Upgraded Next.js 15.2 → 16.1 and React 19 → 19.1",
+            "→ Replaced Airtable CMS with Supabase PostgreSQL layer (80+ queries)",
+            "→ Configured AVIF images (30% smaller payload) and security headers",
+            "→ Verified 6/6 integration tests passing for business onboarding flow"
+        ]
     }
 ];
 ---
 
-<section id="desired-projects" class="desired-projects-section max-w-[1440px] mx-auto px-6 md:px-[60px] py-16">
-    <div class="section-header">
-        <h2 class="section-title">Expertise & Specializations</h2>
-        <p class="section-subtitle">Production-Tested Skills Across AI, Voice, and SaaS</p>
+<section id="work" class="desired-projects-section max-w-[1440px] mx-auto px-6 md:px-[60px] py-24">
+    <div class="section-header max-w-2xl mb-16">
+        <div class="home-eyebrow"><span class="num">N° 03</span>Selected Deployments</div>
+        <h2 class="section-title">The ACMI <em class="em-gradient">Entity Explorer</em></h2>
+        <p class="section-subtitle mt-4">
+            Mikey Shaw's production-grade systems modeled in their own protocol. Every project exposes its stable **Profile**, live telemetry **Signals**, and chronological **Timeline**.
+        </p>
     </div>
 
-    <div class="projects-grid">
-        {desiredProjects.map((project) => (
+    <div class="acmi-explorer-grid">
+        {acmiEntities.map((entity) => (
             <div 
-                class="project-card"
-                style={`--project-color: ${project.color}`}
+                class="acmi-card"
+                style={`--card-accent: ${entity.accentColor}`}
+                data-entity-id={entity.id}
             >
-                <div class="icon-container">
-                    <span class="project-icon">{project.icon}</span>
+                <div class="acmi-card-head">
+                    <div class="acmi-badge">
+                        <span class="acmi-badge-tag">{entity.labelTag}</span>
+                        <span class="acmi-status">{entity.status}</span>
+                    </div>
+                    <h3 class="acmi-title">{entity.name}</h3>
                 </div>
-                
-                <h3 class="project-title">{project.title}</h3>
-                <p class="project-description">{project.description}</p>
 
-                <div class="project-tags">
-                    {project.tags.map(tag => (
-                        <span class="tag">{tag}</span>
-                    ))}
+                <div class="acmi-tabs">
+                    <button class="acmi-tab-btn active" data-tab="profile">
+                        <span class="tab-char" style={`background: ${entity.accentColor}`}>P</span> Profile
+                    </button>
+                    <button class="acmi-tab-btn" data-tab="signals">
+                        <span class="tab-char" style={`background: ${entity.accentColor}`}>S</span> Signals
+                    </button>
+                    <button class="acmi-tab-btn" data-tab="timeline">
+                        <span class="tab-char" style={`background: ${entity.accentColor}`}>T</span> Timeline
+                    </button>
+                </div>
+
+                <div class="acmi-content-box">
+                    <div class="acmi-path">acmi:project:{entity.id}:profile</div>
+                    
+                    <!-- Profile Tab (Active by default) -->
+                    <div class="tab-pane active" data-pane="profile">
+                        <pre class="acmi-json">{JSON.stringify(entity.profile, null, 2)}</pre>
+                    </div>
+
+                    <!-- Signals Tab -->
+                    <div class="tab-pane" data-pane="signals">
+                        <pre class="acmi-json">{JSON.stringify(entity.signals, null, 2)}</pre>
+                    </div>
+
+                    <!-- Timeline Tab -->
+                    <div class="tab-pane" data-pane="timeline">
+                        <ul class="acmi-log">
+                            {entity.timeline.map((log) => (
+                                <li>{log}</li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="acmi-card-foot">
+                    <span>ACMI v1.5 Protocol Conformance</span>
                 </div>
             </div>
         ))}
     </div>
 </section>
+
+<script>
+    // Client-side interactive tabs handler
+    document.addEventListener('DOMContentLoaded', () => {
+        const cards = document.querySelectorAll('.acmi-card');
+
+        cards.forEach(card => {
+            const tabButtons = card.querySelectorAll('.acmi-tab-btn');
+            const tabPanes = card.querySelectorAll('.tab-pane');
+            const pathDisplay = card.querySelector('.acmi-path');
+            const entityId = card.getAttribute('data-entity-id');
+
+            tabButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const tabName = btn.getAttribute('data-tab');
+
+                    // Set button active
+                    tabButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    // Set pane active
+                    tabPanes.forEach(pane => {
+                        if (pane.getAttribute('data-pane') === tabName) {
+                            pane.classList.add('active');
+                        } else {
+                            pane.classList.remove('active');
+                        }
+                    });
+
+                    // Update displayed ACMI path
+                    if (pathDisplay) {
+                        pathDisplay.textContent = `acmi:project:${entityId}:${tabName}`;
+                    }
+                });
+            });
+        });
+    });
+</script>
 
 <style define:vars={{
     transitionDuration: `${UX_CONFIG.TRANSITION_DURATION}ms`
@@ -91,124 +228,221 @@ const desiredProjects: DesiredProject[] = [
         width: 100%;
     }
 
-    .section-header {
-        text-align: left;
-        margin-bottom: 4rem;
-        border-bottom: 2px solid var(--primary);
+    .home-eyebrow {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .22em;
+        color: var(--accent-pink, #E5007D);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+
+    .home-eyebrow .num {
         opacity: 0.8;
-        padding-bottom: 2rem;
     }
 
     .section-title {
         font-family: "Playfair Display", serif;
-        font-size: 3rem;
+        font-size: clamp(32px, 4.5vw, 56px);
         font-weight: 900;
-        color: var(--primary);
+        line-height: 1.1;
+        color: var(--primary, #2d4a3e);
         margin: 0;
-        letter-spacing: -0.03em;
-        text-transform: uppercase;
+        letter-spacing: -0.025em;
+    }
+
+    .em-gradient {
+        font-style: italic;
+        background: linear-gradient(90deg, var(--accent-cyan, #00B9F1) 0, var(--accent-pink, #E5007D) 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
     }
 
     .section-subtitle {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 0.85rem;
-        color: var(--accent-pink);
-        margin-top: 0.5rem;
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
+        font-family: "Outfit", sans-serif;
+        font-size: 1.1rem;
+        color: rgba(45, 74, 62, 0.75);
+        line-height: 1.6;
     }
 
-    .projects-grid {
+    .acmi-explorer-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        grid-template-columns: 1fr;
         gap: 2rem;
     }
 
-    .project-card {
-        background: var(--bg-secondary);
-        border-radius: 0px;
-        padding: 2.5rem;
+    @media (min-width: 1024px) {
+        .acmi-explorer-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .acmi-card {
+        background: #ffffff;
+        border-radius: 14px;
+        padding: 2.25rem;
+        border-top: 5px solid var(--card-accent);
+        box-shadow: 0 8px 24px rgba(45, 74, 62, 0.04);
+        transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.32s;
         display: flex;
         flex-direction: column;
-        align-items: start;
-        text-align: left;
-        transition: 
-            transform 0.2s ease,
-            box-shadow 0.2s ease;
-        position: relative;
-        overflow: hidden;
-        border: 2px solid var(--project-color);
+        gap: 1.5rem;
+        border-left: 1px solid rgba(45, 74, 62, 0.05);
+        border-right: 1px solid rgba(45, 74, 62, 0.05);
+        border-bottom: 1px solid rgba(45, 74, 62, 0.05);
     }
 
-    .project-card:hover {
-        transform: translate(-6px, -6px);
-        box-shadow: 6px 6px 0px var(--project-color);
+    .acmi-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 36px rgba(45, 74, 62, 0.08);
     }
 
-    .icon-container {
-        width: 60px;
-        height: 60px;
-        background: var(--bg-primary);
-        border-radius: 0px;
-        border: 2px solid var(--project-color);
+    .acmi-badge {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-        margin-bottom: 2rem;
-        transition: transform 0.2s ease;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
     }
 
-    .project-card:hover .icon-container {
-        transform: scale(1.1) rotate(5deg);
+    .acmi-badge-tag {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--card-accent);
     }
 
-    .project-icon {
-        font-size: 2rem;
+    .acmi-status {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: rgba(45, 74, 62, 0.5);
     }
 
-    .project-title {
+    .acmi-title {
         font-family: "Playfair Display", serif;
-        font-size: 1.5rem;
+        font-size: 1.75rem;
         font-weight: 850;
-        color: var(--primary);
-        margin: 0 0 1.25rem;
-        border-left: 4px solid var(--project-color);
-        padding-left: 0.75rem;
+        color: var(--primary, #2d4a3e);
+        margin: 0;
+        letter-spacing: -0.015em;
     }
 
-    .project-description {
+    .acmi-tabs {
+        display: flex;
+        gap: 0.5rem;
+        border-bottom: 1px solid rgba(45, 74, 62, 0.1);
+        padding-bottom: 0.75rem;
+    }
+
+    .acmi-tab-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
         font-family: "Outfit", sans-serif;
-        color: var(--text-primary);
-        font-size: 0.95rem;
-        line-height: 1.6;
-        margin-bottom: 2rem;
+        font-size: 13.5px;
+        font-weight: 600;
+        color: rgba(45, 74, 62, 0.6);
+        background: none;
+        border: none;
+        padding: 6px 12px;
+        cursor: pointer;
+        transition: color 0.2s;
+        border-radius: 6px;
+    }
+
+    .acmi-tab-btn:hover {
+        color: var(--primary, #2d4a3e);
+        background: rgba(45, 74, 62, 0.03);
+    }
+
+    .acmi-tab-btn.active {
+        color: var(--primary, #2d4a3e);
+        background: rgba(45, 74, 62, 0.05);
+    }
+
+    .tab-char {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        border-radius: 4px;
+        color: #ffffff;
+        font-family: "Playfair Display", serif;
+        font-weight: 900;
+        font-size: 10px;
+        flex-shrink: 0;
+    }
+
+    .acmi-content-box {
+        background: #faf9f5;
+        border: 1px solid rgba(45, 74, 62, 0.1);
+        border-radius: 8px;
+        padding: 1.25rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12.5px;
+        line-height: 1.65;
+        color: rgba(45, 74, 62, 0.85);
+        min-height: 190px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .acmi-path {
+        font-size: 11.5px;
+        color: rgba(45, 74, 62, 0.45);
+        border-bottom: 1px dashed rgba(45, 74, 62, 0.1);
+        padding-bottom: 0.75rem;
+        margin-bottom: 0.75rem;
+        word-break: break-all;
+    }
+
+    .tab-pane {
+        display: none;
         flex-grow: 1;
     }
 
-    .project-tags {
+    .tab-pane.active {
+        display: block;
+    }
+
+    .acmi-json {
+        margin: 0;
+        white-space: pre-wrap;
+        word-break: break-all;
+        font-family: inherit;
+        font-size: inherit;
+    }
+
+    .acmi-log {
+        list-style: none;
+        padding: 0;
+        margin: 0;
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: column;
         gap: 0.5rem;
     }
 
-    .tag {
-        background: var(--bg-secondary);
-        color: var(--primary);
-        padding: 0.25rem 0.75rem;
-        border-radius: 0px;
-        font-family: "JetBrains Mono", monospace;
-        font-size: 0.75rem;
-        font-weight: 600;
-        border: 1px solid var(--project-color);
+    .acmi-log li {
+        position: relative;
+        padding-left: 0.25rem;
     }
 
-    @media (max-width: 768px) {
-        .projects-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .section-title {
-            font-size: 2.25rem;
-        }
+    .acmi-card-foot {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: rgba(45, 74, 62, 0.4);
+        margin-top: auto;
     }
 </style>

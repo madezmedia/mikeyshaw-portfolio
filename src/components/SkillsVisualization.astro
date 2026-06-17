@@ -4,7 +4,7 @@ import { UX_CONFIG } from '../utils/ux';
 // Data mapping to the client-side D3 network
 const skillsData = {
     nodes: [        
-        // Groups: 1=Voice AI (Cyan), 2=Agent Frameworks (Pink), 3=Web/SaaS (Yellow), 4=Core (White)
+        // Groups: 1=Voice AI (Cyan), 2=Agent Frameworks (Pink), 3=Web/SaaS (Yellow), 4=Core (Purple)
         { id: "AI Architect", group: 4, value: 20, icon: "👑" },
         
         // Voice AI
@@ -102,8 +102,9 @@ const skillsData = {
             const rawLinks: any[] = rawData.links || [];
 
             const isMobile = window.innerWidth <= 768;
-            let width = container.clientWidth;
-            let height = isMobile ? 350 : 600;
+            // Bug Fix: Fallback width calculation if clientWidth is 0 (due to reveal-item hidden state)
+            let width = container.clientWidth || Math.min(window.innerWidth - 48, 1200);
+            let height = isMobile ? 350 : 550;
             
             const scale = window.devicePixelRatio || 1;
             canvas.width = width * scale;
@@ -115,7 +116,7 @@ const skillsData = {
             if (context) context.scale(scale, scale);
 
             // Group colors mapping exactly to brand palette:
-            // 1=Voice AI (Cyan/Blue), 2=Agent Frameworks (Pink), 3=Web/SaaS (Yellow), 4=Core (Purple)
+            // 1=Voice AI (Cyan), 2=Agent Frameworks (Pink), 3=Web/SaaS (Yellow), 4=Core (Purple)
             const colorScale = d3.scaleOrdinal<string>()
                 .domain(['1', '2', '3', '4'])
                 .range(['#00B9F1', '#E5007D', '#FCDC00', '#9C198C']);
@@ -123,17 +124,17 @@ const skillsData = {
             const nodes: SkillNode[] = rawNodes.map(d => ({...d}));
             const links: SkillLink[] = rawLinks.map(d => ({...d}));
 
-            const linkDist = isMobile ? 60 : 100;
-            const chargeStr = isMobile ? -150 : -355;
-            const nodeScale = isMobile ? 1.0 : 1.4;
-            const fontSize = isMobile ? 10 : 12;
-            const iconSize = isMobile ? 12 : 16;
+            const linkDist = isMobile ? 60 : 90;
+            const chargeStr = isMobile ? -120 : -300;
+            const nodeScale = isMobile ? 1.0 : 1.3;
+            const fontSize = isMobile ? 10.5 : 11.5;
+            const iconSize = isMobile ? 12 : 15;
 
             const simulation = d3.forceSimulation<SkillNode>(nodes)
                 .force("link", d3.forceLink<SkillNode, SkillLink>(links).id((d) => d.id).distance(linkDist))
                 .force("charge", d3.forceManyBody().strength(chargeStr))
                 .force("center", d3.forceCenter(width / 2, height / 2))
-                .force("collide", d3.forceCollide<SkillNode>().radius((d) => d.value * nodeScale + 8));
+                .force("collide", d3.forceCollide<SkillNode>().radius((d) => d.value * nodeScale + 12));
 
             // Drag behavior
             const drag = (sim: d3.Simulation<SkillNode, undefined>) => {
@@ -215,7 +216,7 @@ const skillsData = {
                 
                 // Draw links
                 context.save();
-                context.globalAlpha = 0.12;
+                context.globalAlpha = 0.08;
                 context.strokeStyle = "#2d4a3e";
                 context.beginPath();
                 links.forEach((link) => {
@@ -230,9 +231,9 @@ const skillsData = {
                 // Highlight connected links
                 if (hoverNode) {
                     context.save();
-                    context.strokeStyle = "#00B9F1";
-                    context.globalAlpha = 0.6;
-                    context.lineWidth = 2;
+                    context.strokeStyle = colorScale(String(hoverNode.group));
+                    context.globalAlpha = 0.4;
+                    context.lineWidth = 1.5;
                     context.beginPath();
                     links.forEach((link) => {
                         const s = link.source as SkillNode;
@@ -258,17 +259,17 @@ const skillsData = {
                                (t.id === hoverNode!.id && s.id === node.id);
                     });
 
-                    const pulse = Math.sin(Date.now() / 800 + node.index!) * 1.2;
+                    const pulse = Math.sin(Date.now() / 800 + node.index!) * 0.8;
                     
-                    context.arc(node.x!, node.y!, isHovered ? radius + 4 : radius + pulse, 0, 2 * Math.PI);
+                    context.arc(node.x!, node.y!, isHovered ? radius + 3 : radius + pulse, 0, 2 * Math.PI);
                     context.fillStyle = colorScale(String(node.group));
                     
                     context.save();
                     if (isHovered) {
-                        context.shadowBlur = 15;
+                        context.shadowBlur = 12;
                         context.shadowColor = colorScale(String(node.group));
                     } else if (isConnected) {
-                        context.shadowBlur = 8;
+                        context.shadowBlur = 6;
                         context.shadowColor = colorScale(String(node.group));
                     } else {
                         context.shadowBlur = 0;
@@ -277,17 +278,17 @@ const skillsData = {
                     context.fill();
                     context.restore();
                     context.strokeStyle = "#faf9f5";
-                    context.lineWidth = 2;
+                    context.lineWidth = 1.5;
                     context.stroke();
 
                     // Node titles - legibly forest green
                     context.fillStyle = "#2d4a3e";
-                    context.font = `${isHovered ? '900 ' : '600 '}${fontSize}px 'JetBrains Mono', monospace`;
+                    context.font = `${isHovered ? '700 ' : '500 '}${fontSize}px 'JetBrains Mono', monospace`;
                     context.textAlign = "center";
                     context.textBaseline = "middle";
                     
                     if (node.value > 12 || isHovered || isConnected) {
-                        context.fillText(node.id, node.x!, node.y! + radius + 15);
+                        context.fillText(node.id, node.x!, node.y! + radius + 14);
                     }
                     
                     if (node.icon) {
@@ -302,8 +303,8 @@ const skillsData = {
             // Resizing handler
             window.addEventListener('resize', () => {
                 const newMobile = window.innerWidth <= 768;
-                width = container.clientWidth;
-                height = newMobile ? 350 : 600;
+                width = container.clientWidth || Math.min(window.innerWidth - 48, 1200);
+                height = newMobile ? 350 : 550;
                 
                 const s = window.devicePixelRatio || 1;
                 canvas.width = width * s;
@@ -332,11 +333,12 @@ const skillsData = {
         position: relative;
         width: 100%;
         background: radial-gradient(circle at center, #faf9f5 0%, #f5f4ed 100%);
-        border-radius: 0px;
-        border: 2px solid var(--primary);
+        border-radius: 14px;
+        border: 1px solid rgba(45, 74, 62, 0.1);
         overflow: hidden;
         cursor: grab;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.32s;
+        box-shadow: 0 8px 24px rgba(45, 74, 62, 0.04);
     }
 
     .canvas-container:active {
@@ -344,8 +346,8 @@ const skillsData = {
     }
 
     .canvas-container:hover {
-        transform: translate(-6px, -6px);
-        box-shadow: 6px 6px 0px var(--accent-pink);
+        transform: translateY(-4px);
+        box-shadow: 0 16px 36px rgba(45, 74, 62, 0.08);
     }
 
     #skills-canvas {
@@ -371,20 +373,17 @@ const skillsData = {
         background: #faf9f5;
         color: #2d4a3e;
         padding: 6px 12px;
-        border-radius: 0px;
+        border-radius: 6px;
         font-family: "JetBrains Mono", monospace;
         font-size: 11px;
         opacity: 0;
         transition: opacity 0.15s;
         z-index: 10;
-        border: 2px solid var(--primary);
+        border: 1px solid rgba(45, 74, 62, 0.1);
+        box-shadow: 0 4px 12px rgba(45, 74, 62, 0.06);
     }
 
     @media (max-width: 768px) {
-        .canvas-container {
-            border-radius: 0px;
-        }
-
         .overlay-instruction {
             font-size: 0.6rem;
             width: 90%;
