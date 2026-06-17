@@ -1,124 +1,193 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './ChatWidget.css';
 
-export interface ChatWidgetProps {}
+interface Message {
+    id: string;
+    sender: 'user' | 'bentley';
+    text: string;
+    timestamp: Date;
+}
 
-export function ChatWidget(props: ChatWidgetProps) {
+export function ChatWidget() {
     const [isOpen, setIsOpen] = useState(false);
-    const [currentTheme, setCurrentTheme] = useState<'dark' | 'light'>('dark');
+    const [messages, setMessages] = useState<Message[]>([
+        {
+            id: 'init-1',
+            sender: 'bentley',
+            text: "Hello! I am Bentley, the AI Sales Co-Pilot for Mikey Shaw and Mad EZ Media.",
+            timestamp: new Date()
+        },
+        {
+            id: 'init-2',
+            sender: 'bentley',
+            text: "I coordinate our autonomous agentic fleets. Ask me about Mikey's pricing, his ACMI protocol, or custom integrations like OwnerScout and Folana's CNS.",
+            timestamp: new Date()
+        }
+    ]);
+    const [inputValue, setInputValue] = useState('');
+    const [isTyping, setIsTyping] = useState(false);
+    const messagesEndRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        // Safely get theme from document attribute
-        const initialTheme = document.documentElement.getAttribute('data-theme') as 'dark' | 'light';
-        setCurrentTheme(initialTheme || 'dark');
-
-        const handleThemeChange = (event: CustomEvent<{theme: 'dark' | 'light'}>) => {
-            setCurrentTheme(event.detail.theme);
-        };
-
-        const themeChangeListener = ((e: Event) => {
-            handleThemeChange(e as CustomEvent<{theme: 'dark' | 'light'}>);
-        }) as EventListener;
-
-        document.addEventListener('theme-changed', themeChangeListener);
-
-        return () => {
-            document.removeEventListener('theme-changed', themeChangeListener);
-        };
-    }, []);
-
-    const themeColors = {
-        dark: {
-            toggleBackground: '#D4AF37',
-            containerBackground: 'rgba(30, 30, 30, 0.95)',
-            border: '#333',
-            headerColor: '#E0E0E0',
-            textColor: '#C0C0C0'
-        },
-        light: {
-            toggleBackground: '#28A745',
-            containerBackground: 'rgba(248, 249, 250, 0.95)',
-            border: '#DEE2E6',
-            headerColor: '#212529',
-            textColor: '#495057'
+        if (messagesEndRef.current) {
+            messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
         }
+    }, [messages, isTyping]);
+
+    const getBentleyResponse = (input: string): string => {
+        const query = input.toLowerCase();
+
+        if (query.includes('price') || query.includes('pricing') || query.includes('cost') || query.includes('money') || query.includes('investment') || query.includes('retainer')) {
+            return "Mikey's core offer is the Custom Agentic Fleet Deployment at $15,000 (or a $4,500/month retainer). This includes full Next.js 16/Supabase/PostgreSQL architecture, custom ACMI bus integration, and a 45-day performance guarantee. We also offer media pipeline integrations ($3,500) and Whop credit checkout setups ($2,000).";
+        }
+        if (query.includes('acmi') || query.includes('bus') || query.includes('memory') || query.includes('correlation') || query.includes('protocol')) {
+            return "ACMI (Agentic Context Memory Interface) is Mikey's custom v1.5 atomic memory bus. It synchronizes states, profiles, telemetry signals, and event timelines across independent AI subagents. This avoids fragile API links and ensures 100% state-consistency across systems like Folana.";
+        }
+        if (query.includes('ownerscout')) {
+            return "OwnerScout is an AI Restaurant Discovery Engine built by Mikey. It uses Google Places API + Gemini to crawl and qualify leads. It aggregates Square/Toast POS signatures and writes custom cold pitches. Mikey optimized it to prospect 50 restaurants for only ~$0.91 (an 80%+ cost cut).";
+        }
+        if (query.includes('folana') || query.includes('journal') || query.includes('cns') || query.includes('creator')) {
+            return "Folana's Journal is an autonomous creator CNS built on Next.js 16, Deepgram (aura-2-arcas TTS), RunPod lip-sync, and Composio. It runs a launchd cron loop 4x daily to draft, narrate, render, and publish high-retention video dispatches with zero human clicks.";
+        }
+        if (query.includes('ez') || query.includes('influencer') || query.includes('canvas') || query.includes('360')) {
+            return "EZ Influencer 360 is a visual creator workspace built for Whop communities. It integrates ComfyUI, Bytedance Seedream 4.0, and RunPod InfiniteTalk. Mikey structured it with an Upstash Redis credits gateway, yielding a 2.3-second average generation speed.";
+        }
+        if (query.includes('madez') || query.includes('mad ez') || query.includes('migration') || query.includes('supabase')) {
+            return "For Mad EZ Website V2, Mikey upgraded Airtable to Supabase PostgreSQL with Redis TTL caching. Using Next.js 16 with Turbopack, he cut build times from 40s to 3s and reduced DB queries by 99% (API latency under 10ms).";
+        }
+        if (query.includes('contact') || query.includes('hire') || query.includes('meeting') || query.includes('book') || query.includes('schedule') || query.includes('email') || query.includes('call')) {
+            return "You can book a meeting with Mikey directly via the calendar widget on this page, or email him at michael@madezmedia.com to initiate a System Architecture Brief.";
+        }
+        if (query.includes('hello') || query.includes('hi') || query.includes('hey')) {
+            return "Hello! How can I assist you with Mikey's autonomous fleet deployments or technical integrations today?";
+        }
+
+        return "I'm Bentley, Mikey's sales co-pilot. I can detail his Custom Agentic Fleet deployments ($15,000 / $4,500 retainer), explain ACMI, or share metrics on OwnerScout and Folana. Try asking: 'How much does it cost?' or 'What is OwnerScout?'";
     };
 
-    const colors = themeColors[currentTheme];
+    const handleSend = (text: string) => {
+        if (!text.trim()) return;
 
-    return React.createElement(
-        'div',
-        {
-            className: `chat-widget ${isOpen ? 'open' : ''} theme-${currentTheme}`,
-            style: { 
-                position: 'fixed', 
-                bottom: '20px', 
-                right: '20px', 
-                zIndex: 1000 
-            }
-        },
-        React.createElement(
-            'div',
-            {
-                className: 'chat-toggle',
-                onClick: () => setIsOpen(!isOpen),
-                style: {
-                    width: '60px',
-                    height: '60px',
-                    borderRadius: '50%',
-                    background: colors.toggleBackground,
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    cursor: 'pointer',
-                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-                }
-            },
-            '💬'
-        ),
-        isOpen && React.createElement(
-            'div',
-            {
-                className: 'chat-container',
-                style: {
-                    position: 'absolute',
-                    bottom: '80px',
-                    right: '0',
-                    width: '300px',
-                    background: colors.containerBackground,
-                    border: `1px solid ${colors.border}`,
-                    borderRadius: '10px',
-                    padding: '15px',
-                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                    transition: 'all 0.3s ease'
-                }
-            },
-            [
-                React.createElement(
-                    'h3',
-                    { 
-                        style: { 
-                            color: colors.headerColor, 
-                            marginBottom: '10px',
-                            fontFamily: "'Orbitron', sans-serif",
-                            textTransform: 'uppercase',
-                            letterSpacing: '0.05em'
-                        } 
-                    },
-                    'Chat Widget'
-                ),
-                React.createElement(
-                    'p',
-                    { 
-                        style: { 
-                            color: colors.textColor,
-                            fontFamily: "'Inter', sans-serif"
-                        } 
-                    },
-                    'This is a simple chat widget placeholder.'
-                )
-            ]
-        )
+        const userMsg: Message = {
+            id: `msg-${Date.now()}-user`,
+            sender: 'user',
+            text,
+            timestamp: new Date()
+        };
+
+        setMessages(prev => [...prev, userMsg]);
+        setInputValue('');
+        setIsTyping(true);
+
+        setTimeout(() => {
+            const replyText = getBentleyResponse(text);
+            const bentleyMsg: Message = {
+                id: `msg-${Date.now()}-bentley`,
+                sender: 'bentley',
+                text: replyText,
+                timestamp: new Date()
+            };
+            setMessages(prev => [...prev, bentleyMsg]);
+            setIsTyping(false);
+        }, 800);
+    };
+
+    const quickReplies = [
+        "What is Mikey's pricing?",
+        "Explain the ACMI protocol",
+        "Tell me about OwnerScout",
+        "How do I book a meeting?"
+    ];
+
+    return (
+        <div className={`bentley-chat-widget ${isOpen ? 'is-open' : ''}`}>
+            <button 
+                className="bentley-chat-toggle"
+                onClick={() => setIsOpen(!isOpen)}
+                aria-label="Toggle chat assistant"
+            >
+                <span className="toggle-icon">💬</span>
+                <span className="toggle-badge">Bentley</span>
+            </button>
+
+            {isOpen && (
+                <div className="bentley-chat-window">
+                    <div className="bentley-chat-header">
+                        <div className="bentley-avatar-container">
+                            <span className="bentley-avatar">🤵</span>
+                            <span className="status-indicator online"></span>
+                        </div>
+                        <div className="bentley-header-info">
+                            <h3 className="bentley-name">Bentley</h3>
+                            <p className="bentley-role">AI Sales Co-Pilot • Mad EZ</p>
+                        </div>
+                        <button 
+                            className="bentley-close-btn"
+                            onClick={() => setIsOpen(false)}
+                            aria-label="Close chat window"
+                        >
+                            ✕
+                        </button>
+                    </div>
+
+                    <div className="bentley-messages-container">
+                        {messages.map(msg => (
+                            <div key={msg.id} className={`chat-bubble-wrapper ${msg.sender}`}>
+                                <div className="chat-bubble">
+                                    <p className="bubble-text">{msg.text}</p>
+                                    <span className="bubble-time">
+                                        {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                    </span>
+                                </div>
+                            </div>
+                        ))}
+                        {isTyping && (
+                            <div className="chat-bubble-wrapper bentley typing">
+                                <div className="chat-bubble">
+                                    <div className="typing-indicator">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                        <div ref={messagesEndRef} />
+                    </div>
+
+                    <div className="bentley-quick-replies">
+                        {quickReplies.map((reply, index) => (
+                            <button 
+                                key={index} 
+                                className="quick-reply-btn"
+                                onClick={() => handleSend(reply)}
+                            >
+                                {reply}
+                            </button>
+                        ))}
+                    </div>
+
+                    <form 
+                        className="bentley-input-form"
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            handleSend(inputValue);
+                        }}
+                    >
+                        <input 
+                            type="text" 
+                            className="bentley-chat-input"
+                            value={inputValue}
+                            onChange={(e) => setInputValue(e.target.value)}
+                            placeholder="Ask Bentley about services or case studies..."
+                        />
+                        <button type="submit" className="bentley-send-btn">
+                            Send
+                        </button>
+                    </form>
+                </div>
+            )}
+        </div>
     );
 }
 

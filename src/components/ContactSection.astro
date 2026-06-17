@@ -82,9 +82,9 @@ const contactOptions = [
         margin: 4rem auto;
         padding: 2.5rem;
         background: var(--bg-secondary);
-        border-radius: 0px;
-        border: 2px solid var(--primary);
-        box-shadow: 6px 6px 0px var(--accent-pink);
+        border-radius: 16px;
+        border: 1px solid rgba(45, 74, 62, 0.08);
+        box-shadow: 0 8px 32px rgba(45, 74, 62, 0.03);
         transition: transform var(--transitionDuration) ease;
     }
 
@@ -132,8 +132,8 @@ const contactOptions = [
 
     .connection-card {
         background: var(--bg-primary);
-        border-radius: 0px;
-        border: 1px solid var(--primary);
+        border-radius: 12px;
+        border: 1px solid rgba(45, 74, 62, 0.06);
         padding: 1.5rem;
         display: flex;
         align-items: center;
@@ -143,6 +143,7 @@ const contactOptions = [
             box-shadow var(--transitionDuration) ease;
         position: relative;
         overflow: hidden;
+        box-shadow: 0 4px 12px rgba(45, 74, 62, 0.02);
     }
 
     .connection-card::before {
@@ -163,8 +164,8 @@ const contactOptions = [
     }
 
     .connection-card:hover {
-        transform: translate(-4px, -4px);
-        box-shadow: 4px 4px 0px var(--accent-cyan);
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px rgba(45, 74, 62, 0.06);
     }
 
     .connection-card:hover::before {
@@ -175,8 +176,8 @@ const contactOptions = [
         background: var(--bg-secondary);
         width: 80px;
         height: 80px;
-        border-radius: 0px;
-        border: 1px solid var(--primary);
+        border-radius: 10px;
+        border: 1px solid rgba(45, 74, 62, 0.08);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -215,22 +216,23 @@ const contactOptions = [
         display: inline-block;
         background: var(--primary);
         color: var(--bg-primary);
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 1.5rem;
         text-decoration: none;
-        border-radius: 0px;
+        border-radius: 9999px;
         border: 1px solid var(--primary);
         font-family: 'JetBrains Mono', monospace;
         font-size: 0.8rem;
         text-transform: uppercase;
         letter-spacing: 0.1em;
         transition: all 0.2s ease;
+        box-shadow: 0 4px 10px rgba(45, 74, 62, 0.08);
     }
 
     .connection-link:hover {
         background: transparent;
         color: var(--primary);
-        transform: translate(-2px, -2px);
-        box-shadow: 2px 2px 0px var(--accent-yellow);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 14px rgba(45, 74, 62, 0.12);
     }
 
     .social-connect {
@@ -248,9 +250,10 @@ const contactOptions = [
 
     .scheduling-container {
         background: var(--bg-primary);
-        border-radius: 0px;
-        border: 1px solid var(--primary);
+        border-radius: 12px;
+        border: 1px solid rgba(45, 74, 62, 0.06);
         padding: 2rem;
+        box-shadow: 0 8px 24px rgba(45, 74, 62, 0.02);
     }
 
     .scheduling-header {

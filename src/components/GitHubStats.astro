@@ -60,17 +60,18 @@ const githubStatsImages = [
 
     .github-stat-image-container {
         background: var(--bg-secondary);
-        border-radius: 0px;
-        border: 2px solid var(--accent);
+        border-radius: 14px;
+        border: 1px solid rgba(45, 74, 62, 0.08);
         overflow: hidden;
+        box-shadow: 0 8px 24px rgba(45, 74, 62, 0.03);
         transition: 
-            transform 0.2s ease,
-            box-shadow 0.2s ease;
+            transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+            box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .github-stat-image-container:hover {
-        transform: translate(-4px, -4px);
-        box-shadow: 4px 4px 0px var(--accent-pink);
+        transform: translateY(-4px);
+        box-shadow: 0 16px 36px rgba(45, 74, 62, 0.08);
     }
 
     .github-stat-image {
@@ -78,36 +79,37 @@ const githubStatsImages = [
         height: auto;
         display: block;
         object-fit: cover;
-        border-radius: 0px;
-        filter: saturate(0.85) contrast(1.1);
-        transition: filter 0.2s ease;
+        border-radius: 14px;
+        filter: saturate(0.85) contrast(1.05);
+        transition: filter 0.3s ease;
     }
 
     .github-stat-image:hover {
-        filter: saturate(1.1) contrast(1.2);
+        filter: saturate(1) contrast(1.1);
     }
 
     .profile-link {
-        font-family: "Montserrat", sans-serif;
-        font-weight: 700;
+        font-family: "Outfit", sans-serif;
+        font-weight: 600;
         text-transform: uppercase;
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         letter-spacing: 0.15em;
-        background: var(--accent-yellow);
-        color: #000000;
-        padding: 1rem 2rem;
+        background: #2d4a3e;
+        color: #ffffff;
+        padding: 0.85rem 2rem;
         text-decoration: none;
-        border-radius: 0px;
-        border: 2px solid var(--accent-yellow);
-        transition: all 0.2s ease;
+        border-radius: 9999px;
+        border: 1px solid #2d4a3e;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         display: inline-block;
+        box-shadow: 0 4px 12px rgba(45, 74, 62, 0.1);
     }
 
     .profile-link:hover {
         background: transparent;
-        color: var(--accent-yellow);
-        transform: translate(-4px, -4px);
-        box-shadow: 4px 4px 0px var(--accent-cyan);
+        color: #2d4a3e;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(45, 74, 62, 0.15);
     }
 </style>
 

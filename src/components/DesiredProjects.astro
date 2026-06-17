@@ -21,21 +21,23 @@ const acmiEntities: ACMIEntity[] = [
         accentColor: '#00B9F1', // Cyan
         profile: {
             "entity": "ownerscout",
-            "purpose": "Restaurant Lead Qualification",
-            "architecture": "Parallel Web Crawler",
-            "stack": ["React 19", "Vite", "Google Places Aggregate API", "Gemini 1.5 Pro"]
+            "path": "dyad-apps/ownerscout",
+            "core_file": "ownerscout/App.tsx",
+            "proxy_server": "ownerscout/proxy-server.js",
+            "database_migration": "supabase/migrations/20260405_create_args_tables.sql",
+            "stack": ["React 19", "Vite", "Google Places API", "Gemini 1.5 Pro"]
         },
         signals: {
-            "crawl_status": "Parallel execution active",
-            "signatures_crawled": "50+ tech platform signatures",
-            "leads_scored": "Independence + Commission Bleed gap",
-            "api_efficiency": "50 restaurants prospected for ~$0.91"
+            "prospecting_method": "Parallel POS signature scraping",
+            "lead_efficiency": "50 restaurants qualified for ~$0.91",
+            "signatures_detected": "Toast POS, Square, and ChowNow online menus",
+            "status": "OPTIMIZATION-COMPLETE.md & LOCATION-FEATURE.md verified"
         },
         timeline: [
-            "→ Integrated Google Places Aggregate API",
-            "→ Deployed parallel website crawler filtering 100+ known chains",
-            "→ Implemented Toast/Square/ChowNow POS & ordering signatures",
-            "→ Wired Gemini AI Vibe Check for automatic cold sales pitches"
+            "→ Configured Google Places endpoint proxy in ownerscout/proxy-server.js",
+            "→ Deployed create_args_tables.sql SQL script in local Supabase migrations",
+            "→ Implemented multi-thread POS ordering checkout signature crawler",
+            "→ Wired Gemini AI pitch builder directly to ownerscout/App.tsx front-end"
         ]
     },
     {
@@ -46,21 +48,23 @@ const acmiEntities: ACMIEntity[] = [
         accentColor: '#E5007D', // Pink
         profile: {
             "entity": "ez-influencer-360",
-            "purpose": "Visual Multi-Engine Media Pipeline",
-            "canvas": "React Flow Node Workspace",
-            "stack": ["Next.js 14", "Upstash Redis", "Sinkin.ai", "Fal.ai", "RunPod"]
+            "path": "dyad-apps/ez-influencer-360",
+            "core_types": ["types/VideoStudio.ts", "types/LipSync.ts"],
+            "lora_manager": "app/ez-loras-manager/page.tsx",
+            "checkout_reconciliation": "app/purchase-success/page.tsx",
+            "stack": ["Next.js 14", "Upstash Redis", "Fal.ai", "RunPod InfiniteTalk"]
         },
         signals: {
-            "generation_engines": "ComfyUI, Seedream 4.0 4K, RunPod InfiniteTalk",
-            "average_speed": "2.3 seconds per 4K generation",
-            "credits_gateway": "Whop-native webhooks reconciled",
-            "affiliate_commission": "20% automated credit referral system"
+            "render_speed": "2.3s average per 4K frame generation",
+            "payment_webhook": "Whop API gateway signature checked",
+            "nsfw_filter": "Grok moderation fallback listener active",
+            "credit_cache": "Upstash Redis TTL-based coin ledger sync"
         },
         timeline: [
-            "→ Designed React Flow node canvas with 7 inputs & 9 backend engines",
-            "→ Wired Bytedance Seedream 4.0 (4K resolution) and Seedance video",
-            "→ Integrated RunPod InfiniteTalk lip-sync and gesture engine",
-            "→ Deployed Grok NSFW content routing fallback filter"
+            "→ Structured Node canvas utilizing VideoStudio and LipSync typescript types",
+            "→ Wired checkout success hooks inside app/purchase-success/page.tsx",
+            "→ Designed custom LoRA training parameters at app/ez-loras-manager/page.tsx",
+            "→ Integrated ComfyUI, Seedream 4.0, and RunPod lip-sync API channels"
         ]
     },
     {
@@ -71,21 +75,23 @@ const acmiEntities: ACMIEntity[] = [
         accentColor: '#FCDC00', // Yellow
         profile: {
             "entity": "folanas-journal",
-            "architecture": "5-Layer Central Nervous System",
-            "cadence": "4x daily wake checks via launchd",
-            "stack": ["Next.js 16", "Deepgram aura-2-arcas", "Composio", "Upstash Redis"]
+            "path": "dyad-apps/folanas-journal",
+            "protocol_client": "folanas-journal/lib/acmi-client.ts",
+            "journal_data": "folanas-journal/lib/acmi-journal.ts",
+            "scheduler": "launchd cron daemon (ensure_daily_video)",
+            "stack": ["Next.js 16", "Deepgram TTS", "Composio", "Upstash Redis"]
         },
         signals: {
-            "voice_synthesis": "breathy aura-2-arcas-en @ 0.96 speed",
-            "overall_health": "68% total project completion (78% pipeline)",
-            "queue_listener": "Upstash Redis inbox-drain system active",
-            "publishing": "Next.js Admin API auto-registration"
+            "active_timeline": "grokOvernight-1780212345000 thread monitoring",
+            "vocal_synth": "Deepgram aura-2-arcas-en @ 0.96 speed",
+            "social_dist": "Composio workflow dispatch (LINKEDIN_CREATE_POST)",
+            "bus_publish": "Atomic events pushed to http://localhost:7780/emit"
         },
         timeline: [
-            "→ Hardened 5-Layer CNS (Grounded, Creative, Episodic, State, Tool)",
-            "→ Wired Deepgram vocal synthesis and RunPod gesture video loops",
-            "→ Created launchd automated inbox queue claiming scripts",
-            "→ Autonomously published Ep47 & Ep48 video dispatches to live journal"
+            "→ Deployed state-management protocol inside lib/acmi-journal.ts",
+            "→ Configured daily automated video render triggered via local launchd",
+            "→ Generated vocal tracks from md posts using Deepgram aura-2-arcas-en TTS",
+            "→ Emitted transaction logs to main acmi_bus.txt in commit 20b954e"
         ]
     },
     {
@@ -96,21 +102,23 @@ const acmiEntities: ACMIEntity[] = [
         accentColor: '#2d4a3e', // Forest
         profile: {
             "entity": "Mad-EZ-Website-V2",
-            "purpose": "Agency Portfolio & Onboarding",
-            "optimization": "Next.js 16 + Turbopack build",
+            "path": "/Volumes/1TB/Mad-EZ-Website-V2",
+            "postgres_schema": "types/supabase.ts",
+            "site_configuration": "next.config.ts",
+            "layout_root": "app/layout.tsx",
             "stack": ["Next.js 16.1.0", "React 19.1", "Supabase PostgreSQL", "Redis"]
         },
         signals: {
-            "build_time": "3-5 seconds (Turbopack enabled, previously 40s)",
-            "caching": "Redis TTL (1-hour expiry, 99% DB call reduction)",
-            "api_response": "Cached endpoints returned in <10ms",
-            "onboarding": "Interactive Yelps & Google Places qualifying agent"
+            "compile_speed": "3-5s Turbopack server startup (previously 40s)",
+            "db_cache": "Redis TTL (1-hour expiration cache hits: 99.2%)",
+            "migration_check": "DEPLOYMENT_READY.md integration metrics verified",
+            "latency": "Cached onboarding endpoints resolving in under 10ms"
         },
         timeline: [
-            "→ Upgraded Next.js 15.2 → 16.1 and React 19 → 19.1",
-            "→ Replaced Airtable CMS with Supabase PostgreSQL layer (80+ queries)",
-            "→ Configured AVIF images (30% smaller payload) and security headers",
-            "→ Verified 6/6 integration tests passing for business onboarding flow"
+            "→ Upgraded next.config.ts config to use Turbopack and React 19.1",
+            "→ Replaced Airtable API calls with Supabase clients in types/supabase.ts",
+            "→ Configured AVIF image codecs and custom security policies in headers",
+            "→ Deployed brand showcase layouts and contact routes inside app/layout.tsx"
         ]
     }
 ];
