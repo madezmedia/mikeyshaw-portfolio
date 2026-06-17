@@ -4,7 +4,7 @@ interface ServiceItem {
   id: string;
   name: string;
   price: string;
-  basePriceNum: number;
+  baseComplexity: number;
   type: 'retainer' | 'flat' | 'hybrid';
   description: string;
   bullets: string[];
@@ -16,8 +16,8 @@ const services: ServiceItem[] = [
   {
     id: 'agentic-fleet',
     name: 'Custom Agentic Fleet Deployment',
-    price: '$15,000 setup + $4,500/mo',
-    basePriceNum: 15000,
+    price: 'Custom Retainer / Proposal Required',
+    baseComplexity: 50,
     type: 'hybrid',
     description: 'Autonomous multi-agent systems built to handle production-scale digital operations, state management, and media generation pipelines with zero manual clicks.',
     bullets: [
@@ -33,8 +33,8 @@ const services: ServiceItem[] = [
   {
     id: 'ai-coaching',
     name: 'AI Coaching & Setup for SMBs & Execs',
-    price: '$3,500/mo',
-    basePriceNum: 3500,
+    price: 'Monthly Advisory / Retainer',
+    baseComplexity: 20,
     type: 'retainer',
     description: 'Direct 1-on-1 strategic advisory and workflow engineering for business leaders. We audit your operations, build custom low-code tools, and upskill your team.',
     bullets: [
@@ -50,8 +50,8 @@ const services: ServiceItem[] = [
   {
     id: 'media-pipeline',
     name: 'Custom Media Pipeline Setup',
-    price: '$5,000 flat',
-    basePriceNum: 5000,
+    price: 'Project Basis / Quote Required',
+    baseComplexity: 35,
     type: 'flat',
     description: 'Dedicated automated media synthesis engine. Integrates Fal.ai image generators, RunPod InfiniteTalk lip-sync videos, and Deepgram voice synthesis.',
     bullets: [
@@ -132,28 +132,26 @@ export default function ServicesAndOffers() {
   const [submittingQuote, setSubmittingQuote] = useState(false);
   const [quoteResponse, setQuoteResponse] = useState<any>(null);
 
-  // Cal.com / Square simulated route
   const currentService = services.find(s => s.id === selectedService) || services[0];
 
-  // Calculate pricing dynamically
-  const calculateTotal = () => {
-    let base = currentService.basePriceNum;
-    if (selectedService === 'agentic-fleet') {
-      if (databaseOption) base += 2500;
-      if (telemetryOption) base += 3000;
-      if (customCrmOption) base += 2000;
-      // Urgent multiplier
-      if (timelineSpeed === 1) base += 5000;
-    } else if (selectedService === 'media-pipeline') {
-      if (databaseOption) base += 1000;
-      if (telemetryOption) base += 1500;
-      if (customCrmOption) base += 1000;
-      if (timelineSpeed === 1) base += 1500;
+  // Calculate project complexity score instead of exact price
+  const calculateComplexity = () => {
+    let score = currentService.baseComplexity;
+    if (selectedService === 'agentic-fleet' || selectedService === 'media-pipeline') {
+      if (databaseOption) score += 15;
+      if (telemetryOption) score += 20;
+      if (customCrmOption) score += 10;
+      if (timelineSpeed === 1) score += 15;
     } else if (selectedService === 'ai-coaching') {
-      // Monthly rates: no addons, but speed can affect onboarding cost
-      if (timelineSpeed === 1) base += 1000;
+      if (timelineSpeed === 1) score += 15;
     }
-    return base;
+    return Math.min(score, 100);
+  };
+
+  const getComplexityTier = (score: number) => {
+    if (score < 40) return 'Standard Integration';
+    if (score >= 40 && score < 70) return 'Pro Hybrid Architecture';
+    return 'Enterprise Swarm Deployment';
   };
 
   const handleQuoteSubmit = (e: React.FormEvent) => {
@@ -165,11 +163,10 @@ export default function ServicesAndOffers() {
 
     setSubmittingQuote(true);
 
-    // Dynamic quote JSON payload for Square/ACMI bus representation
     setTimeout(() => {
       const generatedInvoiceId = 'sq-inv_' + Math.random().toString(36).substring(2, 11).toUpperCase();
       const generatedQuoteId = 'Q-' + Math.floor(100000 + Math.random() * 900000);
-      const totalAmount = calculateTotal();
+      const score = calculateComplexity();
 
       const quoteDetails = {
         invoiceId: generatedInvoiceId,
@@ -183,7 +180,8 @@ export default function ServicesAndOffers() {
           crmIntegration: customCrmOption
         },
         timelineWeeks: timelineSpeed === 1 ? 2 : timelineSpeed === 3 ? 6 : 12,
-        amount: totalAmount,
+        complexityScore: score,
+        complexityTier: getComplexityTier(score),
         status: 'QUOTE_STAGED',
         merchantNotes: 'Direct Square merchant dispatch queued. Integration verified.',
         createdAt: new Date().toISOString()
@@ -192,7 +190,7 @@ export default function ServicesAndOffers() {
       setQuoteResponse(quoteDetails);
       setSubmittingQuote(false);
 
-      // Emit event to local ACMI bus relay if active (or standard console signal)
+      // Emit event to local ACMI bus relay if active
       try {
         fetch('http://localhost:7780/emit', {
           method: 'POST',
@@ -283,7 +281,7 @@ export default function ServicesAndOffers() {
               <span className="w-2.5 h-2.5 rounded-full bg-[#00B9F1] animate-pulse"></span>
               <span className="font-label-mono text-[9px] uppercase tracking-[0.2em] text-[#00B9F1] font-bold">Square Merchant Engine</span>
             </div>
-            <h3 className="font-heading text-xl font-bold">Quote Request & Setup Dispatch</h3>
+            <h3 className="font-heading text-xl font-bold">Inquire & Request Custom Quote</h3>
           </div>
           <div className="bg-white/10 px-4 py-1.5 rounded-lg border border-white/10 font-label-mono text-xs">
             Client Selected: <span className="text-accent-yellow font-bold uppercase">{currentService.id.replace('-', ' ')}</span>
@@ -336,7 +334,7 @@ export default function ServicesAndOffers() {
                           <div>
                             <span className="block font-sans text-xs font-bold text-[#2d4a3e]">Database Hardening</span>
                             <span className="block font-label-mono text-[9px] text-[#2d4a3e]/60 mt-1">
-                              {selectedService === 'agentic-fleet' ? '+$2,500' : '+$1,000'}
+                              Integration Upgrade
                             </span>
                           </div>
                         </div>
@@ -353,7 +351,7 @@ export default function ServicesAndOffers() {
                           <div>
                             <span className="block font-sans text-xs font-bold text-[#2d4a3e]">Telemetry Dashboard</span>
                             <span className="block font-label-mono text-[9px] text-[#2d4a3e]/60 mt-1">
-                              {selectedService === 'agentic-fleet' ? '+$3,000' : '+$1,500'}
+                              ACMI Live Portal
                             </span>
                           </div>
                         </div>
@@ -370,7 +368,7 @@ export default function ServicesAndOffers() {
                           <div>
                             <span className="block font-sans text-xs font-bold text-[#2d4a3e]">CRM Synced Flow</span>
                             <span className="block font-label-mono text-[9px] text-[#2d4a3e]/60 mt-1">
-                              {selectedService === 'agentic-fleet' ? '+$2,000' : '+$1,000'}
+                              API Webhook Sync
                             </span>
                           </div>
                         </div>
@@ -396,7 +394,7 @@ export default function ServicesAndOffers() {
                     className="w-full h-1 bg-[#2d4a3e]/10 rounded-lg appearance-none cursor-pointer accent-[#2d4a3e]"
                   />
                   <div className="flex justify-between font-label-mono text-[9px] text-[#2d4a3e]/40 mt-1.5 uppercase font-semibold">
-                    <span>Urgent (+Fee)</span>
+                    <span>Urgent SLA</span>
                     <span>Standard</span>
                     <span>Extended</span>
                   </div>
@@ -410,7 +408,7 @@ export default function ServicesAndOffers() {
                       rel="noopener noreferrer"
                       className="w-full inline-block text-center py-4 bg-[#2d4a3e] text-white font-sans font-bold text-xs uppercase tracking-widest rounded-full hover:bg-[#3a5c4e] transition-all cursor-pointer shadow-md no-underline"
                     >
-                      Redirect to Booking Calendar
+                      Book strategy brief on Cal.com
                     </a>
                   ) : (
                     <button 
@@ -418,7 +416,7 @@ export default function ServicesAndOffers() {
                       disabled={submittingQuote}
                       className="w-full py-4 bg-[#2d4a3e] text-white font-sans font-bold text-xs uppercase tracking-widest rounded-full hover:bg-[#3a5c4e] transition-all cursor-pointer disabled:opacity-50 shadow-md"
                     >
-                      {submittingQuote ? 'Communicating with Square API...' : `Request Direct Square Quote • $${calculateTotal().toLocaleString()}`}
+                      {submittingQuote ? 'Communicating with Square API...' : 'Submit Architecture Intake & Request Quote'}
                     </button>
                   )}
                 </div>
@@ -431,7 +429,7 @@ export default function ServicesAndOffers() {
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span>Square Quote Staged & Telemetry Locked</span>
+                    <span>Square Quote Intake Complete</span>
                   </div>
                   
                   <p className="font-sans text-xs text-[#2d4a3e]/80 leading-relaxed">
@@ -452,10 +450,10 @@ export default function ServicesAndOffers() {
 
                 <div className="flex flex-col md:flex-row gap-4 pt-2">
                   <a 
-                    href={`mailto:michael@madezmedia.com?subject=Square%20Proposal%20Inquiry%20[${quoteResponse.quoteId}]&body=Hi%20Mikey,%0D%0A%0D%0AI%20have%20staged%20a%20Square%20quote%20for%20the%20${encodeURIComponent(quoteResponse.service)}.%0D%0A%0D%0AInvoice%20ID:%20${quoteResponse.invoiceId}%0D%0ATotal%20Estimate:%20$${quoteResponse.amount.toLocaleString()}%0D%0ACompany:%20${encodeURIComponent(quoteResponse.company)}%0D%0AEmail:%20${encodeURIComponent(quoteResponse.email)}%0D%0A%0D%0APlease%20review%20and%20send%20over%20the%20official%20Square%20agreement.`}
+                    href={`mailto:michael@madezmedia.com?subject=Square%20Proposal%20Inquiry%20[${quoteResponse.quoteId}]&body=Hi%20Mikey,%0D%0A%0D%0AI%20have%20staged%20a%20Square%20quote%20for%20the%20${encodeURIComponent(quoteResponse.service)}.%0D%0A%0D%0AInvoice%20ID:%20${quoteResponse.invoiceId}%0D%0AComplexity%20Tier:%20${encodeURIComponent(quoteResponse.complexityTier)}%0D%0ACompany:%20${encodeURIComponent(quoteResponse.company)}%0D%0AEmail:%20${encodeURIComponent(quoteResponse.email)}%0D%0A%0D%0APlease%20review%20and%20send%20over%20the%20official%20Square%20agreement.`}
                     className="flex-1 text-center py-3.5 bg-[#2d4a3e] text-white font-sans font-bold text-xs uppercase tracking-widest rounded-full hover:bg-[#3a5c4e] transition-all no-underline shadow-sm"
                   >
-                    Confirm & Send Email Quote
+                    Confirm & Send Email Inquiry
                   </a>
                   <button 
                     onClick={resetForm}
@@ -471,82 +469,97 @@ export default function ServicesAndOffers() {
           {/* Right: Live Telemetry Preview Panel */}
           <div className="lg:col-span-5 p-8 bg-[#faf9f5] flex flex-col justify-between space-y-8">
             <div className="space-y-6">
-              <span className="font-label-mono text-[9px] uppercase tracking-widest text-[#2d4a3e]/45 font-bold block">Telemetry Ledger & Summary</span>
+              <span className="font-label-mono text-[9px] uppercase tracking-widest text-[#2d4a3e]/45 font-bold block">Telemetry Ledger & Scope</span>
               
-              <div className="space-y-3.5">
+              <div className="space-y-4">
                 <div className="flex justify-between items-baseline text-[#2d4a3e] border-b border-[#2d4a3e]/10 pb-2.5">
                   <span className="font-sans text-sm font-semibold">{currentService.name}</span>
-                  <span className="font-label-mono text-xs font-bold">${currentService.basePriceNum.toLocaleString()}</span>
+                  <span className="font-label-mono text-[10px] font-bold text-accent-pink uppercase">Intake Active</span>
                 </div>
 
-                {selectedService === 'agentic-fleet' && (
-                  <div className="space-y-2 text-xs text-[#2d4a3e]/70 font-sans">
-                    {databaseOption && (
-                      <div className="flex justify-between items-center">
-                        <span>+ DB Schema & Partition Audits</span>
-                        <span className="font-label-mono text-[10px] font-bold">+$2,500</span>
-                      </div>
-                    )}
-                    {telemetryOption && (
-                      <div className="flex justify-between items-center">
-                        <span>+ Live ACMI Rollup Portal</span>
-                        <span className="font-label-mono text-[10px] font-bold">+$3,000</span>
-                      </div>
-                    )}
-                    {customCrmOption && (
-                      <div className="flex justify-between items-center">
-                        <span>+ Custom Hubspot / Stripe webhook syncs</span>
-                        <span className="font-label-mono text-[10px] font-bold">+$2,000</span>
-                      </div>
-                    )}
+                <div className="space-y-2 text-xs text-[#2d4a3e]/70 font-sans">
+                  <div className="flex justify-between items-center">
+                    <span>Base Scope Level:</span>
+                    <span className="font-label-mono text-[10px] font-bold text-[#2d4a3e]">{currentService.baseComplexity} / 100</span>
                   </div>
-                )}
 
-                {selectedService === 'media-pipeline' && (
-                  <div className="space-y-2 text-xs text-[#2d4a3e]/70 font-sans">
-                    {databaseOption && (
-                      <div className="flex justify-between items-center">
-                        <span>+ Media Storage Cache Partition</span>
-                        <span className="font-label-mono text-[10px] font-bold">+$1,000</span>
-                      </div>
-                    )}
-                    {telemetryOption && (
-                      <div className="flex justify-between items-center">
-                        <span>+ Asset Generation Logs Portal</span>
-                        <span className="font-label-mono text-[10px] font-bold">+$1,500</span>
-                      </div>
-                    )}
-                    {customCrmOption && (
-                      <div className="flex justify-between items-center">
-                        <span>+ Automatic social webhook post trigger</span>
-                        <span className="font-label-mono text-[10px] font-bold">+$1,000</span>
-                      </div>
-                    )}
-                  </div>
-                )}
+                  {selectedService === 'agentic-fleet' && (
+                    <div className="space-y-2">
+                      {databaseOption && (
+                        <div className="flex justify-between items-center">
+                          <span>+ Database Hardening Upgrade</span>
+                          <span className="font-label-mono text-[10px] font-bold text-[#2d4a3e]">+15</span>
+                        </div>
+                      )}
+                      {telemetryOption && (
+                        <div className="flex justify-between items-center">
+                          <span>+ ACMI Telemetry Live Portal</span>
+                          <span className="font-label-mono text-[10px] font-bold text-[#2d4a3e]">+20</span>
+                        </div>
+                      )}
+                      {customCrmOption && (
+                        <div className="flex justify-between items-center">
+                          <span>+ CRM API & Webhook Syncs</span>
+                          <span className="font-label-mono text-[10px] font-bold text-[#2d4a3e]">+10</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
 
-                {timelineSpeed === 1 && (
-                  <div className="flex justify-between items-center text-xs text-accent-pink font-sans font-bold">
-                    <span>+ Urgent Delivery (2 Wks SLA)</span>
-                    <span className="font-label-mono text-[10px]">${selectedService === 'agentic-fleet' ? '5,000' : '1,500'}</span>
-                  </div>
-                )}
+                  {selectedService === 'media-pipeline' && (
+                    <div className="space-y-2">
+                      {databaseOption && (
+                        <div className="flex justify-between items-center">
+                          <span>+ Asset Storage Partition</span>
+                          <span className="font-label-mono text-[10px] font-bold text-[#2d4a3e]">+10</span>
+                        </div>
+                      )}
+                      {telemetryOption && (
+                        <div className="flex justify-between items-center">
+                          <span>+ Generation Logging Panel</span>
+                          <span className="font-label-mono text-[10px] font-bold text-[#2d4a3e]">+15</span>
+                        </div>
+                      )}
+                      {customCrmOption && (
+                        <div className="flex justify-between items-center">
+                          <span>+ Social Webhook Post Module</span>
+                          <span className="font-label-mono text-[10px] font-bold text-[#2d4a3e]">+10</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {timelineSpeed === 1 && (
+                    <div className="flex justify-between items-center text-accent-pink font-bold">
+                      <span>+ Urgent 2-Week SLA Priority</span>
+                      <span className="font-label-mono text-[10px]">+15</span>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
             <div className="bg-white border border-[#2d4a3e]/10 p-5 rounded-xl space-y-4">
-              <div className="flex justify-between items-baseline">
-                <span className="font-label-mono text-[10px] uppercase tracking-wider text-[#2d4a3e]/50 font-bold">ESTIMATED TOTAL</span>
-                <span className="font-heading text-3xl font-black text-[#2d4a3e]">
-                  ${calculateTotal().toLocaleString()}
+              <div className="flex flex-col gap-1">
+                <span className="font-label-mono text-[9px] uppercase tracking-wider text-[#2d4a3e]/50 font-bold">COMPLEXITY TIER</span>
+                <span className="font-heading text-lg font-black text-[#2d4a3e] leading-tight">
+                  {getComplexityTier(calculateComplexity())}
                 </span>
+                <div className="w-full bg-[#2d4a3e]/10 h-1.5 rounded-full mt-2 overflow-hidden">
+                  <div 
+                    className="bg-[#2d4a3e] h-full transition-all duration-300"
+                    style={{ width: `${calculateComplexity()}%` }}
+                  ></div>
+                </div>
               </div>
               
               <div className="h-[1px] bg-[#2d4a3e]/10 w-full"></div>
               
-              <div className="flex justify-between items-center font-label-mono text-[9px] text-[#2d4a3e]/55 uppercase font-bold">
-                <span>Verification State</span>
-                <span className="px-2 py-0.5 bg-green-100 text-green-800 rounded font-semibold">Active</span>
+              <div className="flex justify-between items-baseline">
+                <span className="font-label-mono text-[9px] uppercase tracking-wider text-[#2d4a3e]/50 font-bold">ESTIMATED RATE</span>
+                <span className="font-sans text-xs font-bold text-accent-pink uppercase">
+                  Custom Quote Required
+                </span>
               </div>
             </div>
           </div>

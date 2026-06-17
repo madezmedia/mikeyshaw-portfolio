@@ -38,7 +38,7 @@ export function ChatWidget() {
         const query = input.toLowerCase();
 
         if (query.includes('price') || query.includes('pricing') || query.includes('cost') || query.includes('money') || query.includes('investment') || query.includes('retainer')) {
-            return "Mikey's core offer is the Custom Agentic Fleet Deployment at $15,000 (or a $4,500/month retainer). This includes full Next.js 16/Supabase/PostgreSQL architecture, custom ACMI bus integration, and a 45-day performance guarantee. We also offer media pipeline integrations ($3,500) and Whop credit checkout setups ($2,000).";
+            return "Mikey's B2B services—such as Custom Agentic Fleet Deployments, Executive AI Coaching, and Custom Media Pipelines—are priced on a custom proposal basis rather than transactional rates. Solutions are tailored to your architecture (Supabase, Next.js, Redis, and ACMI memory bus) and billed securely via Square Invoices. You can request a custom quote or scope complexity estimate directly on the homepage, or book a strategy brief!";
         }
         if (query.includes('acmi') || query.includes('bus') || query.includes('memory') || query.includes('correlation') || query.includes('protocol')) {
             return "ACMI (Agentic Context Memory Interface) is Mikey's custom v1.5 atomic memory bus. It synchronizes states, profiles, telemetry signals, and event timelines across independent AI subagents. This avoids fragile API links and ensures 100% state-consistency across systems like Folana.";
@@ -62,7 +62,7 @@ export function ChatWidget() {
             return "Hello! How can I assist you with Mikey's autonomous fleet deployments or technical integrations today?";
         }
 
-        return "I'm Bentley, Mikey's sales co-pilot. I can detail his Custom Agentic Fleet deployments ($15,000 / $4,500 retainer), explain ACMI, or share metrics on OwnerScout and Folana. Try asking: 'How much does it cost?' or 'What is OwnerScout?'";
+        return "I'm Bentley, Mikey's sales co-pilot. I can detail his Custom Agentic Fleet deployments, explain ACMI, or share metrics on OwnerScout and Folana. Try asking: 'How do I request a quote?' or 'What is OwnerScout?'";
     };
 
     const handleSend = (text: string) => {
@@ -93,7 +93,7 @@ export function ChatWidget() {
     };
 
     const quickReplies = [
-        "What is Mikey's pricing?",
+        "How do I request a quote?",
         "Explain the ACMI protocol",
         "Tell me about OwnerScout",
         "How do I book a meeting?"
