@@ -16,19 +16,8 @@ import ServicesAndOffers from '../components/ServicesAndOffers.tsx';
 ---
 
 <Layout title="Mikey Shaw | Creative Technologist & AI Architect">
-    <!-- Sticky Glassmorphic Navigation -->
-    <nav class="fixed top-0 left-0 w-full z-50 bg-[#faf9f5]/80 backdrop-blur-md border-b border-[#2d4a3e]/10 flex justify-between items-center px-12 md:px-[60px] py-5">
-        <a class="flex items-center gap-1 text-2xl font-black text-[#2d4a3e] no-underline" aria-label="Mikey Shaw — Home" href="/">
-            <span class="font-display font-bold italic tracking-tight">mikey<span class="text-accent-pink">z</span>shaw</span>
-        </a>
-        <div class="hidden md:flex gap-10 items-center">
-            <a class="font-label-mono text-[11px] font-semibold uppercase tracking-[0.25em] text-[#2d4a3e] hover:text-accent-pink transition-colors no-underline" href="#summary">01 Summary</a>
-            <a class="font-label-mono text-[11px] font-semibold uppercase tracking-[0.25em] text-[#2d4a3e] hover:text-accent-cyan transition-colors no-underline" href="#capabilities">02 Skills</a>
-            <a class="font-label-mono text-[11px] font-semibold uppercase tracking-[0.25em] text-[#2d4a3e] hover:text-accent-pink transition-colors no-underline" href="#services">03 Services</a>
-            <a class="font-label-mono text-[11px] font-semibold uppercase tracking-[0.25em] text-[#2d4a3e] hover:text-accent-blue transition-colors no-underline" href="/resume">04 Resume</a>
-            <a class="bg-[#2d4a3e] text-white px-6 py-2.5 font-sans font-bold text-xs uppercase tracking-widest hover:bg-[#3a5c4e] hover:-translate-y-[1px] transition-all rounded-full no-underline" href="mailto:hello@mikeyshaw.work">Initiate Brief</a>
-        </div>
-    </nav>
+    <!-- Sticky Shared Navigation -->
+    <Navbar />
 
     <!-- 3D Interactive Layer -->
     <Scene3D shapeCount={50} complexity={0.9} theme="light" />
@@ -45,7 +34,7 @@ import ServicesAndOffers from '../components/ServicesAndOffers.tsx';
                     Custom media pipelines, persistent memory protocols, and AI-driven discovery engines. We do not ship slide decks. We ship <strong>working systems</strong> that run on autopilot.
                 </p>
                 <div class="flex gap-6 items-center mt-10">
-                    <a class="bg-[#2d4a3e] text-white px-8 py-4 font-bold text-xs uppercase tracking-widest hover:bg-[#3a5c4e] transition-all rounded-full no-underline" href="mailto:hello@mikeyshaw.work">Initiate Architecture Brief →</a>
+                    <a class="bg-[#2d4a3e] text-white px-8 py-4 font-bold text-xs uppercase tracking-widest hover:bg-[#3a5c4e] transition-all rounded-full no-underline" href="#contact">Schedule Discovery Brief →</a>
                     <a class="font-label-mono text-xs uppercase tracking-widest text-[#2d4a3e] hover:text-accent-pink transition-colors no-underline border-b border-[#2d4a3e]/30 pb-0.5" href="#work">Explore the lab</a>
                 </div>
             </div>

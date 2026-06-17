@@ -1,458 +1,179 @@
 ---
-import { THEME_TRANSITION_DURATION } from '../utils/theme';
-
 const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
 const navLinks = [
-    { name: 'Home', href: isHome ? '#hero' : '/#hero', icon: '🏠', ariaLabel: 'Navigate to Home section' },
-    { name: 'About', href: isHome ? '#summary' : '/#summary', icon: '👤', ariaLabel: 'Navigate to About section' },
-    { name: 'Skills', href: isHome ? '#capabilities' : '/#capabilities', icon: '🛠️', ariaLabel: 'Navigate to Skills section' },
-    { name: 'Services', href: isHome ? '#services' : '/#services', icon: '💼', ariaLabel: 'Navigate to Services section' },
-    { name: 'Resume', href: '/resume', icon: '📋', ariaLabel: 'Navigate to Resume page' },
-    { name: 'Contact', href: isHome ? '#contact' : '/#contact', icon: '📞', ariaLabel: 'Navigate to Contact section' }
+    { name: 'Summary', href: isHome ? '#summary' : '/#summary', id: '01' },
+    { name: 'Skills', href: isHome ? '#capabilities' : '/#capabilities', id: '02' },
+    { name: 'Services', href: isHome ? '#services' : '/#services', id: '03' },
+    { name: 'Resume', href: '/resume', id: '04' }
 ];
+
+const ctaHref = isHome ? '#contact' : '/#contact';
 ---
 
-<nav 
-    class="navbar" 
-    aria-label="Main Navigation" 
-    role="navigation"
->
-    <div class="navbar-container">
-        <div class="logo-container">
+<nav class="fixed top-0 left-0 w-full z-50 bg-[#faf9f5]/85 backdrop-blur-md border-b border-[#2d4a3e]/10 px-6 md:px-[60px] py-4 md:py-5 flex justify-between items-center transition-all duration-300">
+    <!-- Logo -->
+    <a class="flex items-center gap-1 text-2xl font-black text-[#2d4a3e] no-underline" aria-label="Mikey Shaw — Home" href="/">
+        <span class="font-display font-bold italic tracking-tight">mikey<span class="text-accent-pink">z</span>shaw</span>
+    </a>
+
+    <!-- Desktop Navigation Menu -->
+    <div class="hidden md:flex gap-10 items-center">
+        {navLinks.map((link) => (
             <a 
-                href="#hero" 
-                class="logo desktop-logo" 
-                aria-label="Michael Shaw Portfolio Home"
+                class="font-label-mono text-[11px] font-semibold uppercase tracking-[0.25em] text-[#2d4a3e] hover:text-[#E5007D] transition-colors no-underline cursor-pointer" 
+                href={link.href}
                 data-nav-link
             >
-                MIKEY SHAW
+                {link.id} {link.name}
             </a>
-        </div>
-        
-        <div class="nav-controls">
-            <div 
-                class="theme-toggle desktop" 
-                id="theme-toggle" 
-                title="Toggle Theme" 
-                role="button" 
-                aria-pressed="false" 
-                tabindex="0"
-            >
-                <span class="theme-icon" aria-hidden="true">🌓</span>
-            </div>
-            
-            <button 
-                class="menu-toggle" 
-                id="mobile-menu" 
-                aria-label="Open Navigation Menu" 
-                aria-expanded="false"
-            >
-                <span class="theme-icon" aria-hidden="true">📋</span>
-            </button>
-        </div>
-        
-        <ul class="nav-menu" role="menu">
-            {navLinks.map((link) => (
-                <li class="nav-item" role="none">
-                    <a 
-                        href={link.href} 
-                        class="nav-link" 
-                        role="menuitem"
-                        aria-label={link.ariaLabel}
-                        data-nav-link
-                    >
-                        <span class="nav-icon" aria-hidden="true">{link.icon}</span>
-                        <span class="nav-link-text">{link.name}</span>
-                    </a>
-                </li>
-            ))}
-        </ul>
+        ))}
+        <a 
+            class="bg-[#2d4a3e] text-white px-6 py-2.5 font-sans font-bold text-xs uppercase tracking-widest hover:bg-[#3a5c4e] hover:-translate-y-[1px] active:translate-y-0 transition-all rounded-full no-underline shadow-sm" 
+            href={ctaHref}
+        >
+            Schedule Call
+        </a>
     </div>
-    
+
+    <!-- Mobile Navigation Toggle -->
+    <button 
+        class="md:hidden flex flex-col justify-center items-end gap-1.5 w-8 h-8 bg-transparent border-none cursor-pointer z-55" 
+        id="mobile-menu-toggle"
+        aria-label="Toggle Navigation Menu"
+        aria-expanded="false"
+    >
+        <span class="w-6 h-0.5 bg-[#2d4a3e] transition-transform duration-300 origin-center" id="bar-1"></span>
+        <span class="w-4 h-0.5 bg-[#2d4a3e] transition-opacity duration-300" id="bar-2"></span>
+        <span class="w-5 h-0.5 bg-[#2d4a3e] transition-transform duration-300 origin-center" id="bar-3"></span>
+    </button>
+
+    <!-- Mobile Drawer Overlay -->
     <div 
-        class="mobile-drawer" 
-        id="mobile-drawer" 
+        class="fixed inset-0 bg-[#faf9f5]/98 z-54 md:hidden flex flex-col justify-center px-12 transition-all duration-500 opacity-0 pointer-events-none" 
+        id="mobile-drawer"
         role="dialog" 
         aria-modal="true" 
         aria-label="Navigation Menu"
     >
-        <div class="drawer-content">
-            <div class="glass-card">
-                <button 
-                    class="close-drawer" 
-                    id="close-drawer" 
-                    aria-label="Close Navigation Menu"
+        <div class="flex flex-col gap-8">
+            {navLinks.map((link) => (
+                <a 
+                    class="font-display text-4xl font-extrabold text-[#2d4a3e] hover:text-[#E5007D] no-underline transition-colors block" 
+                    href={link.href}
+                    data-mobile-nav-link
                 >
-                    <span class="theme-icon" aria-hidden="true">❌</span>
-                </button>
-                <div class="mobile-nav-header">
-                    <img 
-                        src="/images/mad-ez-media-logo.png" 
-                        alt="Mad EZ Media Logo" 
-                        class="mobile-nav-logo"
-                        loading="lazy"
-                    >
-                    <h2 class="mobile-nav-title">Navigation</h2>
-                </div>
-                <div class="mobile-theme-toggle">
-                    <div 
-                        class="theme-toggle mobile" 
-                        id="mobile-theme-toggle" 
-                        title="Toggle Theme" 
-                        role="button" 
-                        aria-pressed="false" 
-                        tabindex="0"
-                    >
-                        <span class="theme-icon" aria-hidden="true">🌓</span>
-                        <span class="theme-text">Switch Theme</span>
-                    </div>
-                </div>
-                <ul class="mobile-nav-menu" role="menu">
-                    {navLinks.map((link) => (
-                        <li class="mobile-nav-item" role="none">
-                            <a 
-                                href={link.href} 
-                                class="mobile-nav-link" 
-                                role="menuitem"
-                                aria-label={link.ariaLabel}
-                                data-nav-link
-                            >
-                                <span class="nav-icon" aria-hidden="true">{link.icon}</span>
-                                <span class="nav-link-text">{link.name}</span>
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+                    <span class="font-label-mono text-[13px] text-accent-pink tracking-widest mr-4 font-normal">{link.id}</span>
+                    {link.name}
+                </a>
+            ))}
+            <div class="h-[1px] bg-[#2d4a3e]/10 w-full my-4"></div>
+            <a 
+                class="inline-block text-center bg-[#2d4a3e] text-white py-4 font-sans font-bold text-sm uppercase tracking-widest hover:bg-[#3a5c4e] transition-all rounded-full no-underline shadow-md" 
+                href={ctaHref}
+                data-mobile-nav-link
+            >
+                Schedule Call
+            </a>
         </div>
     </div>
 </nav>
 
-<style define:vars={{ THEME_TRANSITION_DURATION }}>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
-
-    .logo {
-        font-family: 'Orbitron', sans-serif;
-        font-size: 1.5rem;
-        font-weight: 700;
-        text-decoration: none;
-        transition: color calc(var(--THEME_TRANSITION_DURATION) * 1ms) ease;
-        letter-spacing: 0.1em;
-        color: #D4AF37; /* Gold in dark mode */
-    }
-
-    :root[data-theme='light'] .logo {
-        color: #28A745; /* Green in light mode */
-    }
-
-    .navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background: color-mix(in srgb, var(--bg-primary) 80%, transparent);
-        backdrop-filter: blur(10px);
-        z-index: 1000;
-        transition: all calc(var(--THEME_TRANSITION_DURATION) * 1ms) ease;
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .navbar-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 1rem 2rem;
-    }
-
-    .nav-menu {
-        display: flex;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        align-items: center;
-    }
-
-    .nav-item {
-        margin-left: 1rem;
-    }
-
-    .nav-link {
-        font-family: 'Orbitron', sans-serif;
-        color: var(--secondary);
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        transition: color 0.3s ease;
-        text-transform: uppercase;
-        font-size: 0.8rem;
-        letter-spacing: 0.1em;
-    }
-
-    .nav-link:hover {
-        color: var(--primary-color);
-    }
-
-    .nav-icon {
-        font-size: 1rem;
-        opacity: 0.7;
-        transition: opacity 0.3s ease;
-    }
-
-    .nav-link:hover .nav-icon {
-        opacity: 1;
-    }
-
-    .menu-toggle {
-        display: none;
-        flex-direction: column;
-        width: 25px;
-        height: 20px;
-        background: none;
-        border: none;
-        cursor: pointer;
-    }
-
-    .hamburger-line {
-        width: 100%;
-        height: 2px;
-        background-color: var(--primary-color);
-        margin: 3px 0;
-        transition: 0.3s ease;
-        transform-origin: center;
-    }
-
-    .close-drawer {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        width: 24px;
-        height: 24px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 0;
-    }
-
-    .close-line {
-        position: absolute;
-        width: 100%;
-        height: 2px;
-        background-color: var(--primary-color);
-        transition: 0.3s ease;
-    }
-
-    .close-line:first-child {
-        transform: rotate(45deg);
-    }
-
-    .close-line:last-child {
-        transform: rotate(-45deg);
-    }
-
-    @media (max-width: 992px) {
-        .nav-menu {
-            display: none;
-        }
-
-        .menu-toggle {
-            display: flex;
-        }
-    }
-
-    /* Mobile Drawer Styles */
-    .mobile-drawer {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 300px;
-        height: 100%;
-        background: var(--bg-primary);
-        transition: 0.5s;
-        z-index: 1100;
-    }
-
-    .mobile-drawer.active {
-        right: 0;
-    }
-
-    .glass-card {
-        height: 100%;
-        background: var(--bg-secondary);
-        backdrop-filter: blur(15px);
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .mobile-nav-menu {
-        list-style: none;
-        padding: 0;
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .mobile-nav-link {
-        display: flex;
-        align-items: center;
-        color: var(--secondary-color);
-        text-decoration: none;
-        font-family: 'Orbitron', sans-serif;
-        font-size: 1.2rem;
-        margin-bottom: 1.5rem;
-        transition: color 0.3s ease;
-        text-transform: uppercase;
-    }
-
-    .mobile-nav-link:hover {
-        color: var(--primary-color);
-    }
-</style>
-
 <script>
     function initNavbar() {
-        const navLinks = document.querySelectorAll('[data-nav-link]');
-        const mobileDrawer = document.getElementById('mobile-drawer');
-        const mobileMenuButton = document.getElementById('mobile-menu');
-        const closeDrawerButton = document.getElementById('close-drawer');
-        const desktopThemeToggle = document.getElementById('theme-toggle');
-        const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
-        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        const toggleBtn = document.getElementById('mobile-menu-toggle');
+        const drawer = document.getElementById('mobile-drawer');
+        const bar1 = document.getElementById('bar-1');
+        const bar2 = document.getElementById('bar-2');
+        const bar3 = document.getElementById('bar-3');
+        const mobileLinks = document.querySelectorAll('[data-mobile-nav-link]');
+        const desktopLinks = document.querySelectorAll('[data-nav-link]');
 
-        let currentTheme = localStorage.getItem('theme') || 'dark';
-        document.documentElement.setAttribute('data-theme', currentTheme);
+        if (!toggleBtn || !drawer) return;
 
-        function smoothScroll(e) {
-            e.preventDefault();
-            const targetId = e.currentTarget.getAttribute('href');
-            if (!targetId || targetId === '#') return;
+        let isOpen = false;
+
+        function toggleMenu() {
+            isOpen = !isOpen;
+            toggleBtn?.setAttribute('aria-expanded', String(isOpen));
             
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                targetElement.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+            if (isOpen) {
+                // Show Drawer
+                drawer?.classList.remove('pointer-events-none');
+                drawer?.classList.add('opacity-100');
                 
-                // Close mobile drawer if open
-                if (mobileDrawer) {
-                    mobileDrawer.classList.remove('active');
-                    mobileMenuButton?.setAttribute('aria-expanded', 'false');
+                // Animate Hamburger to 'X'
+                if (bar1) {
+                    bar1.style.transform = 'translateY(7px) rotate(45deg)';
+                    bar1.style.width = '24px';
+                }
+                if (bar2) bar2.style.opacity = '0';
+                if (bar3) {
+                    bar3.style.transform = 'translateY(-7px) rotate(-45deg)';
+                    bar3.style.width = '24px';
+                }
+            } else {
+                // Hide Drawer
+                drawer?.classList.add('pointer-events-none');
+                drawer?.classList.remove('opacity-100');
+                
+                // Animate 'X' back to Hamburger
+                if (bar1) {
+                    bar1.style.transform = 'none';
+                    bar1.style.width = '24px';
+                }
+                if (bar2) bar2.style.opacity = '1';
+                if (bar3) {
+                    bar3.style.transform = 'none';
+                    bar3.style.width = '20px';
                 }
             }
         }
 
-        // Add smooth scroll to all nav links
-        navLinks.forEach(link => {
-            link.addEventListener('click', smoothScroll);
+        toggleBtn.addEventListener('click', toggleMenu);
+
+        // Close drawer on link clicks
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (isOpen) toggleMenu();
+            });
         });
 
-        function toggleTheme() {
-            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        // Smooth scroll for hash links on the same page
+        function smoothScroll(e: Event) {
+            const currentTarget = e.currentTarget as HTMLAnchorElement;
+            const href = currentTarget.getAttribute('href') || '';
             
-            document.documentElement.setAttribute('data-theme', currentTheme);
-            
-            const themeChangeEvent = new CustomEvent('theme-changed', { 
-                detail: { theme: currentTheme } 
-            });
-            document.dispatchEvent(themeChangeEvent);
-
-            localStorage.setItem('theme', currentTheme);
-
-            if (desktopThemeToggle) desktopThemeToggle.setAttribute('aria-pressed', String(currentTheme === 'light'));
-            if (mobileThemeToggle) mobileThemeToggle.setAttribute('aria-pressed', String(currentTheme === 'light'));
-        }
-
-        function toggleMobileDrawer() {
-            if (!mobileDrawer) return;
-            const isOpen = mobileDrawer.classList.toggle('active');
-            mobileMenuButton?.setAttribute('aria-expanded', String(isOpen));
-        }
-
-        if (desktopThemeToggle) {
-            desktopThemeToggle.addEventListener('click', toggleTheme);
-            desktopThemeToggle.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
+            // Check if it's a hash link for the current page
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const targetEl = document.querySelector(href);
+                if (targetEl) {
+                    targetEl.scrollIntoView({ behavior: 'smooth' });
+                }
+            } else if (href.startsWith('/#')) {
+                // If on homepage, strip the '/' and smooth scroll
+                if (window.location.pathname === '/' || window.location.pathname === '') {
                     e.preventDefault();
-                    toggleTheme();
+                    const hash = href.substring(1);
+                    const targetEl = document.querySelector(hash);
+                    if (targetEl) {
+                        targetEl.scrollIntoView({ behavior: 'smooth' });
+                    }
                 }
-            });
-        }
-
-        if (mobileThemeToggle) {
-            mobileThemeToggle.addEventListener('click', toggleTheme);
-            
-            // Initial state
-            mobileThemeToggle.setAttribute('aria-pressed', String(currentTheme === 'light'));
-
-            mobileThemeToggle.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    toggleTheme();
-                }
-            });
-        }
-
-        // Set initial state for desktop toggle too
-        if (desktopThemeToggle) {
-             desktopThemeToggle.setAttribute('aria-pressed', String(currentTheme === 'light'));
-        }
-
-
-        if (mobileMenuButton) {
-            mobileMenuButton.addEventListener('click', (e) => {
-                e.stopPropagation();
-                toggleMobileDrawer();
-            });
-        }
-
-        if (closeDrawerButton) {
-            closeDrawerButton.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (mobileDrawer) mobileDrawer.classList.remove('active');
-                mobileMenuButton?.setAttribute('aria-expanded', 'false');
-            });
-        }
-
-        mobileNavLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                // e.stopPropagation(); // Removed to allow smooth scroll to work if attached
-                if (mobileDrawer) mobileDrawer.classList.remove('active');
-                mobileMenuButton?.setAttribute('aria-expanded', 'false');
-            });
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && mobileDrawer && mobileDrawer.classList.contains('active')) {
-                mobileDrawer.classList.remove('active');
-                mobileMenuButton?.setAttribute('aria-expanded', 'false');
-                mobileMenuButton?.focus();
             }
-        });
-        
-        // Close drawer when clicking outside
-        document.addEventListener('click', (e) => {
-            if (mobileDrawer && mobileDrawer.classList.contains('active') && 
-                !mobileDrawer.contains(e.target) && 
-                !mobileMenuButton?.contains(e.target)) {
-                mobileDrawer.classList.remove('active');
-                mobileMenuButton?.setAttribute('aria-expanded', 'false');
-            }
-        });
+        }
+
+        desktopLinks.forEach(link => link.addEventListener('click', smoothScroll));
+        mobileLinks.forEach(link => link.addEventListener('click', smoothScroll));
     }
 
-    // Initialize immediately if document is already ready, otherwise wait
+    // Initialize
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initNavbar);
     } else {
         initNavbar();
     }
     
-    // Re-initialize on view transitions if using them
+    // Support Astro View Transitions
     document.addEventListener('astro:page-load', initNavbar);
 </script>
