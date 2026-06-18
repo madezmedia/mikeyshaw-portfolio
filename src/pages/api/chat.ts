@@ -35,6 +35,7 @@ CTAs & Contact:
 - Email: michael@madezmedia.com.
 - Pricing: Avoid giving exact pricing values for custom services (Fleets/Coaching/Media). Direct them to use the homepage Quote Request intake form, which links to custom Square Invoice staging.
 
+If the prospect has staged a quote or entered details (found in CURRENT LEAD CONTEXT below), welcome them back, acknowledge their company name and the quote tier they selected, and guide them to schedule a brief.
 Structure your responses concisely. Focus on answering their technical questions using details from the real-time ACMI Grounding Data provided below. Transition into a booking CTA.
 `;
 
@@ -140,7 +141,7 @@ async function fetchACMIData(): Promise<Record<string, ACMIRecord>> {
   const token = process.env.UPSTASH_REDIS_REST_TOKEN || import.meta.env.UPSTASH_REDIS_REST_TOKEN || '';
 
   if (!url || !token) {
-    console.warn('Upstash Redis credentials are not configured in environment variables.');
+    console.warn('Upstash Redis credentials are not configured.');
     return {};
   }
 
@@ -234,41 +235,312 @@ async function fetchACMIData(): Promise<Record<string, ACMIRecord>> {
   return result;
 }
 
-async function logACMIEvent(userText: string, replyText: string) {
+// Fetch agent bentley's own ACMI details
+async function fetchAgentBentleyData(): Promise<ACMIRecord | null> {
+  const url = process.env.UPSTASH_REDIS_REST_URL || import.meta.env.UPSTASH_REDIS_REST_URL || '';
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN || import.meta.env.UPSTASH_REDIS_REST_TOKEN || '';
+
+  if (!url || !token) return null;
+
+  try {
+    const response = await fetch(`${url}/pipeline`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify([
+        ['GET', 'acmi:agent:bentley:profile'],
+        ['GET', 'acmi:agent:bentley:signals'],
+        ['ZRANGE', 'acmi:agent:bentley:timeline', '-5', '-1'] // Get last 5 timeline events
+      ])
+    });
+
+    if (response.ok) {
+      const results = await response.json();
+      const profileRaw = results[0]?.result;
+      const signalsRaw = results[1]?.result;
+      const timelineRaw = results[2]?.result || [];
+
+      let profile = null;
+      let signals = null;
+
+      try { if (profileRaw) profile = JSON.parse(profileRaw); } catch(e) {}
+      try { if (signalsRaw) signals = JSON.parse(signalsRaw); } catch(e) {}
+      const timeline = timelineRaw.map((t: string) => {
+        try { return JSON.parse(t).summary || t; } catch(e) { return t; }
+      });
+
+      return { profile, signals, timeline };
+    }
+  } catch (err) {
+    console.error('Error fetching agent:bentley ACMI:', err);
+  }
+  return null;
+}
+
+// Fetch or initialize lead ACMI details
+async function fetchOrUpdateLeadData(leadId: string, userText: string): Promise<ACMIRecord | null> {
+  const url = process.env.UPSTASH_REDIS_REST_URL || import.meta.env.UPSTASH_REDIS_REST_URL || '';
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN || import.meta.env.UPSTASH_REDIS_REST_TOKEN || '';
+
+  if (!url || !token || !leadId) return null;
+
+  const leadKey = `acmi:lead:${leadId}`;
+
+  try {
+    // Check if lead already exists
+    const response = await fetch(`${url}/pipeline`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify([
+        ['GET', `${leadKey}:profile`],
+        ['GET', `${leadKey}:signals`],
+        ['ZRANGE', `${leadKey}:timeline`, '-5', '-1']
+      ])
+    });
+
+    if (!response.ok) return null;
+    const results = await response.json();
+    const profileRaw = results[0]?.result;
+    const signalsRaw = results[1]?.result;
+    const timelineRaw = results[2]?.result || [];
+
+    let profile = null;
+    let signals = null;
+
+    try { if (profileRaw) profile = JSON.parse(profileRaw); } catch (e) {}
+    try { if (signalsRaw) signals = JSON.parse(signalsRaw); } catch (e) {}
+
+    const timeline = timelineRaw.map((t: string) => {
+      try { return JSON.parse(t).summary || t; } catch(e) { return t; }
+    });
+
+    const timestamp = Date.now();
+
+    if (!profile) {
+      // Initialize fresh anonymous lead
+      const defaultProfile = {
+        id: leadId,
+        actor_type: 'human',
+        tenant_id: 'madez',
+        created_at_iso: new Date().toISOString()
+      };
+
+      const defaultSignals = {
+        status: 'nurturing',
+        engagement_score: 1,
+        last_activity: new Date().toISOString()
+      };
+
+      const initEvent = {
+        ts: timestamp,
+        source: `user:${leadId}`,
+        kind: 'chat-spawn',
+        summary: `[chat-spawn] Anonymous lead session started (ID: ${leadId})`
+      };
+
+      await fetch(`${url}/pipeline`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify([
+          ['SET', `${leadKey}:profile`, JSON.stringify(defaultProfile)],
+          ['SET', `${leadKey}:signals`, JSON.stringify(defaultSignals)],
+          ['ZADD', `${leadKey}:timeline`, timestamp.toString(), JSON.stringify(initEvent)]
+        ])
+      });
+
+      return {
+        profile: defaultProfile,
+        signals: defaultSignals,
+        timeline: [initEvent.summary]
+      };
+    } else {
+      // Increment engagement score & update last_activity
+      const updatedSignals = {
+        ...signals,
+        engagement_score: (signals?.engagement_score || 0) + 1,
+        last_activity: new Date().toISOString()
+      };
+
+      await fetch(`${url}/SET`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify([`${leadKey}:signals`, JSON.stringify(updatedSignals)])
+      });
+
+      return {
+        profile,
+        signals: updatedSignals,
+        timeline
+      };
+    }
+  } catch (err) {
+    console.error('Error in fetchOrUpdateLeadData:', err);
+  }
+  return null;
+}
+
+// Log chat event to the lead timeline, agent timeline, and general bus
+async function logACMIEvent(leadId: string, userText: string, replyText: string) {
   const url = process.env.UPSTASH_REDIS_REST_URL || import.meta.env.UPSTASH_REDIS_REST_URL || '';
   const token = process.env.UPSTASH_REDIS_REST_TOKEN || import.meta.env.UPSTASH_REDIS_REST_TOKEN || '';
 
   if (!url || !token) return;
 
   const timestamp = Date.now();
+  const cid = `bentleyChat-${timestamp}`;
+
   const event = {
     ts: timestamp,
     source: 'agent:bentley',
     kind: 'chat-interaction',
-    summary: `[chat-interaction @prospect] User queried Bentley: "${userText.slice(0, 60)}${userText.length > 60 ? '...' : ''}"`,
+    correlationId: cid,
+    summary: `[chat-interaction @prospect] Query: "${userText.slice(0, 60)}${userText.length > 60 ? '...' : ''}"`,
     payload: {
+      leadId,
       userText,
       replyText: replyText.slice(0, 300)
     }
   };
 
   try {
-    await fetch(url, {
+    const pipeline = [
+      ['ZADD', 'acmi:workspace:madez:timeline', timestamp.toString(), JSON.stringify(event)],
+      ['ZADD', 'acmi:agent:bentley:timeline', timestamp.toString(), JSON.stringify(event)]
+    ];
+
+    if (leadId) {
+      pipeline.push(['ZADD', `acmi:lead:${leadId}:timeline`, timestamp.toString(), JSON.stringify(event)]);
+    }
+
+    await fetch(`${url}/pipeline`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(['ZADD', 'acmi:workspace:madez:timeline', timestamp.toString(), JSON.stringify(event)])
+      body: JSON.stringify(pipeline)
     });
   } catch (err) {
-    console.error('Failed to log ACMI event:', err);
+    console.error('Failed to log ACMI events:', err);
   }
+}
+
+// Detect email in user message to dynamically convert anonymous leads
+function detectEmail(text: string): string | null {
+  const emailRegex = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/gi;
+  const match = text.match(emailRegex);
+  return match ? match[0] : null;
+}
+
+// Merge anonymous lead into identified lead if email is detected in chat
+async function handleInlineLeadIdentification(anonId: string, email: string): Promise<string> {
+  const url = process.env.UPSTASH_REDIS_REST_URL || import.meta.env.UPSTASH_REDIS_REST_URL || '';
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN || import.meta.env.UPSTASH_REDIS_REST_TOKEN || '';
+
+  if (!url || !token || !anonId || !email) return anonId;
+
+  const emailSlug = email.toLowerCase().replace(/[^a-z0-9]/g, '-');
+  const anonKey = `acmi:lead:${anonId}`;
+  const newLeadKey = `acmi:lead:${emailSlug}`;
+
+  try {
+    const response = await fetch(`${url}/pipeline`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify([
+        ['ZRANGE', `${anonKey}:timeline`, '0', '-1'],
+        ['GET', `${anonKey}:signals`]
+      ])
+    });
+
+    if (response.ok) {
+      const results = await response.json();
+      const rawEvents = results[0]?.result || [];
+      const rawSignals = results[1]?.result;
+
+      let engagementScore = 1;
+      let existingSigsObj = {};
+      if (rawSignals) {
+        try {
+          existingSigsObj = JSON.parse(rawSignals);
+          engagementScore = (existingSigsObj as any).engagement_score || 1;
+        } catch(e) {}
+      }
+
+      const profile = {
+        name: email.split('@')[0],
+        email,
+        actor_type: 'human',
+        tenant_id: 'madez',
+        created_at_iso: new Date().toISOString()
+      };
+
+      const signals = {
+        ...existingSigsObj,
+        status: 'nurturing',
+        engagement_score: engagementScore + 1,
+        last_activity: new Date().toISOString()
+      };
+
+      const mergeEvent = {
+        ts: Date.now(),
+        source: `user:${emailSlug}`,
+        kind: 'lead-identification',
+        summary: `[lead-identification @mikey] Anonymous lead merged into identified lead ${email}`
+      };
+
+      const pipeline = [
+        ['SET', `${newLeadKey}:profile`, JSON.stringify(profile)],
+        ['SET', `${newLeadKey}:signals`, JSON.stringify(signals)],
+        ['ZADD', `${newLeadKey}:timeline`, Date.now().toString(), JSON.stringify(mergeEvent)],
+        ['DEL', `${anonKey}:profile`],
+        ['DEL', `${anonKey}:signals`],
+        ['DEL', `${anonKey}:timeline`]
+      ];
+
+      rawEvents.forEach((evtStr: string) => {
+        try {
+          const parsed = JSON.parse(evtStr);
+          pipeline.push(['ZADD', `${newLeadKey}:timeline`, parsed.ts.toString(), evtStr]);
+        } catch(e) {
+          pipeline.push(['ZADD', `${newLeadKey}:timeline`, Date.now().toString(), evtStr]);
+        }
+      });
+
+      await fetch(`${url}/pipeline`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(pipeline)
+      });
+
+      return emailSlug;
+    }
+  } catch (err) {
+    console.error('Failed inline lead identification merging:', err);
+  }
+  return anonId;
 }
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const { messages } = await request.json();
+    const { messages, leadId: clientLeadId } = await request.json();
     
     if (!messages || !Array.isArray(messages)) {
       return new Response(
@@ -280,8 +552,18 @@ export const POST: APIRoute = async ({ request }) => {
     const lastMessage = messages[messages.length - 1];
     const userText = lastMessage?.text || '';
 
-    // Fetch live RAG data from ACMI Redis
+    let activeLeadId = clientLeadId || 'anon_default';
+
+    // 1. Detect if user self-identified an email in the chat
+    const detectedEmailAddr = detectEmail(userText);
+    if (detectedEmailAddr && activeLeadId.startsWith('anon_')) {
+      activeLeadId = await handleInlineLeadIdentification(activeLeadId, detectedEmailAddr);
+    }
+
+    // 2. Fetch live RAG data from ACMI Redis
     const liveACMI = await fetchACMIData();
+    const liveAgent = await fetchAgentBentleyData();
+    const liveLead = await fetchOrUpdateLeadData(activeLeadId, userText);
     
     // Merge live ACMI with fallback values
     const groundedEntities = {
@@ -307,7 +589,18 @@ export const POST: APIRoute = async ({ request }) => {
       }
     };
 
-    const systemInstruction = `${systemInstructionBase}\n\nLIVE ACMI GROUNDING DATA (Retrieved dynamically at request time):\n${JSON.stringify(groundedEntities, null, 2)}`;
+    const systemInstruction = `
+${systemInstructionBase}
+
+LIVE ACMI GROUNDING DATA (Retrieved dynamically at request time):
+${JSON.stringify(groundedEntities, null, 2)}
+
+LIVE BENTLEY AGENT STATE:
+${JSON.stringify(liveAgent || { note: "No agent profile found." }, null, 2)}
+
+CURRENT LEAD CONTEXT (ACMI lead ID: ${activeLeadId}):
+${JSON.stringify(liveLead || { note: "Anonymous prospect session." }, null, 2)}
+`;
 
     // 1. Primary Engine: OpenAI (GPT-4o-mini)
     if (openaiApiKey) {
@@ -330,10 +623,10 @@ export const POST: APIRoute = async ({ request }) => {
       const responseText = completion.choices[0]?.message?.content || '';
 
       // Async log to ACMI bus in the background
-      logACMIEvent(userText, responseText).catch(() => {});
+      logACMIEvent(activeLeadId, userText, responseText).catch(() => {});
 
       return new Response(
-        JSON.stringify({ text: responseText }),
+        JSON.stringify({ text: responseText, leadId: activeLeadId }),
         { status: 200, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -358,10 +651,10 @@ export const POST: APIRoute = async ({ request }) => {
       const responseText = result.response.text();
 
       // Async log to ACMI bus in the background
-      logACMIEvent(userText, responseText).catch(() => {});
+      logACMIEvent(activeLeadId, userText, responseText).catch(() => {});
 
       return new Response(
-        JSON.stringify({ text: responseText }),
+        JSON.stringify({ text: responseText, leadId: activeLeadId }),
         { status: 200, headers: { 'Content-Type': 'application/json' } }
       );
     }

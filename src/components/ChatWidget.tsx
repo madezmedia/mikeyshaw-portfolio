@@ -12,10 +12,51 @@ interface Message {
 export function ChatWidget() {
     const [isOpen, setIsOpen] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
+    const [leadId, setLeadId] = useState<string>('');
+
+    // Generate random anonymous ID
+    const generateAnonId = () => {
+        return 'anon_' + Math.random().toString(36).substring(2, 15);
+    };
 
     useEffect(() => {
         setIsMounted(true);
+        
+        // Initialize Lead ID
+        let currentLeadId = localStorage.getItem('bentley_lead_id');
+        if (!currentLeadId) {
+            currentLeadId = generateAnonId();
+            localStorage.setItem('bentley_lead_id', currentLeadId);
+        }
+        setLeadId(currentLeadId);
+
+        // Listen for identified lead submission from Services page
+        const handleIdentifiedLead = (e: Event) => {
+            const customEvent = e as CustomEvent;
+            if (customEvent.detail && customEvent.detail.leadId) {
+                const newLeadId = customEvent.detail.leadId;
+                localStorage.setItem('bentley_lead_id', newLeadId);
+                setLeadId(newLeadId);
+                
+                // Add system message informing user of synchronization
+                setMessages(prev => [
+                    ...prev,
+                    {
+                        id: `sys-${Date.now()}`,
+                        sender: 'bentley',
+                        text: `[ACMI Link Active] Context merged successfully. Staged Quote Reference: ${customEvent.detail.quoteId || 'Active'}. I am now fully grounded in your architecture request!`,
+                        timestamp: new Date()
+                    }
+                ]);
+            }
+        };
+
+        window.addEventListener('squareQuoteSubmitted', handleIdentifiedLead);
+        return () => {
+            window.removeEventListener('squareQuoteSubmitted', handleIdentifiedLead);
+        };
     }, []);
+
     const [messages, setMessages] = useState<Message[]>([
         {
             id: 'init-1',
@@ -90,7 +131,7 @@ export function ChatWidget() {
             const response = await fetch('/api/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ messages: updatedMessages })
+                body: JSON.stringify({ messages: updatedMessages, leadId })
             });
 
             if (!response.ok) throw new Error('API request failed');
@@ -98,6 +139,12 @@ export function ChatWidget() {
             const data = await response.json();
             
             if (data.text) {
+                // If backend updated/merged leadId (e.g. email detected inline)
+                if (data.leadId && data.leadId !== leadId) {
+                    localStorage.setItem('bentley_lead_id', data.leadId);
+                    setLeadId(data.leadId);
+                }
+
                 const bentleyMsg: Message = {
                     id: `msg-${Date.now()}-bentley`,
                     sender: 'bentley',

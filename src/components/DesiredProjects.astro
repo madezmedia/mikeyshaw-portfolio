@@ -192,7 +192,7 @@ const acmiEntities: ACMIEntity[] = [
 </section>
 
 <script>
-    // Client-side interactive tabs handler
+    // Client-side interactive tabs handler and live RAG hydration
     document.addEventListener('DOMContentLoaded', () => {
         const cards = document.querySelectorAll('.acmi-card');
 
@@ -226,6 +226,58 @@ const acmiEntities: ACMIEntity[] = [
                 });
             });
         });
+
+        // Hydrate live ACMI data from Redis via local API
+        fetch('/api/acmi-data')
+            .then(res => res.json())
+            .then(data => {
+                if (data.error) return;
+                
+                Object.keys(data).forEach(id => {
+                    const card = document.querySelector(`.acmi-card[data-entity-id="${id}"]`);
+                    if (!card) return;
+
+                    const record = data[id];
+                    
+                    // Update status label if we have live signals status
+                    const statusEl = card.querySelector('.acmi-status');
+                    if (statusEl && record.signals && record.signals.status) {
+                        const capitalized = record.signals.status.charAt(0).toUpperCase() + record.signals.status.slice(1);
+                        const subInfo = id === 'ownerscout' ? '80% Cost Cut' :
+                                        id === 'ez-influencer' ? '99.9% Uptime' :
+                                        id === 'folana-cns' ? 'Daily Loop Running' : '<10ms Cache';
+                        statusEl.textContent = `${capitalized} • ${subInfo}`;
+                    }
+
+                    // Update Profile Pane JSON
+                    const profileJsonEl = card.querySelector('[data-pane="profile"] .acmi-json');
+                    if (profileJsonEl && record.profile) {
+                        profileJsonEl.textContent = JSON.stringify(record.profile, null, 2);
+                    }
+
+                    // Update Signals Pane JSON
+                    const signalsJsonEl = card.querySelector('[data-pane="signals"] .acmi-json');
+                    if (signalsJsonEl && record.signals) {
+                        signalsJsonEl.textContent = JSON.stringify(record.signals, null, 2);
+                    }
+
+                    // Update Timeline Pane List
+                    const timelineLogEl = card.querySelector('[data-pane="timeline"] .acmi-log');
+                    if (timelineLogEl && record.timeline && record.timeline.length) {
+                        timelineLogEl.innerHTML = '';
+                        record.timeline.forEach(evt => {
+                            const li = document.createElement('li');
+                            li.textContent = evt.startsWith('→') ? evt : `→ ${evt}`;
+                            timelineLogEl.appendChild(li);
+                        });
+                    }
+
+                    // Flash card to denote successful sync
+                    card.classList.add('hydrated');
+                    setTimeout(() => card.classList.remove('hydrated'), 1200);
+                });
+            })
+            .catch(err => console.warn('Could not fetch live ACMI explorer data:', err));
     });
 </script>
 
@@ -297,7 +349,7 @@ const acmiEntities: ACMIEntity[] = [
         padding: 2.25rem;
         border-top: 5px solid var(--card-accent);
         box-shadow: 0 8px 24px rgba(45, 74, 62, 0.04);
-        transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.32s;
+        transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.32s, border-color 0.5s;
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
@@ -309,6 +361,25 @@ const acmiEntities: ACMIEntity[] = [
     .acmi-card:hover {
         transform: translateY(-4px);
         box-shadow: 0 16px 36px rgba(45, 74, 62, 0.08);
+    }
+
+    .acmi-card.hydrated {
+        animation: acmiPulse 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    @keyframes acmiPulse {
+        0% {
+            border-left-color: var(--card-accent);
+            border-right-color: var(--card-accent);
+            border-bottom-color: var(--card-accent);
+            box-shadow: 0 0 20px rgba(45, 74, 62, 0.15);
+        }
+        100% {
+            border-left-color: rgba(45, 74, 62, 0.05);
+            border-right-color: rgba(45, 74, 62, 0.05);
+            border-bottom-color: rgba(45, 74, 62, 0.05);
+            box-shadow: 0 8px 24px rgba(45, 74, 62, 0.04);
+        }
     }
 
     .acmi-badge {

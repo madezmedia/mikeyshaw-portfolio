@@ -154,7 +154,7 @@ export default function ServicesAndOffers() {
     return 'Enterprise Swarm Deployment';
   };
 
-  const handleQuoteSubmit = (e: React.FormEvent) => {
+  const handleQuoteSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!companyName || !emailAddress) {
       alert('Please fill out your Company Name and Email Address.');
@@ -163,47 +163,60 @@ export default function ServicesAndOffers() {
 
     setSubmittingQuote(true);
 
-    setTimeout(() => {
-      const generatedInvoiceId = 'sq-inv_' + Math.random().toString(36).substring(2, 11).toUpperCase();
-      const generatedQuoteId = 'Q-' + Math.floor(100000 + Math.random() * 900000);
-      const score = calculateComplexity();
+    const generatedInvoiceId = 'sq-inv_' + Math.random().toString(36).substring(2, 11).toUpperCase();
+    const generatedQuoteId = 'Q-' + Math.floor(100000 + Math.random() * 900000);
+    const score = calculateComplexity();
+    const currentLeadId = localStorage.getItem('bentley_lead_id') || '';
 
-      const quoteDetails = {
-        invoiceId: generatedInvoiceId,
-        quoteId: generatedQuoteId,
-        service: currentService.name,
-        company: companyName,
-        email: emailAddress,
-        addons: {
-          databaseHardening: databaseOption,
-          telemetryPortal: telemetryOption,
-          crmIntegration: customCrmOption
-        },
-        timelineWeeks: timelineSpeed === 1 ? 2 : timelineSpeed === 3 ? 6 : 12,
-        complexityScore: score,
-        complexityTier: getComplexityTier(score),
-        status: 'QUOTE_STAGED',
-        merchantNotes: 'Direct Square merchant dispatch queued. Integration verified.',
-        createdAt: new Date().toISOString()
-      };
+    const quoteDetails = {
+      leadId: currentLeadId,
+      invoiceId: generatedInvoiceId,
+      quoteId: generatedQuoteId,
+      service: currentService.name,
+      company: companyName,
+      email: emailAddress,
+      addons: {
+        databaseHardening: databaseOption,
+        telemetryPortal: telemetryOption,
+        crmIntegration: customCrmOption
+      },
+      timelineWeeks: timelineSpeed === 1 ? 2 : timelineSpeed === 3 ? 6 : 12,
+      complexityScore: score,
+      complexityTier: getComplexityTier(score),
+      status: 'QUOTE_STAGED',
+      merchantNotes: 'Direct Square merchant dispatch queued. Integration verified.',
+      createdAt: new Date().toISOString()
+    };
 
+    try {
+      const response = await fetch('/api/ingest-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(quoteDetails)
+      });
+
+      if (!response.ok) throw new Error('Failed to ingest lead in ACMI');
+
+      const data = await response.json();
+      
       setQuoteResponse(quoteDetails);
+      
+      // Dispatch custom event to notify ChatWidget of session identified/merged
+      const event = new CustomEvent('squareQuoteSubmitted', {
+        detail: {
+          leadId: data.leadId,
+          quoteId: generatedQuoteId
+        }
+      });
+      window.dispatchEvent(event);
+    } catch (err) {
+      console.warn('Backend lead ingestion offline. Falling back to local state.', err);
+      setQuoteResponse(quoteDetails);
+    } finally {
       setSubmittingQuote(false);
-
-      // Emit event to local ACMI bus relay if active
-      try {
-        fetch('http://localhost:7780/emit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            event: 'SQUARE_QUOTE_STAGED',
-            correlationId: generatedQuoteId,
-            payload: quoteDetails
-          })
-        }).catch(() => {});
-      } catch (err) {}
-    }, 1200);
+    }
   };
+
 
   const resetForm = () => {
     setQuoteResponse(null);
