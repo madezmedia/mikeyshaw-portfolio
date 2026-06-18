@@ -16,10 +16,10 @@ export const coreLinkPreviews: Record<string, LinkMetadata> = {
     image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=500&auto=format&fit=crop',
     ctaText: 'Join Workspace'
   },
-  'https://cal.com/mikeyshaw': {
+  'https://cal.com/mad-ez-media/ai-automation-discovery': {
     title: 'Schedule B2B Systems Architecture Brief',
     description: 'Book a direct 15-minute advisory call with Mikey Shaw to audit your current infrastructure and outline autonomous agent fleets.',
-    url: 'https://cal.com/mikeyshaw',
+    url: 'https://cal.com/mad-ez-media/ai-automation-discovery',
     domain: 'cal.com',
     image: 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?q=80&w=500&auto=format&fit=crop',
     ctaText: 'Book Strategy Slot'

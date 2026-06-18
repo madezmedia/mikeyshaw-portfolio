@@ -416,7 +416,7 @@ export default function ServicesAndOffers() {
                 <div className="pt-4">
                   {currentService.squareAction === 'appointment' ? (
                     <a 
-                      href="https://cal.com/mikeyshaw"
+                      href="https://cal.com/mad-ez-media/ai-automation-discovery"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full inline-block text-center py-4 bg-[#2d4a3e] text-white font-sans font-bold text-xs uppercase tracking-widest rounded-full hover:bg-[#3a5c4e] transition-all cursor-pointer shadow-md no-underline"

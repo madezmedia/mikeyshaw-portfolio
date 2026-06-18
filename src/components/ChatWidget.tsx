@@ -67,7 +67,7 @@ export function ChatWidget() {
         {
             id: 'init-2',
             sender: 'bentley',
-            text: "I coordinate our autonomous agentic fleets. Ask me about Mikey's pricing, his ACMI protocol, or custom integrations like OwnerScout and Folana's CNS.",
+            text: "I coordinate our autonomous agent fleets. To help design a custom automation blueprint for your operations, could you share your name, email, and the business workflows you're looking to automate today?",
             timestamp: new Date()
         }
     ]);
