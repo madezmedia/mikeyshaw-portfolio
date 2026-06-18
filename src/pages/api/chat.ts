@@ -1,10 +1,12 @@
 import type { APIRoute } from 'astro';
+import OpenAI from 'openai';
 import { GoogleGenAI } from '@google/generative-ai';
 
 export const prerender = false;
 
-// Initialize Google Gen AI with fallback logic for keys
-const apiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KEY || '';
+// Initialize keys
+const openaiApiKey = import.meta.env.OPENAI_API_KEY || process.env.OPENAI_API_KEY || '';
+const geminiApiKey = import.meta.env.GEMINI_API_KEY || process.env.GEMINI_API_KEY || '';
 
 const systemInstruction = `
 You are Bentley, the sophisticated, elite AI Sales Co-Pilot for Mikey Shaw and Mad EZ Media.
@@ -44,16 +46,6 @@ Structure your responses concisely. Focus on answering their technical questions
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    if (!apiKey) {
-      console.warn('GEMINI_API_KEY is not set. Falling back to local static matching.');
-      return new Response(
-        JSON.stringify({ 
-          text: "Bentley API Offline: Please set GEMINI_API_KEY in Vercel environment variables. In the meantime, you can book a slot directly via https://cal.com/mikeyshaw" 
-        }),
-        { status: 200, headers: { 'Content-Type': 'application/json' } }
-      );
-    }
-
     const { messages } = await request.json();
     
     if (!messages || !Array.isArray(messages)) {
@@ -63,41 +55,74 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Grab the latest user message
     const lastMessage = messages[messages.length - 1];
     const userText = lastMessage?.text || '';
 
-    // Convert conversation history to Gemini structure if available
-    const history = messages
-      .slice(0, -1)
-      .map((msg: any) => ({
-        role: msg.sender === 'user' ? 'user' : 'model',
-        parts: [{ text: msg.text }]
-      }));
+    // 1. Primary Engine: OpenAI (GPT-4o-mini)
+    if (openaiApiKey) {
+      const openai = new OpenAI({ apiKey: openaiApiKey });
+      
+      const formattedMessages = [
+        { role: 'system', content: systemInstruction },
+        ...messages.map((msg: any) => ({
+          role: msg.sender === 'user' ? 'user' : 'assistant',
+          content: msg.text
+        }))
+      ];
 
-    // Initialize Gemini API
-    const ai = new GoogleGenAI({ apiKey });
-    const model = ai.getGenerativeModel({ 
-      model: 'gemini-1.5-flash',
-      systemInstruction: systemInstruction
-    });
+      const completion = await openai.chat.completions.create({
+        model: 'gpt-4o-mini',
+        messages: formattedMessages as any,
+        temperature: 0.7
+      });
 
-    const chat = model.startChat({
-      history: history
-    });
+      const responseText = completion.choices[0]?.message?.content || '';
 
-    const result = await chat.sendMessage(userText);
-    const responseText = result.response.text();
+      return new Response(
+        JSON.stringify({ text: responseText }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
 
-    return new Response(
-      JSON.stringify({ text: responseText }),
-      { status: 200, headers: { 'Content-Type': 'application/json' } }
-    );
-  } catch (error: any) {
-    console.error('Gemini API Error:', error);
+    // 2. Secondary Engine Fallback: Google Gemini
+    if (geminiApiKey) {
+      const history = messages
+        .slice(0, -1)
+        .map((msg: any) => ({
+          role: msg.sender === 'user' ? 'user' : 'model',
+          parts: [{ text: msg.text }]
+        }));
+
+      const ai = new GoogleGenAI({ apiKey: geminiApiKey });
+      const model = ai.getGenerativeModel({ 
+        model: 'gemini-1.5-flash',
+        systemInstruction: systemInstruction
+      });
+
+      const chat = model.startChat({ history });
+      const result = await chat.sendMessage(userText);
+      const responseText = result.response.text();
+
+      return new Response(
+        JSON.stringify({ text: responseText }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // 3. Warning fallback
+    console.warn('Neither OPENAI_API_KEY nor GEMINI_API_KEY is configured.');
     return new Response(
       JSON.stringify({ 
-        text: "I'm having trouble connecting to my central cognitive engine right now. Let's schedule a direct call to outline your requirements: https://cal.com/mikeyshaw"
+        text: "Bentley API Offline: Please configure OPENAI_API_KEY or GEMINI_API_KEY in your Vercel project variables. You can book a strategy brief directly at https://cal.com/mikeyshaw" 
+      }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
+    );
+
+  } catch (error: any) {
+    console.error('AI Chat Routing Error:', error);
+    return new Response(
+      JSON.stringify({ 
+        text: "I experienced a glitch in my neural pathways. Let's schedule a direct call to plan your systems: https://cal.com/mikeyshaw"
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
