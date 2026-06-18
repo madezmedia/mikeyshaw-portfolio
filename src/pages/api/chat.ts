@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import OpenAI from 'openai';
-import { GoogleGenAI } from '@google/generative-ai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 export const prerender = false;
 
@@ -93,7 +93,7 @@ export const POST: APIRoute = async ({ request }) => {
           parts: [{ text: msg.text }]
         }));
 
-      const ai = new GoogleGenAI({ apiKey: geminiApiKey });
+      const ai = new GoogleGenerativeAI(geminiApiKey);
       const model = ai.getGenerativeModel({ 
         model: 'gemini-1.5-flash',
         systemInstruction: systemInstruction
