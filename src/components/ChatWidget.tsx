@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './ChatWidget.css';
+import { detectCoreLinks } from '../utils/previews';
 
 interface Message {
     id: string;
@@ -65,7 +66,7 @@ export function ChatWidget() {
         return "I'm Bentley, Mikey's sales co-pilot. I can detail his Custom Agentic Fleet deployments, explain ACMI, or share metrics on OwnerScout and Folana. Try asking: 'How do I request a quote?' or 'What is OwnerScout?'";
     };
 
-    const handleSend = (text: string) => {
+    const handleSend = async (text: string) => {
         if (!text.trim()) return;
 
         const userMsg: Message = {
@@ -75,11 +76,35 @@ export function ChatWidget() {
             timestamp: new Date()
         };
 
-        setMessages(prev => [...prev, userMsg]);
+        const updatedMessages = [...messages, userMsg];
+        setMessages(updatedMessages);
         setInputValue('');
         setIsTyping(true);
 
-        setTimeout(() => {
+        try {
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ messages: updatedMessages })
+            });
+
+            if (!response.ok) throw new Error('API request failed');
+
+            const data = await response.json();
+            
+            if (data.text) {
+                const bentleyMsg: Message = {
+                    id: `msg-${Date.now()}-bentley`,
+                    sender: 'bentley',
+                    text: data.text,
+                    timestamp: new Date()
+                };
+                setMessages(prev => [...prev, bentleyMsg]);
+            } else {
+                throw new Error('Invalid response structure');
+            }
+        } catch (error) {
+            console.warn('Backend chat API offline. Falling back to local responder.', error);
             const replyText = getBentleyResponse(text);
             const bentleyMsg: Message = {
                 id: `msg-${Date.now()}-bentley`,
@@ -88,8 +113,9 @@ export function ChatWidget() {
                 timestamp: new Date()
             };
             setMessages(prev => [...prev, bentleyMsg]);
+        } finally {
             setIsTyping(false);
-        }, 800);
+        }
     };
 
     const quickReplies = [
@@ -131,16 +157,39 @@ export function ChatWidget() {
                     </div>
 
                     <div className="bentley-messages-container">
-                        {messages.map(msg => (
-                            <div key={msg.id} className={`chat-bubble-wrapper ${msg.sender}`}>
-                                <div className="chat-bubble">
-                                    <p className="bubble-text">{msg.text}</p>
-                                    <span className="bubble-time">
-                                        {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                                    </span>
+                        {messages.map(msg => {
+                            const detectedLinks = detectCoreLinks(msg.text);
+                            return (
+                                <div key={msg.id} className={`chat-bubble-wrapper ${msg.sender} flex flex-col gap-2`}>
+                                    <div className="chat-bubble">
+                                        <p className="bubble-text">{msg.text}</p>
+                                        <span className="bubble-time">
+                                            {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                        </span>
+                                    </div>
+                                    
+                                    {/* Link Preview Cards */}
+                                    {detectedLinks.map((link, idx) => (
+                                        <div key={idx} className="link-preview-card border border-[#2d4a3e]/15 bg-[#faf9f5] rounded-xl overflow-hidden shadow-sm max-w-[280px] self-start transition-all hover:border-[#2d4a3e]/30 mt-1">
+                                            <img src={link.image} alt={link.title} className="w-full h-28 object-cover grayscale opacity-90 contrast-110" />
+                                            <div className="p-3.5 space-y-2">
+                                                <span className="font-label-mono text-[8px] uppercase tracking-wider text-[#2d4a3e]/50 font-bold block">{link.domain}</span>
+                                                <h4 className="font-sans font-bold text-xs text-[#2d4a3e] leading-tight">{link.title}</h4>
+                                                <p className="font-sans text-[10px] text-[#2d4a3e]/70 leading-normal line-clamp-2">{link.description}</p>
+                                                <a 
+                                                    href={link.url} 
+                                                    target="_blank" 
+                                                    rel="noopener noreferrer"
+                                                    className="inline-block w-full text-center py-2 bg-[#2d4a3e] hover:bg-[#3a5c4e] text-white font-sans font-bold text-[9px] uppercase tracking-wider rounded-md no-underline transition-all mt-1"
+                                                >
+                                                    {link.ctaText}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                         {isTyping && (
                             <div className="chat-bubble-wrapper bentley typing">
                                 <div className="chat-bubble">
