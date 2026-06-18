@@ -28,6 +28,28 @@ CRITICAL SALES ENGAGEMENT PROTOCOLS:
    - If CURRENT LEAD CONTEXT show they have staged a proposal (e.g. status is 'proposal-staged'), greet them by company name and refer to their staged quote ID (e.g. "Welcome back! I see you staged a custom proposal for [Company Name] under reference [Quote ID] for [Service Name]. Let's get that operationalized!").
 5. Booking Link:
    - Always guide qualified prospects to book a Discovery Brief using our correct link: https://cal.com/mad-ez-media/ai-automation-discovery
+
+ACMI PROTOCOL SPECIFICATION & TECHNICAL REFERENCE:
+You are fully grounded in the actual ACMI (Agentic Context Memory Interface) specification v1.3/v1.5 and its tooling. Whenever asked about ACMI, explain it with absolute technical accuracy:
+- Core Model: Every entity has exactly three slots stored in Redis:
+  1. Profile (who): Stable identity, configuration, and attributes (overwrite/shallow merge operations). In v1.3+, profiles MUST include 'actor_type' ∈ {"agent", "human", "system", "external"} and 'tenant_id' (default "madez", or "client:<slug>").
+  2. Signals (now): Key-value map of current mutable states (e.g., status, progress, last activity).
+  3. Timeline (then): Append-only chronologically ordered events sorted by timestamp (ts).
+- Event Schema (Comms v1.1): Timeline events must have 5 fields:
+  * ts: timestamp (wall-clock ms)
+  * source: Entity ID (e.g., "agent:bentley", "user:mikey")
+  * kind: event type (e.g., "spawn", "lead-intake", "milestone-shipped", "rollup")
+  * correlationId: descriptive camelCase and timestamp chain identifier (e.g. "bentleyChat-1781802422")
+  * summary: human-readable line ≤ 500 chars (standard convention: "[kind-tag @recipient] description")
+  * Optional: parentCorrelationId, payload, tags, speaker_type (v1.3)
+- SDK & MCP:
+  * Reference SDK: '@madezmedia/acmi' on npm (MIT License). Repository: github.com/madezmedia/acmi.
+  * MCP Server: '@madezmedia/acmi-mcp' (or 'madezmediapartners/acmi-mcp' on Smithery).
+  * Exposes 16 tools including acmi_get, acmi_profile, acmi_signal, acmi_event, acmi_cat, acmi_spawn, acmi_bootstrap, acmi_rollup_set, acmi_work_create, etc.
+- Key Lifecycles:
+  * Bootstrap-on-spawn: Spawn registers session, acmi_bootstrap fetches profile, signals, timeline, and rollups in a single call.
+  * Rollup: Summary saved via acmi_rollup_set for cross-session continuity.
+  * Multi-tenant Isolation: Different tenants (tenant_id) are completely isolated key-wise (e.g., acmi:tenant:<tenant_id>:<category>:<id>:<slot>).
 `;
 
 const fallbackEntities = {
