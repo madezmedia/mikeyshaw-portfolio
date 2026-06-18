@@ -11,6 +11,11 @@ interface Message {
 
 export function ChatWidget() {
     const [isOpen, setIsOpen] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
     const [messages, setMessages] = useState<Message[]>([
         {
             id: 'init-1',
@@ -164,7 +169,7 @@ export function ChatWidget() {
                                     <div className="chat-bubble">
                                         <p className="bubble-text">{msg.text}</p>
                                         <span className="bubble-time">
-                                            {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                            {isMounted ? msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}
                                         </span>
                                     </div>
                                     
