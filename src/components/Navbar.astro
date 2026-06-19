@@ -11,9 +11,9 @@ const navLinks = [
 const ctaHref = isHome ? '#contact' : '/#contact';
 ---
 
-<nav class="fixed top-0 left-0 w-full z-50 bg-[#faf9f5]/85 backdrop-blur-md border-b border-[#2d4a3e]/10 px-6 md:px-[60px] py-4 md:py-5 flex justify-between items-center transition-all duration-300">
+<nav class="fixed top-0 left-0 w-full z-50 bg-background/85 backdrop-blur-md border-b border-foreground/10 px-6 md:px-[60px] py-4 md:py-5 flex justify-between items-center transition-all duration-300">
     <!-- Logo -->
-    <a class="flex items-center gap-1 text-2xl font-black text-[#2d4a3e] no-underline" aria-label="Mikey Shaw — Home" href="/">
+    <a class="flex items-center gap-1 text-2xl font-black text-foreground no-underline" aria-label="Mikey Shaw — Home" href="/">
         <span class="font-display font-bold italic tracking-tight">mikey <span class="text-accent-pink">shaw</span></span>
     </a>
 
@@ -21,7 +21,7 @@ const ctaHref = isHome ? '#contact' : '/#contact';
     <div class="hidden md:flex gap-10 items-center">
         {navLinks.map((link) => (
             <a 
-                class="font-label-mono text-[11px] font-semibold uppercase tracking-[0.25em] text-[#2d4a3e] hover:text-[#E5007D] transition-colors no-underline cursor-pointer" 
+                class="font-label-mono text-[11px] font-semibold uppercase tracking-[0.25em] text-foreground/80 hover:text-accent-pink transition-colors no-underline cursor-pointer" 
                 href={link.href}
                 data-nav-link
             >
@@ -29,7 +29,7 @@ const ctaHref = isHome ? '#contact' : '/#contact';
             </a>
         ))}
         <a 
-            class="bg-[#2d4a3e] text-white px-6 py-2.5 font-sans font-bold text-xs uppercase tracking-widest hover:bg-[#3a5c4e] hover:-translate-y-[1px] active:translate-y-0 transition-all rounded-full no-underline shadow-sm" 
+            class="bg-foreground text-background px-6 py-2.5 font-sans font-bold text-xs uppercase tracking-widest hover:bg-foreground/90 hover:-translate-y-[1px] active:translate-y-0 transition-all rounded-full no-underline shadow-sm" 
             href={ctaHref}
         >
             Schedule Call
@@ -43,41 +43,41 @@ const ctaHref = isHome ? '#contact' : '/#contact';
         aria-label="Toggle Navigation Menu"
         aria-expanded="false"
     >
-        <span class="w-6 h-0.5 bg-[#2d4a3e] transition-transform duration-300 origin-center" id="bar-1"></span>
-        <span class="w-4 h-0.5 bg-[#2d4a3e] transition-opacity duration-300" id="bar-2"></span>
-        <span class="w-5 h-0.5 bg-[#2d4a3e] transition-transform duration-300 origin-center" id="bar-3"></span>
+        <span class="w-6 h-0.5 bg-foreground transition-transform duration-300 origin-center" id="bar-1"></span>
+        <span class="w-4 h-0.5 bg-foreground transition-opacity duration-300" id="bar-2"></span>
+        <span class="w-5 h-0.5 bg-foreground transition-transform duration-300 origin-center" id="bar-3"></span>
     </button>
+</nav>
 
-    <!-- Mobile Drawer Overlay -->
-    <div 
-        class="fixed inset-0 bg-[#faf9f5]/98 z-54 md:hidden flex flex-col justify-center px-12 transition-all duration-500 opacity-0 pointer-events-none" 
-        id="mobile-drawer"
-        role="dialog" 
-        aria-modal="true" 
-        aria-label="Navigation Menu"
-    >
-        <div class="flex flex-col gap-8">
-            {navLinks.map((link) => (
-                <a 
-                    class="font-display text-4xl font-extrabold text-[#2d4a3e] hover:text-[#E5007D] no-underline transition-colors block" 
-                    href={link.href}
-                    data-mobile-nav-link
-                >
-                    <span class="font-label-mono text-[13px] text-accent-pink tracking-widest mr-4 font-normal">{link.id}</span>
-                    {link.name}
-                </a>
-            ))}
-            <div class="h-[1px] bg-[#2d4a3e]/10 w-full my-4"></div>
+<!-- Mobile Drawer Overlay (Relocated outside <nav> to prevent z-index constraint) -->
+<div 
+    class="fixed inset-0 bg-background/98 z-54 md:hidden flex flex-col justify-center px-12 transition-all duration-500 opacity-0 pointer-events-none invisible" 
+    id="mobile-drawer"
+    role="dialog" 
+    aria-modal="true" 
+    aria-label="Navigation Menu"
+>
+    <div class="flex flex-col gap-8">
+        {navLinks.map((link) => (
             <a 
-                class="inline-block text-center bg-[#2d4a3e] text-white py-4 font-sans font-bold text-sm uppercase tracking-widest hover:bg-[#3a5c4e] transition-all rounded-full no-underline shadow-md" 
-                href={ctaHref}
+                class="font-display text-4xl font-extrabold text-foreground hover:text-accent-pink no-underline transition-colors block" 
+                href={link.href}
                 data-mobile-nav-link
             >
-                Schedule Call
+                <span class="font-label-mono text-[13px] text-accent-pink tracking-widest mr-4 font-normal">{link.id}</span>
+                {link.name}
             </a>
-        </div>
+        ))}
+        <div class="h-[1px] bg-foreground/10 w-full my-4"></div>
+        <a 
+            class="inline-block text-center bg-foreground text-background py-4 font-sans font-bold text-sm uppercase tracking-widest hover:bg-foreground/90 transition-all rounded-full no-underline shadow-md" 
+            href={ctaHref}
+            data-mobile-nav-link
+        >
+            Schedule Call
+        </a>
     </div>
-</nav>
+</div>
 
 <script>
     function initNavbar() {
@@ -99,8 +99,8 @@ const ctaHref = isHome ? '#contact' : '/#contact';
             
             if (isOpen) {
                 // Show Drawer
-                drawer?.classList.remove('pointer-events-none');
-                drawer?.classList.add('opacity-100');
+                drawer?.classList.remove('pointer-events-none', 'invisible');
+                drawer?.classList.add('opacity-100', 'visible');
                 
                 // Animate Hamburger to 'X'
                 if (bar1) {
@@ -114,8 +114,8 @@ const ctaHref = isHome ? '#contact' : '/#contact';
                 }
             } else {
                 // Hide Drawer
-                drawer?.classList.add('pointer-events-none');
-                drawer?.classList.remove('opacity-100');
+                drawer?.classList.add('pointer-events-none', 'invisible');
+                drawer?.classList.remove('opacity-100', 'visible');
                 
                 // Animate 'X' back to Hamburger
                 if (bar1) {
