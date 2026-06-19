@@ -3,8 +3,9 @@ const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
 const navLinks = [
     { name: 'Summary', href: isHome ? '#summary' : '/#summary', id: '01' },
     { name: 'Skills', href: isHome ? '#capabilities' : '/#capabilities', id: '02' },
-    { name: 'Services', href: isHome ? '#services' : '/#services', id: '03' },
-    { name: 'Resume', href: '/resume', id: '04' }
+    { name: 'AI Kit', href: '/starter-kit', id: '03' },
+    { name: 'Intel', href: isHome ? '#intel' : '/#intel', id: '04' },
+    { name: 'Resume', href: '/resume', id: '05' }
 ];
 
 const ctaHref = isHome ? '#contact' : '/#contact';
@@ -13,7 +14,7 @@ const ctaHref = isHome ? '#contact' : '/#contact';
 <nav class="fixed top-0 left-0 w-full z-50 bg-[#faf9f5]/85 backdrop-blur-md border-b border-[#2d4a3e]/10 px-6 md:px-[60px] py-4 md:py-5 flex justify-between items-center transition-all duration-300">
     <!-- Logo -->
     <a class="flex items-center gap-1 text-2xl font-black text-[#2d4a3e] no-underline" aria-label="Mikey Shaw — Home" href="/">
-        <span class="font-display font-bold italic tracking-tight">mikey<span class="text-accent-pink">z</span>shaw</span>
+        <span class="font-display font-bold italic tracking-tight">mikey <span class="text-accent-pink">shaw</span></span>
     </a>
 
     <!-- Desktop Navigation Menu -->

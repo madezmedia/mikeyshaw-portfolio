@@ -23,7 +23,8 @@ export const GET: APIRoute = async () => {
     { id: 'ownerscout', redisId: 'ownerscout' },
     { id: 'ez-influencer', redisId: 'ez-influencer-360' },
     { id: 'folana-cns', redisId: 'folanas-journal' },
-    { id: 'mad-ez-v2', redisId: 'mad-ez-website-v2' }
+    { id: 'mad-ez-v2', redisId: 'mad-ez-website-v2' },
+    { id: 'tony-series', redisId: 'top-of-new-york' }
   ];
 
   const result: Record<string, ACMIRecord> = {};

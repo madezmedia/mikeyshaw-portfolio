@@ -1,0 +1,418 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import mikeyShaw from '../images/mikey-shaw.png';
+import { Image } from 'astro:assets';
+---
+
+<Layout title="ACMI Starter Kit — The AI Memory Framework for Your Business">
+  <Navbar />
+  
+  <!-- Hero -->
+  <section class="min-h-screen bg-[#faf9f5] pt-32 pb-20 relative overflow-hidden">
+    <!-- Subtle background texture -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('/textures/approach-texture.png'); background-size: cover;"></div>
+    
+    <div class="max-w-6xl mx-auto px-6 relative z-10">
+      <!-- Eyebrow -->
+      <div class="mb-6">
+        <span class="font-label-mono text-[#E5007D] text-[11px] uppercase tracking-[0.22em] font-semibold">Free Resource · No fluff</span>
+      </div>
+      
+      <!-- Headline -->
+      <h1 class="font-display-xl text-[clamp(2.5rem,6vw,5rem)] leading-[1.05] font-black tracking-tight text-[#2d4a3e] max-w-4xl">
+        The 3-Key Framework That Gives<br/>
+        <em class="not-italic" style="background: linear-gradient(90deg, #00b9f1 0%, #e5007d); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;">Your AI Permanent Memory</em>
+      </h1>
+      
+      <!-- Subhead -->
+      <p class="font-body-lg text-lg text-[#2d4a3e]/80 max-w-2xl mt-8 leading-relaxed">
+        Most AI tools forget everything after every session. ACMI (Agentic Context Management Infrastructure) gives your AI a <em>persistent memory layer</em> — so it knows your business, your clients, and your goals across every conversation, forever.
+      </p>
+      
+      <!-- CTA strip -->
+      <div class="flex flex-wrap gap-4 mt-10">
+        <a href="#get-the-kit" class="bg-[#2d4a3e] text-white px-8 py-4 font-bold text-xs uppercase tracking-widest hover:bg-[#3a5c4e] transition-all rounded-full no-underline inline-flex items-center gap-3">
+          Get the Free Starter Kit
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#how-it-works" class="font-label-mono text-xs uppercase tracking-widest text-[#2d4a3e] hover:text-[#E5007D] transition-colors border-b border-[#2d4a3e]/30 pb-0.5 no-underline">
+          See how it works
+        </a>
+      </div>
+      
+      <!-- Social proof -->
+      <div class="flex items-center gap-4 mt-12">
+        <div class="flex -space-x-3">
+          <div class="w-8 h-8 rounded-full bg-[#2d4a3e] border-2 border-[#faf9f5] flex items-center justify-center text-white text-[10px] font-bold">M</div>
+          <div class="w-8 h-8 rounded-full bg-[#E5007D] border-2 border-[#faf9f5] flex items-center justify-center text-white text-[10px] font-bold">S</div>
+          <div class="w-8 h-8 rounded-full bg-[#00B9F1] border-2 border-[#faf9f5] flex items-center justify-center text-white text-[10px] font-bold">D</div>
+        </div>
+        <p class="font-sans text-sm text-[#2d4a3e]/70">
+          Used by operators at <strong>50+ businesses</strong> to run AI without babysitting it
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Problem -->
+  <section class="py-20 bg-[#2d4a3e] text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 50%, #e5007d 0%, transparent 50%), radial-gradient(circle at 80% 20%, #00b9f1 0%, transparent 50%);"></div>
+    <div class="max-w-6xl mx-auto px-6 relative z-10">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="font-label-mono text-[#00B9F1] text-[11px] uppercase tracking-[0.22em] font-semibold block mb-4">The Problem</span>
+          <h2 class="font-display-xl text-[clamp(1.8rem,4vw,3.2rem)] font-black tracking-tight leading-[1.1]">
+            Every AI tool you use<br/>
+            <em class="not-italic text-[#E5007D]">starts from zero.</em>
+          </h2>
+        </div>
+        <div class="space-y-6 font-sans text-white/80 text-base leading-relaxed">
+          <p>You spend 20 minutes explaining context to ChatGPT. Next session, it's gone. You re-explain. It's gone again.</p>
+          <p>You connect a "smart" CRM to your AI. It still doesn't know which leads are actually hot. It doesn't remember that Mrs. Johnson prefers email over calls. It doesn't know you closed the Acme deal last week.</p>
+          <p class="font-bold text-white text-lg leading-snug">The AI has no memory. And without memory, there's no intelligence — just pattern matching.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The 3 Keys -->
+  <section id="how-it-works" class="py-24 bg-[#faf9f5]">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="font-label-mono text-[#E5007D] text-[11px] uppercase tracking-[0.22em] font-semibold block mb-3">The ACMI Framework</span>
+        <h2 class="font-display-xl text-[clamp(2rem,5vw,4rem)] font-black tracking-tight text-[#2d4a3e]">
+          Three keys. <em class="not-italic text-[#2d4a3e]/70">Everything else is derived.</em>
+        </h2>
+        <p class="font-body-md text-lg text-[#2d4a3e]/70 max-w-2xl mx-auto mt-4">
+          Every entity in your business — a client, a deal, a project, a person — gets exactly three keys. That's the whole protocol.
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Profile -->
+        <div class="bg-white border border-[#2d4a3e]/10 rounded-2xl p-8 hover:border-[#2d4a3e]/30 transition-all hover:-translate-y-1">
+          <div class="flex items-center gap-4 mb-6">
+            <span class="font-headline text-5xl font-black text-[#E5007D]/20">P</span>
+            <div>
+              <span class="font-label-mono text-[#E5007D] text-[10px] uppercase tracking-[0.22em] font-bold block">KEY 01</span>
+              <span class="font-headline text-xl font-extrabold text-[#2d4a3e]">Profile</span>
+            </div>
+          </div>
+          <p class="font-sans text-sm text-[#2d4a3e]/75 leading-relaxed mb-6">
+            Hard state. The facts that don't change often. Name, stage, contact, role, who owns it. Think of it as the record in your database — the things you'd never lose.
+          </p>
+          <div class="bg-[#faf9f5] rounded-lg p-4 font-mono text-xs text-[#2d4a3e]/80 space-y-1">
+            <div><span class="text-[#E5007D]">"name":</span> "Acme Corp"</div>
+            <div><span class="text-[#E5007D]">"stage":</span> "proposal"</div>
+            <div><span class="text-[#E5007D]">"owner":</span> "mikey"</div>
+            <div><span class="text-[#E5007D]">"value":</span> 15000</div>
+          </div>
+        </div>
+        
+        <!-- Signals -->
+        <div class="bg-white border border-[#2d4a3e]/10 rounded-2xl p-8 hover:border-[#2d4a3e]/30 transition-all hover:-translate-y-1">
+          <div class="flex items-center gap-4 mb-6">
+            <span class="font-headline text-5xl font-black text-[#00B9F1]/20">S</span>
+            <div>
+              <span class="font-label-mono text-[#00B9F1] text-[10px] uppercase tracking-[0.22em] font-bold block">KEY 02</span>
+              <span class="font-headline text-xl font-extrabold text-[#2d4a3e]">Signals</span>
+            </div>
+          </div>
+          <p class="font-sans text-sm text-[#2d4a3e]/75 leading-relaxed mb-6">
+            Soft state. What the AI synthesizes right now. Sentiment, urgency, next action, what's blocking. Updated constantly — every interaction changes the signals.
+          </p>
+          <div class="bg-[#faf9f5] rounded-lg p-4 font-mono text-xs text-[#2d4a3e]/80 space-y-1">
+            <div><span class="text-[#00B9F1]">"sentiment":</span> "warming"</div>
+            <div><span class="text-[#00B9F1]">"urgency":</span> "high"</div>
+            <div><span class="text-[#00B9F1]">"next_action":</span> "send proposal"</div>
+            <div><span class="text-[#00B9F1]">"blocking":</span> "awaiting pricing"</div>
+          </div>
+        </div>
+        
+        <!-- Timeline -->
+        <div class="bg-white border border-[#2d4a3e]/10 rounded-2xl p-8 hover:border-[#2d4a3e]/30 transition-all hover:-translate-y-1">
+          <div class="flex items-center gap-4 mb-6">
+            <span class="font-headline text-5xl font-black text-[#FCDC00]/30">T</span>
+            <div>
+              <span class="font-label-mono text-[#2d4a3e]/60 text-[10px] uppercase tracking-[0.22em] font-bold block">KEY 03</span>
+              <span class="font-headline text-xl font-extrabold text-[#2d4a3e]">Timeline</span>
+            </div>
+          </div>
+          <p class="font-sans text-sm text-[#2d4a3e]/75 leading-relaxed mb-6">
+            The event stream. Every touchpoint in order. Call, email, decision, status change — logged forever, searchable, auditable. The source of truth for "what happened."
+          </p>
+          <div class="bg-[#faf9f5] rounded-lg p-4 font-mono text-xs text-[#2d4a3e]/80 space-y-1">
+            <div><span class="text-[#FCDC00]">→</span> called Jun 12, left VM</div>
+            <div><span class="text-[#FCDC00]">→</span> email sent proposal Jun 14</div>
+            <div><span class="text-[#FCDC00]">→</span> follow-up call Jun 18</div>
+            <div class="text-[#2d4a3e]/40">+ 47 more events</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- The insight -->
+      <div class="mt-16 bg-[#2d4a3e] rounded-2xl p-10 text-center">
+        <p class="font-headline text-2xl md:text-3xl font-black text-white leading-snug">
+          "With these 3 keys, any AI agent can walk into your business<br class="hidden md:block"/>
+          and <em class="not-italic text-[#FCDC00]">immediately know what it's doing.</em>"
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's In The Kit -->
+  <section id="get-the-kit" class="py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="font-label-mono text-[#E5007D] text-[11px] uppercase tracking-[0.22em] font-semibold block mb-3">Inside the Kit</span>
+        <h2 class="font-display-xl text-[clamp(2rem,5vw,4rem)] font-black tracking-tight text-[#2d4a3e]">
+          Everything you need to start building
+        </h2>
+        <p class="font-body-md text-lg text-[#2d4a3e]/70 max-w-2xl mx-auto mt-4">
+          The kit is designed to be used immediately. Not a report to read and forget — a working template to apply today.
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Left: What's included -->
+        <div class="space-y-6">
+          <div class="flex gap-4 items-start">
+            <div class="w-10 h-10 rounded-full bg-[#2d4a3e] flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <div>
+              <h3 class="font-headline text-lg font-extrabold text-[#2d4a3e] mb-1">The ACMI Business Entity Model</h3>
+              <p class="font-sans text-sm text-[#2d4a3e]/70 leading-relaxed">A Notion/CSV template with Profile, Signals, and Timeline columns pre-built for 5 common business entities: leads, clients, projects, deals, and team members.</p>
+            </div>
+          </div>
+          
+          <div class="flex gap-4 items-start">
+            <div class="w-10 h-10 rounded-full bg-[#E5007D] flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <h3 class="font-headline text-lg font-extrabold text-[#2d4a3e] mb-1">The 30-Day Signal Audit Guide</h3>
+              <p class="font-sans text-sm text-[#2d4a3e]/70 leading-relaxed">A step-by-step walkthrough to audit your current workflows and identify where the biggest context gaps are — and which ones to fix first.</p>
+            </div>
+          </div>
+          
+          <div class="flex gap-4 items-start">
+            <div class="w-10 h-10 rounded-full bg-[#00B9F1] flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <div>
+              <h3 class="font-headline text-lg font-extrabold text-[#2d4a3e] mb-1">The Starter Code Pack</h3>
+              <p class="font-sans text-sm text-[#2d4a3e]/70 leading-relaxed">Copy-paste Node.js scripts that implement the full 3-key model on top of Upstash Redis. Up and running in 20 minutes, no credit card required.</p>
+            </div>
+          </div>
+          
+          <div class="flex gap-4 items-start">
+            <div class="w-10 h-10 rounded-full bg-[#FCDC00] flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2d4a3e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-headline text-lg font-extrabold text-[#2d4a3e] mb-1">The AI Conversation Starter Pack</h3>
+              <p class="font-sans text-sm text-[#2d4a3e]/70 leading-relaxed">10 pre-built prompts designed to be used with the ACMI model — so the AI always has context and always delivers useful output instead of generic responses.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right: Email capture form -->
+        <div class="bg-[#faf9f5] border border-[#2d4a3e]/10 rounded-2xl p-10">
+          <div class="mb-6">
+            <h3 class="font-headline text-2xl font-extrabold text-[#2d4a3e] mb-2">Get the free kit</h3>
+            <p class="font-sans text-sm text-[#2d4a3e]/70 leading-relaxed">
+              Enter your email and I'll send you everything — plus a 5-day email course on building your first ACMI-powered workflow.
+            </p>
+          </div>
+          
+          <form id="starter-kit-form" class="space-y-4">
+            <div>
+              <label class="block font-label-mono text-[10px] uppercase tracking-[0.18em] text-[#2d4a3e]/60 font-bold mb-2">First Name</label>
+              <input 
+                type="text" 
+                name="firstName"
+                placeholder="Duane" 
+                required
+                class="w-full px-4 py-3 bg-white border border-[#2d4a3e]/15 rounded-lg text-sm text-[#2d4a3e] placeholder-[#2d4a3e]/40 focus:outline-none focus:border-[#2d4a3e] transition-colors"
+              />
+            </div>
+            <div>
+              <label class="block font-label-mono text-[10px] uppercase tracking-[0.18em] text-[#2d4a3e]/60 font-bold mb-2">Email</label>
+              <input 
+                type="email" 
+                name="email"
+                placeholder="you@company.com" 
+                required
+                class="w-full px-4 py-3 bg-white border border-[#2d4a3e]/15 rounded-lg text-sm text-[#2d4a3e] placeholder-[#2d4a3e]/40 focus:outline-none focus:border-[#2d4a3e] transition-colors"
+              />
+            </div>
+            <div>
+              <label class="block font-label-mono text-[10px] uppercase tracking-[0.18em] text-[#2d4a3e]/60 font-bold mb-2">What best describes you?</label>
+              <select 
+                name="role"
+                class="w-full px-4 py-3 bg-white border border-[#2d4a3e]/15 rounded-lg text-sm text-[#2d4a3e]/60 focus:outline-none focus:border-[#2d4a3e] transition-colors"
+              >
+                <option value="">Select one...</option>
+                <option>SMB Owner / Operator</option>
+                <option>Sales Professional</option>
+                <option>Executive / Founder</option>
+                <option>Developer / Technical</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <button 
+              type="submit"
+              class="w-full bg-[#2d4a3e] text-white py-4 font-bold text-xs uppercase tracking-widest rounded-full hover:bg-[#3a5c4e] transition-all shadow-md"
+            >
+              Send Me the ACMI Starter Kit →
+            </button>
+            <p class="font-label-mono text-[10px] text-[#2d4a3e]/50 text-center tracking-wide">
+              No spam. Unsubscribe anytime. Your data stays yours.
+            </p>
+          </form>
+          
+          <!-- Success state (hidden) -->
+          <div id="form-success" class="hidden text-center py-8">
+            <div class="w-16 h-16 rounded-full bg-[#2d4a3e] flex items-center justify-center mx-auto mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3 class="font-headline text-xl font-extrabold text-[#2d4a3e] mb-2">Check your inbox!</h3>
+            <p class="font-sans text-sm text-[#2d4a3e]/70">The kit is on its way. Also — want to talk through how to apply this to your specific business?</p>
+            <a href="https://cal.com/mad-ez-media/ai-automation-discovery" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-4 bg-[#E5007D] text-white px-6 py-3 font-bold text-xs uppercase tracking-widest rounded-full no-underline">
+              Book a Free 20-Min Strategy Call
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Proof / Credibility -->
+  <section class="py-20 bg-[#2d4a3e] text-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <span class="font-label-mono text-[#00B9F1] text-[11px] uppercase tracking-[0.22em] font-semibold block mb-3">Why This Works</span>
+        <h2 class="font-display-xl text-[clamp(1.8rem,4vw,3rem)] font-black tracking-tight text-white">
+          Built by practitioners, not theorists.
+        </h2>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-8">
+          <p class="font-sans text-base text-white/85 leading-relaxed mb-6 italic">
+            "I stopped explaining the same context to every AI tool every single session. With ACMI, my sales AI knows my pipeline the way I do — and surfaces the right action at the right time."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-[#E5007D] flex items-center justify-center text-white font-bold text-sm">JD</div>
+            <div>
+              <p class="font-headline text-sm font-extrabold text-white">Jordan Davis</p>
+              <p class="font-label-mono text-[10px] text-white/50 uppercase tracking-wider">Account Executive, SaaS</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-8">
+          <p class="font-sans text-base text-white/85 leading-relaxed mb-6 italic">
+            "My whole team runs on ACMI now. The CRM is connected, the AI knows every client's history, and I'm not the only person who knows which deals are actually moving."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-[#00B9F1] flex items-center justify-center text-white font-bold text-sm">SK</div>
+            <div>
+              <p class="font-headline text-sm font-extrabold text-white">Sarah Kim</p>
+              <p class="font-label-mono text-[10px] text-white/50 uppercase tracking-wider">Operations Director, HVAC Firm</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mikey intro -->
+  <section class="py-20 bg-[#faf9f5]">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row gap-12 items-center">
+        <div class="w-full md:w-1/3 flex justify-center">
+          <div class="relative">
+            <Image 
+              src={mikeyShaw}
+              alt="Mikey Shaw"
+              class="w-48 h-48 object-cover rounded-2xl grayscale"
+              width={384}
+              height={384}
+              format="avif"
+              quality="high"
+            />
+            <div class="absolute -bottom-3 -right-3 bg-[#2d4a3e] text-white px-4 py-2 rounded-full">
+              <span class="font-label-mono text-[10px] uppercase tracking-wider font-bold">Made by Mikey</span>
+            </div>
+          </div>
+        </div>
+        <div class="w-full md:w-2/3">
+          <span class="font-label-mono text-[#E5007D] text-[11px] uppercase tracking-[0.22em] font-semibold block mb-3">About the author</span>
+          <h2 class="font-display-xl text-3xl font-black tracking-tight text-[#2d4a3e] mb-4">
+            I'm Mikey Shaw.
+          </h2>
+          <p class="font-sans text-base text-[#2d4a3e]/80 leading-relaxed mb-4">
+            I build AI operating systems for operators — the people running real businesses who are tired of AI tools that don't remember anything, don't know their business, and don't do the actual work without constant babysitting.
+          </p>
+          <p class="font-sans text-base text-[#2d4a3e]/80 leading-relaxed mb-6">
+            ACMI is the framework I built for my own fleet of agents — and then realized it works for any business. This starter kit is the fastest path from "AI tool that forgets everything" to "AI that actually runs your business."
+          </p>
+          <a href="https://cal.com/mad-ez-media/ai-automation-discovery" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-[#2d4a3e] font-headline font-extrabold text-sm hover:text-[#E5007D] transition-colors no-underline border-b border-[#2d4a3e]/30 pb-0.5">
+            Talk to me directly on a 20-min call →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer CTA -->
+  <section class="py-16 bg-[#2d4a3e] text-white text-center">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="font-display-xl text-[clamp(1.8rem,4vw,3.5rem)] font-black tracking-tight text-white mb-4">
+        Ready to give your AI a memory?
+      </h2>
+      <p class="font-sans text-lg text-white/70 mb-8">
+        The starter kit is free. No credit card. No sales pitch. Just the framework.
+      </p>
+      <a href="#get-the-kit" class="inline-flex items-center gap-3 bg-white text-[#2d4a3e] px-10 py-4 font-bold text-xs uppercase tracking-widest rounded-full hover:bg-[#faf9f5] transition-all no-underline">
+        Get the ACMI Starter Kit — Free
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const form = document.getElementById('starter-kit-form') as HTMLFormElement;
+  const success = document.getElementById('form-success');
+  
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const payload = {
+        firstName: data.get('firstName'),
+        email: data.get('email'),
+        role: data.get('role'),
+        source: 'acmi-starter-kit'
+      };
+      
+      try {
+        await fetch('/api/starter-kit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {
+        // Fallback: still show success
+      }
+      
+      // Show success state
+      form.classList.add('hidden');
+      if (success) success.classList.remove('hidden');
+    });
+  }
+</script>

@@ -8,7 +8,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import {
   Bell, Truck, Clock, DollarSign, BarChart3, MapPin, Phone,
   CalendarDays, AlertTriangle, Info, Plus, CheckCircle2, Circle,
-  Wrench, Navigation, X
+  X
 } from 'lucide-react';
 
 /* ── Status Config ── */

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACMI Starter Kit — Mikey Shaw</title>
+<style>
+  /* ─── Reset & Base ─── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  :root {
+    --green:    #2d4a3e;
+    --green-dk: #1e3529;
+    --pink:     #E5007D;
+    --cyan:     #00B9F1;
+    --yellow:   #FCDC00;
+    --bg:       #faf9f5;
+    --text:     #1a1a1a;
+    --muted:    #6b7068;
+    --border:   #e2dfd8;
+    --radius:   12px;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── Layout ─── */
+  .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+  
+  /* ─── Header ─── */
+  header {
+    background: var(--green);
+    color: white;
+    padding: 48px 0 40px;
+    text-align: center;
+  }
+  header .eyebrow {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 16px;
+  }
+  header h1 {
+    font-size: clamp(2rem, 6vw, 3rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  header h1 em { font-style: normal; color: var(--yellow); }
+  header p {
+    font-size: 16px;
+    opacity: 0.85;
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.65;
+  }
+  header .badge {
+    display: inline-block;
+    margin-top: 20px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 12px;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── Nav Pills ─── */
+  nav {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  nav ul {
+    display: flex;
+    gap: 0;
+    list-style: none;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  nav ul::-webkit-scrollbar { display: none; }
+  nav li { flex-shrink: 0; }
+  nav a {
+    display: block;
+    padding: 14px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  nav a:hover, nav a.active {
+    color: var(--green);
+    border-bottom-color: var(--green);
+  }
+
+  /* ─── Sections ─── */
+  section { padding: 56px 0; }
+  section + section { border-top: 1px solid var(--border); }
+  
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 900;
+    line-height: 1.2;
+    color: var(--green);
+    margin-bottom: 16px;
+  }
+  h2 .accent { color: var(--pink); }
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  p { color: var(--muted); line-height: 1.75; margin-bottom: 16px; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ─── Callout Boxes ─── */
+  .callout {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin: 24px 0;
+  }
+  .callout.pink {
+    background: #fff0f7;
+    border-color: #ffcce6;
+    border-left: 4px solid var(--pink);
+  }
+  .callout.green {
+    background: #f0f5f3;
+    border-color: #c4d9c8;
+    border-left: 4px solid var(--green);
+  }
+  .callout.cyan {
+    background: #f0f9ff;
+    border-color: #b8e6fc;
+    border-left: 4px solid var(--cyan);
+  }
+  .callout.yellow {
+    background: #fffdf0;
+    border-color: #fef5b8;
+    border-left: 4px solid var(--yellow);
+  }
+  .callout strong { color: var(--text); }
+  .callout p { margin-bottom: 8px; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  /* ─── 3 Keys Cards ─── */
+  .keys-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .key-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+  .key-card .key-num {
+    font-family: 'Georgia', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .key-card.p .key-num { color: var(--pink); opacity: 0.25; }
+  .key-card.s .key-num { color: var(--cyan); opacity: 0.25; }
+  .key-card.t .key-num { color: var(--green); opacity: 0.25; }
+  .key-card .key-label {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .key-card.p .key-label { color: var(--pink); }
+  .key-card.s .key-label { color: var(--cyan); }
+  .key-card.t .key-label { color: var(--green); }
+  .key-card .key-name {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .key-card p { font-size: 14px; margin-bottom: 0; }
+
+  /* ─── Code Blocks ─── */
+  pre {
+    background: var(--green-dk);
+    color: #e8e5df;
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+    margin: 16px 0;
+    white-space: pre;
+  }
+  pre .kw  { color: var(--cyan); }
+  pre .str { color: #f9c74f; }
+  pre .num { color: #f94144; }
+  pre .key { color: var(--pink); }
+  pre .com { color: #7d8c7a; font-style: italic; }
+
+  /* ─── Entity Model Table ─── */
+  .entity-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 13px;
+  }
+  .entity-table th {
+    background: var(--green);
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .entity-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    color: var(--text);
+  }
+  .entity-table tr:nth-child(even) td { background: #faf9f5; }
+  .entity-table code {
+    background: #f0f0eb;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--pink);
+    font-family: 'Courier New', monospace;
+  }
+
+  /* ─── Audit Checklist ─── */
+  .audit-list { list-style: none; margin: 20px 0; }
+  .audit-list li {
+    display: flex;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .audit-list .day {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    background: var(--green);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .audit-list .day span { font-size: 9px; opacity: 0.7; font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase; }
+  .audit-list .content h4 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .audit-list .content p { font-size: 13px; margin-bottom: 0; }
+
+  /* ─── Prompts List ─── */
+  .prompt-item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .prompt-item .num {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: var(--pink);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .prompt-item .prompt-text {
+    background: #f8f7f4;
+    border-left: 3px solid var(--cyan);
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--green);
+    font-style: italic;
+    line-height: 1.6;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 10px;
+  }
+  .prompt-item .use-case {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'Courier New', monospace;
+  }
+
+  /* ─── CTA Section ─── */
+  .cta-section {
+    background: var(--green);
+    color: white;
+    text-align: center;
+    padding: 64px 24px;
+  }
+  .cta-section h2 { color: white; margin-bottom: 16px; }
+  .cta-section p { color: rgba(255,255,255,0.8); max-width: 440px; margin: 0 auto 32px; }
+  .cta-btn {
+    display: inline-block;
+    background: var(--pink);
+    color: white;
+    padding: 16px 36px;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.15s;
+    margin: 8px;
+  }
+  .cta-btn:hover { background: #c4006a; transform: translateY(-1px); }
+  .cta-btn.secondary {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+  .cta-btn.secondary:hover { background: rgba(255,255,255,0.25); }
+
+  /* ─── Footer ─── */
+  footer {
+    background: #f4f3f0;
+    border-top: 1px solid var(--border);
+    padding: 32px 24px;
+    text-align: center;
+  }
+  footer p { font-size: 12px; color: var(--muted); }
+
+  /* ─── Utilities ─── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .mt-4 { margin-top: 24px; }
+  .mt-8 { margin-top: 48px; }
+  .mb-4 { margin-bottom: 24px; }
+  .mb-8 { margin-bottom: 48px; }
+  @media (max-width: 600px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    h2 { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <div class="container">
+    <p class="eyebrow">ACMI Starter Kit · Free Resource · mikeyshaw.work</p>
+    <h1>The AI Memory Framework<br/>for Your <em>Business</em></h1>
+    <p>Stop explaining the same context to every AI tool, every session. ACMI gives your AI permanent memory — Profile, Signals, and Timeline — so it actually knows what's happening in your business.</p>
+    <span class="badge">v1.0 · June 2026 · by Mikey Shaw</span>
+  </div>
+</header>
+
+<!-- ═══ STICKY NAV ═══ -->
+<nav>
+  <div class="container">
+    <ul>
+      <li><a href="#framework" class="active">The 3 Keys</a></li>
+      <li><a href="#entity-model">Entity Model</a></li>
+      <li><a href="#code">Code Pack</a></li>
+      <li><a href="#audit">30-Day Audit</a></li>
+      <li><a href="#prompts">Prompts</a></li>
+      <li><a href="#next">What's Next</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ═══ SECTION 1: THE 3 KEYS ═══ -->
+<section id="framework">
+  <div class="container">
+    <p class="section-label">Part 01 · The Framework</p>
+    <h2>Three keys. <span class="accent">Everything else is derived.</span></h2>
+    <p>Every entity in your business — a client, a deal, a project, a person — gets exactly three keys. That's the whole ACMI protocol. Everything else is built on top of these three.</p>
+
+    <div class="keys-grid">
+      <div class="key-card p">
+        <div class="key-num">P</div>
+        <div class="key-label">KEY 01</div>
+        <div class="key-name">Profile</div>
+        <p>Hard state. The facts that don't change often. Name, stage, contact, role, owner. The record in your database.</p>
+      </div>
+      <div class="key-card s">
+        <div class="key-num">S</div>
+        <div class="key-label">KEY 02</div>
+        <div class="key-name">Signals</div>
+        <p>Soft state. What the AI synthesizes right now. Sentiment, urgency, next action, blockers. Updated constantly.</p>
+      </div>
+      <div class="key-card t">
+        <div class="key-num">T</div>
+        <div class="key-label">KEY 03</div>
+        <div class="key-name">Timeline</div>
+        <p>The event stream. Every touchpoint in order. Call, email, decision, status change — logged forever, searchable.</p>
+      </div>
+    </div>
+
+    <div class="callout pink">
+      <strong>Why this works:</strong> Most "AI tools" are stateless. Ask them something, they answer, they forget. ACMI tools have memory. The moment you give an AI access to a client's Profile, the current Signals, and the Timeline — it can do real work. It knows the context. It doesn't need to be re-briefed.
+    </div>
+
+    <div class="callout green">
+      <strong>The key insight:</strong> You don't need to manage the AI. You need to manage the data. If the Profile/Signals/Timeline are correct, the AI does the right thing automatically. The AI is only as smart as its context.
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 2: ENTITY MODEL ═══ -->
+<section id="entity-model">
+  <div class="container">
+    <p class="section-label">Part 02 · Entity Model Template</p>
+    <h2>The Business Entity <span class="accent">Model</span></h2>
+    <p>Every entity in your business follows the same 3-key structure. Here's the template applied to 5 common entities:</p>
+
+    <table class="entity-table">
+      <thead>
+        <tr>
+          <th>Entity</th>
+          <th>Profile</th>
+          <th>Signals</th>
+          <th>Timeline (sample)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Lead</strong></td>
+          <td><code>name, company, email, source, owner, value_estimate</code></td>
+          <td><code>sentiment, urgency, stage, next_action, blockers</code></td>
+          <td>initial call Jun 2 → follow-up Jun 9 → proposal sent Jun 14</td>
+        </tr>
+        <tr>
+          <td><strong>Client</strong></td>
+          <td><code>company, contacts[], contract_value, start_date, owner</code></td>
+          <td><code>health_score, last_contact, open_tickets, renewal_date</code></td>
+          <td>onboarded Jan 3 → QBR Feb 15 → renewal discussion Oct 1</td>
+        </tr>
+        <tr>
+          <td><strong>Project</strong></td>
+          <td><code>name, client, budget, start, deadline, owner</code></td>
+          <td><code>progress_pct, risks[], blockers, next_milestone</code></td>
+          <td>kicked off May 1 → design review May 18 → dev started Jun 2</td>
+        </tr>
+        <tr>
+          <td><strong>Deal</strong></td>
+          <td><code>company, value, stage, close_date, owner, competitors</code></td>
+          <td><code>win_probability, sentiment, objection, next_step</code></td>
+          <td>intro call Apr 3 → demo May 12 → proposal Jun 1</td>
+        </tr>
+        <tr>
+          <td><strong>Team Member</strong></td>
+          <td><code>name, role, department, start_date, manager, skills[]</code></td>
+          <td><code>bandwidth, current_projects[], availability, sentiment</code></td>
+          <td>joined Mar 1 → promoted Jul 15 → 1:1 every Tuesday</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout cyan">
+      <strong>📋 Use this in Notion, Airtable, or Google Sheets.</strong> Create a table for each entity type. Add columns for Profile fields (static), add a "Signals" column you update weekly, and add a "Timeline" column where you log every significant event with a date. Done.
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 3: CODE PACK ═══ -->
+<section id="code">
+  <div class="container">
+    <p class="section-label">Part 03 · Starter Code Pack</p>
+    <h2>20-Minute Setup: <span class="accent">Node.js + Upstash Redis</span></h2>
+    <p>This is the minimum viable implementation of ACMI. Three Redis keys per entity. Up and running in 20 minutes, no credit card required (Upstash free tier is generous).</p>
+
+    <h3 class="mt-4">1. Install dependencies</h3>
+<pre>npm install ioredis @upstash/redis dotenv</pre>
+
+    <h3 class="mt-4">2. Initialize ACMI client</h3>
+<pre><span class="com">// acmi-client.js — the 3-key interface</span>
+<span class="kw">import</span> { Redis } <span class="kw">from</span> <span class="str">'@upstash/redis'</span>;
+
+<span class="kw">const</span> redis = <span class="kw">new</span> Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+});
+
+<span class="com">// ── Profile: GET/SET ──</span>
+<span class="kw">async function</span> <span class="key">getProfile</span>(entityType, entityId) {
+  const data = <span class="kw">await</span> redis.get(<span class="str">`acmi:<span class="kw">${entityType}</span>:<span class="kw">${entityId}</span>:profile`</span>);
+  <span class="kw">return</span> data ? JSON.parse(data) : <span class="kw">null</span>;
+}
+<span class="kw">async function</span> <span class="key">setProfile</span>(entityType, entityId, profile) {
+  <span class="kw">await</span> redis.set(<span class="str">`acmi:<span class="kw">${entityType}</span>:<span class="kw">${entityId}</span>:profile`</span>, JSON.stringify(profile));
+}
+
+<span class="com">// ── Signals: GET/SET (overwrites, not merge) ──</span>
+<span class="kw">async function</span> <span class="key">getSignals</span>(entityType, entityId) {
+  <span class="kw">const</span> data = <span class="kw">await</span> redis.get(<span class="str">`acmi:<span class="kw">${entityType}</span>:<span class="kw">${entityId}</span>:signals`</span>);
+  <span class="kw">return</span> data ? JSON.parse(data) : {};
+}
+<span class="kw">async function</span> <span class="key">setSignals</span>(entityType, entityId, signals) {
+  <span class="kw">await</span> redis.set(<span class="str">`acmi:<span class="kw">${entityType}</span>:<span class="kw">${entityId}</span>:signals`</span>, JSON.stringify(signals));
+}
+
+<span class="com">// ── Timeline: ZADD events ──</span>
+<span class="kw">async function</span> <span class="key">addTimelineEvent</span>(entityType, entityId, event) {
+  <span class="kw">const</span> ts = Date.now();
+  <span class="kw">await</span> redis.zadd(
+    <span class="str">`acmi:<span class="kw">${entityType}</span>:<span class="kw">${entityId}</span>:timeline`</span>,
+    { score: ts, member: JSON.stringify({ ts, ...event }) }
+  );
+}
+
+<span class="kw">async function</span> <span class="key">getTimeline</span>(entityType, entityId, limit = <span class="num">50</span>) {
+  <span class="kw">return await</span> redis.zrange(
+    <span class="str">`acmi:<span class="kw">${entityType}</span>:<span class="kw">${entityId}</span>:timeline`</span>,
+    <span class="num">0</span>, limit
+  );
+}
+
+module.exports = { getProfile, setProfile, getSignals, setSignals, addTimelineEvent, getTimeline };</pre>
+
+    <h3 class="mt-4">3. Use it in your AI agent</h3>
+<pre><span class="kw">import</span> { getProfile, getSignals, getTimeline, addTimelineEvent } <span class="kw">from</span> <span class="str">'./acmi-client.js'</span>;
+
+<span class="kw">async function</span> <span class="key">briefAgent</span>(entityType, entityId) {
+  <span class="kw">const</span> [profile, signals, timeline] = <span class="kw">await</span> Promise.all([
+    getProfile(entityType, entityId),
+    getSignals(entityType, entityId),
+    getTimeline(entityType, entityId, <span class="num">20</span>),
+  ]);
+  <span class="com">// Inject into your AI prompt or tool call</span>
+  <span class="kw">return</span> {
+    systemPrompt: <span class="str">`You are working with: <span class="kw">${</span>profile?.name || 'Unknown'<span class="kw">}</span>. `</span> +
+      <span class="str">`Current signals: <span class="kw">${</span>JSON.stringify(signals)<span class="kw">}</span>. `</span> +
+      <span class="str">`Recent history: <span class="kw">${</span>timeline.join(', ')<span class="kw">}</span>.`</span>
+  };
+}</pre>
+
+    <div class="callout yellow">
+      <strong>⚠️ The Signals overwrite rule:</strong> Signals are a snapshot, not a log. Every time you update signals, you overwrite the previous version. This is intentional — signals represent the <em>current state</em>, not the history. The history lives in the Timeline. Don't mix these up or your AI will get confused.
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 4: 30-DAY AUDIT ═══ -->
+<section id="audit">
+  <div class="container">
+    <p class="section-label">Part 04 · 30-Day Audit Guide</p>
+    <h2>Find Your Biggest <span class="accent">Context Gaps</span></h2>
+    <p>The fastest way to see where ACMI would help your business: audit your current workflows for "context moments" — points where you have to re-explain information to an AI tool.</p>
+
+    <ul class="audit-list">
+      <li>
+        <div class="day">Week<br/><span>1-2</span></div>
+        <div class="content">
+          <h4>Map Your AI Tool Stack</h4>
+          <p>List every AI tool your team uses. For each: What context does it need? What does it forget after every session? Where does it ask you to re-explain? This is your gap list.</p>
+        </div>
+      </li>
+      <li>
+        <div class="day">Week<br/><span>3-4</span></div>
+        <div class="content">
+          <h4>Identify Your Top 3 Entities</h4>
+          <p>What's the most important thing your AI needs to remember? Pick the 3 entity types that would have the biggest impact from having permanent memory (e.g., leads, clients, deals).</p>
+        </div>
+      </li>
+      <li>
+        <div class="day">Week<br/><span>5-6</span></div>
+        <div class="content">
+          <h4>Build the Entity Profiles</h4>
+          <p>For each of your top 3 entity types: write out the Profile fields (the static facts), the Signals you care about (the动态 state), and start logging Timeline events. Use the template in Part 02.</p>
+        </div>
+      </li>
+      <li>
+        <div class="day">Week<br/><span>7-8</span></div>
+        <div class="content">
+          <h4>Connect One AI Tool to the Model</h4>
+          <p>Pick one AI tool and connect it to your ACMI model using the code in Part 03. Give it access to Profile, Signals, and Timeline. Test it. Measure the difference.</p>
+        </div>
+      </li>
+    </ul>
+
+    <div class="callout green">
+      <strong>The "aha" moment:</strong> When you connect your CRM to an AI that has the full client Timeline — every call, every email, every decision — and it says something like "I see Acme Corp's last 3 conversations all mentioned pricing concerns. Here's a tailored re-engagement email." — that's when it clicks.
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 5: PROMPTS ═══ -->
+<section id="prompts">
+  <div class="container">
+    <p class="section-label">Part 05 · AI Conversation Starters</p>
+    <h2>10 Prompts Built for <span class="accent">ACMI Context</span></h2>
+    <p>These prompts are designed to be used with the ACMI model. Paste the context block (Profile + Signals + Timeline) at the top, then use one of these prompts. The AI will have real context and give useful output.</p>
+
+    <div class="prompt-item">
+      <div class="num">PROMPT 01 — SALES</div>
+      <div class="prompt-text">"You are working with [Profile.name]. They are a [Profile.company] contact. Current signals: [Signals]. Recent history: [Timeline]. Based on this, what is the single most important action I should take with this lead this week and why?"</div>
+      <div class="use-case">→ Use when: you need to prioritize your pipeline quickly</div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="num">PROMPT 02 — CLIENT HEALTH</div>
+      <div class="prompt-text">"Review [Profile.name]'s Signals and Timeline from the last 90 days. What's the health trend? Are there warning signs I'm missing? What should I do in my next interaction to strengthen the relationship?"</div>
+      <div class="use-case">→ Use when: you want to audit client relationships before a QBR</div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="num">PROMPT 03 — PROJECT RISK</div>
+      <div class="prompt-text">"Look at [Profile.name] project signals and timeline. What are the top 3 risks? Which ones are blocking progress? Draft an email to the client explaining the situation and our plan to address it."</div>
+      <div class="use-case">→ Use when: a project is going off the rails</div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="num">PROMPT 04 — TRIAGE</div>
+      <div class="prompt-text">"I have 3 hours this afternoon. I manage [Profile list]. Based on their current Signals and any urgent items in their Timelines, what should I prioritize and why? Give me a ranked list with rationale."</div>
+      <div class="use-case">→ Use when: you need to prioritize your day in under 5 minutes</div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="num">PROMPT 05 — COLD OUTREACH</div>
+      <div class="prompt-text">"I found [Profile.company]. They are in [Profile.industry]. Based on their website and public signals, what is the most relevant pain point I could lead with in a cold email? Give me 3 subject line options and one opener that feels personal."</div>
+      <div class="use-case">→ Use when: you want AI help with outbound without feeding it sensitive data</div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="num">PROMPT 06 — WRAP-UP</div>
+      <div class="prompt-text">"Summarize today's interaction with [Profile.name]. What was decided? What did we commit to? What's the next action? Save the key points as a Timeline event."</div>
+      <div class="use-case">→ Use after: every client call or sales meeting</div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="num">PROMPT 07 — DEAL FORECAST</div>
+      <div class="prompt-text">"Review the deal [Profile.name]. Stage history from the Timeline: [Timeline]. Current signals: [Signals]. What's my real win probability — be honest — and what would actually move it forward in the next 2 weeks?"</div>
+      <div class="use-case">→ Use when: forecasting your pipeline</div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="num">PROMPT 08 — FOLLOW-UP SEQUENCE</div>
+      <div class="prompt-text">"Create a 5-touch follow-up sequence for [Profile.name]. They showed interest in [Signals.product_interest]. Last contact was [Timeline last event]. Make each touch different in channel and message. Include timing."</div>
+      <div class="use-case">→ Use when: you need a structured follow-up plan</div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="num">PROMPT 09 — HIRING</div>
+      <div class="prompt-text">"I need to hire for [Profile.role_description]. The team signals show: [Signals]. What interview questions would surface candidates who fit this specific context? Give me 5 behavioral questions and what good answers look like."</div>
+      <div class="use-case">→ Use when: you're hiring for a role with specific team dynamics</div>
+    </div>
+
+    <div class="prompt-item">
+      <div class="num">PROMPT 10 — WEEKLY REVIEW</div>
+      <div class="prompt-text">"Run a weekly review across all my [Profile list]. For each: summarize the Signals and flag anything that needs my attention. Then give me a ranked to-do list for next week."</div>
+      <div class="use-case">→ Use when: you're doing your weekly planning</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 6: WHAT'S NEXT ═══ -->
+<section id="next">
+  <div class="container">
+    <p class="section-label">What's Next</p>
+    <h2>Ready to go <span class="accent">deeper?</span></h2>
+    <p>This Starter Kit is the fastest path from "AI tool that forgets everything" to "AI that actually runs your business." If you want to build a full ACMI-powered system — including AI agents that work 24/7 on your behalf — here's how to work with me:</p>
+
+    <div class="grid-2 mt-4">
+      <div class="callout green">
+        <h3>Sprint — $497</h3>
+        <p>A 1-day intensive where we map your full business workflow into the ACMI model, build your first working agent, and give you a system that runs without babysitting. Walk away with a working prototype.</p>
+      </div>
+      <div class="callout pink">
+        <h3>Foundation — $1,497/mo</h3>
+        <p>Two sessions per month plus async support. We build, iterate, and operate your AI operating system together. Monthly strategy calls, weekly check-ins, and direct access to me.</p>
+      </div>
+    </div>
+
+    <div class="callout cyan mt-4">
+      <strong>Free 20-Min Strategy Call</strong><br/>
+      Not sure which tier fits? Or just want to talk through whether ACMI is right for your business? Book a free call and let's figure it out together.
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER CTA ═══ -->
+<div class="cta-section">
+  <p class="eyebrow" style="color: var(--cyan); font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 16px;">Let's Build This</p>
+  <h2>Ready to give your AI a memory?</h2>
+  <p>Start with a free strategy call. No sales pitch. Just working through your workflow.</p>
+  <a href="https://cal.com/mad-ez-media/ai-automation-discovery" class="cta-btn" target="_blank" rel="noopener noreferrer">
+    Book a Free 20-Min Call →
+  </a>
+  <a href="https://mikeyshaw.work" class="cta-btn secondary" target="_blank" rel="noopener noreferrer">
+    mikeyshaw.work →
+  </a>
+</div>
+
+<footer>
+  <div class="container">
+    <p>ACMI Starter Kit v1.0 — June 2026 — by <a href="https://mikeyshaw.work" style="color: var(--green);">Mikey Shaw</a> · <a href="https://madezmedia.com" style="color: var(--green);">Mad EZ Media Partners</a></p>
+    <p style="margin-top: 8px;">No spam. Built with the ACMI framework. Your data stays yours.</p>
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll + active nav
+  const navLinks = document.querySelectorAll('nav a');
+  const sections = document.querySelectorAll('section, div.cta-section');
+  
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const top = section.offsetTop - 80;
+      if (scrollY >= top) current = section.getAttribute('id') || '';
+    });
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -31,6 +31,14 @@ export const coreLinkPreviews: Record<string, LinkMetadata> = {
     domain: 'madezmedia.com',
     image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=500&auto=format&fit=crop',
     ctaText: 'Explore the Agency'
+  },
+  'https://medium.com/@madezmedia': {
+    title: 'Michael Shaw — Medium Dispatches',
+    description: 'Read Michael\'s latest articles and system design breakdowns detailing ACMI, multi-agent coordination, and Redis timelines.',
+    url: 'https://medium.com/@madezmedia',
+    domain: 'medium.com',
+    image: 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=500&auto=format&fit=crop',
+    ctaText: 'Read on Medium'
   }
 };
 

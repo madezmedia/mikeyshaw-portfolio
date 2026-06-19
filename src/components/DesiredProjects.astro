@@ -14,37 +14,39 @@ interface ACMIEntity {
 
 const acmiEntities: ACMIEntity[] = [
     {
-        id: 'ownerscout',
-        name: 'OwnerScout',
-        labelTag: 'AI Prospecting Engine',
-        status: 'Active • 80% Cost Cut',
-        accentColor: '#00B9F1', // Cyan
+        id: 'folana-cns',
+        name: 'Folana Lanez',
+        labelTag: 'Autonomous Influencer CNS',
+        status: 'EP251 Active • 70 BPM Drop',
+        accentColor: '#1e4d36', // Forest Green
         profile: {
-            "entity": "ownerscout",
-            "path": "dyad-apps/ownerscout",
-            "core_file": "ownerscout/App.tsx",
-            "proxy_server": "ownerscout/proxy-server.js",
-            "database_migration": "supabase/migrations/20260405_create_args_tables.sql",
-            "stack": ["React 19", "Vite", "Google Places API", "Gemini 1.5 Pro"]
+            "entity": "folanas-journal",
+            "path": "dyad-apps/folanas-journal",
+            "protocol_client": "folanas-journal/lib/acmi-client.ts",
+            "music_manifest": "folanas-journal/lib/music-manifest.ts",
+            "scheduler": "launchd cron daemon (ensure_daily_video)",
+            "stack": ["Next.js 16", "Deepgram TTS", "MiniMax MMX", "Upstash Redis", "Fal.ai"]
         },
         signals: {
-            "prospecting_method": "Parallel POS signature scraping",
-            "lead_efficiency": "50 restaurants qualified for ~$0.91",
-            "signatures_detected": "Toast POS, Square, and ChowNow online menus",
-            "status": "OPTIMIZATION-COMPLETE.md & LOCATION-FEATURE.md verified"
+            "active_episode": "EP251: The Forest Speaks",
+            "bpm": 70,
+            "key": "D Major",
+            "genre": "Indie Folk / Ambient",
+            "vocal_synth": "FolanaLanezLocked",
+            "bus_publish": "Atomic events pushed to http://localhost:7780/emit"
         },
         timeline: [
-            "→ Configured Google Places endpoint proxy in ownerscout/proxy-server.js",
-            "→ Deployed create_args_tables.sql SQL script in local Supabase migrations",
-            "→ Implemented multi-thread POS ordering checkout signature crawler",
-            "→ Wired Gemini AI pitch builder directly to ownerscout/App.tsx front-end"
+            "→ Deployed Canopy Arc Episode 251 to production servers",
+            "→ Synthesized vocal narration using FolanaLanezLocked TTS profiles",
+            "→ Rendered visual scenes and mycelium network canvas overlays",
+            "→ Published high-fidelity EP251 music video directly to folana.live CDN"
         ]
     },
     {
         id: 'ez-influencer',
         name: 'EZ Influencer 360',
         labelTag: 'AI Creator Canvas',
-        status: 'Live • 99.9% Uptime',
+        status: 'Live • Whop Certified',
         accentColor: '#E5007D', // Pink
         profile: {
             "entity": "ez-influencer-360",
@@ -52,10 +54,10 @@ const acmiEntities: ACMIEntity[] = [
             "core_types": ["types/VideoStudio.ts", "types/LipSync.ts"],
             "lora_manager": "app/ez-loras-manager/page.tsx",
             "checkout_reconciliation": "app/purchase-success/page.tsx",
-            "stack": ["Next.js 14", "Upstash Redis", "Fal.ai", "RunPod InfiniteTalk"]
+            "stack": ["Next.js 14", "Upstash Redis", "Fal.ai", "RunPod InfiniteTalk", "React Flow"]
         },
         signals: {
-            "render_speed": "2.3s average per 4K frame generation",
+            "canvas_engine": "React Flow active nodes topology",
             "payment_webhook": "Whop API gateway signature checked",
             "nsfw_filter": "Grok moderation fallback listener active",
             "credit_cache": "Upstash Redis TTL-based coin ledger sync"
@@ -68,38 +70,11 @@ const acmiEntities: ACMIEntity[] = [
         ]
     },
     {
-        id: 'folana-cns',
-        name: 'Folana\'s CNS',
-        labelTag: 'Autonomous Influencer CNS',
-        status: 'Daily Loop Running',
-        accentColor: '#FCDC00', // Yellow
-        profile: {
-            "entity": "folanas-journal",
-            "path": "dyad-apps/folanas-journal",
-            "protocol_client": "folanas-journal/lib/acmi-client.ts",
-            "journal_data": "folanas-journal/lib/acmi-journal.ts",
-            "scheduler": "launchd cron daemon (ensure_daily_video)",
-            "stack": ["Next.js 16", "Deepgram TTS", "Composio", "Upstash Redis"]
-        },
-        signals: {
-            "active_timeline": "grokOvernight-1780212345000 thread monitoring",
-            "vocal_synth": "Deepgram aura-2-arcas-en @ 0.96 speed",
-            "social_dist": "Composio workflow dispatch (LINKEDIN_CREATE_POST)",
-            "bus_publish": "Atomic events pushed to http://localhost:7780/emit"
-        },
-        timeline: [
-            "→ Deployed state-management protocol inside lib/acmi-journal.ts",
-            "→ Configured daily automated video render triggered via local launchd",
-            "→ Generated vocal tracks from md posts using Deepgram aura-2-arcas-en TTS",
-            "→ Emitted transaction logs to main acmi_bus.txt in commit 20b954e"
-        ]
-    },
-    {
         id: 'mad-ez-v2',
-        name: 'Mad EZ Website V2',
+        name: 'Mad EZ Media',
         labelTag: 'Infrastructure Migration',
         status: 'Deployed • <10ms Cache',
-        accentColor: '#2d4a3e', // Forest
+        accentColor: '#2d4a3e', // Forest Green
         profile: {
             "entity": "Mad-EZ-Website-V2",
             "path": "/Volumes/1TB/Mad-EZ-Website-V2",
@@ -120,6 +95,33 @@ const acmiEntities: ACMIEntity[] = [
             "→ Configured AVIF image codecs and custom security policies in headers",
             "→ Deployed brand showcase layouts and contact routes inside app/layout.tsx"
         ]
+    },
+    {
+        id: 'tony-series',
+        name: 'T.O.N.Y.',
+        labelTag: 'TV Series Promo Platform',
+        status: 'Live • Gold Theme',
+        accentColor: '#DAAB2D', // Gold
+        profile: {
+            "entity": "top-of-new-york",
+            "path": "dyad-apps/t.o.n.y.---top-of-new-york",
+            "core_config": "vite.config.ts",
+            "media_builder": "lib/media/utils.ts",
+            "animation_presets": "utils/animations.ts",
+            "stack": ["React 19", "Vite", "TypeScript", "Framer Motion", "Tailwind CSS"]
+        },
+        signals: {
+            "theme": "Gold & Deep Black",
+            "media_asset_system": "Dev Placeholders / Prod CDN auto-switch",
+            "animation_engine": "Framer Motion scroll-parallax",
+            "status": "Production Ready"
+        },
+        timeline: [
+            "→ Initialized React 19 + Vite + Tailwind CSS framework scaffold",
+            "→ Implemented dynamic media URL builder with fallback image presets",
+            "→ Structured series data (cast members, episodes, news) in constants.ts",
+            "→ Built custom Framer Motion scroll parallax animations and transitions"
+        ]
     }
 ];
 ---
@@ -133,69 +135,490 @@ const acmiEntities: ACMIEntity[] = [
         </p>
     </div>
 
-    <div class="acmi-explorer-grid">
-        {acmiEntities.map((entity) => (
-            <div 
-                class="acmi-card"
-                style={`--card-accent: ${entity.accentColor}`}
-                data-entity-id={entity.id}
-            >
-                <div class="acmi-card-head">
-                    <div class="acmi-badge">
-                        <span class="acmi-badge-tag">{entity.labelTag}</span>
-                        <span class="acmi-status">{entity.status}</span>
+    <!-- Slideshow Tabs Selector -->
+    <div class="slideshow-nav-container mb-12">
+        <div class="slideshow-nav" role="tablist">
+            {acmiEntities.map((entity, index) => (
+                <button 
+                    class={`slide-nav-btn ${index === 0 ? 'active' : ''}`} 
+                    data-slide={index} 
+                    role="tab" 
+                    aria-selected={index === 0 ? 'true' : 'false'} 
+                    aria-controls={`slide-${entity.id}`}
+                >
+                    <span class="slide-num">0{index + 1}</span>
+                    <span class="slide-label">{entity.name}</span>
+                    <span class="active-indicator" style={`background: ${entity.accentColor};`}></span>
+                </button>
+            ))}
+        </div>
+    </div>
+
+    <!-- Slideshow Wrapper -->
+    <div class="slideshow-container relative min-h-[650px] md:min-h-[600px]">
+        
+        <!-- Slide 0: Folana -->
+        <div id="slide-folana-cns" class="slideshow-slide active" data-slide-index="0" role="tabpanel">
+            <div class="slide-grid">
+                <!-- Specs Panel -->
+                <div class="acmi-card" style="--card-accent: #1e4d36;" data-entity-id="folana-cns">
+                    <div class="acmi-card-head">
+                        <div class="acmi-badge">
+                            <span class="acmi-badge-tag">Autonomous Influencer CNS</span>
+                            <span class="acmi-status">EP251 Active • 70 BPM Drop</span>
+                        </div>
+                        <h3 class="acmi-title">Folana Lanez</h3>
+                        <p class="project-brief mt-3 text-sm text-gray-600 leading-relaxed font-sans">
+                            An end-to-end autonomous character recovery and content generation system. Mikey built a sync bridge to query production Upstash Redis, extract locked safetensors LoRA weights from Whop integrations, and run RunPod InfiniteTalk lip-sync generations. Featured here is her latest production episode: <strong>EP251 — The Forest Speaks</strong>.
+                        </p>
                     </div>
-                    <h3 class="acmi-title">{entity.name}</h3>
+
+                    <div class="acmi-tabs">
+                        <button class="acmi-tab-btn active" data-tab="profile">
+                            <span class="tab-char" style="background: #1e4d36;">P</span> Profile
+                        </button>
+                        <button class="acmi-tab-btn" data-tab="signals">
+                            <span class="tab-char" style="background: #1e4d36;">S</span> Signals
+                        </button>
+                        <button class="acmi-tab-btn" data-tab="timeline">
+                            <span class="tab-char" style="background: #1e4d36;">T</span> Timeline
+                        </button>
+                    </div>
+
+                    <div class="acmi-content-box">
+                        <div class="acmi-path">acmi:project:folana-cns:profile</div>
+                        
+                        <!-- Profile Tab (Active by default) -->
+                        <div class="tab-pane active" data-pane="profile">
+                            <pre class="acmi-json">{JSON.stringify(acmiEntities[0].profile, null, 2)}</pre>
+                        </div>
+
+                        <!-- Signals Tab -->
+                        <div class="tab-pane" data-pane="signals">
+                            <pre class="acmi-json">{JSON.stringify(acmiEntities[0].signals, null, 2)}</pre>
+                        </div>
+
+                        <!-- Timeline Tab -->
+                        <div class="tab-pane" data-pane="timeline">
+                            <ul class="acmi-log">
+                                {acmiEntities[0].timeline.map((log) => (
+                                    <li>{log}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="acmi-card-foot flex justify-between items-center text-[10px] font-mono text-gray-400">
+                        <span>ACMI v1.5 Protocol Conformance</span>
+                        <a href="https://folana.live/folana/premium/ep251" target="_blank" class="hover:text-[#e8a930] transition-colors underline">View Premium Page</a>
+                    </div>
                 </div>
 
-                <div class="acmi-tabs">
-                    <button class="acmi-tab-btn active" data-tab="profile">
-                        <span class="tab-char" style={`background: ${entity.accentColor}`}>P</span> Profile
-                    </button>
-                    <button class="acmi-tab-btn" data-tab="signals">
-                        <span class="tab-char" style={`background: ${entity.accentColor}`}>S</span> Signals
-                    </button>
-                    <button class="acmi-tab-btn" data-tab="timeline">
-                        <span class="tab-char" style={`background: ${entity.accentColor}`}>T</span> Timeline
-                    </button>
-                </div>
+                <!-- Media Showcase Panel (Folana Video) -->
+                <div class="media-showcase-panel flex flex-col justify-center">
+                    <div class="video-player-container relative rounded-2xl overflow-hidden shadow-2xl border border-white/5 aspect-video bg-[#0a1f12]">
+                        <video 
+                            id="folana-mux-video" 
+                            class="w-full h-full object-cover hidden" 
+                            controls 
+                            playsinline
+                            src="https://folana.live/folana/premium/ep251/ep251-music-video.mp4"
+                        ></video>
+                        
+                        <div class="video-overlay absolute inset-0 flex flex-col justify-between p-8 bg-gradient-to-t from-black/85 via-black/35 to-black/60 transition-all duration-300">
+                            <!-- Top Info -->
+                            <div class="flex justify-between items-start">
+                                <div class="glass-pill text-[10px] font-mono text-[#e8a930] tracking-wider uppercase border border-[#e8a930]/20 px-3 py-1 bg-[#0a1f12]/60 backdrop-blur-md flex items-center gap-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#e8a930] animate-ping"></span>
+                                    Episode 251 Release
+                                </div>
+                                <div class="glass-pill text-[10px] font-mono text-white/75 tracking-wider uppercase border border-white/10 px-3 py-1 bg-white/5 backdrop-blur-md">
+                                    70 BPM • D Major
+                                </div>
+                            </div>
 
-                <div class="acmi-content-box">
-                    <div class="acmi-path">acmi:project:{entity.id}:profile</div>
-                    
-                    <!-- Profile Tab (Active by default) -->
-                    <div class="tab-pane active" data-pane="profile">
-                        <pre class="acmi-json">{JSON.stringify(entity.profile, null, 2)}</pre>
+                            <!-- Image & Play Trigger -->
+                            <div class="video-cover-img-wrap absolute inset-0 -z-10 w-full h-full">
+                                <img 
+                                    src="https://folana.live/folana/premium/ep251/ep251-hero.jpg" 
+                                    alt="Folana Episode 251 Canopy Hero" 
+                                    class="w-full h-full object-cover" 
+                                />
+                            </div>
+
+                            <!-- Play Button Area -->
+                            <button class="play-trigger-btn group mx-auto my-auto w-20 h-20 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-md border border-white/20 flex items-center justify-center transition-all duration-300 hover:scale-115 focus:outline-none focus:ring-2 focus:ring-[#e8a930] shadow-[0_0_50px_rgba(232,169,48,0.4)]">
+                                <svg class="w-8 h-8 text-white fill-current translate-x-0.5 group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </button>
+
+                            <!-- Bottom Info -->
+                            <div class="space-y-2 text-white/90">
+                                <h4 class="font-bold text-lg leading-tight tracking-tight">"The forest speaks in a language older than sound."</h4>
+                                <p class="text-xs text-white/60 font-mono flex items-center gap-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#e8a930]"></span>
+                                    MiniMax-M2.6 Audio + RunPod InfiniteTalk (Landscape Video)
+                                </p>
+                            </div>
+                        </div>
                     </div>
-
-                    <!-- Signals Tab -->
-                    <div class="tab-pane" data-pane="signals">
-                        <pre class="acmi-json">{JSON.stringify(entity.signals, null, 2)}</pre>
-                    </div>
-
-                    <!-- Timeline Tab -->
-                    <div class="tab-pane" data-pane="timeline">
-                        <ul class="acmi-log">
-                            {entity.timeline.map((log) => (
-                                <li>{log}</li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="acmi-card-foot">
-                    <span>ACMI v1.5 Protocol Conformance</span>
                 </div>
             </div>
-        ))}
+        </div>
+
+        <!-- Slide 1: EZ Influencer -->
+        <div id="slide-ez-influencer" class="slideshow-slide" data-slide-index="1" role="tabpanel">
+            <div class="slide-grid">
+                <!-- Specs Panel -->
+                <div class="acmi-card" style="--card-accent: #E5007D;" data-entity-id="ez-influencer">
+                    <div class="acmi-card-head">
+                        <div class="acmi-badge">
+                            <span class="acmi-badge-tag">AI Creator Canvas</span>
+                            <span class="acmi-status">Live • Whop Certified</span>
+                        </div>
+                        <h3 class="acmi-title">EZ Influencer 360</h3>
+                        <p class="project-brief mt-3 text-sm text-gray-600 leading-relaxed font-sans">
+                            A production creator workspace featuring a visual node-based workflow builder (React Flow), multi-engine AI generation (ComfyUI + Seedream 4.0), credit cache syncing via Upstash Redis TTL ledgers, and dynamic Whop checkout reconciliation.
+                        </p>
+                    </div>
+
+                    <div class="acmi-tabs">
+                        <button class="acmi-tab-btn active" data-tab="profile">
+                            <span class="tab-char" style="background: #E5007D;">P</span> Profile
+                        </button>
+                        <button class="acmi-tab-btn" data-tab="signals">
+                            <span class="tab-char" style="background: #E5007D;">S</span> Signals
+                        </button>
+                        <button class="acmi-tab-btn" data-tab="timeline">
+                            <span class="tab-char" style="background: #E5007D;">T</span> Timeline
+                        </button>
+                    </div>
+
+                    <div class="acmi-content-box">
+                        <div class="acmi-path">acmi:project:ez-influencer:profile</div>
+                        
+                        <!-- Profile Tab (Active by default) -->
+                        <div class="tab-pane active" data-pane="profile">
+                            <pre class="acmi-json">{JSON.stringify(acmiEntities[1].profile, null, 2)}</pre>
+                        </div>
+
+                        <!-- Signals Tab -->
+                        <div class="tab-pane" data-pane="signals">
+                            <pre class="acmi-json">{JSON.stringify(acmiEntities[1].signals, null, 2)}</pre>
+                        </div>
+
+                        <!-- Timeline Tab -->
+                        <div class="tab-pane" data-pane="timeline">
+                            <ul class="acmi-log">
+                                {acmiEntities[1].timeline.map((log) => (
+                                    <li>{log}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="acmi-card-foot font-mono text-[10px] text-gray-400">
+                        <span>ACMI v1.5 Protocol Conformance</span>
+                    </div>
+                </div>
+
+                <!-- Media Showcase Panel (EZ Influencer App Mock & Whop Link) -->
+                <div class="media-showcase-panel flex flex-col justify-between gap-6">
+                    <!-- Dashboard Mock Visual -->
+                    <div class="dashboard-mock-frame relative rounded-2xl overflow-hidden shadow-2xl border border-[#2d4a3e]/10 bg-[#0c0d12] aspect-[55/27]">
+                        <!-- OS Window Header -->
+                        <div class="window-header bg-black/60 backdrop-blur-sm px-4 py-2 border-b border-white/5 flex items-center gap-2">
+                            <span class="window-dot red w-2 h-2 rounded-full bg-[#ff5f56]"></span>
+                            <span class="window-dot yellow w-2 h-2 rounded-full bg-[#ffbd2e]"></span>
+                            <span class="window-dot green w-2 h-2 rounded-full bg-[#27c93f]"></span>
+                            <span class="window-title text-[9px] font-mono text-white/40 ml-2">ezinfluencer360.com/canvas</span>
+                        </div>
+                        <div class="mock-video-wrap w-full h-[calc(100%-25px)] overflow-hidden">
+                            <iframe
+                              src="https://player.mux.com/NZnrjeoE402CnIlFJYP14xWJd022JRpA6S1lIRXhmmdME?metadata-video-title=a4037ab5-918f-4a19-8aa4-0ba40d5569c5-u2_f6a65738-4299-4274-af1d-4f5e873eecf6&video-title=a4037ab5-918f-4a19-8aa4-0ba40d5569c5-u2_f6a65738-4299-4274-af1d-4f5e873eecf6"
+                              style="width: 100%; height: 100%; border: none;"
+                              allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                              allowfullscreen
+                            ></iframe>
+                        </div>
+                    </div>
+
+                    <!-- Community Highlights & Whop Checkout Card -->
+                    <div class="whop-highlight-card bg-white p-6 rounded-2xl border border-pink-500/10 shadow-[0_8px_30px_rgb(45,74,62,0.03)] flex flex-col justify-between gap-6">
+                        <div class="space-y-3">
+                            <h4 class="text-xs font-mono uppercase text-[#E5007D] tracking-wider font-bold">Community & Integration Highlights</h4>
+                            <ul class="highlights-list grid grid-cols-2 gap-3 text-xs text-gray-600 font-sans">
+                                <li class="flex items-center gap-2">
+                                    <span class="text-pink-500">✔</span> Visual Node Canvas
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <span class="text-pink-500">✔</span> Upstash Credit Cache
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <span class="text-pink-500">✔</span> Whop Member Sync
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <span class="text-pink-500">✔</span> Grok NSFW Fallback
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="flex items-center justify-between border-t border-gray-100 pt-4 flex-wrap gap-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-pink-500/10 flex items-center justify-center text-lg shadow-inner">
+                                    💳
+                                </div>
+                                <div>
+                                    <h5 class="text-sm font-bold text-[#2d4a3e]">Developer License</h5>
+                                    <p class="text-[10px] text-gray-400">Unlock node builder & templates</p>
+                                </div>
+                            </div>
+                            <a 
+                                href="https://whop.com/checkout/plan_2Tz2QipTSn0O9" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                class="whop-checkout-btn inline-flex items-center justify-center bg-gradient-to-r from-pink-500 to-[#E5007D] text-white text-xs font-bold px-6 py-3 rounded-xl hover:opacity-95 transition-all shadow-lg shadow-pink-500/20 hover:shadow-pink-500/30"
+                            >
+                                Get Pass on Whop
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Mad EZ Media -->
+        <div id="slide-mad-ez-v2" class="slideshow-slide" data-slide-index="2" role="tabpanel">
+            <div class="slide-grid">
+                <!-- Specs Panel -->
+                <div class="acmi-card" style="--card-accent: #2d4a3e;" data-entity-id="mad-ez-v2">
+                    <div class="acmi-card-head">
+                        <div class="acmi-badge">
+                            <span class="acmi-badge-tag">Infrastructure Migration</span>
+                            <span class="acmi-status">Deployed • <10ms Cache</span>
+                        </div>
+                        <h3 class="acmi-title">Mad EZ Media</h3>
+                        <p class="project-brief mt-3 text-sm text-gray-600 leading-relaxed font-sans">
+                            A complete production infrastructure overhaul. Shifter to Next.js 16, React 19, and Supabase PostgreSQL. Integrated Upstash Redis TTL caches to reduce data resolving latency to sub-10ms, replacing legacy Airtable dependencies.
+                        </p>
+                    </div>
+
+                    <div class="acmi-tabs">
+                        <button class="acmi-tab-btn active" data-tab="profile">
+                            <span class="tab-char" style="background: #2d4a3e;">P</span> Profile
+                        </button>
+                        <button class="acmi-tab-btn" data-tab="signals">
+                            <span class="tab-char" style="background: #2d4a3e;">S</span> Signals
+                        </button>
+                        <button class="acmi-tab-btn" data-tab="timeline">
+                            <span class="tab-char" style="background: #2d4a3e;">T</span> Timeline
+                        </button>
+                    </div>
+
+                    <div class="acmi-content-box">
+                        <div class="acmi-path">acmi:project:mad-ez-v2:profile</div>
+                        
+                        <!-- Profile Tab (Active by default) -->
+                        <div class="tab-pane active" data-pane="profile">
+                            <pre class="acmi-json">{JSON.stringify(acmiEntities[2].profile, null, 2)}</pre>
+                        </div>
+
+                        <!-- Signals Tab -->
+                        <div class="tab-pane" data-pane="signals">
+                            <pre class="acmi-json">{JSON.stringify(acmiEntities[2].signals, null, 2)}</pre>
+                        </div>
+
+                        <!-- Timeline Tab -->
+                        <div class="tab-pane" data-pane="timeline">
+                            <ul class="acmi-log">
+                                {acmiEntities[2].timeline.map((log) => (
+                                    <li>{log}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="acmi-card-foot font-mono text-[10px] text-gray-400">
+                        <span>ACMI v1.5 Protocol Conformance</span>
+                    </div>
+                </div>
+
+                <!-- Media Showcase Panel (MacBook Mockup) -->
+                <div class="media-showcase-panel flex flex-col justify-center">
+                    <div class="dashboard-mock-frame relative rounded-2xl overflow-hidden shadow-2xl border border-[#2d4a3e]/15 bg-[#FAF9F5] aspect-square flex items-center justify-center p-4">
+                        <img 
+                            src="/images/mad_ez_media_mock.png" 
+                            alt="Mad EZ Media Partners Interface Mockup" 
+                            class="w-full h-full object-contain rounded-lg transition-transform duration-700 hover:scale-105" 
+                        />
+                        <div class="absolute bottom-4 right-4 bg-[#2d4a3e]/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-mono text-white border border-[#2d4a3e]/20">
+                            KAMI ARCHITECTURE
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: T.O.N.Y. -->
+        <div id="slide-tony-series" class="slideshow-slide" data-slide-index="3" role="tabpanel">
+            <div class="slide-grid">
+                <!-- Specs Panel -->
+                <div class="acmi-card" style="--card-accent: #DAAB2D;" data-entity-id="tony-series">
+                    <div class="acmi-card-head">
+                        <div class="acmi-badge">
+                            <span class="acmi-badge-tag">TV Series Promo Platform</span>
+                            <span class="acmi-status">Live • Gold Theme</span>
+                        </div>
+                        <h3 class="acmi-title">T.O.N.Y.</h3>
+                        <p class="project-brief mt-3 text-sm text-gray-600 leading-relaxed font-sans">
+                            A high-end promotional application for the "Top of New York" TV series. Built with React 19, Vite, and Framer Motion. Features a dynamic CDN media asset system that handles automated placeholder mappings, parallax scroll layouts, and gold-noir aesthetics.
+                        </p>
+                    </div>
+
+                    <div class="acmi-tabs">
+                        <button class="acmi-tab-btn active" data-tab="profile">
+                            <span class="tab-char" style="background: #DAAB2D; color: black;">P</span> Profile
+                        </button>
+                        <button class="acmi-tab-btn" data-tab="signals">
+                            <span class="tab-char" style="background: #DAAB2D; color: black;">S</span> Signals
+                        </button>
+                        <button class="acmi-tab-btn" data-tab="timeline">
+                            <span class="tab-char" style="background: #DAAB2D; color: black;">T</span> Timeline
+                        </button>
+                    </div>
+
+                    <div class="acmi-content-box">
+                        <div class="acmi-path">acmi:project:tony-series:profile</div>
+                        
+                        <!-- Profile Tab (Active by default) -->
+                        <div class="tab-pane active" data-pane="profile">
+                            <pre class="acmi-json">{JSON.stringify(acmiEntities[3].profile, null, 2)}</pre>
+                        </div>
+
+                        <!-- Signals Tab -->
+                        <div class="tab-pane" data-pane="signals">
+                            <pre class="acmi-json">{JSON.stringify(acmiEntities[3].signals, null, 2)}</pre>
+                        </div>
+
+                        <!-- Timeline Tab -->
+                        <div class="tab-pane" data-pane="timeline">
+                            <ul class="acmi-log">
+                                {acmiEntities[3].timeline.map((log) => (
+                                    <li>{log}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="acmi-card-foot font-mono text-[10px] text-gray-400">
+                        <span>ACMI v1.5 Protocol Conformance</span>
+                    </div>
+                </div>
+
+                <!-- Media Showcase Panel (Cinema Poster) -->
+                <div class="media-showcase-panel flex flex-col justify-center">
+                    <div class="dashboard-mock-frame relative rounded-2xl overflow-hidden shadow-2xl border border-[#DAAB2D]/15 bg-[#020B13] aspect-square">
+                        <img 
+                            src="/images/tony_showcase.png" 
+                            alt="T.O.N.Y. TV Show Noir Poster Art" 
+                            class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" 
+                        />
+                        <div class="absolute bottom-4 right-4 bg-[#DAAB2D]/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-mono text-black font-bold border border-[#DAAB2D]/20">
+                            PARALLAX ANIMS
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </section>
 
 <script>
-    // Client-side interactive tabs handler and live RAG hydration
-    document.addEventListener('DOMContentLoaded', () => {
-        const cards = document.querySelectorAll('.acmi-card');
+    function initACMIExplorer() {
+        // --- SLIDESHOW NAVIGATION ---
+        const navButtons = document.querySelectorAll('.slide-nav-btn');
+        const slides = document.querySelectorAll('.slideshow-slide');
+        let currentSlideIndex = 0;
 
+        const switchSlide = (slideIndex) => {
+            currentSlideIndex = slideIndex;
+
+            // Pause all videos when switching slides
+            const allVideos = document.querySelectorAll('video');
+            allVideos.forEach(v => {
+                v.pause();
+                v.classList.add('hidden');
+                // show overlay again
+                const overlay = v.parentElement.querySelector('.video-overlay');
+                if (overlay) overlay.classList.remove('opacity-0', 'pointer-events-none');
+            });
+
+            // Update Nav buttons
+            navButtons.forEach((btn, idx) => {
+                if (idx === slideIndex) {
+                    btn.classList.add('active');
+                    btn.setAttribute('aria-selected', 'true');
+                } else {
+                    btn.classList.remove('active');
+                    btn.setAttribute('aria-selected', 'false');
+                }
+            });
+
+            // Update Slides
+            slides.forEach((slide) => {
+                const idx = parseInt(slide.getAttribute('data-slide-index') || '0', 10);
+                if (idx === slideIndex) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+        };
+
+        navButtons.forEach(btn => {
+            // Remove previous event listener if any (resiliency)
+            const newBtn = btn.cloneNode(true);
+            btn.parentNode?.replaceChild(newBtn, btn);
+            
+            newBtn.addEventListener('click', () => {
+                const index = parseInt(newBtn.getAttribute('data-slide') || '0', 10);
+                switchSlide(index);
+            });
+        });
+
+        // Re-query buttons after cloning to bind active indicators
+        const activeNavButtons = document.querySelectorAll('.slide-nav-btn');
+
+        // --- VIDEO PLAYER INTEGRATION ---
+        const folanaVideo = document.getElementById('folana-mux-video') as HTMLVideoElement;
+        const playBtn = document.querySelector('.play-trigger-btn');
+        const videoOverlay = document.querySelector('.video-overlay');
+
+        if (folanaVideo && playBtn && videoOverlay) {
+            playBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                
+                // Show video element, fade out overlay
+                folanaVideo.classList.remove('hidden');
+                videoOverlay.classList.add('opacity-0', 'pointer-events-none');
+                
+                folanaVideo.play().catch(err => console.log('Video play failed:', err));
+            });
+
+            // Let click on the video itself pause/play
+            folanaVideo.addEventListener('click', () => {
+                if (folanaVideo.paused) {
+                    folanaVideo.play();
+                } else {
+                    folanaVideo.pause();
+                }
+            });
+        }
+
+        // --- ACMI CARD TABS HANDLER ---
+        const cards = document.querySelectorAll('.acmi-card');
         cards.forEach(card => {
             const tabButtons = card.querySelectorAll('.acmi-tab-btn');
             const tabPanes = card.querySelectorAll('.tab-pane');
@@ -227,7 +650,7 @@ const acmiEntities: ACMIEntity[] = [
             });
         });
 
-        // Hydrate live ACMI data from Redis via local API
+        // --- LIVE ACMI DATA RAG HYDRATION ---
         fetch('/api/acmi-data')
             .then(res => res.json())
             .then(data => {
@@ -243,9 +666,9 @@ const acmiEntities: ACMIEntity[] = [
                     const statusEl = card.querySelector('.acmi-status');
                     if (statusEl && record.signals && record.signals.status) {
                         const capitalized = record.signals.status.charAt(0).toUpperCase() + record.signals.status.slice(1);
-                        const subInfo = id === 'ownerscout' ? '80% Cost Cut' :
-                                        id === 'ez-influencer' ? '99.9% Uptime' :
-                                        id === 'folana-cns' ? 'Daily Loop Running' : '<10ms Cache';
+                        const subInfo = id === 'folana-cns' ? 'EP251 Active' : 
+                                        id === 'ez-influencer' ? 'Live • Whop Certified' : 
+                                        id === 'mad-ez-v2' ? 'Deployed • <10ms Cache' : 'Live • Gold Theme';
                         statusEl.textContent = `${capitalized} • ${subInfo}`;
                     }
 
@@ -272,13 +695,23 @@ const acmiEntities: ACMIEntity[] = [
                         });
                     }
 
-                    // Flash card to denote successful sync
+                    // Pulse effect
                     card.classList.add('hydrated');
                     setTimeout(() => card.classList.remove('hydrated'), 1200);
                 });
             })
             .catch(err => console.warn('Could not fetch live ACMI explorer data:', err));
-    });
+    }
+
+    // Initialize
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initACMIExplorer);
+    } else {
+        initACMIExplorer();
+    }
+
+    // Support Astro View Transitions
+    document.addEventListener('astro:page-load', initACMIExplorer);
 </script>
 
 <style define:vars={{
@@ -317,7 +750,7 @@ const acmiEntities: ACMIEntity[] = [
 
     .em-gradient {
         font-style: italic;
-        background: linear-gradient(90deg, var(--accent-cyan, #00B9F1) 0, var(--accent-pink, #E5007D) 100%);
+        background: linear-gradient(90deg, #e8a930 0, var(--accent-pink, #E5007D) 100%);
         background-clip: text;
         -webkit-background-clip: text;
         color: transparent;
@@ -331,36 +764,125 @@ const acmiEntities: ACMIEntity[] = [
         line-height: 1.6;
     }
 
-    .acmi-explorer-grid {
+    /* --- SLIDESHOW NAVIGATION --- */
+    .slideshow-nav-container {
+        border-bottom: 1px solid rgba(45, 74, 62, 0.1);
+        overflow-x: auto;
+        -scrollbar-width: none;
+    }
+    
+    .slideshow-nav-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .slideshow-nav {
+        display: flex;
+        gap: 2rem;
+        padding-bottom: 0.5rem;
+        min-width: max-content;
+    }
+
+    .slide-nav-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: none;
+        border: none;
+        padding: 0.75rem 0.5rem;
+        cursor: pointer;
+        position: relative;
+        font-family: "Outfit", sans-serif;
+        text-align: left;
+        transition: opacity 0.3s;
+    }
+
+    .slide-nav-btn:not(.active) {
+        opacity: 0.5;
+    }
+
+    .slide-nav-btn:hover {
+        opacity: 0.85;
+    }
+
+    .slide-num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        font-weight: 700;
+        color: #2d4a3e;
+        opacity: 0.6;
+    }
+
+    .slide-label {
+        font-size: 14.5px;
+        font-weight: 700;
+        color: #2d4a3e;
+    }
+
+    .active-indicator {
+        position: absolute;
+        bottom: -0.5rem;
+        left: 0;
+        right: 0;
+        height: 3px;
+        border-radius: 3px;
+        transform: scaleX(0);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .slide-nav-btn.active .active-indicator {
+        transform: scaleX(1);
+    }
+
+    /* --- SLIDESHOW SLIDE --- */
+    .slideshow-container {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 2rem;
+        grid-template-rows: 1fr;
+    }
+
+    .slideshow-slide {
+        grid-area: 1 / 1 / 2 / 2;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px);
+        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s;
+        pointer-events: none;
+    }
+
+    .slideshow-slide.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: all;
+        z-index: 10;
+    }
+
+    .slide-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
     }
 
     @media (min-width: 1024px) {
-        .acmi-explorer-grid {
-            grid-template-columns: repeat(2, 1fr);
+        .slide-grid {
+            grid-template-columns: 1fr 1fr;
+            align-items: stretch;
         }
     }
 
+    /* --- ACMI CARD & TABS --- */
     .acmi-card {
         background: #ffffff;
-        border-radius: 14px;
+        border-radius: 18px;
         padding: 2.25rem;
         border-top: 5px solid var(--card-accent);
-        box-shadow: 0 8px 24px rgba(45, 74, 62, 0.04);
-        transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.32s, border-color 0.5s;
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
+        box-shadow: 0 10px 30px rgba(45, 74, 62, 0.03);
         border-left: 1px solid rgba(45, 74, 62, 0.05);
         border-right: 1px solid rgba(45, 74, 62, 0.05);
         border-bottom: 1px solid rgba(45, 74, 62, 0.05);
-    }
-
-    .acmi-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 16px 36px rgba(45, 74, 62, 0.08);
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
     }
 
     .acmi-card.hydrated {
@@ -369,16 +891,10 @@ const acmiEntities: ACMIEntity[] = [
 
     @keyframes acmiPulse {
         0% {
-            border-left-color: var(--card-accent);
-            border-right-color: var(--card-accent);
-            border-bottom-color: var(--card-accent);
-            box-shadow: 0 0 20px rgba(45, 74, 62, 0.15);
+            box-shadow: 0 0 25px rgba(45, 74, 62, 0.1);
         }
         100% {
-            border-left-color: rgba(45, 74, 62, 0.05);
-            border-right-color: rgba(45, 74, 62, 0.05);
-            border-bottom-color: rgba(45, 74, 62, 0.05);
-            box-shadow: 0 8px 24px rgba(45, 74, 62, 0.04);
+            box-shadow: 0 10px 30px rgba(45, 74, 62, 0.03);
         }
     }
 
@@ -408,7 +924,7 @@ const acmiEntities: ACMIEntity[] = [
 
     .acmi-title {
         font-family: "Playfair Display", serif;
-        font-size: 1.75rem;
+        font-size: 2rem;
         font-weight: 850;
         color: var(--primary, #2d4a3e);
         margin: 0;
@@ -434,7 +950,7 @@ const acmiEntities: ACMIEntity[] = [
         border: none;
         padding: 6px 12px;
         cursor: pointer;
-        transition: color 0.2s;
+        transition: color 0.2s, background 0.2s;
         border-radius: 6px;
     }
 
@@ -471,7 +987,7 @@ const acmiEntities: ACMIEntity[] = [
         font-size: 12.5px;
         line-height: 1.65;
         color: rgba(45, 74, 62, 0.85);
-        min-height: 190px;
+        min-height: 220px;
         display: flex;
         flex-direction: column;
     }
@@ -523,5 +1039,40 @@ const acmiEntities: ACMIEntity[] = [
         letter-spacing: 0.15em;
         color: rgba(45, 74, 62, 0.4);
         margin-top: auto;
+    }
+
+    /* --- MUX VIDEO CONTAINER --- */
+    .glass-pill {
+        border-radius: 9999px;
+    }
+
+    .play-trigger-btn {
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .video-overlay {
+        transition: opacity 0.5s ease;
+    }
+
+    /* --- EZ INFLUENCER APP FRAME --- */
+    .dashboard-mock-frame {
+        box-shadow: 0 20px 45px rgba(0,0,0,0.06);
+    }
+
+    .window-dot {
+        display: inline-block;
+    }
+
+    /* --- WHOP HIGHLIGHT CARD --- */
+    .whop-highlight-card {
+        border-radius: 18px;
+    }
+
+    .whop-checkout-btn {
+        transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .whop-checkout-btn:hover {
+        transform: translateY(-1px);
     }
 </style>

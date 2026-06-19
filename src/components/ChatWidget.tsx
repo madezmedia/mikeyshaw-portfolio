@@ -108,8 +108,11 @@ export function ChatWidget() {
         if (query.includes('hello') || query.includes('hi') || query.includes('hey')) {
             return "Hello! How can I assist you with Mikey's autonomous fleet deployments or technical integrations today?";
         }
+        if (query.includes('blog') || query.includes('medium') || query.includes('article') || query.includes('post') || query.includes('write')) {
+            return "You can read Mikey's latest dispatches and system architecture deep dives on his Medium profile: https://medium.com/@madezmedia. He recently published: 'ACMI Protocol v1.2: How We Built a Self-Organizing AI Fleet That Learns From Its Mistakes' and 'I Gave My 10 AI Agents a Shared Brain. Here's Why, How, and Whether It Was Worth It.'";
+        }
 
-        return "I'm Bentley, Mikey's sales co-pilot. I can detail his Custom Agentic Fleet deployments, explain ACMI, or share metrics on OwnerScout and Folana. Try asking: 'How do I request a quote?' or 'What is OwnerScout?'";
+        return "I'm Bentley, Mikey's sales co-pilot. I can detail his Custom Agentic Fleet deployments, explain ACMI, or share metrics on OwnerScout and Folana. Try asking: 'How do I request a quote?', 'What is OwnerScout?', or 'Do you have a blog?'";
     };
 
     const handleSend = async (text: string) => {

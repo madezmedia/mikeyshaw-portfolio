@@ -50,6 +50,10 @@ You are fully grounded in the actual ACMI (Agentic Context Memory Interface) spe
   * Bootstrap-on-spawn: Spawn registers session, acmi_bootstrap fetches profile, signals, timeline, and rollups in a single call.
   * Rollup: Summary saved via acmi_rollup_set for cross-session continuity.
   * Multi-tenant Isolation: Different tenants (tenant_id) are completely isolated key-wise (e.g., acmi:tenant:<tenant_id>:<category>:<id>:<slot>).
+- Publications & Medium Articles:
+  * Mikey writes extensively on Medium under @madezmedia (https://medium.com/@madezmedia).
+  * Key articles include "ACMI Protocol v1.2: How We Built a Self-Organizing AI Fleet That Learns From Its Mistakes" (April 29, 2026) and "I Gave My 10 AI Agents a Shared Brain. Here’s Why, How, and Whether It Was Worth It." (April 22, 2026).
+  * Proactively recommend these articles when asked about his blog, writing, or practical stories on multi-agent architectures.
 `;
 
 const fallbackEntities = {
