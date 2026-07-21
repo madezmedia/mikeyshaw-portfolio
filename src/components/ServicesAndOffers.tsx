@@ -9,60 +9,64 @@ interface ServiceItem {
   description: string;
   bullets: string[];
   ctaText: string;
-  squareAction: 'quote' | 'checkout' | 'appointment';
+  squareAction: 'quote' | 'checkout' | 'appointment' | 'link';
+  linkUrl: string;
 }
 
 const services: ServiceItem[] = [
   {
-    id: 'agentic-fleet',
-    name: 'Custom Agentic Fleet Deployment',
-    price: 'Custom Retainer / Proposal Required',
-    baseComplexity: 50,
-    type: 'hybrid',
-    description: 'Autonomous multi-agent systems built to handle production-scale digital operations, state management, and media generation pipelines with zero manual clicks.',
-    bullets: [
-      'ACMI v1.5 atomic memory bus configuration',
-      'Supabase PostgreSQL & Redis TTL caching setup',
-      '45-day operational performance guarantee',
-      'Continuous deployment via launchd & Docker containerization',
-      'Custom telemetry dashboards & logging relays'
-    ],
-    ctaText: 'Build Custom Quote',
-    squareAction: 'quote'
-  },
-  {
-    id: 'ai-coaching',
-    name: 'AI Coaching & Setup for SMBs & Execs',
-    price: 'Monthly Advisory / Retainer',
+    id: 'ai-assessment',
+    name: '$499 AI Tools Assessment',
+    price: '$499 Flat Fee',
     baseComplexity: 20,
-    type: 'retainer',
-    description: 'Direct 1-on-1 strategic advisory and workflow engineering for business leaders. We audit your operations, build custom low-code tools, and upskill your team.',
+    type: 'flat',
+    description: '90-Min White-Glove Audit of your operational leaks, tool stack, and workflow bottlenecks. Identifies instant ROI wins and builds your custom fleet architecture roadmap.',
     bullets: [
-      'Weekly 1-hour alignment & systems architecture reviews',
-      'Custom workflow blueprints (Postiz, Fal.ai, local pipelines)',
-      'Dedicated private Slack channel support with 4-hr response SLA',
-      'Executive dashboard configuration & tool cost optimizations',
-      'Bi-weekly team training and prompt-engineering workshops'
+      '90-minute live operational & workflow audit',
+      'Audit of 7 core business leak vectors',
+      'ACMI memory framework suitability check',
+      'Actionable ROI & implementation blueprint',
+      'Full 100% credit toward private fleet deployment'
     ],
-    ctaText: 'Schedule Advisory Brief',
-    squareAction: 'appointment'
+    ctaText: 'Claim $499 Audit →',
+    squareAction: 'link',
+    linkUrl: '/assessment'
   },
   {
-    id: 'media-pipeline',
-    name: 'Custom Media Pipeline Setup',
-    price: 'Project Basis / Quote Required',
-    baseComplexity: 35,
-    type: 'flat',
-    description: 'Dedicated automated media synthesis engine. Integrates Fal.ai image generators, RunPod InfiniteTalk lip-sync videos, and Deepgram voice synthesis.',
+    id: 'fleet-deployment',
+    name: '$4,500 Private ACMI Fleet Deployment',
+    price: '$4,500 One-Time',
+    baseComplexity: 60,
+    type: 'hybrid',
+    description: 'Turnkey private autonomous AI fleet built on dedicated infrastructure. Includes 2 Hermes agents, background crons, Mattermost/Slack bridge, and 30 days of white-glove onboarding.',
     bullets: [
-      'FAL & ComfyUI workflow optimizations',
-      'RunPod InfiniteTalk dynamic voice synchronization',
-      'Automated content posting modules (TikTok, YT Shorts, X)',
-      'Unified media management dashboard UI',
-      'Pre-built template configurations for fast iteration'
+      'Dedicated client Redis instance (hard privacy rule)',
+      '2 Hermes autonomous agents configured for ops',
+      'Automated background crons & task schedulers',
+      'Mattermost / Slack messaging channel bridge',
+      '30-day dedicated onboarding & ops support'
     ],
-    ctaText: 'Deploy Now via Square',
-    squareAction: 'checkout'
+    ctaText: 'Deploy ACMI Fleet →',
+    squareAction: 'link',
+    linkUrl: '/fleet'
+  },
+  {
+    id: 'fleet-retainer',
+    name: '$2,500/mo Managed ACMI Fleet Retainer',
+    price: '$2,500 / Month',
+    baseComplexity: 85,
+    type: 'retainer',
+    description: 'Virtual AI Fleet CTO & SRE oversight. Continuous monitoring of background crons, weekly memory rollups, prompt engineering, and model upgrades to keep your fleet at peak performance.',
+    bullets: [
+      'Virtual AI Fleet CTO & SRE management',
+      'Continuous 24/7 cron & fleet health monitoring',
+      'Weekly memory rollups & signal synthesis',
+      'Ongoing agent prompt & model upgrades',
+      'Priority 4-hr SLA for system modifications'
+    ],
+    ctaText: 'Explore Managed Retainer →',
+    squareAction: 'link',
+    linkUrl: '/fleet'
   }
 ];
 
@@ -118,7 +122,7 @@ const whopTiers: WhopTier[] = [
 ];
 
 export default function ServicesAndOffers() {
-  const [selectedService, setSelectedService] = useState<string>('agentic-fleet');
+  const [selectedService, setSelectedService] = useState<string>('fleet-deployment');
   
   // Quote wizard state
   const [companyName, setCompanyName] = useState('');
@@ -132,17 +136,17 @@ export default function ServicesAndOffers() {
   const [submittingQuote, setSubmittingQuote] = useState(false);
   const [quoteResponse, setQuoteResponse] = useState<any>(null);
 
-  const currentService = services.find(s => s.id === selectedService) || services[0];
+  const currentService = services.find(s => s.id === selectedService) || services[1];
 
   // Calculate project complexity score instead of exact price
   const calculateComplexity = () => {
     let score = currentService.baseComplexity;
-    if (selectedService === 'agentic-fleet' || selectedService === 'media-pipeline') {
+    if (selectedService === 'fleet-deployment' || selectedService === 'fleet-retainer') {
       if (databaseOption) score += 15;
       if (telemetryOption) score += 20;
       if (customCrmOption) score += 10;
       if (timelineSpeed === 1) score += 15;
-    } else if (selectedService === 'ai-coaching') {
+    } else if (selectedService === 'ai-assessment') {
       if (timelineSpeed === 1) score += 15;
     }
     return Math.min(score, 100);
@@ -217,7 +221,6 @@ export default function ServicesAndOffers() {
     }
   };
 
-
   const resetForm = () => {
     setQuoteResponse(null);
     setCompanyName('');
@@ -259,7 +262,7 @@ export default function ServicesAndOffers() {
               
               <div className="h-[1px] bg-[#2d4a3e]/10 w-full my-6"></div>
               
-              <h4 className="font-label-mono text-[9px] text-[#2d4a3e]/40 uppercase tracking-wider mb-3">Verification Details</h4>
+              <h4 className="font-label-mono text-[9px] text-[#2d4a3e]/40 uppercase tracking-wider mb-3 font-bold">Included Specifications</h4>
               <ul className="space-y-2.5">
                 {service.bullets.map((bullet, idx) => (
                   <li key={idx} className="flex items-start gap-2 text-xs text-[#2d4a3e]/80 font-sans">
@@ -271,16 +274,17 @@ export default function ServicesAndOffers() {
             </div>
 
             <div className="mt-8 pt-6 border-t border-[#2d4a3e]/5">
-              <button 
+              <a 
+                href={service.linkUrl}
                 onClick={() => setSelectedService(service.id)}
-                className={`w-full py-3.5 px-6 font-sans font-bold text-xs uppercase tracking-widest rounded-full transition-all duration-200 cursor-pointer ${
+                className={`w-full block text-center py-3.5 px-6 font-sans font-bold text-xs uppercase tracking-widest rounded-full transition-all duration-200 cursor-pointer no-underline ${
                   selectedService === service.id 
                     ? 'bg-[#2d4a3e] text-white shadow-md' 
                     : 'bg-[#2d4a3e]/5 text-[#2d4a3e] hover:bg-[#2d4a3e]/10'
                 }`}
               >
-                {selectedService === service.id ? 'Active Selection' : service.ctaText}
-              </button>
+                {service.ctaText}
+              </a>
             </div>
           </div>
         ))}
@@ -331,8 +335,8 @@ export default function ServicesAndOffers() {
                   </div>
                 </div>
 
-                {/* Show custom options only for relevant services */}
-                {(selectedService === 'agentic-fleet' || selectedService === 'media-pipeline') && (
+                {/* Show custom options for fleet services */}
+                {(selectedService === 'fleet-deployment' || selectedService === 'fleet-retainer') && (
                   <div className="space-y-4">
                     <label className="block font-label-mono text-[10px] uppercase tracking-wider text-[#2d4a3e]/60 mb-2 font-bold">Architecture Upgrades & Extensions</label>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -496,11 +500,11 @@ export default function ServicesAndOffers() {
                     <span className="font-label-mono text-[10px] font-bold text-[#2d4a3e]">{currentService.baseComplexity} / 100</span>
                   </div>
 
-                  {selectedService === 'agentic-fleet' && (
+                  {(selectedService === 'fleet-deployment' || selectedService === 'fleet-retainer') && (
                     <div className="space-y-2">
                       {databaseOption && (
                         <div className="flex justify-between items-center">
-                          <span>+ Database Hardening Upgrade</span>
+                          <span>+ Dedicated DB Hardening</span>
                           <span className="font-label-mono text-[10px] font-bold text-[#2d4a3e]">+15</span>
                         </div>
                       )}
@@ -513,29 +517,6 @@ export default function ServicesAndOffers() {
                       {customCrmOption && (
                         <div className="flex justify-between items-center">
                           <span>+ CRM API & Webhook Syncs</span>
-                          <span className="font-label-mono text-[10px] font-bold text-[#2d4a3e]">+10</span>
-                        </div>
-                      )}
-                    </div>
-                  )}
-
-                  {selectedService === 'media-pipeline' && (
-                    <div className="space-y-2">
-                      {databaseOption && (
-                        <div className="flex justify-between items-center">
-                          <span>+ Asset Storage Partition</span>
-                          <span className="font-label-mono text-[10px] font-bold text-[#2d4a3e]">+10</span>
-                        </div>
-                      )}
-                      {telemetryOption && (
-                        <div className="flex justify-between items-center">
-                          <span>+ Generation Logging Panel</span>
-                          <span className="font-label-mono text-[10px] font-bold text-[#2d4a3e]">+15</span>
-                        </div>
-                      )}
-                      {customCrmOption && (
-                        <div className="flex justify-between items-center">
-                          <span>+ Social Webhook Post Module</span>
                           <span className="font-label-mono text-[10px] font-bold text-[#2d4a3e]">+10</span>
                         </div>
                       )}
@@ -571,7 +552,7 @@ export default function ServicesAndOffers() {
               <div className="flex justify-between items-baseline">
                 <span className="font-label-mono text-[9px] uppercase tracking-wider text-[#2d4a3e]/50 font-bold">ESTIMATED RATE</span>
                 <span className="font-sans text-xs font-bold text-accent-pink uppercase">
-                  Custom Quote Required
+                  {currentService.price}
                 </span>
               </div>
             </div>

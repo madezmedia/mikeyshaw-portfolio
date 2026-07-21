@@ -1,0 +1,724 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import ContactSection from '../components/ContactSection.astro';
+---
+
+<Layout title="AI Tools Assessment & Operational Audit | Mad EZ Media — Mikey Shaw">
+  <!-- Navigation Bar -->
+  <Navbar />
+
+  <main class="w-full bg-[#faf9f5] overflow-x-hidden text-[#2d4a3e]">
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 md:pt-40 md:pb-28 px-6 max-w-7xl mx-auto relative overflow-hidden">
+      <!-- Subtle background glow -->
+      <div class="absolute top-10 right-10 w-96 h-96 bg-[#00B9F1]/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute bottom-10 left-10 w-96 h-96 bg-[#E5007D]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-4xl relative z-10">
+        <!-- Eyebrow -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2d4a3e]/5 border border-[#2d4a3e]/15 mb-6">
+          <span class="w-2 h-2 rounded-full bg-[#E5007D] animate-pulse"></span>
+          <span class="font-label-mono text-xs uppercase tracking-[0.25em] font-semibold text-[#2d4a3e]">
+            N° 01 • OPERATIONAL LEAK AUDIT
+          </span>
+        </div>
+
+        <!-- Main Headline -->
+        <h1 class="font-display-xl text-[clamp(2.4rem,5.5vw,4.5rem)] leading-[1.08] font-black tracking-tight text-[#2d4a3e]">
+          Stop Buying AI That Forgets Your Business <em class="italic text-[#E5007D] font-black">Every Time You Close The Tab.</em>
+        </h1>
+
+        <!-- Subheadline -->
+        <p class="font-body-lg text-lg md:text-xl text-[#2d4a3e]/85 max-w-3xl mt-8 leading-relaxed font-normal">
+          Off-the-shelf chatbots lose context the second you refresh. We audit your 7 core operational leaks, deploy persistent ACMI memory architectures (Profile / Signals / Timeline), and hand you back 5–15 hours every single week.
+        </p>
+
+        <!-- CTA Action Bar -->
+        <div class="flex flex-wrap items-center gap-4 mt-10">
+          <a
+            href="https://cal.com/mad-ez-media/ai-automation-discovery"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-[#2d4a3e] text-white px-8 py-4 font-bold text-xs uppercase tracking-widest hover:bg-[#3a5c4e] hover:-translate-y-[1px] active:translate-y-0 transition-all rounded-full no-underline inline-flex items-center gap-3 shadow-md"
+          >
+            Book Free 15-Min Consult
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+
+          <a
+            href="#pricing"
+            class="bg-white text-[#2d4a3e] border border-[#2d4a3e]/20 px-8 py-4 font-bold text-xs uppercase tracking-widest hover:border-[#E5007D] hover:text-[#E5007D] transition-all rounded-full no-underline shadow-sm"
+          >
+            Claim $499 Assessment →
+          </a>
+        </div>
+
+        <!-- Key Metrics Strip -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 pt-10 border-t border-[#2d4a3e]/15">
+          <div class="flex items-start gap-4">
+            <div class="p-3 bg-[#E5007D]/10 rounded-xl text-[#E5007D]">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div>
+              <span class="font-label-mono text-xs uppercase tracking-wider text-[#2d4a3e]/60 font-semibold block">Annual Labor Savings</span>
+              <span class="font-display text-2xl font-bold text-[#2d4a3e]">$10,400 / emp</span>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="p-3 bg-[#00B9F1]/10 rounded-xl text-[#00B9F1]">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <span class="font-label-mono text-xs uppercase tracking-wider text-[#2d4a3e]/60 font-semibold block">Time Recovered</span>
+              <span class="font-display text-2xl font-bold text-[#2d4a3e]">5+ hrs / wk</span>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="p-3 bg-[#FCDC00]/20 rounded-xl text-[#2d4a3e]">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <div>
+              <span class="font-label-mono text-xs uppercase tracking-wider text-[#2d4a3e]/60 font-semibold block">White-Glove Guarantee</span>
+              <span class="font-display text-2xl font-bold text-[#2d4a3e]">100% Risk Free</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The 7 Leaks Grid Section -->
+    <section class="py-24 px-6 max-w-7xl mx-auto" id="leaks">
+      <div class="max-w-3xl mb-16">
+        <span class="font-label-mono text-xs uppercase tracking-[0.25em] text-[#E5007D] font-bold block mb-3">
+          N° 02 • THE 7 OPERATIONAL LEAKS
+        </span>
+        <h2 class="font-display-xl text-3xl md:text-5xl font-black text-[#2d4a3e] tracking-tight leading-tight">
+          Where Your Business Is Bleeding Time & Revenue Every Day.
+        </h2>
+        <p class="font-body-lg text-lg text-[#2d4a3e]/80 mt-4 leading-relaxed">
+          Most owners try to solve operational chaos with another $20/mo subscription. But software without persistent memory just creates more tab-switching. Here are the 7 leaks we fix:
+        </p>
+      </div>
+
+      <!-- 7 Leaks Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Leak 1: Missed Calls -->
+        <div class="bg-white rounded-2xl p-8 border border-[#2d4a3e]/10 shadow-sm stagger-card flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-[#E5007D]/5 rounded-bl-full pointer-events-none"></div>
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="font-label-mono text-[10px] uppercase tracking-widest px-3 py-1 bg-[#E5007D]/10 text-[#E5007D] rounded-full font-bold">
+                LEAK 01 • INBOUND
+              </span>
+              <svg class="w-6 h-6 text-[#E5007D]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            </div>
+            <h3 class="font-display text-2xl font-bold text-[#2d4a3e] mb-3">
+              Missed Calls
+            </h3>
+            <p class="font-body-lg text-base font-semibold text-[#E5007D] mb-4 italic">
+              "You miss the call, they call the next guy."
+            </p>
+            <p class="font-sans text-sm text-[#2d4a3e]/80 leading-relaxed mb-6">
+              62% of inbound service leads choose the first company that answers or replies. Unanswered calls go straight to voice mail and then to your competitor.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-[#2d4a3e]/10">
+            <span class="font-label-mono text-[11px] uppercase tracking-wider text-[#2d4a3e]/60 font-semibold block mb-1">ACMI Infrastructure Fix:</span>
+            <span class="font-sans text-xs text-[#2d4a3e] font-bold block">Instant AI call capture & automated SMS handshake within 10s.</span>
+          </div>
+        </div>
+
+        <!-- Leak 2: Cold Leads -->
+        <div class="bg-white rounded-2xl p-8 border border-[#2d4a3e]/10 shadow-sm stagger-card flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-[#00B9F1]/5 rounded-bl-full pointer-events-none"></div>
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="font-label-mono text-[10px] uppercase tracking-widest px-3 py-1 bg-[#00B9F1]/10 text-[#00B9F1] rounded-full font-bold">
+                LEAK 02 • TRIAGE
+              </span>
+              <svg class="w-6 h-6 text-[#00B9F1]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+            <h3 class="font-display text-2xl font-bold text-[#2d4a3e] mb-3">
+              Cold Leads
+            </h3>
+            <p class="font-body-lg text-base font-semibold text-[#00B9F1] mb-4 italic">
+              "Leads sit in inbox overnight while competitors reply in 60s."
+            </p>
+            <p class="font-sans text-sm text-[#2d4a3e]/80 leading-relaxed mb-6">
+              Web forms and email inquiries that wait 12+ hours for a manual response suffer an 80% drop in booking probability compared to sub-5-minute replies.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-[#2d4a3e]/10">
+            <span class="font-label-mono text-[11px] uppercase tracking-wider text-[#2d4a3e]/60 font-semibold block mb-1">ACMI Infrastructure Fix:</span>
+            <span class="font-sans text-xs text-[#2d4a3e] font-bold block">24/7 autonomous email triage & lead qualification agent.</span>
+          </div>
+        </div>
+
+        <!-- Leak 3: Late Quotes -->
+        <div class="bg-white rounded-2xl p-8 border border-[#2d4a3e]/10 shadow-sm stagger-card flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-[#FCDC00]/10 rounded-bl-full pointer-events-none"></div>
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="font-label-mono text-[10px] uppercase tracking-widest px-3 py-1 bg-[#FCDC00]/30 text-[#2d4a3e] rounded-full font-bold">
+                LEAK 03 • PIPELINE
+              </span>
+              <svg class="w-6 h-6 text-[#2d4a3e]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </div>
+            <h3 class="font-display text-2xl font-bold text-[#2d4a3e] mb-3">
+              Late Quotes
+            </h3>
+            <p class="font-body-lg text-base font-semibold text-[#2d4a3e] mb-4 italic">
+              "It's 9pm and you're still doing manual quotes and invoices."
+            </p>
+            <p class="font-sans text-sm text-[#2d4a3e]/80 leading-relaxed mb-6">
+              Spending your evenings calculating line items in spreadsheets kills your energy and delays closing deals. Slow estimates lead to lost jobs.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-[#2d4a3e]/10">
+            <span class="font-label-mono text-[11px] uppercase tracking-wider text-[#2d4a3e]/60 font-semibold block mb-1">ACMI Infrastructure Fix:</span>
+            <span class="font-sans text-xs text-[#2d4a3e] font-bold block">Instant estimate engine & automated client approval dispatch.</span>
+          </div>
+        </div>
+
+        <!-- Leak 4: Repeat Questions -->
+        <div class="bg-white rounded-2xl p-8 border border-[#2d4a3e]/10 shadow-sm stagger-card flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-[#E5007D]/5 rounded-bl-full pointer-events-none"></div>
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="font-label-mono text-[10px] uppercase tracking-widest px-3 py-1 bg-[#E5007D]/10 text-[#E5007D] rounded-full font-bold">
+                LEAK 04 • SUPPORT
+              </span>
+              <svg class="w-6 h-6 text-[#E5007D]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3 class="font-display text-2xl font-bold text-[#2d4a3e] mb-3">
+              Repeat Questions
+            </h3>
+            <p class="font-body-lg text-base font-semibold text-[#E5007D] mb-4 italic">
+              "Answering the same 5 questions 20 times a day."
+            </p>
+            <p class="font-sans text-sm text-[#2d4a3e]/80 leading-relaxed mb-6">
+              Pricing, availability, service areas, and process questions consume hours of administrative capacity that should be spent executing high-margin work.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-[#2d4a3e]/10">
+            <span class="font-label-mono text-[11px] uppercase tracking-wider text-[#2d4a3e]/60 font-semibold block mb-1">ACMI Infrastructure Fix:</span>
+            <span class="font-sans text-xs text-[#2d4a3e] font-bold block">Context-trained auto-responder across SMS, email, and web.</span>
+          </div>
+        </div>
+
+        <!-- Leak 5: Scheduling Ping-Pong -->
+        <div class="bg-white rounded-2xl p-8 border border-[#2d4a3e]/10 shadow-sm stagger-card flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-[#00B9F1]/5 rounded-bl-full pointer-events-none"></div>
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="font-label-mono text-[10px] uppercase tracking-widest px-3 py-1 bg-[#00B9F1]/10 text-[#00B9F1] rounded-full font-bold">
+                LEAK 05 • CALENDAR
+              </span>
+              <svg class="w-6 h-6 text-[#00B9F1]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            </div>
+            <h3 class="font-display text-2xl font-bold text-[#2d4a3e] mb-3">
+              Scheduling Ping-Pong
+            </h3>
+            <p class="font-body-lg text-base font-semibold text-[#00B9F1] mb-4 italic">
+              "6 back-and-forth emails just to pick a 30-min slot."
+            </p>
+            <p class="font-sans text-sm text-[#2d4a3e]/80 leading-relaxed mb-6">
+              Calendar friction kills deal momentum. Every unnecessary email exchange gives prospects a chance to lose interest or find an alternative.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-[#2d4a3e]/10">
+            <span class="font-label-mono text-[11px] uppercase tracking-wider text-[#2d4a3e]/60 font-semibold block mb-1">ACMI Infrastructure Fix:</span>
+            <span class="font-sans text-xs text-[#2d4a3e] font-bold block">Autonomous calendar handshake & SMS confirmation engine.</span>
+          </div>
+        </div>
+
+        <!-- Leak 6: No Reviews -->
+        <div class="bg-white rounded-2xl p-8 border border-[#2d4a3e]/10 shadow-sm stagger-card flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-[#FCDC00]/10 rounded-bl-full pointer-events-none"></div>
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="font-label-mono text-[10px] uppercase tracking-widest px-3 py-1 bg-[#FCDC00]/30 text-[#2d4a3e] rounded-full font-bold">
+                LEAK 06 • REPUTATION
+              </span>
+              <svg class="w-6 h-6 text-[#2d4a3e]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+            </div>
+            <h3 class="font-display text-2xl font-bold text-[#2d4a3e] mb-3">
+              No Reviews
+            </h3>
+            <p class="font-body-lg text-base font-semibold text-[#2d4a3e] mb-4 italic">
+              "Happy clients leave without leaving Google reviews."
+            </p>
+            <p class="font-sans text-sm text-[#2d4a3e]/80 leading-relaxed mb-6">
+              Clients are thrilled when you finish the job, but unless you ask at the exact right moment via automated follow-up, 90% forget to leave a review.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-[#2d4a3e]/10">
+            <span class="font-label-mono text-[11px] uppercase tracking-wider text-[#2d4a3e]/60 font-semibold block mb-1">ACMI Infrastructure Fix:</span>
+            <span class="font-sans text-xs text-[#2d4a3e] font-bold block">Automated post-service review request & sentiment filter dispatch.</span>
+          </div>
+        </div>
+
+        <!-- Leak 7: Night Paperwork (Featured Full-width or Accent Card) -->
+        <div class="bg-white rounded-2xl p-8 border border-[#2d4a3e]/10 shadow-sm stagger-card flex flex-col justify-between relative overflow-hidden md:col-span-2 lg:col-span-3 border-l-4 border-l-[#E5007D]">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div class="max-w-2xl">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="font-label-mono text-[10px] uppercase tracking-widest px-3 py-1 bg-[#E5007D] text-white rounded-full font-bold">
+                  LEAK 07 • OPERATIONS
+                </span>
+                <span class="font-label-mono text-xs text-[#E5007D] font-bold uppercase tracking-wider">The Ultimate Founder Bottleneck</span>
+              </div>
+              <h3 class="font-display text-2xl md:text-3xl font-bold text-[#2d4a3e] mb-2">
+                Night Paperwork
+              </h3>
+              <p class="font-body-lg text-lg font-semibold text-[#E5007D] mb-3 italic">
+                "Drowning in spreadsheets after the workday ends."
+              </p>
+              <p class="font-sans text-sm text-[#2d4a3e]/80 leading-relaxed">
+                Manually copying data between your CRM, email, calendar, and accounting tools forces you into late-night admin work. Your business shouldn't depend on manual copy-pasting.
+              </p>
+            </div>
+            <div class="bg-[#faf9f5] p-6 rounded-xl border border-[#2d4a3e]/15 min-w-[280px]">
+              <span class="font-label-mono text-xs uppercase tracking-wider text-[#2d4a3e]/60 font-semibold block mb-2">ACMI Infrastructure Fix</span>
+              <span class="font-sans text-sm text-[#2d4a3e] font-bold block leading-snug">
+                Autonomous background sync across CRM, QuickBooks, and fleet ops — zero manual data entry.
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive ROI Labor Calculator Section -->
+    <section class="py-24 px-6 bg-[#2d4a3e] text-white relative overflow-hidden" id="calculator">
+      <!-- Background pattern -->
+      <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 10% 20%, #e5007d 0%, transparent 40%), radial-gradient(circle at 90% 80%, #00b9f1 0%, transparent 40%);"></div>
+
+      <div class="max-w-7xl mx-auto relative z-10">
+        <div class="max-w-3xl mb-16">
+          <span class="font-label-mono text-xs uppercase tracking-[0.25em] text-[#00B9F1] font-bold block mb-3">
+            N° 03 • ROI LABOR CALCULATOR
+          </span>
+          <h2 class="font-display-xl text-3xl md:text-5xl font-black tracking-tight leading-tight">
+            Calculate Your Annual Labor Leakage.
+          </h2>
+          <p class="font-sans text-lg text-white/80 mt-4 leading-relaxed">
+            Our standard operational model assumes a conservative baseline of <strong class="text-[#FCDC00]">$10,400 per employee in annual labor savings</strong> (5 wasted hours/week at $40/hr). Adjust the sliders below to see what your business is currently losing.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <!-- Interactive Sliders (7 cols) -->
+          <div class="lg:col-span-7 bg-white/5 backdrop-blur-md p-8 md:p-10 rounded-2xl border border-white/10 space-y-8">
+            <!-- Slider 1: Team Size -->
+            <div>
+              <div class="flex justify-between items-center mb-3">
+                <label for="emp-slider" class="font-label-mono text-xs uppercase tracking-wider text-white/90 font-semibold">
+                  1. Team Size / Employees
+                </label>
+                <span class="font-display text-2xl font-bold text-[#00B9F1]" id="emp-val">5 employees</span>
+              </div>
+              <input
+                type="range"
+                id="emp-slider"
+                min="1"
+                max="50"
+                value="5"
+                class="w-full h-3 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#00B9F1]"
+              />
+              <div class="flex justify-between text-[10px] font-label-mono text-white/50 mt-1">
+                <span>1 Emp</span>
+                <span>25 Emps</span>
+                <span>50 Emps</span>
+              </div>
+            </div>
+
+            <!-- Slider 2: Average Hourly Rate -->
+            <div>
+              <div class="flex justify-between items-center mb-3">
+                <label for="rate-slider" class="font-label-mono text-xs uppercase tracking-wider text-white/90 font-semibold">
+                  2. Average Hourly Labor Rate
+                </label>
+                <span class="font-display text-2xl font-bold text-[#FCDC00]" id="rate-val">$40 / hr</span>
+              </div>
+              <input
+                type="range"
+                id="rate-slider"
+                min="20"
+                max="150"
+                step="5"
+                value="40"
+                class="w-full h-3 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#FCDC00]"
+              />
+              <div class="flex justify-between text-[10px] font-label-mono text-white/50 mt-1">
+                <span>$20/hr</span>
+                <span>$85/hr</span>
+                <span>$150/hr</span>
+              </div>
+            </div>
+
+            <!-- Slider 3: Wasted Hours per Week -->
+            <div>
+              <div class="flex justify-between items-center mb-3">
+                <label for="hours-slider" class="font-label-mono text-xs uppercase tracking-wider text-white/90 font-semibold">
+                  3. Wasted Hours / Wk Per Employee
+                </label>
+                <span class="font-display text-2xl font-bold text-[#E5007D]" id="hours-val">5 hrs / wk</span>
+              </div>
+              <input
+                type="range"
+                id="hours-slider"
+                min="2"
+                max="15"
+                step="1"
+                value="5"
+                class="w-full h-3 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#E5007D]"
+              />
+              <div class="flex justify-between text-[10px] font-label-mono text-white/50 mt-1">
+                <span>2 hrs (Minimal)</span>
+                <span>5 hrs (Guaranteed Baseline)</span>
+                <span>15 hrs (Heavy Admin)</span>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-white/10 text-xs text-white/70 font-sans italic">
+              * Model calculation based on 52 working weeks/yr. $10,400/emp/yr baseline = 5 hrs/wk × $40/hr × 52 weeks.
+            </div>
+          </div>
+
+          <!-- Dynamic Output Card (5 cols) -->
+          <div class="lg:col-span-5 bg-white text-[#2d4a3e] p-8 md:p-10 rounded-2xl border border-[#2d4a3e]/10 shadow-xl flex flex-col justify-between h-full">
+            <div>
+              <span class="font-label-mono text-xs uppercase tracking-[0.2em] text-[#E5007D] font-bold block mb-2">
+                ESTIMATED ANNUAL LOSS
+              </span>
+              <div class="font-display text-4xl md:text-5xl font-black text-[#2d4a3e] mb-2 tracking-tight" id="total-loss-display">
+                $52,000 / yr
+              </div>
+              <p class="font-sans text-sm text-[#2d4a3e]/70 mb-8">
+                Total money paid for manual, repetitive, automatable tasks across your team every year.
+              </p>
+
+              <div class="space-y-4 pt-6 border-t border-[#2d4a3e]/10">
+                <div class="flex justify-between items-center">
+                  <span class="font-sans text-sm font-semibold text-[#2d4a3e]/80">Per-Employee Annual Leak:</span>
+                  <span class="font-label-mono text-base font-bold text-[#E5007D]" id="per-emp-display">$10,400 / yr</span>
+                </div>
+
+                <div class="flex justify-between items-center">
+                  <span class="font-sans text-sm font-semibold text-[#2d4a3e]/80">Hours Recovered Per Year:</span>
+                  <span class="font-label-mono text-base font-bold text-[#00B9F1]" id="hours-rec-display">1,300 hrs</span>
+                </div>
+
+                <div class="flex justify-between items-center">
+                  <span class="font-sans text-sm font-semibold text-[#2d4a3e]/80">$499 Audit ROI Potential:</span>
+                  <span class="font-label-mono text-base font-bold text-[#2d4a3e]" id="roi-display">10,321%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-10">
+              <a
+                href="#pricing"
+                class="w-full block text-center bg-[#E5007D] text-white py-4 font-bold text-xs uppercase tracking-widest hover:bg-[#c4006a] transition-all rounded-full no-underline shadow-md"
+              >
+                Stop The Leak — Claim $499 Audit →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Approved Pricing Ladder Cards Section -->
+    <section class="py-24 px-6 max-w-7xl mx-auto" id="pricing">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="font-label-mono text-xs uppercase tracking-[0.25em] text-[#E5007D] font-bold block mb-3">
+          N° 04 • APPROVED PRICING LADDER
+        </span>
+        <h2 class="font-display-xl text-3xl md:text-5xl font-black text-[#2d4a3e] tracking-tight leading-tight">
+          Select Your Level of Infrastructure.
+        </h2>
+        <p class="font-body-lg text-lg text-[#2d4a3e]/80 mt-4 leading-relaxed">
+          From a free 15-minute alignment call to complete private agentic fleet deployment. Zero hidden fees.
+        </p>
+      </div>
+
+      <!-- 3 Pricing Ladder Cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+        <!-- Step 0: Free 15-Minute Consult -->
+        <div class="bg-white rounded-2xl p-8 border border-[#2d4a3e]/15 shadow-sm flex flex-col justify-between stagger-card relative">
+          <div>
+            <div class="inline-block px-3 py-1 bg-[#00B9F1]/10 text-[#00B9F1] font-label-mono text-[10px] uppercase tracking-widest rounded-full font-bold mb-4">
+              STEP 0 • DISCOVERY
+            </div>
+            <h3 class="font-display text-2xl font-bold text-[#2d4a3e] mb-2">
+              Free 15-Min Consult
+            </h3>
+            <div class="flex items-baseline gap-2 mb-4">
+              <span class="font-display text-4xl font-black text-[#2d4a3e]">$0</span>
+              <span class="font-label-mono text-xs text-[#2d4a3e]/60 font-medium">100% Free</span>
+            </div>
+            <p class="font-sans text-sm text-[#2d4a3e]/80 leading-relaxed mb-6">
+              1-on-1 discovery call to map your current manual bottlenecks and identify high-leverage AI automation opportunities.
+            </p>
+
+            <ul class="space-y-3 font-sans text-sm text-[#2d4a3e]/90 mb-8 border-t border-[#2d4a3e]/10 pt-6">
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-[#00B9F1] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>15-minute 1-on-1 strategy call</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-[#00B9F1] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Manual bottleneck identification</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-[#00B9F1] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Custom ACMI roadmap preview</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-[#00B9F1] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Zero obligation or sales pressure</span>
+              </li>
+            </ul>
+          </div>
+
+          <a
+            href="https://cal.com/mad-ez-media/ai-automation-discovery"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full text-center bg-[#2d4a3e] text-white py-4 font-bold text-xs uppercase tracking-widest hover:bg-[#3a5c4e] transition-all rounded-full no-underline block"
+          >
+            Book Free Consult →
+          </a>
+        </div>
+
+        <!-- Entry: $499 90-Minute Audit (FEATURED CARD) -->
+        <div class="bg-white rounded-2xl p-8 border-2 border-[#E5007D] shadow-xl flex flex-col justify-between stagger-card relative lg:-translate-y-3">
+          <!-- Featured Badge -->
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#E5007D] text-white px-4 py-1 font-label-mono text-[10px] uppercase tracking-widest rounded-full font-bold shadow-md">
+            MOST POPULAR • ENTRY TIER
+          </div>
+
+          <div>
+            <div class="inline-block px-3 py-1 bg-[#E5007D]/10 text-[#E5007D] font-label-mono text-[10px] uppercase tracking-widest rounded-full font-bold mb-4 mt-2">
+              ENTRY • 90-MIN AUDIT
+            </div>
+            <h3 class="font-display text-2xl font-bold text-[#2d4a3e] mb-2">
+              AI Tools Assessment
+            </h3>
+            <div class="flex items-baseline gap-2 mb-2">
+              <span class="font-display text-4xl font-black text-[#2d4a3e]">$499</span>
+              <span class="font-label-mono text-xs text-[#2d4a3e]/60 font-medium">one-time assessment</span>
+            </div>
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#FCDC00]/30 rounded-md text-[#2d4a3e] font-label-mono text-[11px] font-bold mb-4">
+              ★ 5+ hr/wk returned guarantee
+            </div>
+            <p class="font-sans text-sm text-[#2d4a3e]/80 leading-relaxed mb-6">
+              Deep-dive operational teardown. We analyze your tech stack, audit all 7 leaks, and deliver a turn-key ACMI execution blueprint.
+            </p>
+
+            <ul class="space-y-3 font-sans text-sm text-[#2d4a3e]/90 mb-8 border-t border-[#2d4a3e]/10 pt-6">
+              <li class="flex items-center gap-3 font-semibold">
+                <svg class="w-5 h-5 text-[#E5007D] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>90-min live white-glove audit session</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-[#E5007D] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Full 7-leak infrastructure diagnosis</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-[#E5007D] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Custom ACMI setup & tool blueprint</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-[#E5007D] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Priority ROI & labor savings roadmap</span>
+              </li>
+              <li class="flex items-center gap-3 text-[#E5007D] font-bold">
+                <svg class="w-5 h-5 text-[#E5007D] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>5+ hr/wk time returned guarantee</span>
+              </li>
+            </ul>
+          </div>
+
+          <a
+            href="https://cal.com/mad-ez-media/ai-automation-discovery"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full text-center bg-[#E5007D] text-white py-4 font-bold text-xs uppercase tracking-widest hover:bg-[#c4006a] transition-all rounded-full no-underline block shadow-md"
+          >
+            Claim $499 Assessment →
+          </a>
+        </div>
+
+        <!-- Tier 2: $4,500 Private ACMI Fleet Deployment -->
+        <div class="bg-white rounded-2xl p-8 border border-[#2d4a3e]/15 shadow-sm flex flex-col justify-between stagger-card relative">
+          <div>
+            <div class="inline-block px-3 py-1 bg-[#FCDC00]/40 text-[#2d4a3e] font-label-mono text-[10px] uppercase tracking-widest rounded-full font-bold mb-4">
+              TIER 2 • FULL BUILD
+            </div>
+            <h3 class="font-display text-2xl font-bold text-[#2d4a3e] mb-2">
+              Private ACMI Fleet
+            </h3>
+            <div class="flex items-baseline gap-2 mb-4">
+              <span class="font-display text-4xl font-black text-[#2d4a3e]">$4,500</span>
+              <span class="font-label-mono text-xs text-[#2d4a3e]/60 font-medium">deployment build</span>
+            </div>
+            <p class="font-sans text-sm text-[#2d4a3e]/80 leading-relaxed mb-6">
+              Full custom agentic infrastructure built on persistent memory. Dedicated background crons, multi-agent relays, and complete workflow automation.
+            </p>
+
+            <ul class="space-y-3 font-sans text-sm text-[#2d4a3e]/90 mb-8 border-t border-[#2d4a3e]/10 pt-6">
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-[#2d4a3e] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Dedicated Redis & ACMI Super Bus relay</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-[#2d4a3e] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>2 Hermes / Antigravity agents custom-trained</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-[#2d4a3e] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Background crons & automated triggers</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-[#2d4a3e] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>CRM, calendar & email integrations</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-[#2d4a3e] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Full source code & infrastructure ownership</span>
+              </li>
+            </ul>
+          </div>
+
+          <a
+            href="https://cal.com/mad-ez-media/ai-automation-discovery"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full text-center bg-[#2d4a3e] text-white py-4 font-bold text-xs uppercase tracking-widest hover:bg-[#3a5c4e] transition-all rounded-full no-underline block"
+          >
+            Deploy Private Fleet →
+          </a>
+        </div>
+      </div>
+
+      <!-- Managed Fleet Retainer Banner -->
+      <div class="mt-12 bg-white rounded-2xl p-8 border border-[#2d4a3e]/15 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="max-w-2xl">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="font-label-mono text-[10px] uppercase tracking-widest px-3 py-1 bg-[#2d4a3e] text-white rounded-full font-bold">
+              OPTIONAL ADD-ON
+            </span>
+            <span class="font-label-mono text-xs text-[#2d4a3e] font-bold uppercase tracking-wider">MANAGED FLEET RETAINER</span>
+          </div>
+          <h4 class="font-display text-xl font-bold text-[#2d4a3e]">
+            Continuous Fleet Operations & Support ($2,500 / month)
+          </h4>
+          <p class="font-sans text-sm text-[#2d4a3e]/80 mt-1">
+            Need ongoing fleet maintenance? Includes continuous prompt tuning, background crons monitoring, security patches, and new tool additions every month.
+          </p>
+        </div>
+
+        <a
+          href="https://cal.com/mad-ez-media/ai-automation-discovery"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="shrink-0 bg-[#2d4a3e] text-white px-6 py-3.5 font-bold text-xs uppercase tracking-widest hover:bg-[#3a5c4e] transition-all rounded-full no-underline"
+        >
+          Inquire Retainer →
+        </a>
+      </div>
+    </section>
+
+    <!-- Guarantee Callout Section -->
+    <section class="py-16 px-6 max-w-4xl mx-auto">
+      <div class="bg-[#2d4a3e]/5 rounded-2xl p-8 md:p-10 border border-[#2d4a3e]/15 text-center">
+        <span class="font-label-mono text-xs uppercase tracking-[0.2em] text-[#E5007D] font-bold block mb-3">
+          OUR IRONCLAD COMMITMENT
+        </span>
+        <h3 class="font-display text-2xl md:text-3xl font-black text-[#2d4a3e] mb-4">
+          The 5-Hour Time Returned Guarantee
+        </h3>
+        <p class="font-sans text-base text-[#2d4a3e]/85 leading-relaxed max-w-2xl mx-auto mb-6">
+          If our 90-minute AI Tools Assessment does not clearly identify at least 5 hours per week of automatable, repetitive work across your operations, we will issue a 100% full refund on the spot. No friction, no hard feelings.
+        </p>
+        <div class="inline-flex items-center gap-2 font-label-mono text-xs uppercase tracking-wider text-[#2d4a3e] font-bold">
+          <svg class="w-4 h-4 text-[#E5007D]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          Mad EZ Media Execution Guarantee
+        </div>
+      </div>
+    </section>
+
+    <!-- Shared Contact Section -->
+    <ContactSection />
+  </main>
+</Layout>
+
+<!-- Client-side Interactive ROI Calculator Script -->
+<script>
+  function initCalculator() {
+    const empSlider = document.getElementById('emp-slider') as HTMLInputElement | null;
+    const rateSlider = document.getElementById('rate-slider') as HTMLInputElement | null;
+    const hoursSlider = document.getElementById('hours-slider') as HTMLInputElement | null;
+
+    const empVal = document.getElementById('emp-val');
+    const rateVal = document.getElementById('rate-val');
+    const hoursVal = document.getElementById('hours-val');
+
+    const totalLossDisplay = document.getElementById('total-loss-display');
+    const perEmpDisplay = document.getElementById('per-emp-display');
+    const hoursRecDisplay = document.getElementById('hours-rec-display');
+    const roiDisplay = document.getElementById('roi-display');
+
+    if (!empSlider || !rateSlider || !hoursSlider) return;
+
+    function calculate() {
+      const emps = parseInt(empSlider.value, 10);
+      const rate = parseInt(rateSlider.value, 10);
+      const hours = parseInt(hoursSlider.value, 10);
+
+      // Update slider labels
+      if (empVal) empVal.textContent = `${emps} ${emps === 1 ? 'employee' : 'employees'}`;
+      if (rateVal) rateVal.textContent = `$${rate} / hr`;
+      if (hoursVal) hoursVal.textContent = `${hours} hrs / wk`;
+
+      // Core Math: 52 working weeks per year
+      const perEmpAnnualLoss = hours * rate * 52;
+      const totalAnnualLoss = emps * perEmpAnnualLoss;
+      const totalHoursRecovered = emps * hours * 52;
+
+      const auditCost = 499;
+      const roiPercent = Math.round(((totalAnnualLoss - auditCost) / auditCost) * 100);
+
+      // Format currency
+      const formattedTotal = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(totalAnnualLoss);
+      const formattedPerEmp = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(perEmpAnnualLoss);
+      const formattedHours = new Intl.NumberFormat('en-US').format(totalHoursRecovered);
+
+      if (totalLossDisplay) totalLossDisplay.textContent = `${formattedTotal} / yr`;
+      if (perEmpDisplay) perEmpDisplay.textContent = `${formattedPerEmp} / yr`;
+      if (hoursRecDisplay) hoursRecDisplay.textContent = `${formattedHours} hrs`;
+      if (roiDisplay) roiDisplay.textContent = `${roiPercent.toLocaleString()}%`;
+    }
+
+    empSlider.addEventListener('input', calculate);
+    rateSlider.addEventListener('input', calculate);
+    hoursSlider.addEventListener('input', calculate);
+
+    // Initial run
+    calculate();
+  }
+
+  // Bind on load and Astro page load transitions
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCalculator);
+  } else {
+    initCalculator();
+  }
+  document.addEventListener('astro:page-load', initCalculator);
+</script>

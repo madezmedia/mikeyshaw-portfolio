@@ -1,0 +1,405 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import ContactSection from '../components/ContactSection.astro';
+---
+
+<Layout title="Private ACMI Autonomous Agent Fleet | Mad EZ Media — Mikey Shaw">
+  <!-- Navigation Bar -->
+  <Navbar />
+
+  <main class="w-full bg-[#faf9f5] overflow-x-hidden text-[#2d4a3e]">
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 md:pt-40 md:pb-28 px-6 max-w-7xl mx-auto relative overflow-hidden">
+      <!-- Background Ambient Glows -->
+      <div class="absolute top-10 right-10 w-96 h-96 bg-[#00B9F1]/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute bottom-10 left-10 w-96 h-96 bg-[#E5007D]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-4xl relative z-10">
+        <!-- Eyebrow Badge -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2d4a3e]/5 border border-[#2d4a3e]/15 mb-6">
+          <span class="w-2 h-2 rounded-full bg-[#E5007D] animate-pulse"></span>
+          <span class="font-label-mono text-xs uppercase tracking-[0.25em] font-semibold text-[#2d4a3e]">
+            N° 02 • PRIVATE AI INFRASTRUCTURE
+          </span>
+        </div>
+
+        <!-- Main Headline -->
+        <h1 class="font-display-xl text-[clamp(2.4rem,5.2vw,4.5rem)] leading-[1.08] font-black tracking-tight text-[#2d4a3e]">
+          Deploy Your Private ACMI <em class="italic text-[#E5007D] font-black block md:inline">Autonomous Agent Fleet.</em>
+        </h1>
+
+        <!-- Tagline & Subheadline -->
+        <p class="font-body-lg text-xl md:text-2xl font-bold text-[#2d4a3e] mt-6 tracking-tight">
+          "The difference isn't the AI. <span class="text-[#00B9F1]">It's the memory.</span>"
+        </p>
+
+        <p class="font-body-md text-base md:text-lg text-[#2d4a3e]/85 max-w-3xl mt-4 leading-relaxed font-normal">
+          Stop relying on stateless chatbots that forget your business operational rules the second a session ends. We build, deploy, and manage private autonomous multi-agent fleets powered by ACMI (Profile / Signals / Timeline) on dedicated, isolated infrastructure.
+        </p>
+
+        <!-- CTA Action Bar -->
+        <div class="flex flex-wrap items-center gap-4 mt-10">
+          <a
+            href="https://cal.com/mad-ez-media/ai-automation-discovery"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-[#2d4a3e] text-white px-8 py-4 font-bold text-xs uppercase tracking-widest hover:bg-[#3a5c4e] hover:-translate-y-[1px] active:translate-y-0 transition-all rounded-full no-underline inline-flex items-center gap-3 shadow-md"
+          >
+            Book Discovery Call
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+
+          <a
+            href="#architecture"
+            class="bg-white text-[#2d4a3e] border border-[#2d4a3e]/20 px-8 py-4 font-bold text-xs uppercase tracking-widest hover:border-[#E5007D] hover:text-[#E5007D] transition-all rounded-full no-underline shadow-sm"
+          >
+            View Fleet Offers →
+          </a>
+        </div>
+
+        <!-- Infrastructure Highlight Strip -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 pt-10 border-t border-[#2d4a3e]/15">
+          <div class="flex items-start gap-4">
+            <div class="p-3 bg-[#E5007D]/10 rounded-xl text-[#E5007D]">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            </div>
+            <div>
+              <span class="font-label-mono text-xs uppercase tracking-wider text-[#2d4a3e]/60 font-semibold block">Infrastructure Security</span>
+              <span class="font-display text-lg font-bold text-[#2d4a3e]">Dedicated Redis Instance</span>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="p-3 bg-[#00B9F1]/10 rounded-xl text-[#00B9F1]">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div>
+              <span class="font-label-mono text-xs uppercase tracking-wider text-[#2d4a3e]/60 font-semibold block">Agent Fleet Base</span>
+              <span class="font-display text-lg font-bold text-[#2d4a3e]">2x Hermes Autonomous</span>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="p-3 bg-[#FCDC00]/25 rounded-xl text-[#2d4a3e]">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <span class="font-label-mono text-xs uppercase tracking-wider text-[#2d4a3e]/60 font-semibold block">Data Governance</span>
+              <span class="font-display text-lg font-bold text-[#2d4a3e]">Zero Shared MCP Servers</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hard Rule Infrastructure Section -->
+    <section class="py-12 px-6 max-w-7xl mx-auto">
+      <div class="bg-[#2d4a3e] text-white rounded-3xl p-8 md:p-12 relative overflow-hidden shadow-xl border border-[#2d4a3e]/20">
+        <div class="absolute -right-16 -bottom-16 w-80 h-80 bg-[#00B9F1]/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative z-10 max-w-4xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[#FCDC00] border border-[#FCDC00]/30 text-xs font-label-mono uppercase tracking-widest font-bold mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            HARD INFRASTRUCTURE RULE
+          </div>
+          <h2 class="font-display-xl text-2xl md:text-4xl font-black text-white tracking-tight leading-tight mb-4">
+            Dedicated Client Redis Instance Guarantee
+          </h2>
+          <p class="font-sans text-base md:text-lg text-white/90 leading-relaxed">
+            Every ACMI Fleet deployment is provisioned with a <strong>dedicated, client-isolated Redis memory instance</strong>. We NEVER host your operational memory on a shared MCP server or multi-tenant database. Your company's signals, entity profiles, and action timelines remain 100% strictly segregated with zero cross-client memory bleed and absolute privacy.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chatbot vs Fleet Framing Ladder Section -->
+    <section class="py-24 px-6 max-w-7xl mx-auto" id="ladder">
+      <div class="max-w-3xl mb-16">
+        <span class="font-label-mono text-xs uppercase tracking-[0.25em] text-[#E5007D] font-bold block mb-3">
+          N° 03 • THE EVOLUTION LADDER
+        </span>
+        <h2 class="font-display-xl text-3xl md:text-5xl font-black text-[#2d4a3e] tracking-tight leading-tight">
+          From Generic Chatbots to Autonomous ACMI Fleets.
+        </h2>
+        <p class="font-body-md text-base md:text-lg text-[#2d4a3e]/80 mt-4 leading-relaxed">
+          Most organizations get stuck at Step 1 or Step 2. Here is how true operational leverage scales as memory and autonomy increase.
+        </p>
+      </div>
+
+      <!-- 4-Step Framing Ladder -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-20">
+        <!-- Step 1 -->
+        <div class="bg-white border border-[#2d4a3e]/15 p-6 rounded-2xl flex flex-col justify-between hover:border-[#2d4a3e]/30 transition-all shadow-sm">
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <span class="font-label-mono text-xs font-bold text-[#2d4a3e]/40 uppercase tracking-widest">STEP 01</span>
+              <span class="px-2 py-0.5 bg-gray-100 text-gray-600 rounded text-[10px] font-label-mono uppercase font-bold">Stateless</span>
+            </div>
+            <h3 class="font-heading text-xl font-bold text-[#2d4a3e] mb-2">Chatbot</h3>
+            <p class="font-sans text-xs text-[#2d4a3e]/75 leading-relaxed">
+              Prompt responder. Forgets everything the moment you close the tab. Zero context, zero background action.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-[#2d4a3e]/10 font-label-mono text-[10px] text-[#2d4a3e]/50">
+            Memory: 0 MB • Autonomy: None
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="bg-white border border-[#2d4a3e]/15 p-6 rounded-2xl flex flex-col justify-between hover:border-[#2d4a3e]/30 transition-all shadow-sm">
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <span class="font-label-mono text-xs font-bold text-[#2d4a3e]/40 uppercase tracking-widest">STEP 02</span>
+              <span class="px-2 py-0.5 bg-[#00B9F1]/10 text-[#00B9F1] rounded text-[10px] font-label-mono uppercase font-bold">Single-Task</span>
+            </div>
+            <h3 class="font-heading text-xl font-bold text-[#2d4a3e] mb-2">AI Agent</h3>
+            <p class="font-sans text-xs text-[#2d4a3e]/75 leading-relaxed">
+              Executes isolated tasks or scripts on command. Limited tool access, requires manual triggering and babysitting.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-[#2d4a3e]/10 font-label-mono text-[10px] text-[#2d4a3e]/50">
+            Memory: Session • Autonomy: Low
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="bg-white border border-[#2d4a3e]/15 p-6 rounded-2xl flex flex-col justify-between hover:border-[#2d4a3e]/30 transition-all shadow-sm">
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <span class="font-label-mono text-xs font-bold text-[#2d4a3e]/40 uppercase tracking-widest">STEP 03</span>
+              <span class="px-2 py-0.5 bg-[#FCDC00]/30 text-[#2d4a3e] rounded text-[10px] font-label-mono uppercase font-bold">Persistent</span>
+            </div>
+            <h3 class="font-heading text-xl font-bold text-[#2d4a3e] mb-2">AI Employee</h3>
+            <p class="font-sans text-xs text-[#2d4a3e]/75 leading-relaxed">
+              Maintains state across conversations, integrated into Slack/Mattermost, capable of executing multi-step workflows.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-[#2d4a3e]/10 font-label-mono text-[10px] text-[#2d4a3e]/50">
+            Memory: DB Synced • Autonomy: Medium
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="bg-[#2d4a3e] text-white border border-[#2d4a3e] p-6 rounded-2xl flex flex-col justify-between shadow-md relative overflow-hidden">
+          <div class="absolute -right-8 -top-8 w-24 h-24 bg-[#E5007D]/20 rounded-full blur-xl pointer-events-none"></div>
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <span class="font-label-mono text-xs font-bold text-[#FCDC00] uppercase tracking-widest">STEP 04</span>
+              <span class="px-2 py-0.5 bg-[#E5007D] text-white rounded text-[10px] font-label-mono uppercase font-bold">Full Swarm</span>
+            </div>
+            <h3 class="font-heading text-xl font-bold text-white mb-2">AI Agent Fleet</h3>
+            <p class="font-sans text-xs text-white/85 leading-relaxed">
+              Multi-agent autonomous swarm running background crons, connected to dedicated Redis & ACMI memory bus. Zero manual clicks.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/10 font-label-mono text-[10px] text-[#FCDC00] font-bold">
+            Memory: ACMI Bus • Autonomy: 100%
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual Comparison: Generic Chatbot vs Private ACMI Agent Fleet -->
+      <div class="bg-white border border-[#2d4a3e]/15 rounded-3xl p-8 md:p-12 shadow-sm">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <span class="font-label-mono text-xs uppercase tracking-widest text-[#2d4a3e]/60 font-bold block mb-2">VISUAL CASE COMPARISON</span>
+          <h3 class="font-heading text-2xl md:text-3xl font-extrabold text-[#2d4a3e]">
+            Why Generic AI Fails in High-Stakes Operations
+          </h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Chatbot Generic Output -->
+          <div class="p-6 bg-red-50/50 border border-red-200 rounded-2xl space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600 font-bold text-sm">✕</div>
+              <div>
+                <h4 class="font-sans font-bold text-sm text-red-900">Generic Chatbot Blast</h4>
+                <span class="font-label-mono text-[10px] text-red-600 uppercase">Stateless / No Memory</span>
+              </div>
+            </div>
+            <div class="bg-white p-4 rounded-xl border border-red-200/80 font-mono text-xs text-gray-700 leading-relaxed shadow-inner">
+              <p class="font-bold text-gray-900 mb-2">Subject: Account Update Notice</p>
+              <p>Dear Valued Customer,</p>
+              <p class="mt-2">Thank you for reaching out to support. Please provide your ticket number and account ID so we can assist you with your inquiry.</p>
+              <p class="mt-2 text-red-500 font-semibold">[Error: System has no record of previous call or service location]</p>
+            </div>
+            <p class="font-sans text-xs text-red-800 leading-relaxed">
+              Forces the customer to repeat themselves, destroys trust, and wastes human operator time re-entering basic account details.
+            </p>
+          </div>
+
+          <!-- ACMI Fleet Personalized Output -->
+          <div class="p-6 bg-[#2d4a3e]/5 border border-[#2d4a3e]/20 rounded-2xl space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-[#2d4a3e] flex items-center justify-center text-[#FCDC00] font-bold text-sm">✓</div>
+              <div>
+                <h4 class="font-sans font-bold text-sm text-[#2d4a3e]">Private ACMI Agent Fleet</h4>
+                <span class="font-label-mono text-[10px] text-[#E5007D] font-bold uppercase">Dedicated Memory & History</span>
+              </div>
+            </div>
+            <div class="bg-white p-4 rounded-xl border border-[#2d4a3e]/20 font-mono text-xs text-gray-800 leading-relaxed shadow-inner">
+              <p class="font-bold text-[#2d4a3e] mb-2">Subject: Dispatch Confirmed: Water Heater Maintenance</p>
+              <p><span class="bg-[#FCDC00]/40 px-1 font-bold">Hi Sarah — water heater on Maple Ave</span> service request logged at 08:14 AM.</p>
+              <p class="mt-2">Technician Dave is en route (ETA 10:30 AM). Your 15% loyalty credit from March 12 has been auto-applied.</p>
+              <p class="mt-2 text-[#00B9F1] font-semibold">[ACMI Signal: Match lead history #4829 + Maple Ave property record]</p>
+            </div>
+            <p class="font-sans text-xs text-[#2d4a3e]/85 leading-relaxed">
+              Instantly correlates past interactions, property addresses, and customer profiles with zero human data entry required.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Value Architecture Section -->
+    <section class="py-24 px-6 max-w-7xl mx-auto" id="architecture">
+      <div class="max-w-3xl mb-16">
+        <span class="font-label-mono text-xs uppercase tracking-[0.25em] text-[#E5007D] font-bold block mb-3">
+          N° 04 • CORE VALUE ARCHITECTURE
+        </span>
+        <h2 class="font-display-xl text-3xl md:text-5xl font-black text-[#2d4a3e] tracking-tight leading-tight">
+          Productized Fleet Deployment Packages
+        </h2>
+        <p class="font-body-md text-base md:text-lg text-[#2d4a3e]/80 mt-4 leading-relaxed">
+          Clear, fixed-scope investment tiers designed for operational scale with zero hidden infrastructure surprises.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Package 1: Private ACMI Fleet Deployment -->
+        <div class="bg-white border-2 border-[#2d4a3e] rounded-3xl p-8 md:p-10 flex flex-col justify-between shadow-lg relative overflow-hidden">
+          <div class="absolute top-0 right-0 bg-[#2d4a3e] text-white font-label-mono text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-bl-xl">
+            ONE-TIME BUILD
+          </div>
+
+          <div>
+            <div class="mb-6">
+              <span class="font-label-mono text-xs uppercase tracking-widest text-[#E5007D] font-bold block mb-2">TURNKEY DEPLOYMENT</span>
+              <h3 class="font-heading text-3xl font-black text-[#2d4a3e]">$4,500 Private ACMI Fleet Deployment</h3>
+              <p class="font-sans text-sm text-[#2d4a3e]/80 mt-3 leading-relaxed">
+                Complete private multi-agent architecture built, configured, and integrated directly into your business stack on dedicated infrastructure.
+              </p>
+            </div>
+
+            <div class="h-[1px] bg-[#2d4a3e]/15 w-full my-6"></div>
+
+            <h4 class="font-label-mono text-xs uppercase tracking-wider text-[#2d4a3e]/60 font-bold mb-4">Included Specifications</h4>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3 text-sm text-[#2d4a3e]">
+                <span class="text-[#E5007D] font-bold text-lg">•</span>
+                <span><strong>Dedicated Client Redis Instance:</strong> 100% isolated memory server with zero shared MCP risk.</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-[#2d4a3e]">
+                <span class="text-[#E5007D] font-bold text-lg">•</span>
+                <span><strong>2 Hermes Autonomous Agents:</strong> Pre-tuned specialist agents tailored to your operational workflows.</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-[#2d4a3e]">
+                <span class="text-[#E5007D] font-bold text-lg">•</span>
+                <span><strong>Background Crons & Automation:</strong> Automated task schedulers running on continuous loops.</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-[#2d4a3e]">
+                <span class="text-[#E5007D] font-bold text-lg">•</span>
+                <span><strong>Mattermost / Slack Bridge:</strong> Direct chat interface for your team to assign and monitor agent tasks.</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-[#2d4a3e]">
+                <span class="text-[#E5007D] font-bold text-lg">•</span>
+                <span><strong>30-Day Onboarding Support:</strong> Hands-on operational tuning and staff training.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-10 pt-6 border-t border-[#2d4a3e]/10">
+            <a
+              href="https://cal.com/mad-ez-media/ai-automation-discovery"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full block text-center py-4 bg-[#2d4a3e] text-white font-sans font-bold text-xs uppercase tracking-widest rounded-full hover:bg-[#3a5c4e] transition-all no-underline shadow-md"
+            >
+              Book $4,500 Fleet Intake Call →
+            </a>
+          </div>
+        </div>
+
+        <!-- Package 2: Managed ACMI Fleet Retainer -->
+        <div class="bg-[#2d4a3e] text-white rounded-3xl p-8 md:p-10 flex flex-col justify-between shadow-xl relative overflow-hidden border border-[#2d4a3e]">
+          <div class="absolute top-0 right-0 bg-[#E5007D] text-white font-label-mono text-[10px] uppercase font-bold tracking-widest px-4 py-1.5 rounded-bl-xl">
+            MONTHLY RETAINER
+          </div>
+
+          <div>
+            <div class="mb-6">
+              <span class="font-label-mono text-xs uppercase tracking-widest text-[#FCDC00] font-bold block mb-2">CONTINUOUS MANAGEMENT</span>
+              <h3 class="font-heading text-3xl font-black text-white">$2,500 / Month Managed ACMI Fleet Retainer</h3>
+              <p class="font-sans text-sm text-white/85 mt-3 leading-relaxed">
+                Ongoing virtual engineering leadership and active infrastructure management to keep your autonomous fleet running flawlessly.
+              </p>
+            </div>
+
+            <div class="h-[1px] bg-white/15 w-full my-6"></div>
+
+            <h4 class="font-label-mono text-xs uppercase tracking-wider text-white/60 font-bold mb-4">Included Specifications</h4>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3 text-sm text-white/90">
+                <span class="text-[#00B9F1] font-bold text-lg">•</span>
+                <span><strong>Virtual AI Fleet CTO & SRE:</strong> Dedicated senior oversight for system reliability and prompt tuning.</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-white/90">
+                <span class="text-[#00B9F1] font-bold text-lg">•</span>
+                <span><strong>Continuous Cron Monitoring:</strong> Real-time uptime telemetry and error recovery loops.</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-white/90">
+                <span class="text-[#00B9F1] font-bold text-lg">•</span>
+                <span><strong>Weekly Memory Rollups:</strong> Automated consolidation of ACMI memory signals for executive reporting.</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-white/90">
+                <span class="text-[#00B9F1] font-bold text-lg">•</span>
+                <span><strong>Model & System Upgrades:</strong> Immediate integration of newer foundation models and security patches.</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-white/90">
+                <span class="text-[#00B9F1] font-bold text-lg">•</span>
+                <span><strong>Priority SLA:</strong> 4-hour direct engineer turnaround for workflow modifications.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-10 pt-6 border-t border-white/10">
+            <a
+              href="https://cal.com/mad-ez-media/ai-automation-discovery"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full block text-center py-4 bg-[#E5007D] text-white font-sans font-bold text-xs uppercase tracking-widest rounded-full hover:bg-[#c4006a] transition-all no-underline shadow-md"
+            >
+              Book Managed Retainer Call →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Banner -->
+    <section class="py-20 px-6 max-w-7xl mx-auto text-center">
+      <div class="bg-[#faf9f5] border border-[#2d4a3e]/20 rounded-3xl p-10 md:p-16 space-y-6 shadow-sm">
+        <span class="font-label-mono text-xs uppercase tracking-[0.3em] text-[#E5007D] font-bold">READY TO ESCAPE STATELESS AI?</span>
+        <h2 class="font-display-xl text-3xl md:text-5xl font-black text-[#2d4a3e] max-w-3xl mx-auto leading-tight">
+          Build An Autonomous AI Fleet That Remembers Your Business.
+        </h2>
+        <p class="font-body-md text-base md:text-lg text-[#2d4a3e]/80 max-w-2xl mx-auto leading-relaxed">
+          Book a 15-minute discovery call to review your current tool stack, evaluate ACMI memory framework compatibility, and lock in your dedicated infrastructure deployment date.
+        </p>
+        <div class="pt-4">
+          <a
+            href="https://cal.com/mad-ez-media/ai-automation-discovery"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-[#2d4a3e] text-white px-10 py-5 font-bold text-xs uppercase tracking-widest hover:bg-[#3a5c4e] transition-all rounded-full no-underline inline-block shadow-lg"
+          >
+            Schedule Discovery Call via Cal.com →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Contact Component -->
+    <ContactSection />
+  </main>
+</Layout>
