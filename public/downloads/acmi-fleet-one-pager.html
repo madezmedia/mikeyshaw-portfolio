@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Outfit:wght@300..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="./doc-page.js"></script>
+<style>
+  body { margin: 0; background: #faf9f5; }
+  doc-page:not(:defined) { visibility: hidden; }
+  a { color: #2d4a3e; } a:hover { color: #E5007D; }
+</style>
+</helmet>
+<doc-page>
+  <section class="page" id="fleet" data-screen-label="ACMI Fleet One-Pager" style="background: #faf9f5; background-image: radial-gradient(rgba(45,74,62,0.05) 1px, transparent 1px); background-size: 18px 18px; font-family: Outfit, sans-serif; color: #2d4a3e; display: flex; flex-direction: column;">
+    <div style="background: #2d4a3e; color: #faf9f5; display: flex; justify-content: space-between; align-items: center; padding: 16px 48px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;">
+      <span style="font-weight: 700;">Mad EZ Media · Private ACMI Fleet</span>
+      <span style="color: rgba(250,249,245,0.65);">Doctrine · Charlotte NC · 2026</span>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; padding: 34px 48px 28px; gap: 22px;">
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: #00B9F1; font-weight: 700;">N° 02 · The Backend</span>
+        <h1 style="margin: 0; font-family: 'Playfair Display', serif; font-weight: 900; font-size: 36px; line-height: 1.08; letter-spacing: -0.01em; text-wrap: balance;">The agency is the <em>infrastructure.</em></h1>
+        <p style="margin: 0; font-size: 13.5px; line-height: 1.6; color: rgba(45,74,62,0.85); max-width: 620px;">The audit finds your leak. The fleet closes it permanently. You own the market and the relationships. We deploy and run the agent infrastructure that remembers your business — on hardware and memory that belong to you, not to a shared platform.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(45,74,62,0.55); font-weight: 700;">ACMI — the memory protocol every agent runs on</span>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+          <div style="background: #ffffff; border: 1px solid rgba(45,74,62,0.12); border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 5px;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #00B9F1; font-weight: 700;">01 // PROFILE</span>
+            <strong style="font-size: 14px;">Who</strong>
+            <p style="margin: 0; font-size: 11.5px; line-height: 1.5; color: rgba(45,74,62,0.7);">Identity, configuration, role — your business facts, stable and versioned.</p>
+          </div>
+          <div style="background: #ffffff; border: 1px solid rgba(45,74,62,0.12); border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 5px;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #00B9F1; font-weight: 700;">02 // SIGNALS</span>
+            <strong style="font-size: 14px;">Now</strong>
+            <p style="margin: 0; font-size: 11.5px; line-height: 1.5; color: rgba(45,74,62,0.7);">Live state — open leads, current tasks, what's hot. Nothing falls through.</p>
+          </div>
+          <div style="background: #ffffff; border: 1px solid rgba(45,74,62,0.12); border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 5px;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #00B9F1; font-weight: 700;">03 // TIMELINE</span>
+            <strong style="font-size: 14px;">Then</strong>
+            <p style="margin: 0; font-size: 11.5px; line-height: 1.5; color: rgba(45,74,62,0.7);">Every event, in order, forever. An audit trail your agents actually use.</p>
+          </div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 5fr 7fr; gap: 14px; align-items: stretch;">
+        <div style="background: #ffffff; border: 1px solid rgba(45,74,62,0.12); border-radius: 14px; padding: 20px 22px; display: flex; flex-direction: column; gap: 9px;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(45,74,62,0.5); font-weight: 700;">What we deploy</span>
+          <div style="display: flex; flex-direction: column; gap: 7px; font-size: 12px; color: rgba(45,74,62,0.8); line-height: 1.5;">
+            <span style="display: flex; gap: 8px;"><span style="color: #00B9F1; font-weight: 700;">—</span>Dedicated Redis memory bus — yours, isolated, never shared</span>
+            <span style="display: flex; gap: 8px;"><span style="color: #00B9F1; font-weight: 700;">—</span>Lead-triage agent wired to your intake and CRM</span>
+            <span style="display: flex; gap: 8px;"><span style="color: #00B9F1; font-weight: 700;">—</span>Exec-rollup agent — a daily brief of what your fleet did</span>
+            <span style="display: flex; gap: 8px;"><span style="color: #00B9F1; font-weight: 700;">—</span>Written runbook + human-confirmed provisioning. No black boxes.</span>
+          </div>
+          <span style="margin-top: auto; font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(45,74,62,0.45); font-style: italic;">Log: fleet heartbeat nominal · 45-day guarantee active</span>
+        </div>
+        <div style="background: #2d4a3e; border-radius: 14px; color: #faf9f5; padding: 20px 22px; display: flex; flex-direction: column; gap: 12px;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.24em; text-transform: uppercase; color: #00B9F1; font-weight: 700;">The offer ladder</span>
+          <div style="display: flex; flex-direction: column; gap: 0;">
+            <div style="display: grid; grid-template-columns: 92px 1fr auto; gap: 14px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid rgba(250,249,245,0.15);">
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(250,249,245,0.55);">Step 0</span>
+              <div><strong style="font-size: 13px;">15-Minute Consult</strong><span style="display: block; font-size: 11px; color: rgba(250,249,245,0.7);">Is there a leak worth auditing? We tell you straight.</span></div>
+              <span style="font-family: 'Playfair Display', serif; font-weight: 900; font-size: 19px;">Free</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 92px 1fr auto; gap: 14px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid rgba(250,249,245,0.15);">
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(250,249,245,0.55);">Entry</span>
+              <div><strong style="font-size: 13px;">AI Tools Assessment</strong><span style="display: block; font-size: 11px; color: rgba(250,249,245,0.7);">90-min white-glove audit · leak report · 30-day roadmap</span></div>
+              <span style="font-family: 'Playfair Display', serif; font-weight: 900; font-size: 19px;">$499</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 92px 1fr auto; gap: 14px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid rgba(250,249,245,0.15);">
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(250,249,245,0.55);">Tier 2</span>
+              <div><strong style="font-size: 13px;">Private ACMI Fleet Deployment</strong><span style="display: block; font-size: 11px; color: rgba(250,249,245,0.7);">Your memory bus, your agents, your hardware</span></div>
+              <span style="font-family: 'Playfair Display', serif; font-weight: 900; font-size: 19px; color: #FCDC00;">$4,500</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 92px 1fr auto; gap: 14px; align-items: baseline; padding: 9px 0;">
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(250,249,245,0.55);">Tier 3</span>
+              <div><strong style="font-size: 13px;">Managed ACMI Fleet Retainer</strong><span style="display: block; font-size: 11px; color: rgba(250,249,245,0.7);">We operate it — telemetry, tuning, exec strategy calls</span></div>
+              <span style="font-family: 'Playfair Display', serif; font-weight: 900; font-size: 19px; color: #FCDC00;">$2,500<span style="font-size: 11px; color: rgba(250,249,245,0.7);">/mo</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: auto; background: #2d4a3e; border-radius: 16px; color: #faf9f5; display: flex; align-items: center; gap: 20px; padding: 16px 24px;">
+        <div style="background: #ffffff; border-radius: 8px; padding: 5px;"><img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&amp;data=https%3A%2F%2Fmikeyshaw.work%2Fassessment&amp;color=2d4a3e&amp;bgcolor=ffffff&amp;qzone=1" alt="QR to book audit" style="width: 66px; height: 66px; display: block;"></div>
+        <div style="display: flex; flex-direction: column; gap: 3px;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #FCDC00; font-weight: 700;">[Scan to start the handshake — free 15-min consult]</span>
+          <span style="font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 800;">mikeyshaw.work/assessment</span>
+        </div>
+        <div style="margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(250,249,245,0.65); gap: 2px;">
+          <span>+1 202 300 1442</span>
+          <span>mikey@madezmedia.com</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</doc-page>
+</x-dc>
+</body>
+</html>

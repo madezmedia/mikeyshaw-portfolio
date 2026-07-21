@@ -31,13 +31,16 @@ import { Image } from 'astro:assets';
       </p>
       
       <!-- CTA strip -->
-      <div class="flex flex-wrap gap-4 mt-10">
+      <div class="flex flex-wrap gap-4 items-center mt-10">
         <a href="#get-the-kit" class="bg-[#2d4a3e] text-white px-8 py-4 font-bold text-xs uppercase tracking-widest hover:bg-[#3a5c4e] transition-all rounded-full no-underline inline-flex items-center gap-3">
           Get the Free Starter Kit
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <a href="#how-it-works" class="font-label-mono text-xs uppercase tracking-widest text-[#2d4a3e] hover:text-[#E5007D] transition-colors border-b border-[#2d4a3e]/30 pb-0.5 no-underline">
-          See how it works
+        <a href="/assessment" class="bg-[#E5007D] text-white px-8 py-4 font-bold text-xs uppercase tracking-widest hover:bg-[#c4006a] transition-all rounded-full no-underline">
+          Book $499 AI Assessment
+        </a>
+        <a href="/fleet" class="bg-[#00B9F1] text-white px-8 py-4 font-bold text-xs uppercase tracking-widest hover:bg-[#009ac8] transition-all rounded-full no-underline">
+          Deploy ACMI Fleet
         </a>
       </div>
       
@@ -375,12 +378,20 @@ import { Image } from 'astro:assets';
         Ready to give your AI a memory?
       </h2>
       <p class="font-sans text-lg text-white/70 mb-8">
-        The starter kit is free. No credit card. No sales pitch. Just the framework.
+        The starter kit is free. Or work directly with us to audit and deploy your custom AI architecture.
       </p>
-      <a href="#get-the-kit" class="inline-flex items-center gap-3 bg-white text-[#2d4a3e] px-10 py-4 font-bold text-xs uppercase tracking-widest rounded-full hover:bg-[#faf9f5] transition-all no-underline">
-        Get the ACMI Starter Kit — Free
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
+      <div class="flex flex-wrap justify-center gap-4 items-center">
+        <a href="#get-the-kit" class="inline-flex items-center gap-3 bg-white text-[#2d4a3e] px-8 py-4 font-bold text-xs uppercase tracking-widest rounded-full hover:bg-[#faf9f5] transition-all no-underline">
+          Get Free Starter Kit
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="/assessment" class="inline-flex items-center gap-3 bg-[#E5007D] text-white px-8 py-4 font-bold text-xs uppercase tracking-widest rounded-full hover:bg-[#c4006a] transition-all no-underline">
+          Book $499 AI Assessment
+        </a>
+        <a href="/fleet" class="inline-flex items-center gap-3 bg-[#00B9F1] text-white px-8 py-4 font-bold text-xs uppercase tracking-widest rounded-full hover:bg-[#009ac8] transition-all no-underline">
+          Deploy ACMI Fleet
+        </a>
+      </div>
     </div>
   </section>
 </Layout>

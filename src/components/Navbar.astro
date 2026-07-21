@@ -3,9 +3,10 @@ const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
 const navLinks = [
     { name: 'Summary', href: isHome ? '#summary' : '/#summary', id: '01' },
     { name: 'Skills', href: isHome ? '#capabilities' : '/#capabilities', id: '02' },
-    { name: 'AI Kit', href: '/starter-kit', id: '03' },
-    { name: 'Intel', href: isHome ? '#intel' : '/#intel', id: '04' },
-    { name: 'Resume', href: '/resume', id: '05' }
+    { name: 'AI Assessment', href: '/assessment', id: '03' },
+    { name: 'Agent Fleet', href: '/fleet', id: '04' },
+    { name: 'AI Kit', href: '/starter-kit', id: '05' },
+    { name: 'Resume', href: '/resume', id: '06' }
 ];
 
 const ctaHref = isHome ? '#contact' : '/#contact';
@@ -18,10 +19,10 @@ const ctaHref = isHome ? '#contact' : '/#contact';
     </a>
 
     <!-- Desktop Navigation Menu -->
-    <div class="hidden md:flex gap-10 items-center">
+    <div class="hidden md:flex gap-6 lg:gap-8 items-center">
         {navLinks.map((link) => (
             <a 
-                class="font-label-mono text-[11px] font-semibold uppercase tracking-[0.25em] text-foreground/80 hover:text-accent-pink transition-colors no-underline cursor-pointer" 
+                class="font-label-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground/80 hover:text-accent-pink transition-colors no-underline cursor-pointer" 
                 href={link.href}
                 data-nav-link
             >
@@ -29,7 +30,7 @@ const ctaHref = isHome ? '#contact' : '/#contact';
             </a>
         ))}
         <a 
-            class="bg-foreground text-background px-6 py-2.5 font-sans font-bold text-xs uppercase tracking-widest hover:bg-foreground/90 hover:-translate-y-[1px] active:translate-y-0 transition-all rounded-full no-underline shadow-sm" 
+            class="bg-foreground text-background px-6 py-2.5 font-sans font-bold text-xs uppercase tracking-widest hover:bg-foreground/90 hover:-translate-y-[1px] active:translate-y-0 transition-all rounded-full no-underline shadow-sm whitespace-nowrap" 
             href={ctaHref}
         >
             Schedule Call
@@ -51,16 +52,16 @@ const ctaHref = isHome ? '#contact' : '/#contact';
 
 <!-- Mobile Drawer Overlay (Relocated outside <nav> to prevent z-index constraint) -->
 <div 
-    class="fixed inset-0 bg-background/98 z-54 md:hidden flex flex-col justify-center px-12 transition-all duration-500 opacity-0 pointer-events-none invisible" 
+    class="fixed inset-0 bg-background/98 z-54 md:hidden flex flex-col justify-center px-8 md:px-12 py-10 transition-all duration-500 opacity-0 pointer-events-none invisible overflow-y-auto" 
     id="mobile-drawer"
     role="dialog" 
     aria-modal="true" 
     aria-label="Navigation Menu"
 >
-    <div class="flex flex-col gap-8">
+    <div class="flex flex-col gap-6 max-h-[85vh] justify-center">
         {navLinks.map((link) => (
             <a 
-                class="font-display text-4xl font-extrabold text-foreground hover:text-accent-pink no-underline transition-colors block" 
+                class="font-display text-3xl font-extrabold text-foreground hover:text-accent-pink no-underline transition-colors block" 
                 href={link.href}
                 data-mobile-nav-link
             >
@@ -68,9 +69,9 @@ const ctaHref = isHome ? '#contact' : '/#contact';
                 {link.name}
             </a>
         ))}
-        <div class="h-[1px] bg-foreground/10 w-full my-4"></div>
+        <div class="h-[1px] bg-foreground/10 w-full my-2"></div>
         <a 
-            class="inline-block text-center bg-foreground text-background py-4 font-sans font-bold text-sm uppercase tracking-widest hover:bg-foreground/90 transition-all rounded-full no-underline shadow-md" 
+            class="inline-block text-center bg-foreground text-background py-3.5 font-sans font-bold text-sm uppercase tracking-widest hover:bg-foreground/90 transition-all rounded-full no-underline shadow-md" 
             href={ctaHref}
             data-mobile-nav-link
         >
