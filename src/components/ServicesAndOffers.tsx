@@ -70,6 +70,42 @@ const services: ServiceItem[] = [
   }
 ];
 
+interface CustomService {
+  type: string;
+  price: string;
+  name: string;
+  desc: string;
+  cta: string;
+  href: string;
+}
+
+const customServices: CustomService[] = [
+  {
+    type: 'Hybrid',
+    price: 'Custom retainer',
+    name: 'Custom Agentic Fleet Deployment',
+    desc: 'Autonomous multi-agent systems for production-scale operations — ACMI memory bus, Supabase + Redis, 45-day performance guarantee.',
+    cta: 'Build custom quote',
+    href: 'https://cal.com/mad-ez-media/ai-automation-discovery'
+  },
+  {
+    type: 'Retainer',
+    price: 'Monthly advisory',
+    name: 'Executive AI Advisory for SMBs',
+    desc: 'Deeper than coaching: weekly architecture reviews, custom low-code tooling, and dedicated Slack support with a 4-hour SLA.',
+    cta: 'Schedule advisory brief',
+    href: 'https://cal.com/mad-ez-media/ai-automation-discovery'
+  },
+  {
+    type: 'Flat',
+    price: 'Project basis',
+    name: 'Custom Media Pipeline Setup',
+    desc: 'Automated media synthesis — Fal.ai generation, RunPod lip-sync video, Deepgram voice, and auto-posting to social.',
+    cta: 'Request scope',
+    href: 'mailto:michael@madezmedia.com?subject=Custom%20Media%20Pipeline%20Scope%20Request'
+  }
+];
+
 interface WhopTier {
   name: string;
   price: string;
@@ -288,6 +324,40 @@ export default function ServicesAndOffers() {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Custom Engagements — quote required */}
+      <div id="custom-engagements" className="space-y-6">
+        <span className="font-label-mono text-[10px] uppercase tracking-[0.3em] text-[#2d4a3e]/50 font-bold block">
+          Custom · Quote required · Existing engagements
+        </span>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {customServices.map((svc) => (
+            <div
+              key={svc.name}
+              className="flex flex-col gap-2.5 p-6 bg-white border border-[#2d4a3e]/10 hover:border-[#2d4a3e]/30 rounded-2xl transition-all duration-300"
+            >
+              <div className="flex items-baseline justify-between gap-3">
+                <span className="font-label-mono text-[8.5px] uppercase tracking-[0.2em] bg-[#2d4a3e]/5 px-2.5 py-1 rounded-full font-bold text-[#2d4a3e]">
+                  {svc.type}
+                </span>
+                <span className="font-label-mono text-[10px] font-bold text-accent-pink text-right">
+                  {svc.price}
+                </span>
+              </div>
+              <strong className="font-heading text-lg text-[#2d4a3e] leading-tight">{svc.name}</strong>
+              <p className="font-sans text-xs leading-relaxed text-[#2d4a3e]/70">{svc.desc}</p>
+              <a
+                href={svc.href}
+                target={svc.href.startsWith('http') ? '_blank' : undefined}
+                rel={svc.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                className="mt-auto pt-2 font-label-mono text-[9.5px] uppercase tracking-[0.16em] font-bold text-[#2d4a3e] hover:text-accent-pink no-underline"
+              >
+                {svc.cta} →
+              </a>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Interactive Square Integration & Quote Request Panel */}
