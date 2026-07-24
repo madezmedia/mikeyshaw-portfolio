@@ -1,0 +1,54 @@
+/* Folana Chat Assessment — scoped styles (typing dots + scroll behavior) */
+
+.folana-widget {
+  scroll-behavior: smooth;
+}
+
+.folana-messages {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(45, 74, 62, 0.25) transparent;
+}
+
+.folana-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.folana-messages::-webkit-scrollbar-thumb {
+  background: rgba(45, 74, 62, 0.25);
+  border-radius: 999px;
+}
+
+.folana-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.folana-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(45, 74, 62, 0.5);
+  animation: folanaDotPulse 1.2s ease-in-out infinite both;
+}
+
+.folana-dots span:nth-child(2) { animation-delay: 0.15s; }
+.folana-dots span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes folanaDotPulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+.folana-chip {
+  transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.folana-bubble-in {
+  animation: folanaRise 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes folanaRise {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}

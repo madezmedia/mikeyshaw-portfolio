@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import ContactSection from '../components/ContactSection.astro';
+import FolanaChatAssessment from '../components/FolanaChatAssessment.tsx';
 ---
 
 <Layout title="AI Tools Assessment & Operational Audit | Mad EZ Media — Mikey Shaw">
@@ -89,11 +90,27 @@ import ContactSection from '../components/ContactSection.astro';
       </div>
     </section>
 
+    <!-- Folana Chat Assessment Widget -->
+    <section class="py-24 px-6 max-w-7xl mx-auto" id="folana">
+      <div class="max-w-3xl mb-12">
+        <span class="font-label-mono text-xs uppercase tracking-[0.25em] text-[#E5007D] font-bold block mb-3">
+          N° 02 • TALK TO FOLANA
+        </span>
+        <h2 class="font-display-xl text-3xl md:text-5xl font-black text-[#2d4a3e] tracking-tight leading-tight">
+          Two Minutes. A Few Quick Stops. Your Leak, Named.
+        </h2>
+        <p class="font-body-lg text-lg text-[#2d4a3e]/80 mt-4 leading-relaxed">
+          Skip the guesswork — chat with Folana, our AI systems interviewer, and walk away with a personalized snapshot of exactly where your business is leaking time before you ever book a call.
+        </p>
+      </div>
+      <FolanaChatAssessment client:load />
+    </section>
+
     <!-- The 7 Leaks Grid Section -->
     <section class="py-24 px-6 max-w-7xl mx-auto" id="leaks">
       <div class="max-w-3xl mb-16">
         <span class="font-label-mono text-xs uppercase tracking-[0.25em] text-[#E5007D] font-bold block mb-3">
-          N° 02 • THE 7 OPERATIONAL LEAKS
+          N° 03 • THE 7 OPERATIONAL LEAKS
         </span>
         <h2 class="font-display-xl text-3xl md:text-5xl font-black text-[#2d4a3e] tracking-tight leading-tight">
           Where Your Business Is Bleeding Time & Revenue Every Day.
@@ -300,7 +317,7 @@ import ContactSection from '../components/ContactSection.astro';
       <div class="max-w-7xl mx-auto relative z-10">
         <div class="max-w-3xl mb-16">
           <span class="font-label-mono text-xs uppercase tracking-[0.25em] text-[#00B9F1] font-bold block mb-3">
-            N° 03 • ROI LABOR CALCULATOR
+            N° 04 • ROI LABOR CALCULATOR
           </span>
           <h2 class="font-display-xl text-3xl md:text-5xl font-black tracking-tight leading-tight">
             Calculate Your Annual Labor Leakage.
@@ -437,7 +454,7 @@ import ContactSection from '../components/ContactSection.astro';
     <section class="py-24 px-6 max-w-7xl mx-auto" id="pricing">
       <div class="text-center max-w-3xl mx-auto mb-16">
         <span class="font-label-mono text-xs uppercase tracking-[0.25em] text-[#E5007D] font-bold block mb-3">
-          N° 04 • APPROVED PRICING LADDER
+          N° 05 • APPROVED PRICING LADDER
         </span>
         <h2 class="font-display-xl text-3xl md:text-5xl font-black text-[#2d4a3e] tracking-tight leading-tight">
           Select Your Level of Infrastructure.
