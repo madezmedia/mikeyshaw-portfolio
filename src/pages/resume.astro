@@ -2,58 +2,115 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 
-// Resume data
-const careerData = [
+// Resume data — Mad EZ Media / Michael Shaw, current version (2026)
+const competencies = [
     {
-        category: "Founder Operations",
-        company: "Mad EZ Media Partners",
-        role: "Founder & CEO",
-        date: "2021 — PRESENT",
-        desc: "Directing technical strategy and systems engineering for autonomous AI content pipelines, marketing automation, and multi-agent coordination frameworks.",
-        bullets: [
-            "Designed and deployed the ACMI v1.5 atomic memory bus, managing persistent context states across a fleet of 10+ active subagents.",
-            "Engineered Folana's CNS (Next.js 16 + Deepgram + RunPod + Composio), automating content generation and publishing 4x daily with zero human clicks.",
-            "Built EZ Influencer 360 visual creator canvas, integrating ComfyUI and RunPod InfiniteTalk with a 2.3s average rendering time.",
-            "Migrated legacy Airtable structures to Supabase PostgreSQL with Redis TTL caching, reducing Next.js build speeds from 40s to 3s."
-        ],
-        tags: ["Next.js 16", "Supabase", "Upstash Redis", "Composio", "Deepgram TTS", "RunPod"]
+        title: 'AI & Automation',
+        desc: 'Multi-agent orchestration, voice AI systems, automated reporting, predictive workflows'
     },
     {
-        category: "Public Sector Consulting",
-        company: "D.C. Government Digital Services",
-        role: "Strategic Tech Consultant",
-        date: "2018 — 2021",
-        desc: "Modernizing public service interfaces, designing type-safe data schemas, and leading digital transformation initiatives for municipal departments.",
-        bullets: [
-            "Collaborated with municipal teams to migrate legacy database engines to highly secure, modern web architectures.",
-            "Designed robust OpenAPI schema specs and data integration protocols for municipal service platforms.",
-            "Conducted comprehensive code quality audits and performance analyses, speeding up public portal response times by 35%."
-        ],
-        tags: ["OpenAPI", "TypeScript", "React", "SQL migrations", "Node.js", "System Architecture"]
+        title: 'Systems Development',
+        desc: 'Full-stack (Next.js, React, TypeScript, Node.js), database design (PostgreSQL/Supabase)'
     },
     {
-        category: "Marketing & Analytics",
-        company: "Enterprise Client Group",
-        role: "Director of Marketing Analytics",
-        date: "2006 — 2018",
-        desc: "Managing high-volume acquisition campaigns, engineering custom analytics pipelines, and leading client acquisition strategy.",
+        title: 'Operations & Logistics',
+        desc: 'Multi-channel dispatch, real-time coordination, scheduling optimization, fleet management'
+    },
+    {
+        title: 'Business Development',
+        desc: 'Client relationship management, CRM design, pipeline tracking, proposal development'
+    },
+    {
+        title: 'Communication',
+        desc: 'Multi-channel coordination (phone, email, Slack, Telegram, SMS), 20+ concurrent accounts'
+    },
+    {
+        title: 'Problem Solving',
+        desc: 'Production debugging under pressure, rapid triage, root cause analysis'
+    }
+];
+
+const experience = [
+    {
+        role: 'Founder & CEO',
+        company: 'Mad EZ Media Partners',
+        location: 'Charlotte, NC',
+        dates: '2020 — Present',
         bullets: [
-            "Pioneered marketing data attribution frameworks, analyzing over 20+ years of digital advertising spend and attribution patterns.",
-            "Developed automated data aggregators and dashboards, reducing manual reporting overhead by 70%.",
-            "Designed and optimized customer landing page funnels, leading to consistent cost-per-acquisition (CPA) decreases across B2B campaigns."
-        ],
-        tags: ["Marketing Analytics", "Acquisition Strategy", "Python Scripts", "PostgreSQL", "Google Tag Manager"]
+            'Built and managed a multi-service digital agency serving service businesses across the Southeast',
+            'Designed automated content systems producing 10x output in half the time; built custom CRM/pipeline systems (PostgreSQL, Supabase, React)',
+            'Coordinated real-time operations across 8+ AI agents and 20+ concurrent client accounts; developed automated performance dashboards'
+        ]
+    },
+    {
+        role: 'Founder',
+        company: 'SonicBrand AI',
+        location: 'Charlotte, NC',
+        dates: '2024 — 2025',
+        bullets: [
+            'Built an audio branding SaaS platform with 490+ TypeScript files, production-grade architecture',
+            'Implemented Zustand state management, auth/quota API middleware, SSE streaming, multi-agent voice with ElevenLabs'
+        ]
+    },
+    {
+        role: 'Founder',
+        company: 'EZ Influencer 360',
+        location: 'Charlotte, NC',
+        dates: '2024 — 2025',
+        bullets: [
+            'Architected an AI music influencer platform: character creation, music generation, voice, and video',
+            'Full-stack build across Next.js, React Query, Zustand, Tailwind CSS 4, Supabase, OpenAI, RunPod, Mux — 6 dev phases shipped'
+        ]
+    },
+    {
+        role: 'General Manager',
+        company: 'Crafty Crab Boardwalk INC',
+        location: 'Charlotte, NC',
+        dates: 'Apr 2018 — Apr 2019',
+        bullets: [
+            'Managed full restaurant operations: staffing, scheduling, inventory, and P&L accountability',
+            'Oversaw daily high-volume service across kitchen, front-of-house, and delivery; recruited and managed 15–25 staff'
+        ]
+    },
+    {
+        role: 'Sales Professional',
+        company: 'The Goins Group, LLC',
+        location: 'Charlotte, NC / Lake Wylie, SC',
+        dates: '2019 — 2020',
+        bullets: [
+            'Sales and business development for a $62M+ real estate investment education and services company',
+            'Generated and qualified leads, managed pipeline, and closed deals across multiple channels'
+        ]
+    },
+    {
+        role: 'Founder / Digital Strategy Consultant',
+        company: 'Hashtix Digital Strategy Consulting',
+        location: 'Charlotte, NC',
+        dates: '2017 — 2020',
+        bullets: [
+            'Provided digital marketing and social strategy consulting to local businesses',
+            'Built lead generation funnels and automated marketing systems'
+        ]
+    },
+    {
+        role: 'Technology Consultant',
+        company: 'Independent / Various Clients',
+        location: 'Washington, DC & Charlotte, NC',
+        dates: '2020 — 2024',
+        bullets: [
+            'Collaborated with DC government on technology and data management projects',
+            'Provided marketing analytics and automation consulting for 20+ clients; built custom web apps, e-commerce, and mobile apps'
+        ]
     }
 ];
 ---
 
-<Layout title="Mikey Shaw | Resume & Operations Log">
+<Layout title="Michael Shaw | Resume — Operations & Systems Architect">
     <Navbar />
-    
+
     <main class="pt-32 pb-24 bg-[#faf9f5]">
-        <!-- Career Section -->
-        <section class="px-6 md:px-[60px] max-w-[1440px] mx-auto">
-            <div class="mb-12">
+        <section class="px-6 md:px-[60px] max-w-4xl mx-auto">
+            <div class="mb-10">
                 <a href="/" class="back-link">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="19" y1="12" x2="5" y2="12"></line>
@@ -63,92 +120,96 @@ const careerData = [
                 </a>
             </div>
 
-            <div class="flex items-baseline gap-8 mb-8">
-                <h1 class="font-display-xl text-6xl md:text-7xl font-black tracking-tighter uppercase leading-none text-primary">Operations Log</h1>
-                <span class="font-label-mono text-accent-pink tracking-[0.5em] uppercase text-xs">Resume</span>
+            <!-- Header -->
+            <div class="resume-header">
+                <div class="header-left">
+                    <h1 class="resume-name">Michael Shaw</h1>
+                    <span class="resume-eyebrow">Operations &amp; Systems Architect</span>
+                </div>
+                <div class="header-right">
+                    <span>(202) 300-1442 · michael@madezmedia.com</span>
+                    <span>Charlotte, NC Area (Harrisburg) · mikeyshaw.work</span>
+                    <span>linkedin.com/in/michael-shaw-clt</span>
+                </div>
             </div>
-            
-            <p class="font-body-lg text-lg text-primary/70 mb-16 max-w-2xl">
-                A verified trace of Mikey Shaw's tenures, architectures, and operations across enterprise consulting and agency sectors.
+
+            <!-- Summary -->
+            <p class="resume-summary">
+                Versatile operations leader and technologist with 20+ years spanning restaurant management, real estate sales, business development, and technology entrepreneurship. Proven record managing fast-paced operations, coordinating teams under pressure, and building systems that scale — from running a full-service restaurant, to founding 6 technology companies, to selling real estate. Looking to bring hustle, systems thinking, and a whatever-it-takes work ethic to a growing operation from Day 1.
             </p>
 
-            <div class="career-inspector-grid">
-                <!-- Left: Timeline Buttons -->
-                <div class="career-timeline-buttons">
-                    {careerData.map((entry, index) => (
-                        <button class={`career-timeline-btn ${index === 0 ? 'active' : ''}`} data-index={index}>
-                            <div class="btn-meta">
-                                <span class="btn-date">{entry.date}</span>
-                                <span class="btn-indicator"></span>
-                            </div>
-                            <div class="btn-title-block">
-                                <h3 class="btn-role">{entry.role}</h3>
-                                <p class="btn-company">{entry.company}</p>
-                            </div>
-                        </button>
+            <!-- Core Competencies -->
+            <div class="resume-section">
+                <span class="section-label">Core Competencies</span>
+                <div class="competency-grid">
+                    {competencies.map((c) => (
+                        <div class="competency-item">
+                            <strong>{c.title}</strong>
+                            <span>{c.desc}</span>
+                        </div>
                     ))}
                 </div>
+            </div>
 
-                <!-- Right: Intel Inspector Card -->
-                <div class="career-intel-card">
-                    <div class="intel-card-header">
-                        <span class="intel-card-badge" id="c-badge">FOUNDER OPERATIONS</span>
-                        <h3 class="intel-card-title" id="c-title">Mad EZ Media Partners</h3>
-                    </div>
-
-                    <div class="intel-card-body">
-                        <div class="intel-card-section">
-                            <span class="intel-card-label">Operational Mission</span>
-                            <p class="intel-card-desc" id="c-desc">
-                                Directing technical strategy and systems engineering for autonomous AI content pipelines, marketing automation, and multi-agent coordination frameworks.
-                            </p>
-                        </div>
-
-                        <div class="intel-card-section">
-                            <span class="intel-card-label">Verified Deliverables & Integrations</span>
-                            <ul class="intel-card-list" id="c-bullets">
-                                <li>Designed and deployed the ACMI v1.5 atomic memory bus, managing persistent context states across a fleet of 10+ active subagents.</li>
-                                <li>Engineered Folana's CNS (Next.js 16 + Deepgram + RunPod + Composio), automating content generation and publishing 4x daily with zero human clicks.</li>
-                                <li>Built EZ Influencer 360 visual creator canvas, integrating ComfyUI and RunPod InfiniteTalk with a 2.3s average rendering time.</li>
-                                <li>Migrated legacy Airtable structures to Supabase PostgreSQL with Redis TTL caching, reducing Next.js build speeds from 40s to 3s.</li>
+            <!-- Professional Experience -->
+            <div class="resume-section">
+                <span class="section-label section-label--bordered">Professional Experience</span>
+                <div class="experience-list">
+                    {experience.map((job) => (
+                        <div class="experience-item">
+                            <div class="experience-heading">
+                                <div class="experience-title-row">
+                                    <strong>{job.role}</strong>
+                                    <span class="experience-company">— {job.company}, {job.location}</span>
+                                </div>
+                                <span class="experience-dates">{job.dates}</span>
+                            </div>
+                            <ul class="experience-bullets">
+                                {job.bullets.map((b) => <li>{b}</li>)}
                             </ul>
                         </div>
-
-                        <div class="intel-card-section">
-                            <span class="intel-card-label">Core Technologies</span>
-                            <div class="intel-card-tags" id="c-tags">
-                                <span class="tag-item">Next.js 16</span>
-                                <span class="tag-item">Supabase</span>
-                                <span class="tag-item">Upstash Redis</span>
-                                <span class="tag-item">Composio</span>
-                                <span class="tag-item">Deepgram TTS</span>
-                                <span class="tag-item">RunPod</span>
-                            </div>
-                        </div>
-                    </div>
+                    ))}
                 </div>
             </div>
-        </section>
 
-        <!-- Education Section -->
-        <section class="px-6 md:px-[60px] max-w-[1440px] mx-auto py-24 border-t border-primary/10 mt-12" id="education">
-            <h2 class="font-label-mono text-accent-pink tracking-[0.5em] uppercase text-xs mb-12">04 Academic Credentials</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div class="education-card">
-                    <span class="font-label-mono text-xs uppercase tracking-widest text-primary/60 mb-2 block">MSc Human-Computer Interaction</span>
-                    <h3 class="font-headline-md text-2xl font-bold text-primary mb-1">University College London</h3>
-                    <span class="font-label-mono text-accent-pink text-xs">2014 — 2015</span>
-                    <p class="font-body-md text-sm text-primary/70 mt-4 leading-relaxed">
-                        Specialized in user behavior modeling, user interface ergonomics, and interactive system prototyping.
-                    </p>
+            <!-- Education -->
+            <div class="resume-section">
+                <span class="section-label section-label--bordered">Education</span>
+                <div class="education-row">
+                    <div class="experience-title-row">
+                        <strong>Continuing Education — AI &amp; Full-Stack Development</strong>
+                        <span class="experience-company">— Self-directed / Online</span>
+                    </div>
+                    <span class="experience-dates">2020 – Present</span>
                 </div>
-                <div class="education-card">
-                    <span class="font-label-mono text-xs uppercase tracking-widest text-primary/60 mb-2 block">BFA Digital Media Design</span>
-                    <h3 class="font-headline-md text-2xl font-bold text-primary mb-1">Parsons School of Design</h3>
-                    <span class="font-label-mono text-accent-cyan text-xs">2010 — 2014</span>
-                    <p class="font-body-md text-sm text-primary/70 mt-4 leading-relaxed">
-                        Explored computer graphics, code-driven art, kinetic sculptures, and dynamic visual identities.
-                    </p>
+                <ul class="experience-bullets">
+                    <li>Advanced AI integration and multi-agent system architecture</li>
+                    <li>Full-stack web development (JavaScript, TypeScript, React, Next.js, Node.js)</li>
+                    <li>Database design, cloud infrastructure, and deployment (PostgreSQL, Supabase, Vercel, Docker, CI/CD)</li>
+                </ul>
+            </div>
+
+            <!-- Footer: Technical Skills / Key Projects -->
+            <div class="resume-footer">
+                <div class="footer-col">
+                    <span class="section-label section-label--bordered">Technical Skills</span>
+                    <div class="skills-list">
+                        <span><strong>Languages:</strong> JavaScript, TypeScript, Python, SQL, HTML/CSS</span>
+                        <span><strong>Frameworks:</strong> Next.js, React, Node.js, Astro, Tailwind CSS</span>
+                        <span><strong>Databases:</strong> PostgreSQL, Supabase, Prisma ORM, IndexedDB</span>
+                        <span><strong>AI/ML:</strong> OpenAI GPT-4, ElevenLabs, RunPod, Mux, FAL, custom agents</span>
+                        <span><strong>Cloud &amp; DevOps:</strong> Vercel, GitHub Actions, Docker, Supabase Cloud</span>
+                        <span><strong>Tools:</strong> Git/GitHub, QuickBooks, Slack, CRMs, Figma, Cal.com</span>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <span class="section-label section-label--bordered">Key Projects</span>
+                    <div class="skills-list">
+                        <span><strong>Mad EZ AI Fleet</strong> — Private multi-agent deployment system for local service businesses (live client engagements, 2026)</span>
+                        <span><strong>SonicBrand AI</strong> — Audio branding SaaS, 490+ TypeScript files in production</span>
+                        <span><strong>OwnerScout</strong> — Restaurant tech analysis tool, multi-tier caching (80–95% API cost cut)</span>
+                        <span class="footer-meta">mikeyshaw.work · github.com/madezmedia</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -157,7 +218,7 @@ const careerData = [
     <footer class="px-6 md:px-[60px] py-12 border-t border-primary/10 flex justify-between items-center bg-surface-container text-primary">
         <div class="font-headline-lg text-4xl font-black">MS<span class="text-primary/40">.</span></div>
         <div class="font-label-mono text-[9px] opacity-40 uppercase tracking-[0.3em]">
-            © 2026 CREATIVE TECHNOLOGIST STUDIO. ALL RIGHTS RESERVED.
+            © 2026 MAD EZ MEDIA. ALL RIGHTS RESERVED.
         </div>
     </footer>
 </Layout>
@@ -178,334 +239,248 @@ const careerData = [
         opacity: 0.7;
     }
 
-    .career-inspector-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-        align-items: stretch;
+    .resume-header {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: space-between;
+        align-items: flex-start;
+        border-bottom: 2px solid #2d4a3e;
+        padding-bottom: 1.25rem;
+        margin-bottom: 1.5rem;
     }
 
-    @media (min-width: 1024px) {
-        .career-inspector-grid {
-            grid-template-columns: 2fr 3fr;
+    @media (min-width: 768px) {
+        .resume-header {
+            flex-direction: row;
+            align-items: flex-end;
         }
     }
 
-    .career-timeline-buttons {
+    .header-left {
         display: flex;
         flex-direction: column;
-        gap: 1.25rem;
+        gap: 0.35rem;
     }
 
-    .career-timeline-btn {
-        text-align: left;
-        background: var(--bg-primary);
-        border: 1px solid rgba(45, 74, 62, 0.12);
-        border-radius: 12px;
-        padding: 1.5rem;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-        box-shadow: 0 4px 12px rgba(45, 74, 62, 0.02);
+    .resume-name {
+        margin: 0;
+        font-family: "Playfair Display", serif;
+        font-weight: 900;
+        font-size: clamp(2rem, 4vw, 2.75rem);
+        letter-spacing: 0.005em;
+        color: #2d4a3e;
+        line-height: 1;
     }
 
-    .career-timeline-btn:hover {
-        background: color-mix(in srgb, var(--primary) 2%, transparent);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(45, 74, 62, 0.05);
-        border-color: rgba(45, 74, 62, 0.25);
-    }
-
-    .career-timeline-btn.active {
-        border-color: var(--primary);
-        background: rgba(45, 74, 62, 0.03);
-        box-shadow: 0 10px 24px rgba(45, 74, 62, 0.08);
-        transform: translateY(-3px);
-    }
-
-    .btn-meta {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-    }
-
-    .btn-date {
+    .resume-eyebrow {
         font-family: "JetBrains Mono", monospace;
         font-size: 11px;
         font-weight: 700;
-        color: rgba(45, 74, 62, 0.5);
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: #E5007D;
     }
 
-    .career-timeline-btn.active .btn-date {
-        color: #2d4a3e;
-    }
-
-    .btn-indicator {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: rgba(45, 74, 62, 0.15);
-        transition: background-color 0.3s, transform 0.3s;
-    }
-
-    .career-timeline-btn.active .btn-indicator {
-        background: #2d4a3e;
-        transform: scale(1.2);
-    }
-
-    .btn-title-block {
+    .header-right {
         display: flex;
         flex-direction: column;
         gap: 0.25rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: rgba(45, 74, 62, 0.7);
+        text-align: left;
     }
 
-    .btn-role {
-        font-family: "Playfair Display", serif;
-        font-size: 1.35rem;
-        font-weight: 800;
-        color: #2d4a3e;
-        margin: 0;
+    @media (min-width: 768px) {
+        .header-right {
+            text-align: right;
+        }
     }
 
-    .btn-company {
+    .resume-summary {
+        margin: 0 0 2rem;
         font-family: "Outfit", sans-serif;
-        font-size: 0.9rem;
-        color: rgba(45, 74, 62, 0.6);
-        margin: 0;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
+        font-size: 0.95rem;
+        line-height: 1.65;
+        color: rgba(45, 74, 62, 0.85);
+        max-width: 60ch;
     }
 
-    /* Right Details Inspector Panel */
-    .career-intel-card {
-        background: var(--bg-primary);
-        border-radius: 16px;
-        border: 1px solid rgba(45, 74, 62, 0.12);
-        padding: 2.25rem;
-        box-shadow: 0 10px 30px rgba(45, 74, 62, 0.04);
+    .resume-section {
         display: flex;
         flex-direction: column;
-        gap: 1.75rem;
+        gap: 1rem;
+        margin-bottom: 2.25rem;
     }
 
-    .intel-card-header {
-        border-bottom: 1px solid rgba(45, 74, 62, 0.08);
-        padding-bottom: 1rem;
-    }
-
-    .intel-card-badge {
-        display: inline-block;
+    .section-label {
         font-family: "JetBrains Mono", monospace;
-        font-size: 9px;
+        font-size: 10px;
         font-weight: 700;
+        letter-spacing: 0.22em;
         text-transform: uppercase;
-        letter-spacing: 0.15em;
-        padding: 3px 10px;
-        border-radius: 20px;
-        border: 1px solid rgba(45, 74, 62, 0.2);
-        color: rgba(45, 74, 62, 0.7);
-        margin-bottom: 0.75rem;
-        background: rgba(45, 74, 62, 0.04);
+        color: rgba(45, 74, 62, 0.55);
     }
 
-    .intel-card-title {
-        font-family: "Playfair Display", serif;
-        font-size: 1.95rem;
-        font-weight: 850;
+    .section-label--bordered {
+        border-bottom: 1px solid rgba(45, 74, 62, 0.15);
+        padding-bottom: 0.6rem;
+    }
+
+    .competency-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem 2rem;
+    }
+
+    @media (min-width: 640px) {
+        .competency-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .competency-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .competency-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+
+    .competency-item strong {
+        font-family: "Outfit", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
         color: #2d4a3e;
-        margin: 0;
-        letter-spacing: -0.015em;
     }
 
-    .intel-card-body {
+    .competency-item span {
+        font-family: "Outfit", sans-serif;
+        font-size: 0.82rem;
+        line-height: 1.5;
+        color: rgba(45, 74, 62, 0.72);
+    }
+
+    .experience-list {
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
     }
 
-    .intel-card-section {
+    .experience-item {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 0.4rem;
     }
 
-    .intel-card-label {
+    .experience-heading,
+    .education-row {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    @media (min-width: 640px) {
+        .experience-heading,
+        .education-row {
+            flex-direction: row;
+            align-items: baseline;
+        }
+    }
+
+    .experience-title-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 0.4rem;
+    }
+
+    .experience-title-row strong {
+        font-family: "Playfair Display", serif;
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: #2d4a3e;
+    }
+
+    .experience-company {
+        font-family: "Outfit", sans-serif;
+        font-size: 0.88rem;
+        color: rgba(45, 74, 62, 0.6);
+    }
+
+    .experience-dates {
         font-family: "JetBrains Mono", monospace;
-        font-size: 9.5px;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: rgba(45, 74, 62, 0.45);
+        font-size: 10.5px;
+        color: rgba(45, 74, 62, 0.55);
+        white-space: nowrap;
+        flex-shrink: 0;
     }
 
-    .intel-card-desc {
-        font-family: "Outfit", sans-serif;
-        font-size: 0.95rem;
-        line-height: 1.65;
-        color: rgba(45, 74, 62, 0.85);
+    .experience-bullets {
         margin: 0;
-    }
-
-    .intel-card-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
+        padding-left: 1.1rem;
         display: flex;
         flex-direction: column;
-        gap: 0.65rem;
+        gap: 0.3rem;
     }
 
-    .intel-card-list li {
-        position: relative;
-        padding-left: 1.25rem;
+    .experience-bullets li {
         font-family: "Outfit", sans-serif;
-        font-size: 0.9rem;
+        font-size: 0.88rem;
         line-height: 1.55;
         color: rgba(45, 74, 62, 0.8);
     }
 
-    .intel-card-list li::before {
-        content: "—";
-        position: absolute;
-        left: 0;
-        color: rgba(45, 74, 62, 0.4);
+    .education-row {
+        margin-bottom: 0.5rem;
     }
 
-    .intel-card-tags {
+    .resume-footer {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-top: 1rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(45, 74, 62, 0.15);
+    }
+
+    @media (min-width: 768px) {
+        .resume-footer {
+            grid-template-columns: 1.4fr 1fr;
+        }
+    }
+
+    .footer-col {
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 0.9rem;
+    }
+
+    .skills-list {
+        display: flex;
+        flex-direction: column;
         gap: 0.5rem;
+        font-family: "Outfit", sans-serif;
+        font-size: 0.82rem;
+        line-height: 1.55;
+        color: rgba(45, 74, 62, 0.8);
     }
 
-    .tag-item {
-        background: rgba(45, 74, 62, 0.04);
-        border: 1px solid rgba(45, 74, 62, 0.1);
-        color: var(--primary);
-        padding: 4px 12px;
-        border-radius: 20px;
+    .skills-list strong {
+        color: #2d4a3e;
+    }
+
+    .footer-meta {
         font-family: "JetBrains Mono", monospace;
-        font-size: 11px;
-        font-weight: 600;
-    }
-
-    /* Education styling */
-    .education-card {
-        background: var(--bg-primary);
-        border-radius: 16px;
-        border: 1px solid rgba(45, 74, 62, 0.12);
-        padding: 2rem;
-        box-shadow: 0 8px 24px rgba(45, 74, 62, 0.03);
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .education-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 16px 36px rgba(45, 74, 62, 0.06);
-        border-color: rgba(45, 74, 62, 0.25);
+        font-size: 10.5px;
+        color: rgba(45, 74, 62, 0.6);
+        margin-top: 0.25rem;
     }
 </style>
-
-<script>
-    const careerData = [
-        {
-            category: "Founder Operations",
-            company: "Mad EZ Media Partners",
-            role: "Founder & CEO",
-            desc: "Directing technical strategy and systems engineering for autonomous AI content pipelines, marketing automation, and multi-agent coordination frameworks.",
-            bullets: [
-                "Designed and deployed the ACMI v1.5 atomic memory bus, managing persistent context states across a fleet of 10+ active subagents.",
-                "Engineered Folana's CNS (Next.js 16 + Deepgram + RunPod + Composio), automating content generation and publishing 4x daily with zero human clicks.",
-                "Built EZ Influencer 360 visual creator canvas, integrating ComfyUI and RunPod InfiniteTalk with a 2.3s average rendering time.",
-                "Migrated legacy Airtable structures to Supabase PostgreSQL with Redis TTL caching, reducing Next.js build speeds from 40s to 3s."
-            ],
-            tags: ["Next.js 16", "Supabase", "Upstash Redis", "Composio", "Deepgram TTS", "RunPod"]
-        },
-        {
-            category: "Public Sector Consulting",
-            company: "D.C. Government Digital Services",
-            role: "Strategic Tech Consultant",
-            desc: "Modernizing public service interfaces, designing type-safe data schemas, and leading digital transformation initiatives for municipal departments.",
-            bullets: [
-                "Collaborated with municipal teams to migrate legacy database engines to highly secure, modern web architectures.",
-                "Designed robust OpenAPI schema specs and data integration protocols for municipal service platforms.",
-                "Conducted comprehensive code quality audits and performance analyses, speeding up public portal response times by 35%."
-            ],
-            tags: ["OpenAPI", "TypeScript", "React", "SQL migrations", "Node.js", "System Architecture"]
-        },
-        {
-            category: "Marketing & Analytics",
-            company: "Enterprise Client Group",
-            role: "Director of Marketing Analytics",
-            desc: "Managing high-volume acquisition campaigns, engineering custom analytics pipelines, and leading client acquisition strategy.",
-            bullets: [
-                "Pioneered marketing data attribution frameworks, analyzing over 20+ years of digital advertising spend and attribution patterns.",
-                "Developed automated data aggregators and dashboards, reducing manual reporting overhead by 70%.",
-                "Designed and optimized customer landing page funnels, leading to consistent cost-per-acquisition (CPA) decreases across B2B campaigns."
-            ],
-            tags: ["Marketing Analytics", "Acquisition Strategy", "Python Scripts", "PostgreSQL", "Google Tag Manager"]
-        }
-    ];
-
-    function initResume() {
-        const buttons = document.querySelectorAll('.career-timeline-btn');
-        const badge = document.getElementById('c-badge');
-        const title = document.getElementById('c-title');
-        const desc = document.getElementById('c-desc');
-        const bulletsContainer = document.getElementById('c-bullets');
-        const tagsContainer = document.getElementById('c-tags');
-
-        buttons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const index = parseInt(btn.getAttribute('data-index') || '0', 10);
-                const data = careerData[index];
-
-                if (!data) return;
-
-                // Toggle active classes on buttons
-                buttons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                // Update text content with quick fade animation
-                const elementsToUpdate = [badge, title, desc, bulletsContainer, tagsContainer];
-                elementsToUpdate.forEach(el => {
-                    if (el) el.style.opacity = '0.3';
-                });
-
-                setTimeout(() => {
-                    if (badge) badge.textContent = data.category.toUpperCase();
-                    if (title) title.textContent = data.company;
-                    if (desc) desc.textContent = data.desc;
-
-                    // Update Bullet points list
-                    if (bulletsContainer) {
-                        bulletsContainer.innerHTML = data.bullets
-                            .map(bullet => `<li>${bullet}</li>`)
-                            .join('');
-                    }
-
-                    // Update Technology Tags
-                    if (tagsContainer) {
-                        tagsContainer.innerHTML = data.tags
-                            .map(tag => `<span class="tag-item">${tag}</span>`)
-                            .join('');
-                    }
-
-                    elementsToUpdate.forEach(el => {
-                        if (el) el.style.opacity = '1';
-                    });
-                }, 150);
-            });
-        });
-    }
-
-    // Initialize
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initResume);
-    } else {
-        initResume();
-    }
-    
-    // Support Astro View Transitions
-    document.addEventListener('astro:page-load', initResume);
-</script>
