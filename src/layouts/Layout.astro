@@ -1,5 +1,6 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
+import Analytics from '@vercel/analytics/astro';
 import ChatWidget from '../components/ChatWidget.tsx';
 import ParticleBackground from '../components/ParticleBackground.astro';
 import '../styles/animations.css';
@@ -72,6 +73,7 @@ html, body {
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<Analytics />
 		
 		<!-- Font Optimization -->
 		<link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
