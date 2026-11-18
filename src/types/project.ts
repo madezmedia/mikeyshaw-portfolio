@@ -55,9 +55,9 @@ export const PROJECTS: Project[] = [
     },
     {
         id: 'acmi-memory-interface',
-        name: 'Agentic Context Memory Interface (ACMI)',
+        name: 'LogMem',
         shortDescription: 'Open-Source Persistent Memory & State Protocol for Autonomous AI Agents',
-        fullDescription: 'The open-source state protocol (MIT) giving AI agents persistent Profile, Signals, and Timeline memory slots. Features a TypeScript SDK, CLI commands, and a model context protocol (acmi-mcp) server for cross-agent coordination.',
+        fullDescription: 'The open-source state protocol (MIT) giving AI agents persistent Who, Now, and Log memory slots. Features a TypeScript SDK, CLI commands, and a model context protocol (acmi-mcp) server for cross-agent coordination.',
         category: ['Protocol', 'AI Memory', 'TypeScript SDK'],
         coverImage: '/placeholders/project-placeholder.svg',
         technologies: [
@@ -80,7 +80,7 @@ export const PROJECTS: Project[] = [
         id: 'ez-influencer-360',
         name: 'EZ Influencer 360',
         shortDescription: 'Autonomous AI Creator & Music Influencer Showcase Platform',
-        fullDescription: 'Production creator platform hosting automated video generation pipelines, Fanvue subscription automation, content dispatchers, and multi-agent coordination hooks powered by ACMI memory layers.',
+        fullDescription: 'Production creator platform hosting automated video generation pipelines, Fanvue subscription automation, content dispatchers, and multi-agent coordination hooks powered by LogMem shared memory.',
         category: ['SaaS', 'AI Video', 'Influencer Tech'],
         coverImage: '/images/favor-ai-preview.png',
         technologies: [

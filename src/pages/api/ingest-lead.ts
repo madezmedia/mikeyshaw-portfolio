@@ -169,7 +169,7 @@ export const POST: APIRoute = async ({ request }) => {
         success: true,
         emailSlug,
         leadId: emailSlug,
-        message: 'Lead and opportunity successfully ingested into ACMI.'
+        message: 'Lead and opportunity successfully saved to LogMem.'
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );

@@ -24,7 +24,7 @@ const services: ServiceItem[] = [
     bullets: [
       '90-minute live operational & workflow audit',
       'Audit of 7 core business leak vectors',
-      'ACMI memory framework suitability check',
+      'LogMem memory fit check',
       'Actionable ROI & implementation blueprint',
       'Full 100% credit toward private fleet deployment'
     ],
@@ -34,7 +34,7 @@ const services: ServiceItem[] = [
   },
   {
     id: 'fleet-deployment',
-    name: '$4,500 Private ACMI Fleet Deployment',
+    name: '$4,500 Fleet deploy',
     price: '$4,500 One-Time',
     baseComplexity: 60,
     type: 'hybrid',
@@ -46,13 +46,13 @@ const services: ServiceItem[] = [
       'Mattermost / Slack messaging channel bridge',
       '30-day dedicated onboarding & ops support'
     ],
-    ctaText: 'Deploy ACMI Fleet →',
+    ctaText: 'Deploy a fleet →',
     squareAction: 'link',
     linkUrl: '/fleet'
   },
   {
     id: 'fleet-retainer',
-    name: '$2,500/mo Managed ACMI Fleet Retainer',
+    name: '$2,500/mo Managed fleet retainer',
     price: '$2,500 / Month',
     baseComplexity: 85,
     type: 'retainer',
@@ -84,7 +84,7 @@ const customServices: CustomService[] = [
     type: 'Hybrid',
     price: 'Custom retainer',
     name: 'Custom Agentic Fleet Deployment',
-    desc: 'Autonomous multi-agent systems for production-scale operations — ACMI memory bus, Supabase + Redis, 45-day performance guarantee.',
+    desc: 'Autonomous multi-agent systems for production-scale operations — LogMem shared memory, Supabase + Redis, 45-day performance guarantee.',
     cta: 'Build custom quote',
     href: 'https://cal.com/mad-ez-media/ai-automation-discovery'
   },
@@ -120,10 +120,10 @@ const whopTiers: WhopTier[] = [
     name: 'Tier 1: Code Blueprints',
     price: 'Free / Community',
     badge: 'BLUEPRINTS',
-    desc: 'Access entry-level code crawlers, simple automation scripts, and foundational ACMI bus schema files.',
+    desc: 'Access entry-level code crawlers, simple automation scripts, and starter LogMem memory templates.',
     features: [
       'Basic Yelp/Places lead crawlers',
-      'ACMI core v1.5 schema templates',
+      'LogMem Who / Now / Log templates',
       'Weekly open-source developer updates',
       'Community Discord access'
     ],
@@ -235,7 +235,7 @@ export default function ServicesAndOffers() {
         body: JSON.stringify(quoteDetails)
       });
 
-      if (!response.ok) throw new Error('Failed to ingest lead in ACMI');
+      if (!response.ok) throw new Error('Failed to save lead');
 
       const data = await response.json();
       
@@ -438,7 +438,7 @@ export default function ServicesAndOffers() {
                           <div>
                             <span className="block font-sans text-xs font-bold text-[var(--ms-text)]">Telemetry Dashboard</span>
                             <span className="block font-label-mono text-[9px] text-[var(--ms-muted)] mt-1">
-                              ACMI Live Portal
+                              LogMem live portal
                             </span>
                           </div>
                         </div>
@@ -580,7 +580,7 @@ export default function ServicesAndOffers() {
                       )}
                       {telemetryOption && (
                         <div className="flex justify-between items-center">
-                          <span>+ ACMI Telemetry Live Portal</span>
+                          <span>+ LogMem live activity portal</span>
                           <span className="font-label-mono text-[10px] font-bold text-[var(--ms-text)]">+20</span>
                         </div>
                       )}

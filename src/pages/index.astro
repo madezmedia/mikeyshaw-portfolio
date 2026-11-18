@@ -81,7 +81,7 @@ import ServicesAndOffers from '../components/ServicesAndOffers.tsx';
             
             <div class="col-span-12 md:col-span-7 flex flex-col justify-end">
                 <p class="font-body-md text-base max-w-xl mb-12 text-primary/75 reveal-item opacity-0 leading-relaxed">
-                    My engineering process is structured in three movements. We Architect the data flow and agent schemas; we Build using Next.js 16, Supabase, and Upstash Redis; and we Operate the pipelines on automated cron loops backed by ACMI.
+                    My engineering process is structured in three movements. We Architect the data flow and agent schemas; we Build using Next.js 16, Supabase, and Upstash Redis; and we Operate the pipelines on automated cron loops backed by LogMem.
                 </p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal-item opacity-0">
                     <div class="bg-[var(--ms-surface)] border border-[var(--ms-text)]/10 p-6 flex flex-col justify-between hover:border-[var(--ms-text)]/30 transition-all rounded-xl shadow-sm hover:translate-y-[-2px]">
@@ -103,7 +103,7 @@ import ServicesAndOffers from '../components/ServicesAndOffers.tsx';
                             <span class="material-symbols-outlined text-3xl text-accent-yellow" data-icon="sync_alt">sync_alt</span>
                             <h4 class="font-sans font-bold text-sm uppercase tracking-wider text-[var(--ms-text)] mt-4 mb-2">03. Operate</h4>
                         </div>
-                        <p class="font-sans text-xs text-[var(--ms-text)]/70 leading-relaxed">Running pipelines on automated loops via launchd, monitored with real-time ACMI event logs.</p>
+                        <p class="font-sans text-xs text-[var(--ms-text)]/70 leading-relaxed">Running pipelines on automated loops via launchd, monitored with real-time LogMem activity logs.</p>
                     </div>
                 </div>
             </div>
@@ -134,8 +134,8 @@ import ServicesAndOffers from '../components/ServicesAndOffers.tsx';
                 </div>
                 <div class="group reveal-item opacity-0">
                     <div class="text-accent-pink font-black text-4xl mb-4">02</div>
-                    <h3 class="font-headline-md text-white uppercase font-bold mb-4">Agentic Memory (ACMI)</h3>
-                    <p class="font-body-md text-white/75 text-sm leading-relaxed">Deploying the ACMI memory bus protocol to provide agents with Profile, Signals, and Timeline persistence slots.</p>
+                    <h3 class="font-headline-md text-white uppercase font-bold mb-4">Agent memory (LogMem)</h3>
+                    <p class="font-body-md text-white/75 text-sm leading-relaxed">Running LogMem so every agent keeps a Who, a Now and a Log between sessions.</p>
                 </div>
                 <div class="group reveal-item opacity-0">
                     <div class="text-accent-yellow font-black text-4xl mb-4">03</div>

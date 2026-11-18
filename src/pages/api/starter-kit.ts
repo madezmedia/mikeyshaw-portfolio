@@ -5,7 +5,7 @@ const RESEND_API_KEY = import.meta.env.RESEND_API_KEY || process.env.RESEND_API_
 const UPSTASH_URL = import.meta.env.UPSTASH_REDIS_REST_URL || process.env.UPSTASH_REDIS_REST_URL || '';
 const UPSTASH_TOKEN = import.meta.env.UPSTASH_REDIS_REST_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || '';
 
-const kitUrl = 'https://mikeyshaw.work/mikey-shaw-acmi-starter-kit.html';
+const kitUrl = 'https://mikeyshaw.work/logmem-starter-kit.html';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -38,12 +38,12 @@ export const POST: APIRoute = async ({ request }) => {
           ['SET', `acmi:lead:${emailSlug}:starter-kit`, JSON.stringify(lead)],
           ['ZADD', 'acmi:leads:starter-kit:timeline', ts.toString(), JSON.stringify({
             ts, source: `lead:${emailSlug}`, kind: 'kit-download-request',
-            summary: `[lead-intake @mikey] ${firstName} ${email} requested ACMI Starter Kit (role: ${role})`
+            summary: `[lead-intake @mikey] ${firstName} ${email} requested LogMem Starter Kit (role: ${role})`
           })],
           ['ZADD', 'acmi:bus:relay:events', ts.toString(), JSON.stringify({
             ts, source: 'agent:bentley', kind: 'lead-captured',
             correlationId: `starterKitLead-${ts}`,
-            summary: `[lead-captured @bentley] ${firstName} ${email} — ACMI Starter Kit requested, role: ${role}`
+            summary: `[lead-captured @bentley] ${firstName} ${email} — LogMem Starter Kit requested, role: ${role}`
           })]
         ])
       });
@@ -57,7 +57,7 @@ export const POST: APIRoute = async ({ request }) => {
         await resend.emails.send({
           from: 'Mikey Shaw <mikey@madezmedia.com>',
           to: email,
-          subject: `Your ACMI Starter Kit is ready, ${firstName} 👋`,
+          subject: `Your LogMem Starter Kit is ready, ${firstName} 👋`,
           html: getWelcomeEmail(firstName, kitUrl)
         });
         emailSent = true;
@@ -91,7 +91,7 @@ function getWelcomeEmail(firstName: string, url: string): string {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your ACMI Starter Kit</title>
+<title>Your LogMem Starter Kit</title>
 </head>
 <body style="margin:0;padding:0;background:#faf9f5;font-family:'Helvetica Neue',Arial,sans-serif;">
 <table width="100%" cellpadding="0" cellspacing="0" style="background:#faf9f5;padding:40px 20px;">
@@ -104,7 +104,7 @@ function getWelcomeEmail(firstName: string, url: string): string {
           <td style="background:#2d4a3e;padding:40px 48px;text-align:center;">
             <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#00b9f1;font-family:monospace;">Free Resource · No fluff</p>
             <h1 style="margin:0;font-size:28px;font-weight:900;color:#ffffff;line-height:1.2;">
-              Your ACMI Starter Kit<br/>is ready.
+              Your LogMem Starter Kit<br/>is ready.
             </h1>
           </td>
         </tr>
@@ -116,16 +116,16 @@ function getWelcomeEmail(firstName: string, url: string): string {
               Hey ${firstName}, 👋
             </p>
             <p style="margin:0 0 20px;font-size:15px;color:#2d4a3e;line-height:1.7;">
-              Most AI tools forget everything after every session. ACMI gives your AI a <strong>persistent memory layer</strong> — so it knows your business, your clients, and your goals across every conversation, forever.
+              Most AI tools forget everything after every session. LogMem gives your AI a <strong>persistent memory layer</strong> — so it knows your business, your clients, and your goals across every conversation, forever.
             </p>
             <p style="margin:0 0 28px;font-size:15px;color:#2d4a3e;line-height:1.7;">
               Your kit includes:
             </p>
             <ul style="margin:0 0 28px 0;padding:0 0 0 20px;">
-              <li style="margin-bottom:10px;font-size:14px;color:#2d4a3e;">✅ <strong>The ACMI Business Entity Model</strong> — Profile / Signals / Timeline template</li>
+              <li style="margin-bottom:10px;font-size:14px;color:#2d4a3e;">✅ <strong>The LogMem Model</strong> — Who / Now / Log template</li>
               <li style="margin-bottom:10px;font-size:14px;color:#2d4a3e;">✅ <strong>The 30-Day Signal Audit Guide</strong> — find your biggest context gaps</li>
               <li style="margin-bottom:10px;font-size:14px;color:#2d4a3e;">✅ <strong>The Starter Code Pack</strong> — Node.js scripts, 20-min setup</li>
-              <li style="margin-bottom:10px;font-size:14px;color:#2d4a3e;">✅ <strong>10 AI Conversation Starters</strong> — prompts designed for ACMI context</li>
+              <li style="margin-bottom:10px;font-size:14px;color:#2d4a3e;">✅ <strong>10 AI Conversation Starters</strong> — prompts designed for LogMem context</li>
             </ul>
 
             <!-- CTA -->
@@ -133,7 +133,7 @@ function getWelcomeEmail(firstName: string, url: string): string {
               <tr>
                 <td style="background:#2d4a3e;border-radius:100px;padding:16px 32px;text-align:center;">
                   <a href="${url}" style="color:#ffffff;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">
-                    ↓ Download Your ACMI Starter Kit
+                    ↓ Download Your LogMem Starter Kit
                   </a>
                 </td>
               </tr>
@@ -163,7 +163,7 @@ function getWelcomeEmail(firstName: string, url: string): string {
         <tr>
           <td style="background:#f4f3f0;padding:24px 48px;text-align:center;border-top:1px solid #e8e5df;">
             <p style="margin:0;font-size:12px;color:#2d4a3e;opacity:0.6;line-height:1.5;">
-              You're getting this because you requested the ACMI Starter Kit from mikeyshaw.work.<br/>
+              You're getting this because you requested the LogMem Starter Kit from mikeyshaw.work.<br/>
               No spam. Unsubscribe anytime.<br/>
               © 2026 Mad EZ Media Partners
             </p>

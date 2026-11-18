@@ -44,7 +44,7 @@ export function ChatWidget() {
                     {
                         id: `sys-${Date.now()}`,
                         sender: 'bentley',
-                        text: `[ACMI Link Active] Context merged successfully. Staged Quote Reference: ${customEvent.detail.quoteId || 'Active'}. I am now fully grounded in your architecture request!`,
+                        text: `[LogMem linked] Context merged successfully. Staged Quote Reference: ${customEvent.detail.quoteId || 'Active'}. I am now fully grounded in your architecture request!`,
                         timestamp: new Date()
                     }
                 ]);
@@ -85,10 +85,10 @@ export function ChatWidget() {
         const query = input.toLowerCase();
 
         if (query.includes('price') || query.includes('pricing') || query.includes('cost') || query.includes('money') || query.includes('investment') || query.includes('retainer')) {
-            return "Mikey's B2B services—such as Custom Agentic Fleet Deployments, Executive AI Coaching, and Custom Media Pipelines—are priced on a custom proposal basis rather than transactional rates. Solutions are tailored to your architecture (Supabase, Next.js, Redis, and ACMI memory bus) and billed securely via Square Invoices. You can request a custom quote or scope complexity estimate directly on the homepage, or book a strategy brief!";
+            return "Mikey's B2B services—such as Custom Agentic Fleet Deployments, Executive AI Coaching, and Custom Media Pipelines—are priced on a custom proposal basis rather than transactional rates. Solutions are tailored to your architecture (Supabase, Next.js, Redis, and LogMem shared memory) and billed securely via Square Invoices. You can request a custom quote or scope complexity estimate directly on the homepage, or book a strategy brief!";
         }
         if (query.includes('acmi') || query.includes('bus') || query.includes('memory') || query.includes('correlation') || query.includes('protocol')) {
-            return "ACMI (Agentic Context Memory Interface) is Mikey's custom v1.5 atomic memory bus. It synchronizes states, profiles, telemetry signals, and event timelines across independent AI subagents. This avoids fragile API links and ensures 100% state-consistency across systems like Folana.";
+            return "LogMem is Mikey's shared memory for AI agents. It synchronizes states, profiles, telemetry signals, and event timelines across independent AI subagents. This avoids fragile API links and ensures 100% state-consistency across systems like Folana.";
         }
         if (query.includes('ownerscout')) {
             return "OwnerScout is an AI Restaurant Discovery Engine built by Mikey. It uses Google Places API + Gemini to crawl and qualify leads. It aggregates Square/Toast POS signatures and writes custom cold pitches. Mikey optimized it to prospect 50 restaurants for only ~$0.91 (an 80%+ cost cut).";
@@ -112,7 +112,7 @@ export function ChatWidget() {
             return "You can read Mikey's latest dispatches and system architecture deep dives on his Medium profile: https://medium.com/@madezmedia. He recently published: 'ACMI Protocol v1.2: How We Built a Self-Organizing AI Fleet That Learns From Its Mistakes' and 'I Gave My 10 AI Agents a Shared Brain. Here's Why, How, and Whether It Was Worth It.'";
         }
 
-        return "I'm Bentley, Mikey's sales co-pilot. I can detail his Custom Agentic Fleet deployments, explain ACMI, or share metrics on OwnerScout and Folana. Try asking: 'How do I request a quote?', 'What is OwnerScout?', or 'Do you have a blog?'";
+        return "I'm Bentley, Mikey's sales co-pilot. I can detail his Custom Agentic Fleet deployments, explain LogMem, or share metrics on OwnerScout and Folana. Try asking: 'How do I request a quote?', 'What is OwnerScout?', or 'Do you have a blog?'";
     };
 
     const handleSend = async (text: string) => {
@@ -175,7 +175,7 @@ export function ChatWidget() {
 
     const quickReplies = [
         "How do I request a quote?",
-        "Explain the ACMI protocol",
+        "What is LogMem?",
         "Tell me about OwnerScout",
         "How do I book a meeting?"
     ];

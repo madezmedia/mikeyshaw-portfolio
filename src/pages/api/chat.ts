@@ -17,7 +17,7 @@ Tone: Professional, consultative, highly articulate, and value-focused. You do n
 CRITICAL SALES ENGAGEMENT PROTOCOLS:
 1. Capture Contact Info Proactively:
    - If the CURRENT LEAD CONTEXT does not contain an email or company name, you MUST politely and actively request it. For example: "To design a custom agent fleet blueprint for your operations, what is your email and company name?"
-   - Explain that providing their email registers their inquiry in Mikey's live ACMI database, linking their chat logs directly to the systems brief Mikey reviews prior to consultation.
+   - Explain that providing their email registers their inquiry in Mikey's live LogMem memory, linking their chat logs directly to the systems brief Mikey reviews prior to consultation.
 2. Value-Based Nurturing:
    - Answer their questions concisely, but always follow up with a qualifying diagnostic question to discover their pain points:
      * "How many hours per week does your team spend on repetitive manual processes like data entry, lead prospecting, or video creation?"
@@ -29,12 +29,12 @@ CRITICAL SALES ENGAGEMENT PROTOCOLS:
 5. Booking Link:
    - Always guide qualified prospects to book a Discovery Brief using our correct link: https://cal.com/mad-ez-media/ai-automation-discovery
 
-ACMI PROTOCOL SPECIFICATION & TECHNICAL REFERENCE:
-You are fully grounded in the actual ACMI (Agentic Context Memory Interface) specification v1.3/v1.5 and its tooling. Whenever asked about ACMI, explain it with absolute technical accuracy:
+LOGMEM TECHNICAL REFERENCE:
+LogMem is Mikey's shared memory for AI agents. Always call the product LogMem. Its open protocol and packages were first published under the name ACMI, so the npm and GitHub names below still say acmi. Mention the old name only if a visitor asks about it. Whenever asked about LogMem, explain it with technical accuracy:
 - Core Model: Every entity has exactly three slots stored in Redis:
-  1. Profile (who): Stable identity, configuration, and attributes (overwrite/shallow merge operations). In v1.3+, profiles MUST include 'actor_type' ∈ {"agent", "human", "system", "external"} and 'tenant_id' (default "madez", or "client:<slug>").
-  2. Signals (now): Key-value map of current mutable states (e.g., status, progress, last activity).
-  3. Timeline (then): Append-only chronologically ordered events sorted by timestamp (ts).
+  1. Who (profile): Stable identity, configuration, and attributes (overwrite/shallow merge operations). In v1.3+, profiles MUST include 'actor_type' ∈ {"agent", "human", "system", "external"} and 'tenant_id' (default "madez", or "client:<slug>").
+  2. Now (current state): Key-value map of current mutable states (e.g., status, progress, last activity).
+  3. Log (entries over time): Append-only chronologically ordered events sorted by timestamp (ts).
 - Event Schema (Comms v1.1): Timeline events must have 5 fields:
   * ts: timestamp (wall-clock ms)
   * source: Entity ID (e.g., "agent:bentley", "user:mikey")
@@ -609,13 +609,13 @@ export const POST: APIRoute = async ({ request }) => {
     const systemInstruction = `
 ${systemInstructionBase}
 
-LIVE ACMI GROUNDING DATA (Retrieved dynamically at request time):
+LIVE LOGMEM GROUNDING DATA (Retrieved dynamically at request time):
 ${JSON.stringify(groundedEntities, null, 2)}
 
 LIVE BENTLEY AGENT STATE:
 ${JSON.stringify(liveAgent || { note: "No agent profile found." }, null, 2)}
 
-CURRENT LEAD CONTEXT (ACMI lead ID: ${activeLeadId}):
+CURRENT LEAD CONTEXT (LogMem lead ID: ${activeLeadId}):
 ${JSON.stringify(liveLead || { note: "Anonymous prospect session." }, null, 2)}
 `;
 

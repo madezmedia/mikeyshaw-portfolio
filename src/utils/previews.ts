@@ -10,7 +10,7 @@ export interface LinkMetadata {
 export const coreLinkPreviews: Record<string, LinkMetadata> = {
   'https://whop.com/checkout/plan_2Tz2QipTSn0O9': {
     title: 'Mad EZ Media — Developer Membership',
-    description: 'Instantly unlock Mikey Shaw\'s ACMI v1.5 atomic memory bus, local Yelp/Places crawlers, and the EZ-360 Visual Creator Canvas.',
+    description: 'Instantly unlock Mikey Shaw\'s LogMem shared memory for agents, local Yelp/Places crawlers, and the EZ-360 Visual Creator Canvas.',
     url: 'https://whop.com/checkout/plan_2Tz2QipTSn0O9',
     domain: 'whop.com',
     image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=500&auto=format&fit=crop',
@@ -34,7 +34,7 @@ export const coreLinkPreviews: Record<string, LinkMetadata> = {
   },
   'https://medium.com/@madezmedia': {
     title: 'Michael Shaw — Medium Dispatches',
-    description: 'Read Michael\'s latest articles and system design breakdowns detailing ACMI, multi-agent coordination, and Redis timelines.',
+    description: 'Read Michael\'s latest articles and system design breakdowns detailing LogMem, multi-agent coordination, and Redis timelines.',
     url: 'https://medium.com/@madezmedia',
     domain: 'medium.com',
     image: 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=500&auto=format&fit=crop',
