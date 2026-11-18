@@ -99,7 +99,7 @@
 }
 
 .status-indicator.online {
-    background: var(--ms-yellow);
+    background: var(--ms-blue);
     animation: pulseGlow 2s infinite;
 }
 

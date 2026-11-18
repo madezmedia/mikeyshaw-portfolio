@@ -26,7 +26,7 @@
     /* Legacy color names mapped to kit v3. Ember leads. Pink becomes the
        theme accent text (ember deep on light, ember on dark). The other inks
        stay fills; text-accent-yellow/cyan are re-pointed below for contrast. */
-    --color-accent-yellow: var(--ms-yellow);
+    --color-accent-yellow: var(--ms-ember);
     --color-accent-pink: var(--ms-accent-text);
     --color-accent-cyan: var(--ms-blue);
     --color-accent-blue: var(--ms-blue);
@@ -100,7 +100,7 @@
     --chart-2: #1FB6FF;
     --chart-3: #FF2D8A;
     --chart-4: #9B6BFF;
-    --chart-5: #FFC93C;
+    --chart-5: #5A5278;
     --radius: 16px;
     --sidebar: var(--ms-surface);
     --sidebar-foreground: var(--ms-text);

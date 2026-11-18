@@ -9,15 +9,25 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   
   :root {
-    --green:    #2d4a3e;
-    --green-dk: #1e3529;
-    --pink:     #E5007D;
-    --cyan:     #00B9F1;
-    --yellow:   #FCDC00;
-    --bg:       #faf9f5;
-    --text:     #1a1a1a;
-    --muted:    #6b7068;
-    --border:   #e2dfd8;
+    /* Mikey Shaw kit v3, light. Ink structure, ember accent.
+       Who = ember, Now = blue, Log = violet. Deep tints for text on light. */
+    --ink:         #120E24;
+    --ink-2:       #1E1640;
+    --ember:       #FF6A2B;
+    --ember-text:  #B2410E;
+    --ember-tint:  #FFF0EA;
+    --blue:        #1FB6FF;
+    --blue-text:   #0A6A99;
+    --blue-tint:   #EAF7FF;
+    --violet:      #9B6BFF;
+    --violet-lt:   #B79BFF;
+    --violet-text: #6B3FD9;
+    --violet-tint: #F3EEFF;
+    --bg:          #FFFFFF;
+    --surface:     #F3F0FC;
+    --text:        #120E24;
+    --muted:       #5A5278;
+    --border:      #DDD6F3;
     --radius:   12px;
   }
 
@@ -34,7 +44,7 @@
   
   /* ─── Header ─── */
   header {
-    background: var(--green);
+    background: var(--ink);
     color: white;
     padding: 48px 0 40px;
     text-align: center;
@@ -44,7 +54,7 @@
     font-size: 11px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--cyan);
+    color: var(--blue);
     margin-bottom: 16px;
   }
   header h1 {
@@ -53,7 +63,7 @@
     line-height: 1.1;
     margin-bottom: 16px;
   }
-  header h1 em { font-style: normal; color: var(--yellow); }
+  header h1 em { font-style: normal; color: var(--ember); }
   header p {
     font-size: 16px;
     opacity: 0.85;
@@ -103,8 +113,8 @@
     white-space: nowrap;
   }
   nav a:hover, nav a.active {
-    color: var(--green);
-    border-bottom-color: var(--green);
+    color: var(--text);
+    border-bottom-color: var(--ember);
   }
 
   /* ─── Sections ─── */
@@ -116,7 +126,7 @@
     font-size: 11px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--pink);
+    color: var(--ember-text);
     margin-bottom: 12px;
     font-weight: 700;
   }
@@ -124,10 +134,10 @@
     font-size: clamp(1.5rem, 4vw, 2rem);
     font-weight: 900;
     line-height: 1.2;
-    color: var(--green);
+    color: var(--text);
     margin-bottom: 16px;
   }
-  h2 .accent { color: var(--pink); }
+  h2 .accent { color: var(--ember-text); }
   h3 {
     font-size: 1.1rem;
     font-weight: 700;
@@ -146,24 +156,24 @@
     margin: 24px 0;
   }
   .callout.pink {
-    background: #fff0f7;
-    border-color: #ffcce6;
-    border-left: 4px solid var(--pink);
+    background: var(--ember-tint);
+    border-color: #FFD9C7;
+    border-left: 4px solid var(--ember);
   }
   .callout.green {
-    background: #f0f5f3;
-    border-color: #c4d9c8;
-    border-left: 4px solid var(--green);
+    background: var(--surface);
+    border-color: var(--border);
+    border-left: 4px solid var(--ink);
   }
   .callout.cyan {
-    background: #f0f9ff;
-    border-color: #b8e6fc;
-    border-left: 4px solid var(--cyan);
+    background: var(--blue-tint);
+    border-color: #BFE8FF;
+    border-left: 4px solid var(--blue);
   }
   .callout.yellow {
-    background: #fffdf0;
-    border-color: #fef5b8;
-    border-left: 4px solid var(--yellow);
+    background: var(--violet-tint);
+    border-color: #DCCDFF;
+    border-left: 4px solid var(--violet);
   }
   .callout strong { color: var(--text); }
   .callout p { margin-bottom: 8px; }
@@ -189,9 +199,13 @@
     line-height: 1;
     margin-bottom: 12px;
   }
-  .key-card.p .key-num { color: var(--pink); opacity: 0.25; }
-  .key-card.s .key-num { color: var(--cyan); opacity: 0.25; }
-  .key-card.t .key-num { color: var(--green); opacity: 0.25; }
+  .key-card { border-top: 4px solid var(--border); }
+  .key-card.p { border-top-color: var(--ember); }
+  .key-card.s { border-top-color: var(--blue); }
+  .key-card.t { border-top-color: var(--violet); }
+  .key-card.p .key-num { color: var(--ember); opacity: 0.35; }
+  .key-card.s .key-num { color: var(--blue); opacity: 0.35; }
+  .key-card.t .key-num { color: var(--violet); opacity: 0.35; }
   .key-card .key-label {
     font-family: 'Courier New', monospace;
     font-size: 10px;
@@ -199,21 +213,21 @@
     text-transform: uppercase;
     margin-bottom: 4px;
   }
-  .key-card.p .key-label { color: var(--pink); }
-  .key-card.s .key-label { color: var(--cyan); }
-  .key-card.t .key-label { color: var(--green); }
+  .key-card.p .key-label { color: var(--ember-text); }
+  .key-card.s .key-label { color: var(--blue-text); }
+  .key-card.t .key-label { color: var(--violet-text); }
   .key-card .key-name {
     font-size: 1.25rem;
     font-weight: 800;
-    color: var(--green);
+    color: var(--text);
     margin-bottom: 8px;
   }
   .key-card p { font-size: 14px; margin-bottom: 0; }
 
   /* ─── Code Blocks ─── */
   pre {
-    background: var(--green-dk);
-    color: #e8e5df;
+    background: var(--ink);
+    color: var(--surface);
     border-radius: var(--radius);
     padding: 20px 24px;
     font-family: 'Courier New', Courier, monospace;
@@ -223,11 +237,11 @@
     margin: 16px 0;
     white-space: pre;
   }
-  pre .kw  { color: var(--cyan); }
-  pre .str { color: #f9c74f; }
-  pre .num { color: #f94144; }
-  pre .key { color: var(--pink); }
-  pre .com { color: #7d8c7a; font-style: italic; }
+  pre .kw  { color: var(--blue); }
+  pre .str { color: #FFB38F; }
+  pre .num { color: #FF2D8A; }
+  pre .key { color: var(--violet-lt); }
+  pre .com { color: #9A92C2; font-style: italic; }
 
   /* ─── Entity Model Table ─── */
   .entity-table {
@@ -237,7 +251,7 @@
     font-size: 13px;
   }
   .entity-table th {
-    background: var(--green);
+    background: var(--ink);
     color: white;
     padding: 10px 14px;
     text-align: left;
@@ -253,13 +267,13 @@
     vertical-align: top;
     color: var(--text);
   }
-  .entity-table tr:nth-child(even) td { background: #faf9f5; }
+  .entity-table tr:nth-child(even) td { background: var(--surface); }
   .entity-table code {
-    background: #f0f0eb;
+    background: var(--surface);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 12px;
-    color: var(--pink);
+    color: var(--violet-text);
     font-family: 'Courier New', monospace;
   }
 
@@ -276,7 +290,7 @@
     flex-shrink: 0;
     width: 56px;
     height: 56px;
-    background: var(--green);
+    background: var(--ink);
     color: white;
     border-radius: 50%;
     display: flex;
@@ -303,17 +317,17 @@
   .prompt-item .num {
     font-family: 'Courier New', monospace;
     font-size: 11px;
-    color: var(--pink);
+    color: var(--ember-text);
     letter-spacing: 0.1em;
     margin-bottom: 8px;
     font-weight: 700;
   }
   .prompt-item .prompt-text {
-    background: #f8f7f4;
-    border-left: 3px solid var(--cyan);
+    background: var(--surface);
+    border-left: 3px solid var(--blue);
     padding: 12px 16px;
     font-size: 13px;
-    color: var(--green);
+    color: var(--text);
     font-style: italic;
     line-height: 1.6;
     border-radius: 0 8px 8px 0;
@@ -327,7 +341,7 @@
 
   /* ─── CTA Section ─── */
   .cta-section {
-    background: var(--green);
+    background: var(--ink);
     color: white;
     text-align: center;
     padding: 64px 24px;
@@ -336,8 +350,8 @@
   .cta-section p { color: rgba(255,255,255,0.8); max-width: 440px; margin: 0 auto 32px; }
   .cta-btn {
     display: inline-block;
-    background: var(--pink);
-    color: white;
+    background: var(--ember);
+    color: var(--ink);
     padding: 16px 36px;
     border-radius: 100px;
     font-weight: 700;
@@ -348,8 +362,9 @@
     transition: all 0.15s;
     margin: 8px;
   }
-  .cta-btn:hover { background: #c4006a; transform: translateY(-1px); }
+  .cta-btn:hover { background: #FF824D; transform: translateY(-1px); }
   .cta-btn.secondary {
+    color: #FFFFFF;
     background: rgba(255,255,255,0.15);
     border: 1px solid rgba(255,255,255,0.3);
   }
@@ -357,7 +372,7 @@
 
   /* ─── Footer ─── */
   footer {
-    background: #f4f3f0;
+    background: var(--surface);
     border-top: 1px solid var(--border);
     padding: 32px 24px;
     text-align: center;
@@ -714,7 +729,7 @@ module.exports = { getWho, setWho, getNow, setNow, addLogEntry, getLog };</pre>
 
 <!-- ═══ FOOTER CTA ═══ -->
 <div class="cta-section">
-  <p class="eyebrow" style="color: var(--cyan); font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 16px;">Let's Build This</p>
+  <p class="eyebrow" style="color: var(--blue); font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 16px;">Let's Build This</p>
   <h2>Ready to give your AI a memory?</h2>
   <p>Start with a free strategy call. No sales pitch. Just working through your workflow.</p>
   <a href="https://cal.com/mad-ez-media/ai-automation-discovery" class="cta-btn" target="_blank" rel="noopener noreferrer">
@@ -727,7 +742,7 @@ module.exports = { getWho, setWho, getNow, setNow, addLogEntry, getLog };</pre>
 
 <footer>
   <div class="container">
-    <p>LogMem Starter Kit v1.0 — June 2026 — by <a href="https://mikeyshaw.work" style="color: var(--green);">Mikey Shaw</a> · <a href="https://madezmedia.com" style="color: var(--green);">Mad EZ Media Partners</a></p>
+    <p>LogMem Starter Kit v1.0 — June 2026 — by <a href="https://mikeyshaw.work" style="color: var(--ember-text);">Mikey Shaw</a> · <a href="https://madezmedia.com" style="color: var(--ember-text);">Mad EZ Media Partners</a></p>
     <p style="margin-top: 8px;">No spam. Built with LogMem. Your data stays yours.</p>
   </div>
 </footer>
