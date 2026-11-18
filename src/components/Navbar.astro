@@ -1,4 +1,7 @@
 ---
+import MikeyLogo from './MikeyLogo.astro';
+import ThemeToggle from './ThemeToggle.astro';
+
 const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
 const navLinks = [
     { name: 'Summary', href: isHome ? '#summary' : '/#summary', id: '01' },
@@ -12,71 +15,57 @@ const navLinks = [
 const ctaHref = isHome ? '#contact' : '/#contact';
 ---
 
-<nav class="fixed top-0 left-0 w-full z-50 bg-background/85 backdrop-blur-md border-b border-foreground/10 px-6 md:px-[60px] py-4 md:py-5 flex justify-between items-center transition-all duration-300">
-    <!-- Logo -->
-    <a class="flex items-center gap-1 text-2xl font-black text-foreground no-underline" aria-label="Mikey Shaw — Home" href="/">
-        <span class="font-display font-bold italic tracking-tight">mikey <span class="text-accent-pink">shaw</span></span>
+<nav class="ms-header" aria-label="Main">
+    <!-- Logo: plain A pinwheel + MIKEY SHAW lockup (kit v3) -->
+    <a class="ms-header__home" aria-label="Mikey Shaw, home" href="/">
+        <MikeyLogo size={14} />
     </a>
 
     <!-- Desktop Navigation Menu -->
-    <div class="hidden md:flex gap-6 lg:gap-8 items-center">
+    <div class="ms-header__links">
         {navLinks.map((link) => (
-            <a 
-                class="font-label-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground/80 hover:text-accent-pink transition-colors no-underline cursor-pointer" 
-                href={link.href}
-                data-nav-link
-            >
-                {link.id} {link.name}
+            <a class="ms-header__link" href={link.href} data-nav-link>
+                <span class="ms-header__num" aria-hidden="true">{link.id}</span> {link.name}
             </a>
         ))}
-        <a 
-            class="bg-foreground text-background px-6 py-2.5 font-sans font-bold text-xs uppercase tracking-widest hover:bg-foreground/90 hover:-translate-y-[1px] active:translate-y-0 transition-all rounded-full no-underline shadow-sm whitespace-nowrap" 
-            href={ctaHref}
-        >
-            Schedule Call
-        </a>
     </div>
 
-    <!-- Mobile Navigation Toggle -->
-    <button 
-        class="md:hidden flex flex-col justify-center items-end gap-1.5 w-8 h-8 bg-transparent border-none cursor-pointer z-55" 
-        id="mobile-menu-toggle"
-        aria-label="Toggle Navigation Menu"
-        aria-expanded="false"
-    >
-        <span class="w-6 h-0.5 bg-foreground transition-transform duration-300 origin-center" id="bar-1"></span>
-        <span class="w-4 h-0.5 bg-foreground transition-opacity duration-300" id="bar-2"></span>
-        <span class="w-5 h-0.5 bg-foreground transition-transform duration-300 origin-center" id="bar-3"></span>
-    </button>
+    <div class="ms-header__actions">
+        <ThemeToggle />
+        <a class="ms-btn ms-header__cta" href={ctaHref}>Schedule Call</a>
+
+        <!-- Mobile Navigation Toggle -->
+        <button
+            class="ms-header__burger"
+            id="mobile-menu-toggle"
+            aria-label="Toggle Navigation Menu"
+            aria-expanded="false"
+            aria-controls="mobile-drawer"
+        >
+            <span class="ms-bar" id="bar-1"></span>
+            <span class="ms-bar ms-bar--short" id="bar-2"></span>
+            <span class="ms-bar ms-bar--mid" id="bar-3"></span>
+        </button>
+    </div>
 </nav>
 
-<!-- Mobile Drawer Overlay (Relocated outside <nav> to prevent z-index constraint) -->
-<div 
-    class="fixed inset-0 bg-background/98 z-54 md:hidden flex flex-col justify-center px-8 md:px-12 py-10 transition-all duration-500 opacity-0 pointer-events-none invisible overflow-y-auto" 
+<!-- Mobile Drawer Overlay (outside <nav> to avoid the z-index trap) -->
+<div
+    class="ms-drawer pointer-events-none invisible"
     id="mobile-drawer"
-    role="dialog" 
-    aria-modal="true" 
+    role="dialog"
+    aria-modal="true"
     aria-label="Navigation Menu"
 >
-    <div class="flex flex-col gap-6 max-h-[85vh] justify-center">
+    <div class="ms-drawer__inner">
         {navLinks.map((link) => (
-            <a 
-                class="font-display text-3xl font-extrabold text-foreground hover:text-accent-pink no-underline transition-colors block" 
-                href={link.href}
-                data-mobile-nav-link
-            >
-                <span class="font-label-mono text-[13px] text-accent-pink tracking-widest mr-4 font-normal">{link.id}</span>
+            <a class="ms-drawer__link" href={link.href} data-mobile-nav-link>
+                <span class="ms-drawer__num" aria-hidden="true">{link.id}</span>
                 {link.name}
             </a>
         ))}
-        <div class="h-[1px] bg-foreground/10 w-full my-2"></div>
-        <a 
-            class="inline-block text-center bg-foreground text-background py-3.5 font-sans font-bold text-sm uppercase tracking-widest hover:bg-foreground/90 transition-all rounded-full no-underline shadow-md" 
-            href={ctaHref}
-            data-mobile-nav-link
-        >
-            Schedule Call
-        </a>
+        <div class="ms-drawer__rule"></div>
+        <a class="ms-btn ms-drawer__cta" href={ctaHref} data-mobile-nav-link>Schedule Call</a>
     </div>
 </div>
 
@@ -179,3 +168,143 @@ const ctaHref = isHome ? '#contact' : '/#contact';
     // Support Astro View Transitions
     document.addEventListener('astro:page-load', initNavbar);
 </script>
+
+<style>
+    .ms-header {
+        position: fixed;
+        inset: 0 0 auto 0;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        min-height: 72px;
+        padding: 12px max(16px, env(safe-area-inset-right)) 12px max(16px, env(safe-area-inset-left));
+        background: var(--ms-header-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--ms-border);
+        color: var(--ms-text);
+    }
+    @media (min-width: 768px) {
+        .ms-header { padding-left: 40px; padding-right: 40px; }
+    }
+    .ms-header__home {
+        display: inline-flex;
+        align-items: center;
+        min-height: var(--ms-tap);
+        color: var(--ms-text);
+        text-decoration: none;
+        flex: none;
+    }
+    .ms-header__links {
+        display: none;
+        align-items: center;
+        gap: 4px;
+    }
+    @media (min-width: 1100px) {
+        .ms-header__links { display: flex; }
+    }
+    .ms-header__link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        min-height: var(--ms-tap);
+        padding: 0 10px;
+        border-radius: var(--ms-r-button);
+        font: 700 0.6875rem/1.4 var(--ms-font-mono);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--ms-muted);
+        text-decoration: none;
+        white-space: nowrap;
+        transition: color 0.2s var(--ms-ease);
+    }
+    .ms-header__link:hover { color: var(--ms-text); }
+    .ms-header__num { color: var(--ms-accent-text); }
+    .ms-header__actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .ms-header__cta { display: none; }
+    @media (min-width: 1100px) {
+        .ms-header__cta { display: inline-flex; }
+    }
+    .ms-header__burger {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 6px;
+        width: var(--ms-tap);
+        height: var(--ms-tap);
+        padding: 0 10px;
+        background: transparent;
+        border: 1px solid var(--ms-border);
+        border-radius: var(--ms-r-button);
+        color: var(--ms-text);
+        cursor: pointer;
+        position: relative;
+        z-index: 55;
+    }
+    @media (min-width: 1100px) {
+        .ms-header__burger { display: none; }
+    }
+    .ms-bar {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: currentColor;
+        transform-origin: center;
+        transition: transform 0.3s var(--ms-ease), opacity 0.3s var(--ms-ease), width 0.3s var(--ms-ease);
+    }
+    .ms-bar--short { width: 16px; }
+    .ms-bar--mid { width: 20px; }
+
+    .ms-drawer {
+        position: fixed;
+        inset: 0;
+        z-index: 54;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 96px max(24px, env(safe-area-inset-left)) 40px;
+        background: var(--ms-ground);
+        color: var(--ms-text);
+        overflow-y: auto;
+        opacity: 0;
+        transition: opacity 0.4s var(--ms-ease);
+    }
+    .ms-drawer.opacity-100 { opacity: 1; }
+    @media (min-width: 1100px) {
+        .ms-drawer { display: none; }
+    }
+    .ms-drawer__inner {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .ms-drawer__link {
+        display: flex;
+        align-items: baseline;
+        gap: 16px;
+        min-height: var(--ms-tap);
+        padding: 6px 0;
+        font: 900 clamp(1.75rem, 7vw, 2.25rem)/1.1 var(--ms-font-head);
+        color: var(--ms-text);
+        text-decoration: none;
+    }
+    .ms-drawer__link:hover { color: var(--ms-accent-text); }
+    .ms-drawer__num {
+        font: 700 0.8125rem/1 var(--ms-font-mono);
+        letter-spacing: 0.2em;
+        color: var(--ms-accent-text);
+    }
+    .ms-drawer__rule {
+        height: 1px;
+        background: var(--ms-border);
+        margin: 16px 0;
+    }
+    .ms-drawer__cta { min-height: 54px; }
+</style>

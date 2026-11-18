@@ -1,148 +1,86 @@
 ---
-import { UX_CONFIG } from '../utils/ux';
-import SocialLinks from './SocialLinks.astro';
+/**
+ * Site footer band, brand kit v3.
+ * Light theme: ink band, white text, ember links.
+ * Dark theme: ember band, ink text.
+ * Copy is passed in by each page so this slice does not change page copy.
+ */
+import MikeyLogo from './MikeyLogo.astro';
+
+export interface Props {
+    copyright?: string;
+    links?: { label: string; href: string }[];
+}
 
 const currentYear = new Date().getFullYear();
+const { copyright = `© ${currentYear} Mad EZ Media. All rights reserved.`, links = [] } = Astro.props;
 ---
 
-<footer class="site-footer">
-    <div class="footer-content">
-        <div class="footer-section copyright">
-            <p>© {currentYear} Mad EZ Media. All rights reserved.</p>
-        </div>
-
-        <div class="footer-section legal-links">
-            <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
-            <span class="divider">|</span>
-            <a href="/terms-of-service" class="footer-link">Terms of Service</a>
-            <span class="divider">|</span>
-            <a href="/cookie-policy" class="footer-link">Cookie Policy</a>
-        </div>
-
-        <div class="footer-section social-links">
-            <SocialLinks />
-        </div>
-
-        <div class="footer-section creator-tag">
-            <p>
-                Created with <span class="heart">❤️</span> Coded By <span class="robot">🤖</span> 
-                <a 
-                    href="https://github.com/madezmedia" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    class="creator-link"
-                >
-                    @madezmedia
-                </a>
-            </p>
-        </div>
+<footer class="ms-footer">
+    <div class="ms-footer__inner">
+        <a class="ms-footer__home" href="/" aria-label="Mikey Shaw, home">
+            <MikeyLogo size={14} />
+        </a>
+        {links.length > 0 && (
+            <nav class="ms-footer__links" aria-label="Footer">
+                {links.map((link) => (
+                    <a class="ms-footer__link" href={link.href}>{link.label}</a>
+                ))}
+            </nav>
+        )}
+        <p class="ms-footer__copy">{copyright}</p>
     </div>
 </footer>
 
-<style define:vars={{
-    transitionDuration: `${UX_CONFIG.TRANSITION_DURATION}ms`
-}}>
-    .site-footer {
-        background: color-mix(in srgb, var(--bg-primary) 80%, transparent);
-        border-top: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
-        padding: 2rem;
-        transition: background-color var(--transitionDuration) ease;
+<style>
+    .ms-footer {
+        position: relative;
+        z-index: 1;
+        background: var(--ms-footer-bg);
+        color: var(--ms-footer-fg);
+        padding: 40px max(16px, env(safe-area-inset-left)) max(40px, env(safe-area-inset-bottom));
     }
-
-    .footer-content {
+    .ms-footer :global(.ms-lockup) { color: var(--ms-footer-fg); }
+    /* The ember bar would vanish on the ember band in dark, so it turns ink there. */
+    :global([data-theme="dark"]) .ms-footer :global(.ms-lockup__bar) { background: var(--ms-ink); }
+    .ms-footer__inner {
         max-width: 1200px;
         margin: 0 auto;
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
         align-items: center;
-        gap: 1.5rem;
-        text-align: center;
+        justify-content: space-between;
+        gap: 24px;
     }
-
-    .footer-section {
+    .ms-footer__home {
+        display: inline-flex;
+        align-items: center;
+        min-height: var(--ms-tap);
+        text-decoration: none;
+    }
+    .ms-footer__links {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
-        color: var(--text-secondary);
+        flex-wrap: wrap;
+        gap: 8px 24px;
     }
-
-    .copyright p {
+    .ms-footer__link {
+        display: inline-flex;
+        align-items: center;
+        min-height: var(--ms-tap);
+        font: 700 0.6875rem/1.4 var(--ms-font-mono);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--ms-footer-link);
+        text-decoration: none;
+    }
+    .ms-footer__link:hover { text-decoration: underline; }
+    .ms-footer__link:focus-visible,
+    .ms-footer__home:focus-visible { outline-color: var(--ms-footer-focus); }
+    .ms-footer__copy {
         margin: 0;
-        font-size: 0.9rem;
-        opacity: 0.7;
-    }
-
-    .legal-links {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    .footer-link {
-        color: var(--text-secondary);
-        text-decoration: none;
-        transition: color var(--transitionDuration) ease;
-        font-size: 0.9rem;
-    }
-
-    .footer-link:hover {
-        color: var(--primary);
-    }
-
-    .divider {
-        color: var(--text-secondary);
-        opacity: 0.5;
-    }
-
-    .creator-tag {
-        font-size: 0.9rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .heart {
-        animation: pulse 1.5s infinite;
-    }
-
-    .robot {
-        animation: rotate 3s linear infinite;
-    }
-
-    .creator-link {
-        color: var(--primary);
-        text-decoration: none;
-        font-weight: bold;
-        transition: transform var(--transitionDuration) ease;
-    }
-
-    .creator-link:hover {
-        transform: scale(1.1);
-    }
-
-    @keyframes pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.2); }
-    }
-
-    @keyframes rotate {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-
-    @media (max-width: 768px) {
-        .footer-content {
-            gap: 1rem;
-        }
-
-        .legal-links {
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .divider {
-            display: none;
-        }
+        font: 700 0.6875rem/1.4 var(--ms-font-mono);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--ms-footer-muted);
     }
 </style>

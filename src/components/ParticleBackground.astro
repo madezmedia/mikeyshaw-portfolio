@@ -11,14 +11,19 @@
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('global-particles');
     if (!canvas) return;
+    // Kit v3: particles stop under reduced motion.
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        canvas.style.display = 'none';
+        return;
+    }
     const ctx = canvas.getContext('2d');
     let particles = [];
     let currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
 
     // Theme colors
     const themeColors = {
-        dark: { r: 13, g: 27, b: 42 },   // Ink-blue
-        light: { r: 13, g: 27, b: 42 }   // Ink-blue
+        dark: { r: 196, g: 189, b: 230 }, // Kit v3 muted on dark (#C4BDE6)
+        light: { r: 18, g: 14, b: 36 }    // Kit v3 ink (#120E24)
     };
 
     function getColor() {

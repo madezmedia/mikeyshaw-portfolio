@@ -1,0 +1,65 @@
+---
+/**
+ * Light/dark toggle, brand kit v3.
+ * Uses window.msSetTheme from the head script in Layout.astro, which saves the
+ * choice in localStorage ("ms-theme") inside try/catch.
+ */
+---
+
+<button class="ms-theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Dark theme">
+    <svg class="ms-theme-toggle__moon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+    </svg>
+    <svg class="ms-theme-toggle__sun" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="2" />
+        <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </svg>
+</button>
+
+<script is:inline>
+    (function () {
+        function sync() {
+            var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+            document.querySelectorAll('[data-theme-toggle]').forEach(function (btn) {
+                btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+            });
+        }
+        function bind() {
+            document.querySelectorAll('[data-theme-toggle]').forEach(function (btn) {
+                if (btn.dataset.bound) return;
+                btn.dataset.bound = '1';
+                btn.addEventListener('click', function () {
+                    var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                    if (window.msSetTheme) window.msSetTheme(next);
+                    sync();
+                });
+            });
+            sync();
+        }
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind);
+        else bind();
+        document.addEventListener('theme-changed', sync);
+        document.addEventListener('astro:page-load', bind);
+    })();
+</script>
+
+<style>
+    .ms-theme-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--ms-tap);
+        height: var(--ms-tap);
+        padding: 0;
+        border: 1px solid var(--ms-border);
+        border-radius: var(--ms-r-pill);
+        background: transparent;
+        color: var(--ms-text);
+        cursor: pointer;
+        transition: border-color 0.2s var(--ms-ease);
+    }
+    .ms-theme-toggle:hover { border-color: var(--ms-text); }
+    .ms-theme-toggle__sun { display: none; }
+    :global([data-theme="dark"]) .ms-theme-toggle__sun { display: block; }
+    :global([data-theme="dark"]) .ms-theme-toggle__moon { display: none; }
+</style>

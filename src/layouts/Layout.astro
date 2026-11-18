@@ -32,58 +32,53 @@ const {
 	ogImage = "/images/mikey-shaw.png"
 } = Astro.props;
 
-// Critical CSS for immediate rendering
-const criticalCSS = `
-:root {
-    --primary-dark: #D4AF37;
-    --bg-primary-dark: #121212;
-    --text-primary-dark: #E0E0E0;
-    font-family: 'Inter', system-ui, sans-serif;
-    line-height: 1.6;
-}
-html, body {
-    margin: 0;
-    padding: 0;
-    max-width: 100%;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    background: var(--bg-primary-dark);
-    color: var(--text-primary-dark);
-}
-.app-container {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-.content-wrapper {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-    flex-grow: 1;
-}
-`;
 ---
 
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		
-		<!-- Font Optimization -->
-		<link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
-		<style>
-			@font-face {
-				font-family: 'Inter';
-				src: url('/fonts/inter-variable.woff2') format('woff2-variations');
-				font-weight: 100 900;
-				font-display: swap;
-				font-style: normal;
-			}
-		</style>
+		<meta name="color-scheme" content="light dark" />
+		<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#1E1640" media="(prefers-color-scheme: dark)" />
+
+		<!-- Brand kit v3 fonts: Playfair Display 900 (+italic), Raleway 500/700/900, Roboto Mono 700 -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+		<!-- Theme: runs before paint. Follows the system, falls back to light,
+		     and honours a saved choice from the header toggle. -->
+		<script is:inline>
+			(function () {
+				var root = document.documentElement;
+				var saved = null;
+				try { saved = localStorage.getItem('ms-theme'); } catch (e) {}
+				var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+				function resolve() {
+					if (saved === 'light' || saved === 'dark') return saved;
+					return mq && mq.matches ? 'dark' : 'light';
+				}
+				function apply(theme) {
+					root.setAttribute('data-theme', theme);
+					root.classList.toggle('dark', theme === 'dark');
+					document.dispatchEvent(new CustomEvent('theme-changed', { detail: { theme: theme, duration: 0 } }));
+				}
+				apply(resolve());
+				if (mq && mq.addEventListener) {
+					mq.addEventListener('change', function () { if (!saved) apply(resolve()); });
+				}
+				window.msSetTheme = function (theme) {
+					saved = theme;
+					try { localStorage.setItem('ms-theme', theme); } catch (e) {}
+					apply(theme);
+				};
+				// Re-apply after Astro view transitions swap the document.
+				document.addEventListener('astro:after-swap', function () { apply(resolve()); });
+			})();
+		</script>
 
 		<!-- Primary Meta Tags -->
 		<title>{title}</title>
@@ -143,56 +138,6 @@ html, body {
 
 		<slot name="head" />
 
-		<script is:inline define:vars={{UX_CONFIG}}>
-			// Advanced Theme Management with UX Considerations
-			const THEME_TRANSITION_DURATION = UX_CONFIG.TRANSITION_DURATION;
-
-			const getStoredTheme = () => localStorage.getItem('theme') || 'light';
-			const setStoredTheme = (theme) => localStorage.setItem('theme', theme);
-			
-			const getPreferredTheme = () => {
-				const storedTheme = getStoredTheme();
-				if (storedTheme) return storedTheme;
-				return 'light';
-			};
-
-			const setTheme = (theme) => {
-				document.documentElement.setAttribute('data-theme', theme);
-				if (theme === 'dark') {
-					document.documentElement.classList.add('dark');
-				} else {
-					document.documentElement.classList.remove('dark');
-				}
-				setStoredTheme(theme);
-				
-				// Dispatch global theme change event with UX transition
-				const themeChangeEvent = new CustomEvent('theme-changed', { 
-					detail: { 
-						theme, 
-						duration: THEME_TRANSITION_DURATION 
-					} 
-				});
-				document.dispatchEvent(themeChangeEvent);
-			};
-
-			// Initial theme setup with transition
-			const initTheme = () => {
-				const theme = getPreferredTheme();
-				document.documentElement.style.transition = `all ${THEME_TRANSITION_DURATION}ms ${UX_CONFIG.ANIMATION_EASE}`;
-				setTheme(theme);
-			};
-
-			// Initialize on load
-			window.addEventListener('load', initTheme);
-
-			// Theme toggle listener
-			window.addEventListener('load', () => {
-				// Load theme script after initial render
-				const themeScript = document.createElement('script');
-				themeScript.src = '/scripts/theme.js';
-				document.head.appendChild(themeScript);
-			});
-		</script>
 	</head>
 	<body>
 		<ParticleBackground />
@@ -211,7 +156,12 @@ html, body {
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" is:inline></script>
 		<script is:inline>
 		document.addEventListener('DOMContentLoaded', () => {
-			if (typeof anime === 'undefined') return;
+			const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			if (reduceMotion || typeof anime === 'undefined') {
+				// Content is visible by default. Without motion, show reveal items at once.
+				document.querySelectorAll('.reveal-item').forEach((el) => { el.style.opacity = '1'; el.style.transform = 'none'; });
+				return;
+			}
 
 			// 1. Spring micro-interactions for cards and buttons
 			const springElements = document.querySelectorAll('.stagger-card, .tech-badge, nav button, nav a, .project-card, button, a.inline-block');
@@ -274,58 +224,35 @@ html, body {
     transitionDuration: `${UX_CONFIG.TRANSITION_DURATION}ms`
 }}>
     :root {
-        /* Brutalist Theme Palette matching global.css */
-        --primary: #2d4a3e;
-        --secondary: #2d4a3e;
-        --accent: #00B9F1;
-        --accent-yellow: #FCDC00;
-        --accent-pink: #E5007D;
-        --accent-cyan: #00B9F1;
-        --accent-purple: #9C198C;
-        --bg-primary: #faf9f5;
-        --bg-secondary: #f5f4ed;
-        --text-primary: #2d4a3e;
-        --text-secondary: #2d4a3e;
+        /* Legacy layout variables, now pointed at kit v3 tokens (kit-v3.css) */
+        --primary: var(--ms-text);
+        --secondary: var(--ms-muted);
+        --accent: var(--ms-ember);
+        --accent-yellow: var(--ms-yellow);
+        --accent-pink: var(--ms-magenta);
+        --accent-cyan: var(--ms-blue);
+        --accent-purple: var(--ms-violet);
+        --bg-primary: var(--ms-ground);
+        --bg-secondary: var(--ms-surface);
+        --text-primary: var(--ms-text);
+        --text-secondary: var(--ms-muted);
 
         /* Layout Variables */
         --navbar-height: 80px;
         --content-top-padding: 100px;
     }
 
-    /* Light Mode Overrides */
-    :root[data-theme='light'] {
-        --primary: #2d4a3e;
-        --secondary: #2d4a3e;
-        --accent: #00B9F1;
-        --bg-primary: #faf9f5;
-        --bg-secondary: #f5f4ed;
-        --text-primary: #2d4a3e;
-        --text-secondary: #2d4a3e;
-    }
-
-    /* Dark Mode Overrides - maps to a refined dark-parchment colorway */
-    :root[data-theme='dark'] {
-        --primary: #faf9f5;
-        --secondary: #c2cfc9;
-        --accent: #00B9F1;
-        --bg-primary: #2d4a3e;
-        --bg-secondary: #22372e;
-        --text-primary: #faf9f5;
-        --text-secondary: #c2cfc9;
-    }
-
     html, body {
         max-width: 100%;
         overflow-x: hidden;
         scroll-behavior: smooth;
-        transition: 
-            background-color 0.3s ease, 
-            color 0.3s ease,
-            background-image 0.3s ease;
+        transition:
+            background-color 0.3s ease,
+            color 0.3s ease;
     }
 
     html {
-        font-family: 'Inter', system-ui, sans-serif;
+        font-family: var(--ms-font-body);
         background: var(--bg-primary);
         color: var(--text-primary);
         line-height: 1.6;

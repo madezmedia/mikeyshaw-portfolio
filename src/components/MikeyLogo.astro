@@ -1,0 +1,87 @@
+---
+/**
+ * Mikey Shaw lockup, brand kit v3.
+ * Plain A pinwheel (four inks, no EZ) + "MIKEY SHAW" in Raleway Black + solid ember bar.
+ * Source: madezmedia-rebrand/kit-2026-11 prototype-v3 (#a-q, #a-icon) and DESIGN.md section 2.
+ */
+export interface Props {
+    /** Render the pinwheel only (favicon-size uses). */
+    iconOnly?: boolean;
+    /** Base font size in px. The icon is 2.6em. */
+    size?: number;
+    class?: string;
+}
+
+const { iconOnly = false, size = 15, class: className = '' } = Astro.props;
+// Unique id so two lockups on one page do not share an SVG id.
+const qid = `ms-a-q-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<span class:list={['ms-lockup', className]} style={`font-size:${size}px`}>
+    <svg class="ms-lockup__icon" viewBox="0 0 128 128" aria-hidden="true" focusable="false">
+        <defs>
+            <g id={qid}>
+                <g transform="translate(1.6 -1.6)">
+                    <path d="M64 64V30A34 34 0 0 1 98 64Z" />
+                    <g transform="rotate(45 64 64)"><path d="M57 44L62 18.5Q64 14 66 18.5L71 44Z" /><circle cx="64" cy="7.5" r="5.5" /></g>
+                    <g transform="rotate(20 64 64)"><path d="M59.5 40L62.7 22.5Q64 19 65.3 22.5L68.5 40Z" /><circle cx="64" cy="12.5" r="3" /></g>
+                    <circle cx="64" cy="17" r="4.5" transform="rotate(72 64 64)" />
+                </g>
+            </g>
+        </defs>
+        <g transform="translate(64 64) scale(1.08) translate(-64 -64)">
+            <use href={`#${qid}`} fill="#FF2D8A" />
+            <use href={`#${qid}`} transform="rotate(90 64 64)" fill="#1FB6FF" />
+            <use href={`#${qid}`} transform="rotate(180 64 64)" fill="#FFC93C" />
+            <use href={`#${qid}`} transform="rotate(270 64 64)" fill="#9B6BFF" />
+        </g>
+    </svg>
+    {!iconOnly && (
+        <span class="ms-lockup__wm">
+            <span class="ms-lockup__name">Mikey Shaw</span>
+            <span class="ms-lockup__bar" aria-hidden="true"></span>
+        </span>
+    )}
+</span>
+
+<style>
+    .ms-lockup {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5em;
+        line-height: 1;
+        color: var(--ms-text);
+    }
+    .ms-lockup__icon {
+        width: 2.6em;
+        height: 2.6em;
+        flex: none;
+        transition: transform 0.7s var(--ms-ease);
+    }
+    a:hover > .ms-lockup .ms-lockup__icon,
+    .ms-lockup:hover .ms-lockup__icon {
+        transform: rotate(90deg);
+    }
+    .ms-lockup__wm {
+        display: inline-flex;
+        flex-direction: column;
+        gap: 0.4em;
+    }
+    .ms-lockup__name {
+        font: 900 1.55em/0.86 var(--ms-font-body);
+        letter-spacing: -0.005em;
+        text-transform: uppercase;
+        white-space: nowrap;
+    }
+    .ms-lockup__bar {
+        display: block;
+        height: 0.34em;
+        width: 100%;
+        background: var(--ms-ember);
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .ms-lockup__icon { transition: none; }
+        a:hover > .ms-lockup .ms-lockup__icon,
+        .ms-lockup:hover .ms-lockup__icon { transform: none; }
+    }
+</style>

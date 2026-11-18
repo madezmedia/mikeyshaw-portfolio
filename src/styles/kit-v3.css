@@ -1,0 +1,169 @@
+/*
+ * Mikey Shaw brand kit v3 tokens.
+ * Source of truth: madezmedia-rebrand/kit-2026-11/DESIGN.md and themes/index.html.
+ * Default theme is Mikey Shaw Light. Mikey Shaw Dark applies when the system
+ * prefers dark and the visitor has not picked light, or when data-theme="dark".
+ */
+
+:root {
+    /* Raw palette */
+    --ms-ink: #120E24;
+    --ms-white: #FFFFFF;
+    --ms-deep-violet: #1E1640;
+    --ms-lavender: #F3F0FC;
+    --ms-ember: #FF6A2B;
+    --ms-ember-deep: #B2410E;
+    --ms-yellow: #FFC93C;
+    --ms-magenta: #FF2D8A;
+    --ms-blue: #1FB6FF;
+    --ms-violet: #9B6BFF;
+    --ms-muted-light: #5A5278;
+    --ms-muted-dark: #C4BDE6;
+    --ms-border-light: #DDD6F3;
+    --ms-border-dark: #3A2F6B;
+
+    /* Type */
+    --ms-font-head: "Playfair Display", Georgia, "Times New Roman", serif;
+    --ms-font-body: "Raleway", "Helvetica Neue", Arial, sans-serif;
+    --ms-font-mono: "Roboto Mono", ui-monospace, Menlo, monospace;
+
+    /* Shape and motion */
+    --ms-tap: 44px;
+    --ms-ease: cubic-bezier(.16, 1, .3, 1);
+    --ms-r-button: 6px;
+    --ms-r-window: 12px;
+    --ms-r-card: 16px;
+    --ms-r-pill: 999px;
+
+    /* Mikey Shaw Light (default) */
+    color-scheme: light;
+    --ms-ground: #FFFFFF;
+    --ms-surface: #F3F0FC;
+    --ms-border: #DDD6F3;
+    --ms-text: #120E24;
+    --ms-muted: #5A5278;
+    --ms-accent-text: #B2410E;
+    --ms-glow: #FFF0EA;
+    --ms-focus: #120E24;
+    --ms-btn-bg: #120E24;
+    --ms-btn-fg: #FFFFFF;
+    --ms-btn-shadow: 4px 4px 0 #FF6A2B;
+    --ms-footer-bg: #120E24;
+    --ms-footer-fg: #FFFFFF;
+    --ms-footer-muted: #C4BDE6;
+    --ms-footer-link: #FF6A2B;
+    --ms-footer-focus: #FF6A2B;
+    --ms-header-bg: rgba(255, 255, 255, 0.9);
+}
+
+/* Mikey Shaw Dark */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --ms-ground: #1E1640;
+        --ms-surface: #120E24;
+        --ms-border: #3A2F6B;
+        --ms-text: #FFFFFF;
+        --ms-muted: #C4BDE6;
+        --ms-accent-text: #FF6A2B;
+        --ms-glow: #341E3E;
+        --ms-focus: #FF6A2B;
+        --ms-btn-bg: #FF6A2B;
+        --ms-btn-fg: #120E24;
+        --ms-btn-shadow: none;
+        --ms-footer-bg: #FF6A2B;
+        --ms-footer-fg: #120E24;
+        --ms-footer-muted: #120E24;
+        --ms-footer-link: #120E24;
+        --ms-footer-focus: #120E24;
+        --ms-header-bg: rgba(30, 22, 64, 0.9);
+    }
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --ms-ground: #1E1640;
+    --ms-surface: #120E24;
+    --ms-border: #3A2F6B;
+    --ms-text: #FFFFFF;
+    --ms-muted: #C4BDE6;
+    --ms-accent-text: #FF6A2B;
+    --ms-glow: #341E3E;
+    --ms-focus: #FF6A2B;
+    --ms-btn-bg: #FF6A2B;
+    --ms-btn-fg: #120E24;
+    --ms-btn-shadow: none;
+    --ms-footer-bg: #FF6A2B;
+    --ms-footer-fg: #120E24;
+    --ms-footer-muted: #120E24;
+    --ms-footer-link: #120E24;
+    --ms-footer-focus: #120E24;
+    --ms-header-bg: rgba(30, 22, 64, 0.9);
+}
+
+/* Status chips: solid fills, ink text. Meaning never changes. */
+.ms-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding: 2px 10px;
+    border-radius: var(--ms-r-pill);
+    font: 700 0.6875rem/1.4 var(--ms-font-mono);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ms-ink);
+}
+.ms-chip--inbound { background: var(--ms-blue); }
+.ms-chip--emergency { background: var(--ms-magenta); }
+.ms-chip--locked { background: var(--ms-yellow); }
+.ms-chip--needs-you {
+    background: transparent;
+    color: var(--ms-text);
+    box-shadow: inset 0 0 0 1px var(--ms-border);
+}
+
+/* Primary button (header CTA and any opt-in use) */
+.ms-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    min-height: var(--ms-tap);
+    padding: 0 22px;
+    border-radius: var(--ms-r-button);
+    background: var(--ms-btn-bg);
+    color: var(--ms-btn-fg);
+    box-shadow: var(--ms-btn-shadow);
+    font: 700 0.8125rem/1 var(--ms-font-body);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 0.2s var(--ms-ease), box-shadow 0.2s var(--ms-ease);
+}
+.ms-btn:hover { transform: translateY(-2px); }
+
+/* Mono label */
+.ms-label {
+    font: 700 0.6875rem/1.4 var(--ms-font-mono);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+/* Focus: 3px ring, 3px offset. Ink on light, ember on dark. */
+:focus-visible {
+    outline: 3px solid var(--ms-focus);
+    outline-offset: 3px;
+}
+
+/* Reduced motion: stop loops and movement. Content stays visible. */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto !important; }
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .ms-btn:hover { transform: none; }
+}
