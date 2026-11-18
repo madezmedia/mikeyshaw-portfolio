@@ -59,6 +59,13 @@
     --ms-footer-link: #FF6A2B;
     --ms-footer-focus: #FF6A2B;
     --ms-header-bg: rgba(255, 255, 255, 0.9);
+    /* Who / Now / Log key colors. Fill is the bright hue, text is AA on the ground. */
+    --ms-who: #FF6A2B;
+    --ms-now: #1FB6FF;
+    --ms-log: #9B6BFF;
+    --ms-who-text: #B2410E;
+    --ms-now-text: #0A6A99;
+    --ms-log-text: #6B3FD9;
 }
 
 /* Mikey Shaw Dark */
@@ -82,6 +89,9 @@
         --ms-footer-link: #120E24;
         --ms-footer-focus: #120E24;
         --ms-header-bg: rgba(30, 22, 64, 0.9);
+        --ms-who-text: #FF6A2B;
+        --ms-now-text: #1FB6FF;
+        --ms-log-text: #B79BFF;
     }
 }
 
@@ -104,6 +114,9 @@
     --ms-footer-link: #120E24;
     --ms-footer-focus: #120E24;
     --ms-header-bg: rgba(30, 22, 64, 0.9);
+    --ms-who-text: #FF6A2B;
+    --ms-now-text: #1FB6FF;
+    --ms-log-text: #B79BFF;
 }
 
 /* Status chips: solid fills, ink text. Meaning never changes. */

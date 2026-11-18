@@ -4,9 +4,9 @@ import ThemeToggle from './ThemeToggle.astro';
 
 const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
 const navLinks = [
-    { name: 'Summary', href: isHome ? '#summary' : '/#summary', id: '01' },
-    { name: 'Skills', href: isHome ? '#capabilities' : '/#capabilities', id: '02' },
-    { name: 'AI Assessment', href: '/assessment', id: '03' },
+    { name: 'The Idea', href: isHome ? '#idea' : '/#idea', id: '01' },
+    { name: 'Work With Me', href: isHome ? '#work-with-me' : '/#work-with-me', id: '02' },
+    { name: 'First Shift', href: '/assessment', id: '03' },
     { name: 'Agent Fleet', href: '/fleet', id: '04' },
     { name: 'AI Kit', href: '/starter-kit', id: '05' },
     { name: 'Resume', href: '/resume', id: '06' }

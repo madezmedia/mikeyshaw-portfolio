@@ -3,218 +3,144 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
-import Scene3D from '../components/Scene3D.astro';
-import ProjectsGrid from '../components/ProjectsGrid.astro';
-import SkillsVisualization from '../components/SkillsVisualization.astro';
-import GitHubStats from '../components/GitHubStats.astro';
-import CompanyProfile from '../components/CompanyProfile.astro';
-import DesiredProjects from '../components/DesiredProjects.astro';
 import ContactSection from '../components/ContactSection.astro';
 import BlogFeed from '../components/BlogFeed.astro';
-import { ChatWidget } from '../components/ChatWidget';
 import mikeyShaw from '../images/mikey-shaw.png';
-import ServicesAndOffers from '../components/ServicesAndOffers.tsx';
+
+const CALL = 'https://cal.com/mad-ez-media/ai-automation-discovery';
+
+const running = [
+    { name: 'LogMem', line: 'Open-source shared memory for teams of AI agents.', href: 'https://github.com/logmem/logmem', cta: 'View on GitHub' },
+    { name: 'Mad EZ Media', line: 'The 24/7 AI receptionist for plumbers, HVAC and electricians.', href: 'https://madezmedia.com', cta: 'Visit Mad EZ' },
+    { name: 'Folana', line: 'A creator media pipeline that runs on its own, every day.', href: 'https://github.com/madezmedia/folanas-journal', cta: 'View on GitHub' },
+];
+
+const keys = [
+    { key: 'who', name: 'Who', line: 'The facts that stay put. Who the client is, what they bought, how they like to work.' },
+    { key: 'now', name: 'Now', line: 'The current state, overwritten as it changes. What is open, what is blocked, what is next.' },
+    { key: 'log', name: 'Log', line: 'Every step, in order, never edited. Who did what and when, so anyone can pick it up.' },
+];
+
+const steps = [
+    { n: '01', name: 'Free kit', line: 'Set up agent memory yourself this weekend.', href: '/starter-kit', cta: 'Get the kit' },
+    { n: '02', name: 'First Shift', line: 'One agent doing one real job, live in a week.', href: CALL, cta: 'Book a call' },
+    { n: '03', name: 'Fleet deploy', line: 'A team of agents with shared memory, on your own stack.', href: CALL, cta: 'Book a call' },
+    { n: '04', name: 'Ongoing care', line: 'I run it, watch it and improve it every month.', href: CALL, cta: 'Book a call' },
+];
 ---
 
-<Layout title="Mikey Shaw | Digital Architect — AI Systems for Operators">
-    <!-- Sticky Shared Navigation -->
+<Layout title="Mikey Shaw | AI agents that remember your business">
     <Navbar />
 
-    <!-- 3D Interactive Layer -->
-    <Scene3D shapeCount={50} complexity={0.9} theme="light" />
-
     <main class="w-full">
-        <!-- Modern Hero Section -->
-        <section class="min-h-screen editorial-grid pt-36 relative overflow-hidden" id="hero">
-            <div class="overlap-1 flex flex-col justify-center reveal-item opacity-0">
-                <span class="font-label-mono text-accent-pink mb-4 tracking-[0.4em] uppercase text-xs font-semibold">N° 01 • THE STUDIO</span>
-                <h1 class="font-display-xl text-[5.5vw] md:text-[4.2vw] leading-[1.05] font-black tracking-tight text-[var(--ms-text)]">
-                    Your AI agents shouldn't start <br/><em class="em-gradient font-black">from zero.</em>
+        <!-- 1. Hero -->
+        <section class="home-hero max-w-[1440px] mx-auto px-6 md:px-[60px] pt-36 pb-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center" id="hero">
+            <div class="lg:col-span-7 reveal-item opacity-0">
+                <div class="home-eyebrow"><span class="num">N° 01</span>Mikey Shaw</div>
+                <h1 class="font-display-xl text-[clamp(2.5rem,5.5vw,4.75rem)] leading-[1.05] font-black tracking-tight text-[var(--ms-text)]">
+                    Your AI agents shouldn't start <br class="hidden md:block"/><em class="em-gradient font-black">from zero.</em>
                 </h1>
                 <p class="font-body-md text-lg text-[var(--ms-text)]/85 max-w-xl mt-8 leading-relaxed">
-                    I'm Mikey Shaw. I build AI agent fleets for operators, with shared memory in LogMem. Your agents remember the work, hand it off cleanly and show what they did. You stop being the memory, the messenger and the auditor.
+                    I build AI agents that remember your business. They keep shared memory in LogMem, hand work off cleanly and log every step. You stop being the memory, the messenger and the auditor.
                 </p>
                 <div class="flex flex-wrap gap-4 items-center mt-10">
-                    <a class="bg-[var(--ms-btn-bg)] shadow-[var(--ms-btn-shadow)] text-[var(--ms-btn-fg)] px-8 py-4 font-bold text-xs uppercase tracking-widest hover:bg-[var(--ms-btn-bg)] transition-all rounded-full no-underline" href="/starter-kit">Get the free kit →</a>
-                    <a class="bg-transparent border-2 border-[var(--ms-text)] text-[var(--ms-text)] px-8 py-4 font-bold text-xs uppercase tracking-widest hover:bg-[var(--ms-surface)] transition-all rounded-full no-underline" href="/assessment">Start your First Shift ($499)</a>
-                    <a class="bg-transparent border-2 border-[var(--ms-text)] text-[var(--ms-text)] px-8 py-4 font-bold text-xs uppercase tracking-widest hover:bg-[var(--ms-surface)] transition-all rounded-full no-underline" href="/fleet">Deploy a fleet ($4,500)</a>
+                    <a class="ms-btn" href="/starter-kit">Get the free kit →</a>
+                    <a class="home-btn-ghost" href="#work-with-me">Work with me</a>
                 </div>
             </div>
-            
-            <div class="overlap-2 relative reveal-item opacity-0 flex items-center justify-center">
-                <div class="relative w-full max-w-lg">
-                    <Image 
-                        src={mikeyShaw}
-                        alt="Mikey Shaw" 
-                        class="w-full h-[550px] object-cover grayscale contrast-115 brightness-95 hover:grayscale-0 transition-all duration-700 rounded-2xl border border-[var(--ms-text)]/10 shadow-md" 
-                        width={800}
-                        height={600}
-                        format="avif"
-                        quality="high"
-                        loading="eager"
-                    />
-                    <div class="absolute -bottom-6 -left-6 p-6 bg-[var(--ms-surface)]/95 backdrop-blur-md text-[var(--ms-text)] max-w-xs rounded-xl border border-[var(--ms-text)]/10 shadow-lg">
-                        <p class="font-headline-md leading-tight font-bold text-sm">
-                            "If it requires manual button clicks, it is an operational liability."
-                        </p>
-                        <span class="font-label-mono text-[9px] uppercase tracking-wider text-accent-pink mt-2 block">— Execution Philosophy</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Vertical Text Decorative -->
-            <div class="absolute right-10 top-1/2 -translate-y-1/2 text-vertical font-label-mono text-[10px] tracking-[1em] uppercase hidden lg:block text-[var(--ms-muted)]">
-                Autonomous Systems • Technical Leadership • Persistent Protocols
+            <div class="lg:col-span-5 reveal-item opacity-0 flex justify-center">
+                <Image
+                    src={mikeyShaw}
+                    alt="Mikey Shaw"
+                    class="w-full max-w-md aspect-[4/5] object-cover grayscale contrast-115 brightness-95 hover:grayscale-0 transition-all duration-700 rounded-2xl border border-[var(--ms-border)]"
+                    width={800}
+                    height={1000}
+                    format="avif"
+                    quality="high"
+                    loading="eager"
+                />
             </div>
         </section>
 
-        <!-- Asymmetrical Summary (Approach) -->
-        <section class="px-6 md:px-[60px] py-28 grid grid-cols-12 gap-8 md:gap-12 relative" id="summary">
-            <div class="col-span-12 md:col-span-5 relative">
-                <div class="absolute -top-20 -left-10 text-[20rem] font-black opacity-[0.02] text-primary select-none pointer-events-none">01</div>
-                <div class="home-eyebrow"><span class="num">N° 02</span>The Method</div>
-                <h2 class="font-headline-lg text-5xl uppercase font-black mb-8 leading-none reveal-item opacity-0 text-primary">Philosophy of Execution.</h2>
-                <p class="font-body-lg text-xl leading-relaxed mb-8 border-l-4 border-accent-pink pl-6 reveal-item opacity-0 text-primary">
-                    I don't build playground prototypes. I build production-grade automation systems designed for speed, scale, and operational reliability.
+        <!-- 2. Running now -->
+        <section class="border-y border-[var(--ms-border)] bg-[var(--ms-surface)]" aria-labelledby="running-title">
+            <div class="max-w-[1440px] mx-auto px-6 md:px-[60px] py-10">
+                <h2 id="running-title" class="home-label mb-6">Running now</h2>
+                <ul class="grid grid-cols-1 md:grid-cols-3 gap-6 list-none p-0 m-0">
+                    {running.map((r) => (
+                        <li class="flex flex-col gap-1">
+                            <span class="font-headline font-extrabold text-[var(--ms-text)]">{r.name}</span>
+                            <span class="font-sans text-sm text-[var(--ms-muted)] leading-relaxed">{r.line}</span>
+                            <a class="home-link mt-1" href={r.href} target="_blank" rel="noopener noreferrer">{r.cta} →</a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </section>
+
+        <!-- 3. The idea -->
+        <section class="max-w-[1440px] mx-auto px-6 md:px-[60px] py-24" id="idea">
+            <div class="max-w-3xl reveal-item opacity-0">
+                <div class="home-eyebrow"><span class="num">N° 02</span>The idea</div>
+                <h2 class="font-display-xl text-[clamp(2rem,4vw,3.25rem)] font-black tracking-tight leading-[1.1] text-[var(--ms-text)]">
+                    Most AI forgets everything when the chat ends.
+                </h2>
+                <p class="font-body-md text-lg text-[var(--ms-text)]/80 mt-6 leading-relaxed">
+                    So you explain your business again, every session, to every tool. The fix is simple. Give every agent the same three keys.
                 </p>
             </div>
-            
-            <div class="col-span-12 md:col-span-7 flex flex-col justify-end">
-                <p class="font-body-md text-base max-w-xl mb-12 text-primary/75 reveal-item opacity-0 leading-relaxed">
-                    My engineering process is structured in three movements. We Architect the data flow and agent schemas; we Build using Next.js 16, Supabase, and Upstash Redis; and we Operate the pipelines on automated cron loops backed by LogMem.
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 reveal-item opacity-0">
+                {keys.map((k) => (
+                    <div class={`home-key home-key--${k.key}`}>
+                        <span class="home-key__label">Key</span>
+                        <h3 class="home-key__name">{k.name}</h3>
+                        <p class="font-sans text-sm text-[var(--ms-muted)] leading-relaxed m-0">{k.line}</p>
+                    </div>
+                ))}
+            </div>
+
+            <p class="font-body-md text-lg text-[var(--ms-text)]/80 mt-12 max-w-3xl leading-relaxed reveal-item opacity-0">
+                Then your agents hand off work like a real team. Each one reads the same memory, picks up where the last one stopped and leaves a record you can check.
+            </p>
+            <div class="flex flex-wrap gap-6 mt-6 reveal-item opacity-0">
+                <a class="home-link" href="/starter-kit">Get the free kit →</a>
+                <a class="home-link" href="https://github.com/logmem/logmem" target="_blank" rel="noopener noreferrer">See LogMem on GitHub →</a>
+            </div>
+        </section>
+
+        <!-- 4. Ways to work together -->
+        <section class="border-t border-[var(--ms-border)] bg-[var(--ms-surface)]" id="work-with-me">
+            <div class="max-w-[1440px] mx-auto px-6 md:px-[60px] py-24 reveal-item opacity-0">
+                <div class="home-eyebrow"><span class="num">N° 03</span>Work with me</div>
+                <h2 class="font-display-xl text-[clamp(2rem,4vw,3.25rem)] font-black tracking-tight leading-[1.1] text-[var(--ms-text)] max-w-3xl">
+                    Start small. Grow it when it works.
+                </h2>
+                <ol class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mt-12 list-none p-0">
+                    {steps.map((s) => (
+                        <li class="home-step">
+                            <span class="home-step__n">{s.n}</span>
+                            <h3 class="home-step__name">{s.name}</h3>
+                            <p class="font-sans text-sm text-[var(--ms-muted)] leading-relaxed m-0 flex-1">{s.line}</p>
+                            <a class="home-link mt-6" href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined}>{s.cta} →</a>
+                        </li>
+                    ))}
+                </ol>
+                <p class="font-sans text-sm text-[var(--ms-muted)] mt-8">
+                    Want the details first? <a class="home-link" href="/fleet">See how a fleet deploy works →</a>
                 </p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal-item opacity-0">
-                    <div class="bg-[var(--ms-surface)] border border-[var(--ms-text)]/10 p-6 flex flex-col justify-between hover:border-[var(--ms-text)]/30 transition-all rounded-xl shadow-sm hover:translate-y-[-2px]">
-                        <div>
-                            <span class="material-symbols-outlined text-3xl text-accent-cyan" data-icon="schema">schema</span>
-                            <h4 class="font-sans font-bold text-sm uppercase tracking-wider text-[var(--ms-text)] mt-4 mb-2">01. Architect</h4>
-                        </div>
-                        <p class="font-sans text-xs text-[var(--ms-text)]/70 leading-relaxed">Modeling data schemas, agent behaviors, and state-locked generation references before writing code.</p>
-                    </div>
-                    <div class="bg-[var(--ms-surface)] border border-[var(--ms-text)]/10 p-6 flex flex-col justify-between hover:border-[var(--ms-text)]/30 transition-all rounded-xl shadow-sm hover:translate-y-[-2px]">
-                        <div>
-                            <span class="material-symbols-outlined text-3xl text-accent-pink" data-icon="code">code</span>
-                            <h4 class="font-sans font-bold text-sm uppercase tracking-wider text-[var(--ms-text)] mt-4 mb-2">02. Build</h4>
-                        </div>
-                        <p class="font-sans text-xs text-[var(--ms-text)]/70 leading-relaxed">Shipping TypeScript codebases with Supabase Postgres and Redis caching for sub-10ms response times.</p>
-                    </div>
-                    <div class="bg-[var(--ms-surface)] border border-[var(--ms-text)]/10 p-6 flex flex-col justify-between hover:border-[var(--ms-text)]/30 transition-all rounded-xl shadow-sm hover:translate-y-[-2px]">
-                        <div>
-                            <span class="material-symbols-outlined text-3xl text-accent-yellow" data-icon="sync_alt">sync_alt</span>
-                            <h4 class="font-sans font-bold text-sm uppercase tracking-wider text-[var(--ms-text)] mt-4 mb-2">03. Operate</h4>
-                        </div>
-                        <p class="font-sans text-xs text-[var(--ms-text)]/70 leading-relaxed">Running pipelines on automated loops via launchd, monitored with real-time LogMem activity logs.</p>
-                    </div>
-                </div>
             </div>
         </section>
 
-        <!-- Company Profile (Astro Component) -->
-        <section class="w-full">
-            <div class="reveal-item opacity-0">
-                <CompanyProfile />
-            </div>
-        </section>
-
-        <!-- Desired Projects & Market Target -->
-        <section class="w-full">
-            <div class="reveal-item opacity-0">
-                <DesiredProjects />
-            </div>
-        </section>
-
-        <!-- Capabilities Horizontal Strip -->
-        <section class="bg-[var(--ms-inverse-bg)] py-24 px-6 md:px-[60px] overflow-hidden relative" id="capabilities">
-            <div class="absolute top-0 right-0 p-4 font-label-mono text-[15rem] leading-none opacity-[0.03] text-white font-black select-none pointer-events-none">03</div>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
-                <div class="group reveal-item opacity-0">
-                    <div class="text-accent-cyan font-black text-4xl mb-4">01</div>
-                    <h3 class="font-headline-md text-white uppercase font-bold mb-4">Autonomous Media</h3>
-                    <p class="font-body-md text-white/75 text-sm leading-relaxed">Integrating Fal.ai, RunPod InfiniteTalk, and Deepgram voice models to generate consistent talking-head content on autopilot.</p>
-                </div>
-                <div class="group reveal-item opacity-0">
-                    <div class="text-accent-pink font-black text-4xl mb-4">02</div>
-                    <h3 class="font-headline-md text-white uppercase font-bold mb-4">Agent memory (LogMem)</h3>
-                    <p class="font-body-md text-white/75 text-sm leading-relaxed">Running LogMem so every agent keeps a Who, a Now and a Log between sessions.</p>
-                </div>
-                <div class="group reveal-item opacity-0">
-                    <div class="text-accent-yellow font-black text-4xl mb-4">03</div>
-                    <h3 class="font-headline-md text-white uppercase font-bold mb-4">Database Modernization</h3>
-                    <p class="font-body-md text-white/75 text-sm leading-relaxed">Upgrading legacy database layers to Supabase PostgreSQL, implementing Redis TTL cache routing for &lt;10ms responses.</p>
-                </div>
-                <div class="group reveal-item opacity-0">
-                    <div class="text-white font-black text-4xl mb-4">04</div>
-                    <h3 class="font-headline-md text-white uppercase font-bold mb-4">Lead Discovery Engines</h3>
-                    <p class="font-body-md text-white/75 text-sm leading-relaxed">Building geo-targeted crawlers (Places/Yelp) that calculate API costs, analyze tech gaps, and qualify prospects.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Dynamic Skills Visualization -->
-        <section class="px-6 md:px-[60px] py-24 bg-surface-container border-y border-primary/10">
-            <div class="max-w-[1440px] mx-auto">
-                <h3 class="font-label-mono text-accent-pink tracking-[0.5em] uppercase text-xs mb-8">System Engineering</h3>
-                <h2 class="font-headline-lg text-5xl uppercase font-black text-primary mb-16">Interactive Skills Architecture</h2>
-                <div>
-                    <SkillsVisualization />
-                </div>
-            </div>
-        </section>
-
-
-        <!-- GitHub Integration & Performance Metrics -->
-        <section class="px-6 md:px-[60px] py-24 bg-surface-container border-y border-primary/10">
-            <div class="max-w-[1440px] mx-auto">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                    <div class="lg:col-span-4 flex flex-col justify-center reveal-item opacity-0">
-                        <span class="font-label-mono text-accent-cyan text-xs uppercase tracking-[0.4em] mb-4">Telemetry</span>
-                        <h2 class="font-headline-lg text-4xl font-black uppercase leading-none mb-6 text-primary">Open Design &amp; Engine Output</h2>
-                        <p class="font-body-md text-primary/75">
-                            Live system activity, codebase statistics, and recent commit volumes across our core repositories.
-                        </p>
-                    </div>
-                    <div class="lg:col-span-8 reveal-item opacity-0">
-                        <GitHubStats />
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Services, Offers & Whop Tiers Section -->
-        <section class="px-6 md:px-[60px] py-24 bg-[var(--ms-ground)] border-t border-primary/10" id="services">
-            <div class="max-w-[1440px] mx-auto reveal-item opacity-0">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-baseline gap-6 mb-8">
-                    <div class="flex items-baseline gap-8">
-                        <h2 class="font-display-xl text-7xl md:text-8xl font-black tracking-tighter uppercase leading-none text-primary">Services</h2>
-                        <span class="font-label-mono text-accent-pink tracking-[0.5em] uppercase text-xs">03 Offerings</span>
-                    </div>
-                    <div class="flex flex-wrap gap-3">
-                        <a href="/assessment" class="bg-transparent border-2 border-[var(--ms-text)] text-[var(--ms-text)] px-6 py-3 font-bold text-xs uppercase tracking-widest hover:bg-[var(--ms-surface)] transition-all rounded-full no-underline shadow-sm">
-                            First Shift · $499
-                        </a>
-                        <a href="/fleet" class="bg-[var(--ms-btn-bg)] shadow-[var(--ms-btn-shadow)] text-[var(--ms-btn-fg)] px-6 py-3 font-bold text-xs uppercase tracking-widest hover:bg-[var(--ms-btn-bg)] transition-all rounded-full no-underline shadow-sm">
-                            Fleet deploy · $4,500
-                        </a>
-                    </div>
-                </div>
-                
-                <p class="font-body-lg text-lg text-primary/70 mb-16 max-w-2xl">
-                    One ladder. Start free, put your first agent to work, then grow it into a fleet that remembers. Every step is priced up front.
-                </p>
-
-                <ServicesAndOffers client:load />
-            </div>
-        </section>
-
-        <!-- Blog Feed & Outreach -->
-        <section class="px-6 md:px-[60px] py-24 bg-surface-container border-y border-primary/10" id="intel">
+        <!-- 5. Writing -->
+        <section class="px-6 md:px-[60px] py-24 border-t border-[var(--ms-border)]" id="intel">
             <div class="max-w-[1440px] mx-auto reveal-item opacity-0">
                 <BlogFeed />
             </div>
         </section>
 
-        <!-- Interactive Contact Form -->
-        <section class="px-6 md:px-[60px] py-24 bg-surface-container">
+        <!-- 6. Contact -->
+        <section class="px-6 md:px-[60px] py-24 bg-[var(--ms-surface)] border-t border-[var(--ms-border)]">
             <div class="max-w-[1440px] mx-auto reveal-item opacity-0">
                 <ContactSection />
             </div>
@@ -222,11 +148,107 @@ import ServicesAndOffers from '../components/ServicesAndOffers.tsx';
     </main>
 
     <Footer
-        copyright="© 2026 CREATIVE TECHNOLOGIST STUDIO. ALL RIGHTS RESERVED."
+        copyright="© 2026 Mikey Shaw. All rights reserved."
         links={[
-            { label: 'Privacy', href: '#' },
-            { label: 'Terms', href: '#' },
-            { label: 'Guidelines', href: '#' },
+            { label: 'Mad EZ Media', href: 'https://madezmedia.com' },
+            { label: 'LogMem', href: 'https://github.com/logmem/logmem' },
+            { label: 'Resume', href: '/resume' },
         ]}
     />
 </Layout>
+
+<style>
+    .home-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 20px;
+        font: 700 0.6875rem/1.4 var(--ms-font-mono);
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--ms-accent-text);
+    }
+    .home-eyebrow .num { color: var(--ms-muted); }
+    /* Solid accent, not a gradient: bright ember on white fails contrast. */
+    .em-gradient {
+        font-style: italic;
+        color: var(--ms-accent-text);
+    }
+    .home-label {
+        font: 700 0.6875rem/1.4 var(--ms-font-mono);
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--ms-muted);
+    }
+    .home-link {
+        color: var(--ms-text);
+        font-weight: 700;
+        font-size: 0.875rem;
+        text-decoration: underline;
+        text-decoration-color: var(--ms-who);
+        text-decoration-thickness: 2px;
+        text-underline-offset: 4px;
+    }
+    .home-link:hover { color: var(--ms-accent-text); }
+    .home-link:focus-visible, .home-btn-ghost:focus-visible {
+        outline: 2px solid var(--ms-focus);
+        outline-offset: 3px;
+        border-radius: 4px;
+    }
+    .home-btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        min-height: var(--ms-tap);
+        padding: 0 22px;
+        border-radius: var(--ms-r-button);
+        border: 2px solid var(--ms-text);
+        color: var(--ms-text);
+        font: 700 0.8125rem/1 var(--ms-font-body);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: background 0.2s var(--ms-ease);
+    }
+    .home-btn-ghost:hover { background: var(--ms-surface); }
+
+    .home-key {
+        background: var(--ms-ground);
+        border: 1px solid var(--ms-border);
+        border-top: 4px solid var(--key);
+        border-radius: var(--ms-r-card);
+        padding: 24px;
+    }
+    .home-key--who { --key: var(--ms-who); --key-text: var(--ms-who-text); }
+    .home-key--now { --key: var(--ms-now); --key-text: var(--ms-now-text); }
+    .home-key--log { --key: var(--ms-log); --key-text: var(--ms-log-text); }
+    .home-key__label {
+        font: 700 0.625rem/1.4 var(--ms-font-mono);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--key-text);
+    }
+    .home-key__name {
+        font: 900 1.75rem/1.1 var(--ms-font-head);
+        color: var(--ms-text);
+        margin: 4px 0 10px;
+    }
+
+    .home-step {
+        display: flex;
+        flex-direction: column;
+        background: var(--ms-ground);
+        border: 1px solid var(--ms-border);
+        border-radius: var(--ms-r-card);
+        padding: 24px;
+    }
+    .home-step__n {
+        font: 700 0.75rem/1 var(--ms-font-mono);
+        letter-spacing: 0.2em;
+        color: var(--ms-accent-text);
+    }
+    .home-step__name {
+        font: 800 1.25rem/1.2 var(--ms-font-head);
+        color: var(--ms-text);
+        margin: 10px 0 8px;
+    }
+</style>
