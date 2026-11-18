@@ -220,6 +220,10 @@ const skillsData = {
 <script>
     import * as d3 from 'd3';
 
+    // Kit v3: canvas cannot read CSS variables, so resolve theme tokens at draw time.
+    const msToken = (name: string, fallback: string) =>
+        getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback;
+
     interface SkillNode extends d3.SimulationNodeDatum {
         id: string;
         group: number;
@@ -266,7 +270,7 @@ const skillsData = {
             // Dynamic colors corresponding to group category
             const colorScale = d3.scaleOrdinal<string>()
                 .domain(['1', '2', '3', '4'])
-                .range(['#00B9F1', '#E5007D', '#FCDC00', '#2d4a3e']);
+                .range(['#1FB6FF', '#FF2D8A', '#FF6A2B', '#9B6BFF']);
 
             const nodes: SkillNode[] = rawNodes.map(d => ({...d}));
             const links: SkillLink[] = rawLinks.map(d => ({...d}));
@@ -365,8 +369,8 @@ const skillsData = {
 
                         // Color badge according to its category node
                         if (activeCategory) {
-                            const colors = ['#00B9F1', '#E5007D', '#FCDC00', '#2d4a3e'];
-                            const groupColor = colors[hoverNode.group - 1] || '#2d4a3e';
+                            const colors = ['#1FB6FF', '#FF2D8A', '#FF6A2B', msToken('--ms-text', '#120E24')];
+                            const groupColor = colors[hoverNode.group - 1] || msToken('--ms-text', '#120E24');
                             activeCategory.style.borderColor = groupColor;
                             activeCategory.style.color = groupColor;
                             activeCategory.style.backgroundColor = `${groupColor}0a`;
@@ -388,7 +392,7 @@ const skillsData = {
                 // Draw links (default alpha)
                 context.save();
                 context.globalAlpha = 0.08;
-                context.strokeStyle = "#2d4a3e";
+                context.strokeStyle = msToken('--ms-text', '#120E24');
                 context.lineWidth = 1;
                 context.beginPath();
                 links.forEach((link) => {
@@ -451,13 +455,13 @@ const skillsData = {
                     
                     context.fill();
                     context.restore();
-                    context.strokeStyle = "#faf9f5";
+                    context.strokeStyle = msToken('--ms-ground', '#FFFFFF');
                     context.lineWidth = 1.5;
                     context.stroke();
 
                     // Render titles legibly
-                    context.fillStyle = "#2d4a3e";
-                    context.font = `${isHovered ? '700 ' : '500 '}${fontSize}px 'JetBrains Mono', monospace`;
+                    context.fillStyle = msToken('--ms-text', '#120E24');
+                    context.font = `${isHovered ? '700 ' : '500 '}${fontSize}px 'Roboto Mono', monospace`;
                     context.textAlign = "center";
                     context.textBaseline = "middle";
                     
@@ -503,12 +507,12 @@ const skillsData = {
     }
 
     .home-eyebrow {
-        font-family: "JetBrains Mono", monospace;
+        font-family: var(--ms-font-mono);
         font-size: 11px;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: .22em;
-        color: var(--accent-pink, #E5007D);
+        color: var(--accent-pink, var(--ms-accent-text));
         display: inline-flex;
         align-items: center;
         gap: 8px;
@@ -516,22 +520,22 @@ const skillsData = {
     }
 
     .home-eyebrow .num {
-        opacity: 0.8;
+        opacity: 1;
     }
 
     .section-title {
-        font-family: "Playfair Display", serif;
+        font-family: var(--ms-font-head);
         font-size: clamp(32px, 4.5vw, 56px);
         font-weight: 900;
         line-height: 1.1;
-        color: #2d4a3e;
+        color: var(--ms-text);
         margin: 0;
         letter-spacing: -0.025em;
     }
 
     .em-gradient {
         font-style: italic;
-        background: linear-gradient(90deg, #00B9F1 0, #E5007D 100%);
+        background: linear-gradient(90deg, var(--ms-blue) 0, var(--ms-ember) 100%);
         background-clip: text;
         -webkit-background-clip: text;
         color: transparent;
@@ -539,9 +543,9 @@ const skillsData = {
     }
 
     .section-subtitle {
-        font-family: "Outfit", sans-serif;
+        font-family: var(--ms-font-body);
         font-size: 1.1rem;
-        color: rgba(45, 74, 62, 0.75);
+        color: color-mix(in srgb, var(--ms-text) 75%, transparent);
         line-height: 1.6;
     }
 
@@ -562,13 +566,13 @@ const skillsData = {
     .canvas-panel {
         position: relative;
         width: 100%;
-        background: radial-gradient(circle at center, #faf9f5 0%, #f5f4ed 100%);
+        background: radial-gradient(circle at center, var(--ms-ground) 0%, var(--ms-ground) 100%);
         border-radius: 14px;
-        border: 1px solid rgba(45, 74, 62, 0.1);
+        border: 1px solid color-mix(in srgb, var(--ms-text) 10%, transparent);
         overflow: hidden;
         cursor: grab;
         transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.32s;
-        box-shadow: 0 8px 24px rgba(45, 74, 62, 0.04);
+        box-shadow: 0 8px 24px color-mix(in srgb, var(--ms-ink) 4%, transparent);
         min-height: 380px;
     }
 
@@ -578,7 +582,7 @@ const skillsData = {
 
     .canvas-panel:hover {
         transform: translateY(-2px);
-        box-shadow: 0 16px 36px rgba(45, 74, 62, 0.07);
+        box-shadow: 0 16px 36px color-mix(in srgb, var(--ms-ink) 7%, transparent);
     }
 
     #skills-canvas {
@@ -591,8 +595,8 @@ const skillsData = {
         bottom: 0.75rem;
         left: 50%;
         transform: translateX(-50%);
-        color: rgba(45, 74, 62, 0.4);
-        font-family: "JetBrains Mono", monospace;
+        color: var(--ms-muted);
+        font-family: var(--ms-font-mono);
         font-size: 0.65rem;
         pointer-events: none;
         letter-spacing: 0.05em;
@@ -602,18 +606,18 @@ const skillsData = {
 
     /* Dynamic Details Panel */
     .details-panel {
-        background: #ffffff;
+        background: var(--ms-surface);
         border-radius: 14px;
-        border: 1px solid rgba(45, 74, 62, 0.08);
+        border: 1px solid color-mix(in srgb, var(--ms-text) 8%, transparent);
         padding: 2.25rem;
-        box-shadow: 0 8px 24px rgba(45, 74, 62, 0.03);
+        box-shadow: 0 8px 24px color-mix(in srgb, var(--ms-ink) 3%, transparent);
         display: flex;
         flex-direction: column;
         justify-content: center;
         min-height: 300px;
         position: relative;
         overflow: hidden;
-        border-top: 5px solid #2d4a3e;
+        border-top: 5px solid var(--ms-text);
     }
 
     .skill-detail-view {
@@ -632,31 +636,31 @@ const skillsData = {
     }
 
     .intel-header {
-        border-bottom: 1px solid rgba(45, 74, 62, 0.1);
+        border-bottom: 1px solid color-mix(in srgb, var(--ms-text) 10%, transparent);
         padding-bottom: 1rem;
     }
 
     .intel-badge {
         display: inline-block;
-        font-family: "JetBrains Mono", monospace;
+        font-family: var(--ms-font-mono);
         font-size: 9px;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.15em;
         padding: 3px 8px;
         border-radius: 4px;
-        border: 1px solid rgba(45, 74, 62, 0.4);
-        color: rgba(45, 74, 62, 0.7);
+        border: 1px solid color-mix(in srgb, var(--ms-text) 40%, transparent);
+        color: color-mix(in srgb, var(--ms-text) 70%, transparent);
         margin-bottom: 0.75rem;
-        background: rgba(45, 74, 62, 0.03);
+        background: color-mix(in srgb, var(--ms-inverse-bg) 3%, transparent);
         transition: all 0.25s ease;
     }
 
     .intel-title {
-        font-family: "Playfair Display", serif;
+        font-family: var(--ms-font-head);
         font-size: 1.8rem;
         font-weight: 850;
-        color: #2d4a3e;
+        color: var(--ms-text);
         margin: 0;
         letter-spacing: -0.01em;
     }
@@ -668,10 +672,10 @@ const skillsData = {
     }
 
     .intel-desc {
-        font-family: "Outfit", sans-serif;
+        font-family: var(--ms-font-body);
         font-size: 0.95rem;
         line-height: 1.6;
-        color: rgba(45, 74, 62, 0.8);
+        color: color-mix(in srgb, var(--ms-text) 80%, transparent);
         margin: 0;
     }
 
@@ -688,20 +692,20 @@ const skillsData = {
         justify-content: space-between;
         align-items: center;
         padding-bottom: 0.5rem;
-        border-bottom: 1px dashed rgba(45, 74, 62, 0.1);
+        border-bottom: 1px dashed color-mix(in srgb, var(--ms-text) 10%, transparent);
     }
 
     .stat-label {
-        font-family: "Outfit", sans-serif;
+        font-family: var(--ms-font-body);
         font-size: 0.85rem;
-        color: rgba(45, 74, 62, 0.6);
+        color: var(--ms-muted);
     }
 
     .stat-value {
-        font-family: "JetBrains Mono", monospace;
+        font-family: var(--ms-font-mono);
         font-size: 0.85rem;
         font-weight: 600;
-        color: #2d4a3e;
+        color: var(--ms-text);
     }
 
     /* Meta items for active views */
@@ -712,26 +716,26 @@ const skillsData = {
     }
 
     .meta-label {
-        font-family: "JetBrains Mono", monospace;
+        font-family: var(--ms-font-mono);
         font-size: 9.5px;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: rgba(45, 74, 62, 0.45);
+        color: var(--ms-muted);
     }
 
     .meta-value {
-        font-family: "JetBrains Mono", monospace;
+        font-family: var(--ms-font-mono);
         font-size: 0.9rem;
         font-weight: 600;
-        color: #2d4a3e;
+        color: var(--ms-text);
     }
 
     .meta-value-link {
-        font-family: "Outfit", sans-serif;
+        font-family: var(--ms-font-body);
         font-size: 0.95rem;
         font-weight: 700;
-        color: #2d4a3e;
-        border-bottom: 1px solid rgba(45, 74, 62, 0.2);
+        color: var(--ms-text);
+        border-bottom: 1px solid color-mix(in srgb, var(--ms-text) 20%, transparent);
         display: inline-block;
         width: fit-content;
         cursor: default;

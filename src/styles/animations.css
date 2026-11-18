@@ -18,10 +18,10 @@
 
 @keyframes glowPulse {
     0%, 100% { 
-        box-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+        box-shadow: 0 0 5px color-mix(in srgb, var(--ms-ember) 30%, transparent);
     }
     50% { 
-        box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+        box-shadow: 0 0 15px color-mix(in srgb, var(--ms-ember) 60%, transparent);
     }
 }
 
@@ -91,5 +91,5 @@
 }
 
 .theme-hover:hover {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 25px color-mix(in srgb, var(--ms-ink) 10%, transparent);
 }

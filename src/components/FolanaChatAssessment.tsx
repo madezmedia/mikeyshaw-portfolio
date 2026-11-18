@@ -193,28 +193,28 @@ export default function FolanaChatAssessment() {
   const stepDisplay = Math.min(idx + 1, STEPS.length);
 
   return (
-    <div className="folana-widget w-full max-w-2xl mx-auto bg-white rounded-2xl border border-[#2d4a3e]/12 shadow-lg overflow-hidden flex flex-col">
+    <div className="folana-widget w-full max-w-2xl mx-auto bg-[var(--ms-surface)] rounded-2xl border border-[var(--ms-text)]/12 shadow-lg overflow-hidden flex flex-col">
       {/* Header */}
-      <div className="px-6 pt-6 pb-4 flex flex-col gap-3 border-b border-[#2d4a3e]/8">
+      <div className="px-6 pt-6 pb-4 flex flex-col gap-3 border-b border-[var(--ms-text)]/8">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <span className="w-8 h-8 rounded-lg bg-[#2d4a3e] text-white flex items-center justify-center font-label-mono font-bold text-sm shrink-0">
+            <span className="w-8 h-8 rounded-lg bg-[var(--ms-inverse-bg)] text-white flex items-center justify-center font-label-mono font-bold text-sm shrink-0">
               F
             </span>
             <div className="flex flex-col leading-tight">
-              <strong className="font-sans font-extrabold text-sm text-[#2d4a3e]">Folana</strong>
-              <span className="font-label-mono text-[8.5px] tracking-[0.16em] uppercase text-[#2d4a3e]/55">
+              <strong className="font-sans font-extrabold text-sm text-[var(--ms-text)]">Folana</strong>
+              <span className="font-label-mono text-[8.5px] tracking-[0.16em] uppercase text-[var(--ms-muted)]">
                 AI Systems Audit &middot; Mad EZ Media
               </span>
             </div>
           </div>
-          <span className="font-label-mono text-[9px] tracking-[0.14em] uppercase text-[#2d4a3e]/50 shrink-0">
+          <span className="font-label-mono text-[9px] tracking-[0.14em] uppercase text-[var(--ms-muted)] shrink-0">
             Step {stepDisplay} of {STEPS.length}
           </span>
         </div>
-        <div className="w-full h-1.5 bg-[#2d4a3e]/10 rounded-full overflow-hidden">
+        <div className="w-full h-1.5 bg-[var(--ms-text)]/10 rounded-full overflow-hidden">
           <div
-            className="h-full bg-[#2d4a3e] rounded-full transition-all duration-400 ease-out"
+            className="h-full bg-[var(--ms-inverse-bg)] rounded-full transition-all duration-400 ease-out"
             style={{ width: `${progressPct}%` }}
           />
         </div>
@@ -225,16 +225,16 @@ export default function FolanaChatAssessment() {
         {history.map((turn, i) => (
           <div key={i} className="folana-bubble-in flex flex-col gap-2">
             <div className="flex gap-2.5 items-start">
-              <span className="w-6 h-6 rounded-md bg-[#2d4a3e] text-white flex items-center justify-center font-label-mono font-bold text-[10px] shrink-0">
+              <span className="w-6 h-6 rounded-md bg-[var(--ms-inverse-bg)] text-white flex items-center justify-center font-label-mono font-bold text-[10px] shrink-0">
                 F
               </span>
-              <div className="bg-[#faf9f5] border border-[#2d4a3e]/10 rounded-xl px-4 py-3 text-[13.5px] leading-[1.55] text-[#2d4a3e] max-w-[82%] font-sans">
+              <div className="bg-[var(--ms-ground)] border border-[var(--ms-text)]/10 rounded-xl px-4 py-3 text-[13.5px] leading-[1.55] text-[var(--ms-text)] max-w-[82%] font-sans">
                 {turn.question}
               </div>
             </div>
             {turn.answered && (
               <div className="flex justify-end">
-                <div className="bg-[#2d4a3e] text-white rounded-xl px-4 py-2.5 text-[13px] max-w-[78%] font-sans">
+                <div className="bg-[var(--ms-inverse-bg)] text-white rounded-xl px-4 py-2.5 text-[13px] max-w-[78%] font-sans">
                   {turn.answerText}
                 </div>
               </div>
@@ -244,10 +244,10 @@ export default function FolanaChatAssessment() {
 
         {showTyping && (
           <div className="flex gap-2.5 items-center">
-            <span className="w-6 h-6 rounded-md bg-[#2d4a3e] text-white flex items-center justify-center font-label-mono font-bold text-[10px] shrink-0">
+            <span className="w-6 h-6 rounded-md bg-[var(--ms-inverse-bg)] text-white flex items-center justify-center font-label-mono font-bold text-[10px] shrink-0">
               F
             </span>
-            <div className="folana-dots bg-[#faf9f5] border border-[#2d4a3e]/10 rounded-xl px-4 py-3">
+            <div className="folana-dots bg-[var(--ms-ground)] border border-[var(--ms-text)]/10 rounded-xl px-4 py-3">
               <span />
               <span />
               <span />
@@ -257,8 +257,8 @@ export default function FolanaChatAssessment() {
 
         {done && (
           <div className="folana-bubble-in flex flex-col gap-4 mt-1">
-            <div className="bg-[#2d4a3e] rounded-xl text-white p-5 flex flex-col gap-2.5">
-              <span className="font-label-mono text-[9px] tracking-[0.2em] uppercase text-[#FCDC00] font-bold">
+            <div className="bg-[var(--ms-inverse-bg)] rounded-xl text-white p-5 flex flex-col gap-2.5">
+              <span className="font-label-mono text-[9px] tracking-[0.2em] uppercase text-[var(--ms-accent-text)] font-bold">
                 Your snapshot
               </span>
               <h3 className="font-heading font-extrabold text-[19px] leading-snug m-0">{resultHeadline}</h3>
@@ -266,19 +266,19 @@ export default function FolanaChatAssessment() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <span className="font-label-mono text-[9px] tracking-[0.2em] uppercase text-[#2d4a3e]/55 font-bold">
+              <span className="font-label-mono text-[9px] tracking-[0.2em] uppercase text-[var(--ms-muted)] font-bold">
                 Your ecosystem, on record
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {ecosystemSummary.map((e) => (
                   <div
                     key={e.label}
-                    className="bg-white border border-[#2d4a3e]/10 rounded-lg px-3.5 py-2.5 flex flex-col gap-0.5"
+                    className="bg-[var(--ms-surface)] border border-[var(--ms-text)]/10 rounded-lg px-3.5 py-2.5 flex flex-col gap-0.5"
                   >
-                    <span className="font-label-mono text-[8px] tracking-[0.14em] uppercase text-[#2d4a3e]/50 font-bold">
+                    <span className="font-label-mono text-[8px] tracking-[0.14em] uppercase text-[var(--ms-muted)] font-bold">
                       {e.label}
                     </span>
-                    <span className="text-xs font-semibold text-[#2d4a3e]">{e.value}</span>
+                    <span className="text-xs font-semibold text-[var(--ms-text)]">{e.value}</span>
                   </div>
                 ))}
               </div>
@@ -288,7 +288,7 @@ export default function FolanaChatAssessment() {
               href={CONSULT_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-center bg-[#2d4a3e] hover:bg-[#3a5c4e] transition-colors text-white rounded-full py-3.5 font-sans font-bold text-xs uppercase tracking-widest no-underline"
+              className="text-center bg-[var(--ms-btn-bg)] shadow-[var(--ms-btn-shadow)] hover:bg-[var(--ms-btn-bg)] transition-colors text-[var(--ms-btn-fg)] rounded-full py-3.5 font-sans font-bold text-xs uppercase tracking-widest no-underline"
             >
               Book the free 15-min consult &rarr;
             </a>
@@ -299,7 +299,7 @@ export default function FolanaChatAssessment() {
 
       {/* Input controls */}
       {!done && (
-        <div className="px-6 pb-6 pt-1 border-t border-[#2d4a3e]/8">
+        <div className="px-6 pb-6 pt-1 border-t border-[var(--ms-text)]/8">
           {step?.type === 'chips' && (
             <div className="flex flex-col gap-2.5 pt-4">
               <div className="flex flex-wrap gap-2">
@@ -313,8 +313,8 @@ export default function FolanaChatAssessment() {
                       onClick={() => (step.multi ? toggleMulti(label) : answerCurrent(label, label))}
                       className={`folana-chip border-[1.5px] rounded-full px-4 py-2.5 text-[12.5px] font-semibold font-sans cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${
                         selected
-                          ? 'bg-[#2d4a3e] border-[#2d4a3e] text-white'
-                          : 'bg-white border-[#2d4a3e]/25 text-[#2d4a3e] hover:border-[#2d4a3e]'
+                          ? 'bg-[var(--ms-btn-bg)] shadow-[var(--ms-btn-shadow)] border-[var(--ms-text)] text-[var(--ms-btn-fg)]'
+                          : 'bg-[var(--ms-surface)] border-[var(--ms-text)]/25 text-[var(--ms-text)] hover:border-[var(--ms-text)]'
                       }`}
                     >
                       {label}
@@ -327,7 +327,7 @@ export default function FolanaChatAssessment() {
                   type="button"
                   disabled={!multiSelected.length || showTyping}
                   onClick={submitMulti}
-                  className="w-full bg-[#2d4a3e] hover:bg-[#3a5c4e] transition-colors text-white rounded-full py-3.5 font-sans font-bold text-xs uppercase tracking-widest disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="w-full bg-[var(--ms-btn-bg)] shadow-[var(--ms-btn-shadow)] hover:bg-[var(--ms-btn-bg)] transition-colors text-[var(--ms-btn-fg)] rounded-full py-3.5 font-sans font-bold text-xs uppercase tracking-widest disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   Continue ({multiSelected.length} selected)
                 </button>
@@ -343,12 +343,12 @@ export default function FolanaChatAssessment() {
                 onChange={(e) => setTextValue(e.target.value)}
                 placeholder={step.placeholder}
                 disabled={showTyping}
-                className="flex-1 border-[1.5px] border-[#2d4a3e]/20 rounded-full px-4 py-3 text-[13px] font-sans text-[#2d4a3e] bg-white focus:outline-none focus:border-[#2d4a3e] disabled:opacity-50"
+                className="flex-1 border-[1.5px] border-[var(--ms-text)]/20 rounded-full px-4 py-3 text-[13px] font-sans text-[var(--ms-text)] bg-[var(--ms-surface)] focus:outline-none focus:border-[var(--ms-text)] disabled:opacity-50"
               />
               <button
                 type="submit"
                 disabled={showTyping || !textValue.trim()}
-                className="bg-[#2d4a3e] hover:bg-[#3a5c4e] transition-colors text-white w-11 h-11 rounded-full text-base shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
+                className="bg-[var(--ms-btn-bg)] shadow-[var(--ms-btn-shadow)] hover:bg-[var(--ms-btn-bg)] transition-colors text-[var(--ms-btn-fg)] w-11 h-11 rounded-full text-base shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
                 aria-label="Send answer"
               >
                 &rarr;

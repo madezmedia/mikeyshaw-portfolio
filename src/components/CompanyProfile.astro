@@ -9,9 +9,9 @@ const engagementSlots = [
 ];
 
 const systemStats = [
-    { metric: "6+", label: "Production Apps Deployed", color: "#00B9F1" }, // Cyan
-    { metric: "$497+", label: "Avg MRR per Client Client", color: "#E5007D" }, // Pink
-    { metric: "90%", label: "Manual Cost Reduction", color: "#FCDC00" }  // Yellow
+    { metric: "6+", label: "Production Apps Deployed", color: "var(--ms-accent-text)" }, // Cyan
+    { metric: "$497+", label: "Avg MRR per Client Client", color: "var(--ms-accent-text)" }, // Pink
+    { metric: "90%", label: "Manual Cost Reduction", color: "var(--ms-accent-text)" }  // Yellow
 ];
 ---
 
@@ -80,11 +80,11 @@ const systemStats = [
     }
 
     .company-container {
-        background: #ffffff;
+        background: var(--ms-surface);
         border-radius: 14px;
-        border: 1px solid rgba(45, 74, 62, 0.1);
+        border: 1px solid color-mix(in srgb, var(--ms-text) 10%, transparent);
         padding: 3rem;
-        box-shadow: 0 8px 24px rgba(45, 74, 62, 0.04);
+        box-shadow: 0 8px 24px color-mix(in srgb, var(--ms-ink) 4%, transparent);
     }
 
     .company-profile-grid {
@@ -100,12 +100,12 @@ const systemStats = [
     }
 
     .home-eyebrow {
-        font-family: "JetBrains Mono", monospace;
+        font-family: var(--ms-font-mono);
         font-size: 11px;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: .22em;
-        color: var(--accent-pink, #E5007D);
+        color: var(--accent-pink, var(--ms-accent-text));
         display: inline-flex;
         align-items: center;
         gap: 8px;
@@ -113,22 +113,22 @@ const systemStats = [
     }
 
     .home-eyebrow .num {
-        opacity: 0.8;
+        opacity: 1;
     }
 
     .panel-title {
-        font-family: "Playfair Display", serif;
+        font-family: var(--ms-font-head);
         font-size: 2.25rem;
         font-weight: 900;
-        color: var(--primary, #2d4a3e);
+        color: var(--primary, var(--ms-text));
         margin: 0 0 1rem;
         letter-spacing: -0.02em;
     }
 
     .panel-desc {
-        font-family: "Outfit", sans-serif;
+        font-family: var(--ms-font-body);
         font-size: 0.95rem;
-        color: rgba(45, 74, 62, 0.75);
+        color: color-mix(in srgb, var(--ms-text) 75%, transparent);
         line-height: 1.6;
         margin-bottom: 2rem;
     }
@@ -140,21 +140,21 @@ const systemStats = [
     }
 
     .slot-card {
-        background: #faf9f5;
+        background: var(--ms-ground);
         border-radius: 10px;
         padding: 1.5rem;
-        border-top: 4px solid rgba(45, 74, 62, 0.1);
+        border-top: 4px solid color-mix(in srgb, var(--ms-text) 10%, transparent);
         transition: transform 0.25s, box-shadow 0.25s;
     }
 
     .slot-open {
-        border-top-color: var(--accent-cyan, #00B9F1);
-        box-shadow: 0 4px 12px rgba(0, 185, 241, 0.04);
+        border-top-color: var(--accent-cyan, var(--ms-blue));
+        box-shadow: 0 4px 12px color-mix(in srgb, var(--ms-blue) 4%, transparent);
     }
 
     .slot-open:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(0, 185, 241, 0.08);
+        box-shadow: 0 8px 20px color-mix(in srgb, var(--ms-blue) 8%, transparent);
     }
 
     .slot-header {
@@ -165,50 +165,50 @@ const systemStats = [
     }
 
     .slot-num {
-        font-family: "JetBrains Mono", monospace;
+        font-family: var(--ms-font-mono);
         font-size: 11px;
         font-weight: 700;
-        color: rgba(45, 74, 62, 0.5);
+        color: var(--ms-muted);
         text-transform: uppercase;
         letter-spacing: 0.15em;
     }
 
     .slot-badge-open {
-        font-family: "JetBrains Mono", monospace;
+        font-family: var(--ms-font-mono);
         font-size: 9.5px;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: #ffffff;
-        background: var(--accent-cyan, #00B9F1);
+        color: var(--ms-ink);
+        background: var(--accent-cyan, var(--ms-blue));
         padding: 2px 8px;
         border-radius: 9999px;
     }
 
     .slot-badge-closed {
-        font-family: "JetBrains Mono", monospace;
+        font-family: var(--ms-font-mono);
         font-size: 9.5px;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: rgba(45, 74, 62, 0.7);
-        background: rgba(45, 74, 62, 0.08);
+        color: color-mix(in srgb, var(--ms-text) 70%, transparent);
+        background: color-mix(in srgb, var(--ms-inverse-bg) 8%, transparent);
         padding: 2px 8px;
         border-radius: 9999px;
     }
 
     .slot-status {
-        font-family: "Outfit", sans-serif;
+        font-family: var(--ms-font-body);
         font-weight: 700;
         font-size: 14.5px;
-        color: var(--primary, #2d4a3e);
+        color: var(--primary, var(--ms-text));
         margin-bottom: 0.25rem;
     }
 
     .slot-details {
-        font-family: "Outfit", sans-serif;
+        font-family: var(--ms-font-body);
         font-size: 13px;
-        color: rgba(45, 74, 62, 0.65);
+        color: color-mix(in srgb, var(--ms-text) 65%, transparent);
         margin: 0;
     }
 
@@ -226,9 +226,9 @@ const systemStats = [
         align-items: center;
         justify-content: center;
         padding: 1.5rem 1rem;
-        background: #faf9f5;
+        background: var(--ms-ground);
         border-radius: 10px;
-        border: 1px solid rgba(45, 74, 62, 0.08);
+        border: 1px solid color-mix(in srgb, var(--ms-text) 8%, transparent);
         text-align: center;
         border-top: 4px solid var(--stat-color);
         transition: transform 0.25s;
@@ -239,45 +239,45 @@ const systemStats = [
     }
 
     .stat-metric {
-        font-family: "Playfair Display", serif;
+        font-family: var(--ms-font-head);
         font-size: 2.25rem;
         font-weight: 900;
-        color: var(--primary, #2d4a3e);
+        color: var(--primary, var(--ms-text));
         line-height: 1.1;
         margin-bottom: 0.25rem;
     }
 
     .stat-label {
-        font-family: "Outfit", sans-serif;
+        font-family: var(--ms-font-body);
         font-size: 11px;
-        color: rgba(45, 74, 62, 0.6);
+        color: var(--ms-muted);
         line-height: 1.3;
     }
 
     .studio-meta-box {
-        background: #faf9f5;
+        background: var(--ms-ground);
         padding: 1.75rem;
         border-radius: 10px;
-        border-left: 4px solid var(--accent-pink, #E5007D);
-        border-top: 1px solid rgba(45, 74, 62, 0.05);
-        border-right: 1px solid rgba(45, 74, 62, 0.05);
-        border-bottom: 1px solid rgba(45, 74, 62, 0.05);
+        border-left: 4px solid var(--accent-pink, var(--ms-ember));
+        border-top: 1px solid color-mix(in srgb, var(--ms-text) 5%, transparent);
+        border-right: 1px solid color-mix(in srgb, var(--ms-text) 5%, transparent);
+        border-bottom: 1px solid color-mix(in srgb, var(--ms-text) 5%, transparent);
     }
 
     .meta-box-title {
-        font-family: "JetBrains Mono", monospace;
+        font-family: var(--ms-font-mono);
         font-size: 12px;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.15em;
-        color: var(--accent-pink, #E5007D);
+        color: var(--accent-pink, var(--ms-accent-text));
         margin: 0 0 0.75rem;
     }
 
     .meta-box-text {
-        font-family: "Outfit", sans-serif;
+        font-family: var(--ms-font-body);
         font-size: 13.5px;
-        color: rgba(45, 74, 62, 0.8);
+        color: color-mix(in srgb, var(--ms-text) 80%, transparent);
         line-height: 1.6;
         margin: 0;
     }

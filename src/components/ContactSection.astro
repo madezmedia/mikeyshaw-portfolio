@@ -87,17 +87,17 @@ const contactOptions = [
         max-width: 1440px;
         margin: 4rem auto;
         padding: 3rem;
-        background: #faf9f5;
-        border: 1px solid rgba(45, 74, 62, 0.12);
+        background: var(--ms-ground);
+        border: 1px solid color-mix(in srgb, var(--ms-text) 12%, transparent);
         border-radius: 16px;
-        box-shadow: 0 10px 40px rgba(45, 74, 62, 0.03);
+        box-shadow: 0 10px 40px color-mix(in srgb, var(--ms-ink) 3%, transparent);
         transition: transform var(--transitionDuration) cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .contact-header {
         text-align: left;
         margin-bottom: 4rem;
-        border-bottom: 1px solid rgba(45, 74, 62, 0.1);
+        border-bottom: 1px solid color-mix(in srgb, var(--ms-text) 10%, transparent);
         padding-bottom: 2rem;
     }
 
@@ -105,7 +105,7 @@ const contactOptions = [
         font-size: clamp(3rem, 6vw, 5rem);
         color: var(--primary);
         margin: 0;
-        font-family: 'Playfair Display', serif;
+        font-family: var(--ms-font-head);
         font-weight: 900;
         text-transform: uppercase;
         letter-spacing: -0.02em;
@@ -114,7 +114,7 @@ const contactOptions = [
 
     .section-subtitle {
         color: var(--accent-pink);
-        font-family: 'JetBrains Mono', monospace;
+        font-family: var(--ms-font-mono);
         font-size: 0.85rem;
         text-transform: uppercase;
         letter-spacing: 0.15em;
@@ -141,7 +141,7 @@ const contactOptions = [
 
     .quick-connect-title {
         color: var(--primary);
-        font-family: 'Playfair Display', serif;
+        font-family: var(--ms-font-head);
         font-size: 1.5rem;
         font-weight: 850;
         margin: 0;
@@ -149,7 +149,7 @@ const contactOptions = [
 
     .quick-connect-subtitle {
         color: color-mix(in srgb, var(--primary) 70%, transparent);
-        font-family: 'JetBrains Mono', monospace;
+        font-family: var(--ms-font-mono);
         font-size: 0.75rem;
         margin: 0.25rem 0 0 0;
         text-transform: uppercase;
@@ -163,7 +163,7 @@ const contactOptions = [
 
     .connection-card {
         background: var(--bg-primary);
-        border: 1px solid rgba(45, 74, 62, 0.12);
+        border: 1px solid color-mix(in srgb, var(--ms-text) 12%, transparent);
         border-radius: 12px;
         padding: 1.25rem;
         display: flex;
@@ -175,20 +175,20 @@ const contactOptions = [
             border-color var(--transitionDuration) ease;
         position: relative;
         overflow: hidden;
-        box-shadow: 0 4px 12px rgba(45, 74, 62, 0.01);
+        box-shadow: 0 4px 12px color-mix(in srgb, var(--ms-ink) 1%, transparent);
     }
 
     .connection-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(45, 74, 62, 0.05);
-        border-color: rgba(45, 74, 62, 0.25);
+        box-shadow: 0 8px 24px color-mix(in srgb, var(--ms-ink) 5%, transparent);
+        border-color: var(--ms-muted);
     }
 
     .connection-icon-container {
-        background: #faf9f5;
+        background: var(--ms-ground);
         width: 52px;
         height: 52px;
-        border: 1px solid rgba(45, 74, 62, 0.12);
+        border: 1px solid color-mix(in srgb, var(--ms-text) 12%, transparent);
         border-radius: 8px;
         display: flex;
         justify-content: center;
@@ -220,7 +220,7 @@ const contactOptions = [
     .connection-platform {
         margin: 0;
         color: var(--primary);
-        font-family: 'Playfair Display', serif;
+        font-family: var(--ms-font-head);
         font-size: 1.25rem;
         font-weight: 800;
         line-height: 1.2;
@@ -236,13 +236,13 @@ const contactOptions = [
     .connection-link {
         align-self: flex-start;
         display: inline-block;
-        background: #faf9f5;
+        background: var(--ms-ground);
         color: var(--primary);
-        border: 1px solid rgba(45, 74, 62, 0.15);
+        border: 1px solid color-mix(in srgb, var(--ms-text) 15%, transparent);
         border-radius: 20px;
         padding: 0.35rem 1.25rem;
         text-decoration: none;
-        font-family: 'JetBrains Mono', monospace;
+        font-family: var(--ms-font-mono);
         font-size: 0.75rem;
         font-weight: 700;
         text-transform: uppercase;
@@ -255,19 +255,19 @@ const contactOptions = [
         background: var(--primary);
         color: var(--bg-primary);
         transform: translateY(-1px);
-        box-shadow: 0 4px 10px rgba(45, 74, 62, 0.1);
+        box-shadow: 0 4px 10px color-mix(in srgb, var(--ms-ink) 10%, transparent);
     }
 
     .social-connect {
         text-align: left;
-        border-top: 1px solid rgba(45, 74, 62, 0.1);
+        border-top: 1px solid color-mix(in srgb, var(--ms-text) 10%, transparent);
         padding-top: 2rem;
     }
 
     .social-title {
         color: var(--primary);
         margin-bottom: 1rem;
-        font-family: 'JetBrains Mono', monospace;
+        font-family: var(--ms-font-mono);
         font-size: 0.8rem;
         text-transform: uppercase;
         letter-spacing: 0.15em;
@@ -276,26 +276,26 @@ const contactOptions = [
 
     .scheduling-container {
         background: var(--bg-primary);
-        border: 1px solid rgba(45, 74, 62, 0.12);
+        border: 1px solid color-mix(in srgb, var(--ms-text) 12%, transparent);
         border-radius: 16px;
         padding: 2rem;
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
         height: fit-content;
-        box-shadow: 0 10px 30px rgba(45, 74, 62, 0.03);
+        box-shadow: 0 10px 30px color-mix(in srgb, var(--ms-ink) 3%, transparent);
     }
 
     .scheduling-header {
         text-align: left;
-        border-bottom: 1px solid rgba(45, 74, 62, 0.08);
+        border-bottom: 1px solid color-mix(in srgb, var(--ms-text) 8%, transparent);
         padding-bottom: 1.25rem;
     }
 
     .scheduling-title {
         color: var(--primary);
         margin: 0;
-        font-family: 'Playfair Display', serif;
+        font-family: var(--ms-font-head);
         font-size: 1.6rem;
         font-weight: 850;
         letter-spacing: -0.01em;
@@ -303,7 +303,7 @@ const contactOptions = [
 
     .scheduling-subtitle {
         color: var(--accent-pink);
-        font-family: 'JetBrains Mono', monospace;
+        font-family: var(--ms-font-mono);
         font-size: 0.75rem;
         text-transform: uppercase;
         margin-top: 0.5rem;

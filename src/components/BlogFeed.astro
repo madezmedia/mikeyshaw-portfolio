@@ -95,7 +95,7 @@ function formatDate(dateStr: string) {
 	}
 
 	.blog-section-title {
-		font-family: "Playfair Display", serif;
+		font-family: var(--ms-font-head);
 		font-size: clamp(2.5rem, 5vw, 4rem);
 		font-weight: 900;
 		color: var(--primary);
@@ -106,7 +106,7 @@ function formatDate(dateStr: string) {
 
 	.blog-section-subtitle {
 		color: var(--accent-pink);
-		font-family: 'JetBrains Mono', monospace;
+		font-family: var(--ms-font-mono);
 		font-size: 0.85rem;
 		text-transform: uppercase;
 		letter-spacing: 0.15em;
@@ -138,7 +138,7 @@ function formatDate(dateStr: string) {
 		display: flex;
 		align-items: center;
 		gap: 0.75rem;
-		font-family: "JetBrains Mono", monospace;
+		font-family: var(--ms-font-mono);
 		font-size: 11px;
 		color: color-mix(in srgb, var(--primary) 60%, transparent);
 		text-transform: uppercase;
@@ -153,7 +153,7 @@ function formatDate(dateStr: string) {
 	}
 
 	.post-title {
-		font-family: "Playfair Display", serif;
+		font-family: var(--ms-font-head);
 		font-size: clamp(1.4rem, 2vw, 1.85rem);
 		font-weight: 800;
 		line-height: 1.25;
@@ -172,7 +172,7 @@ function formatDate(dateStr: string) {
 	}
 
 	.post-excerpt {
-		font-family: "Outfit", sans-serif;
+		font-family: var(--ms-font-body);
 		margin: 0 0 1.5rem 0;
 		font-size: 1rem;
 		color: color-mix(in srgb, var(--primary) 80%, transparent);
@@ -185,7 +185,7 @@ function formatDate(dateStr: string) {
 		align-items: center;
 		gap: 0.5rem;
 		color: var(--primary);
-		font-family: "JetBrains Mono", monospace;
+		font-family: var(--ms-font-mono);
 		font-size: 0.8rem;
 		font-weight: 700;
 		text-transform: uppercase;
@@ -224,7 +224,7 @@ function formatDate(dateStr: string) {
 		border: 1.5px solid var(--primary);
 		padding: 0.75rem 2rem;
 		text-decoration: none;
-		font-family: 'JetBrains Mono', monospace;
+		font-family: var(--ms-font-mono);
 		font-size: 0.8rem;
 		font-weight: 700;
 		text-transform: uppercase;

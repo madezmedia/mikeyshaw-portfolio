@@ -5,27 +5,27 @@
     bottom: 24px;
     right: 24px;
     z-index: 1000;
-    font-family: "Outfit", sans-serif;
+    font-family: var(--ms-font-body);
 }
 
 .bentley-chat-toggle {
     display: flex;
     align-items: center;
     gap: 10px;
-    background: #2d4a3e;
-    color: #faf9f5;
-    border: 1px solid rgba(45, 74, 62, 0.15);
+    background: var(--ms-inverse-bg);
+    color: var(--ms-inverse-fg);
+    border: 1px solid color-mix(in srgb, var(--ms-text) 15%, transparent);
     padding: 12px 20px;
     border-radius: 9999px;
     cursor: pointer;
-    box-shadow: 0 4px 20px rgba(45, 74, 62, 0.15);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 20px color-mix(in srgb, var(--ms-ink) 15%, transparent);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); --ms-text: #FFFFFF; --ms-muted: #C4BDE6; --ms-accent-text: #FF6A2B; --ms-border: #3A2F6B; --ms-focus: #FF6A2B;
 }
 
 .bentley-chat-toggle:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(45, 74, 62, 0.25);
-    background: #395d4e;
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--ms-ink) 25%, transparent);
+    background: var(--ms-inverse-bg); --ms-text: #FFFFFF; --ms-muted: #C4BDE6; --ms-accent-text: #FF6A2B; --ms-border: #3A2F6B; --ms-focus: #FF6A2B;
 }
 
 .toggle-icon {
@@ -45,10 +45,10 @@
     right: 0;
     width: 360px;
     height: 520px;
-    background: #faf9f5;
-    border: 1px solid rgba(45, 74, 62, 0.12);
+    background: var(--ms-ground);
+    border: 1px solid color-mix(in srgb, var(--ms-text) 12%, transparent);
     border-radius: 16px;
-    box-shadow: 0 12px 40px rgba(45, 74, 62, 0.12);
+    box-shadow: 0 12px 40px color-mix(in srgb, var(--ms-ink) 12%, transparent);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -67,19 +67,19 @@
 }
 
 .bentley-chat-header {
-    background: #2d4a3e;
-    color: #faf9f5;
+    background: var(--ms-inverse-bg);
+    color: var(--ms-inverse-fg);
     padding: 16px 20px;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid rgba(45, 74, 62, 0.2);
+    border-bottom: 1px solid color-mix(in srgb, var(--ms-text) 20%, transparent); --ms-text: #FFFFFF; --ms-muted: #C4BDE6; --ms-accent-text: #FF6A2B; --ms-border: #3A2F6B; --ms-focus: #FF6A2B;
 }
 
 .bentley-avatar-container {
     position: relative;
     width: 38px;
     height: 38px;
-    background: rgba(250, 249, 245, 0.1);
+    background: color-mix(in srgb, var(--ms-ground) 10%, transparent);
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -95,11 +95,11 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    border: 2px solid #2d4a3e;
+    border: 2px solid var(--ms-text);
 }
 
 .status-indicator.online {
-    background: #4ade80;
+    background: var(--ms-yellow);
     animation: pulseGlow 2s infinite;
 }
 
@@ -114,7 +114,7 @@
 
 .bentley-name {
     margin: 0;
-    font-family: "Playfair Display", serif;
+    font-family: var(--ms-font-head);
     font-size: 1.15rem;
     font-weight: 700;
     line-height: 1.2;
@@ -131,7 +131,7 @@
 .bentley-close-btn {
     background: none;
     border: none;
-    color: #faf9f5;
+    color: var(--ms-inverse-fg);
     opacity: 0.6;
     font-size: 1.1rem;
     cursor: pointer;
@@ -150,7 +150,7 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    background: #faf9f5;
+    background: var(--ms-ground);
 }
 
 /* Chat bubble styling */
@@ -173,20 +173,20 @@
     font-size: 0.9rem;
     line-height: 1.5;
     position: relative;
-    box-shadow: 0 2px 6px rgba(45, 74, 62, 0.02);
+    box-shadow: 0 2px 6px color-mix(in srgb, var(--ms-ink) 2%, transparent);
 }
 
 .chat-bubble-wrapper.bentley .chat-bubble {
-    background: rgba(45, 74, 62, 0.05);
-    color: #2d4a3e;
+    background: color-mix(in srgb, var(--ms-inverse-bg) 5%, transparent);
+    color: var(--ms-text);
     border-radius: 16px 16px 16px 2px;
-    border: 1px solid rgba(45, 74, 62, 0.06);
+    border: 1px solid color-mix(in srgb, var(--ms-text) 6%, transparent);
 }
 
 .chat-bubble-wrapper.user .chat-bubble {
-    background: #2d4a3e;
-    color: #faf9f5;
-    border-radius: 16px 16px 2px 16px;
+    background: var(--ms-inverse-bg);
+    color: var(--ms-inverse-fg);
+    border-radius: 16px 16px 2px 16px; --ms-text: #FFFFFF; --ms-muted: #C4BDE6; --ms-accent-text: #FF6A2B; --ms-border: #3A2F6B; --ms-focus: #FF6A2B;
 }
 
 .bubble-text {
@@ -207,8 +207,8 @@
     gap: 8px;
     padding: 10px 20px;
     overflow-x: auto;
-    background: #faf9f5;
-    border-top: 1px solid rgba(45, 74, 62, 0.04);
+    background: var(--ms-ground);
+    border-top: 1px solid color-mix(in srgb, var(--ms-text) 4%, transparent);
     scrollbar-width: none; /* Hide scrollbar Firefox */
 }
 
@@ -217,9 +217,9 @@
 }
 
 .quick-reply-btn {
-    background: #ffffff;
-    border: 1px solid rgba(45, 74, 62, 0.12);
-    color: #2d4a3e;
+    background: var(--ms-surface);
+    border: 1px solid color-mix(in srgb, var(--ms-text) 12%, transparent);
+    color: var(--ms-text);
     padding: 6px 14px;
     border-radius: 9999px;
     font-size: 11px;
@@ -230,9 +230,9 @@
 }
 
 .quick-reply-btn:hover {
-    background: #2d4a3e;
-    color: #faf9f5;
-    border-color: #2d4a3e;
+    background: var(--ms-btn-bg);
+    color: var(--ms-btn-fg);
+    border-color: var(--ms-text);
 }
 
 /* Typing Indicator */
@@ -246,10 +246,10 @@
 .typing-indicator span {
     width: 6px;
     height: 6px;
-    background: #2d4a3e;
+    background: var(--ms-inverse-bg);
     border-radius: 50%;
     opacity: 0.4;
-    animation: typingBounce 1.4s infinite ease-in-out both;
+    animation: typingBounce 1.4s infinite ease-in-out both; --ms-text: #FFFFFF; --ms-muted: #C4BDE6; --ms-accent-text: #FF6A2B; --ms-border: #3A2F6B; --ms-focus: #FF6A2B;
 }
 
 .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
@@ -264,33 +264,33 @@
 .bentley-input-form {
     display: flex;
     padding: 12px 16px;
-    background: #ffffff;
-    border-top: 1px solid rgba(45, 74, 62, 0.08);
+    background: var(--ms-surface);
+    border-top: 1px solid color-mix(in srgb, var(--ms-text) 8%, transparent);
 }
 
 .bentley-chat-input {
     flex-grow: 1;
-    border: 1px solid rgba(45, 74, 62, 0.15);
-    background: #faf9f5;
+    border: 1px solid color-mix(in srgb, var(--ms-text) 15%, transparent);
+    background: var(--ms-ground);
     padding: 10px 16px;
     border-radius: 9999px;
     font-size: 0.9rem;
-    color: #2d4a3e;
+    color: var(--ms-text);
     outline: none;
     transition: border-color 0.2s;
 }
 
 .bentley-chat-input::placeholder {
-    color: rgba(45, 74, 62, 0.4);
+    color: var(--ms-muted);
 }
 
 .bentley-chat-input:focus {
-    border-color: #2d4a3e;
+    border-color: var(--ms-text);
 }
 
 .bentley-send-btn {
-    background: #2d4a3e;
-    color: #faf9f5;
+    background: var(--ms-btn-bg);
+    color: var(--ms-btn-fg);
     border: none;
     padding: 10px 18px;
     border-radius: 9999px;
@@ -302,7 +302,7 @@
 }
 
 .bentley-send-btn:hover {
-    background: #395d4e;
+    background: var(--ms-inverse-bg); --ms-text: #FFFFFF; --ms-muted: #C4BDE6; --ms-accent-text: #FF6A2B; --ms-border: #3A2F6B; --ms-focus: #FF6A2B;
 }
 
 /* Responsive Styles */

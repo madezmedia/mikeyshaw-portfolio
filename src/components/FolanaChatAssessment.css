@@ -6,7 +6,7 @@
 
 .folana-messages {
   scrollbar-width: thin;
-  scrollbar-color: rgba(45, 74, 62, 0.25) transparent;
+  scrollbar-color: var(--ms-muted) transparent;
 }
 
 .folana-messages::-webkit-scrollbar {
@@ -14,7 +14,7 @@
 }
 
 .folana-messages::-webkit-scrollbar-thumb {
-  background: rgba(45, 74, 62, 0.25);
+  background: color-mix(in srgb, var(--ms-inverse-bg) 25%, transparent);
   border-radius: 999px;
 }
 
@@ -28,7 +28,7 @@
   width: 6px;
   height: 6px;
   border-radius: 999px;
-  background: rgba(45, 74, 62, 0.5);
+  background: color-mix(in srgb, var(--ms-inverse-bg) 50%, transparent);
   animation: folanaDotPulse 1.2s ease-in-out infinite both;
 }
 

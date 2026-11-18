@@ -86,7 +86,7 @@ const { project } = Astro.props;
 
     .project-card:hover {
         transform: translate(-6px, -6px);
-        box-shadow: 6px 6px 0px var(--accent-pink);
+        box-shadow: 6px 6px 0px var(--ms-ember);
     }
 
     .project-card-inner {
@@ -119,7 +119,7 @@ const { project } = Astro.props;
     }
 
     .project-title {
-        font-family: 'Playfair Display', serif;
+        font-family: var(--ms-font-head);
         font-size: 1.5rem;
         color: var(--primary);
         font-weight: 700;
@@ -200,7 +200,7 @@ const { project } = Astro.props;
         border-radius: 0px;
         text-decoration: none;
         font-weight: 600;
-        border: 2px solid var(--accent);
+        border: 2px solid var(--ms-text);
         transition: all 0.2s ease;
     }
 
@@ -210,19 +210,19 @@ const { project } = Astro.props;
     }
 
     .project-link.github:hover {
-        background: var(--accent);
-        color: var(--bg-primary);
+        background: var(--ms-text);
+        color: var(--ms-ground);
     }
 
     .project-link.live {
-        background: var(--accent-yellow);
-        color: #000000;
-        border-color: var(--accent-yellow);
+        background: var(--ms-btn-bg);
+        color: var(--ms-btn-fg);
+        border-color: var(--ms-btn-bg);
     }
 
     .project-link.live:hover {
         background: transparent;
-        color: var(--accent-yellow);
+        color: var(--ms-text);
     }
 
     @media (max-width: 768px) {

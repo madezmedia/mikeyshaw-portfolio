@@ -42,7 +42,7 @@ const {
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		
 		<meta name="color-scheme" content="light dark" />
-		<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="var(--ms-inverse-fg)" media="(prefers-color-scheme: light)" />
 		<meta name="theme-color" content="#1E1640" media="(prefers-color-scheme: dark)" />
 
 		<!-- Brand kit v3 fonts: Playfair Display 900 (+italic), Raleway 500/700/900, Roboto Mono 700 -->
@@ -225,11 +225,9 @@ const {
 }}>
     :root {
         /* Legacy layout variables, now pointed at kit v3 tokens (kit-v3.css) */
-        --primary: var(--ms-text);
-        --secondary: var(--ms-muted);
-        --accent: var(--ms-ember);
-        --accent-yellow: var(--ms-yellow);
-        --accent-pink: var(--ms-magenta);
+        /* --primary, --secondary and --accent come from global.css (shadcn roles). */
+        --accent-yellow: var(--ms-accent-text);
+        --accent-pink: var(--ms-accent-text);
         --accent-cyan: var(--ms-blue);
         --accent-purple: var(--ms-violet);
         --bg-primary: var(--ms-ground);
@@ -325,11 +323,11 @@ const {
     }
 
     ::-webkit-scrollbar-thumb {
-        background: var(--accent);
+        background: var(--ms-border);
         border-radius: 0px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        background: color-mix(in srgb, var(--accent) 80%, white);
+        background: var(--ms-muted);
     }
 </style>

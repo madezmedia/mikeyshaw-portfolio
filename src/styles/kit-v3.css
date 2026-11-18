@@ -35,6 +35,11 @@
     --ms-r-card: 16px;
     --ms-r-pill: 999px;
 
+    /* Inverse panel: ink in both themes, white text. Safe for dark blocks. */
+    --ms-inverse-bg: #120E24;
+    --ms-inverse-fg: #FFFFFF;
+    --ms-inverse-muted: #C4BDE6;
+
     /* Mikey Shaw Light (default) */
     color-scheme: light;
     --ms-ground: #FFFFFF;
@@ -167,3 +172,28 @@
     }
     .ms-btn:hover { transform: none; }
 }
+
+/* Inverse panels (ink in both themes): re-point text roles inside them so
+   ink text, ember deep accents and outline buttons stay readable. */
+[class~="bg-[var(--ms-inverse-bg)]"],
+[class*="bg-[var(--ms-inverse-bg)]/5"],
+[class*="bg-[var(--ms-inverse-bg)]/6"],
+[class*="bg-[var(--ms-inverse-bg)]/7"],
+[class*="bg-[var(--ms-inverse-bg)]/8"],
+[class*="bg-[var(--ms-inverse-bg)]/9"] {
+    --ms-text: #FFFFFF;
+    --ms-muted: #C4BDE6;
+    --ms-accent-text: #FF6A2B;
+    --ms-border: #3A2F6B;
+    --ms-focus: #FF6A2B;
+    /* Nested cards become a dark island too, not light cards with white text. */
+    --ms-surface: #1E1640;
+    --ms-ground: #1E1640;
+    --ms-btn-bg: #FF6A2B;
+    --ms-btn-fg: #120E24;
+    --ms-btn-shadow: none;
+}
+
+/* Legacy accent fills: ember with an ink label in both themes. */
+.bg-accent-pink, .bg-accent-yellow { background-color: var(--ms-ember) !important; color: var(--ms-ink) !important; }
+.bg-accent-cyan, .bg-accent-blue { color: var(--ms-ink) !important; }

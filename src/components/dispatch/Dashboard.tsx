@@ -13,14 +13,14 @@ import {
 
 /* ── Status Config ── */
 const statusConfig: Record<string, { variant: 'default' | 'secondary' | 'destructive' | 'outline'; className: string; label: string; color: string; bg: string }> = {
-  'on-job':      { variant: 'default',   className: 'bg-amber-500/15 text-amber-400 border-amber-500/30 hover:bg-amber-500/20', label: 'On Job',       color: '#F59E0B', bg: 'rgba(245,158,11,0.08)' },
-  'en-route':    { variant: 'secondary', className: 'bg-blue-500/15 text-blue-400 border-blue-500/30 hover:bg-blue-500/20',     label: 'En Route',     color: '#3B82F6', bg: 'rgba(59,130,246,0.08)' },
-  'available':   { variant: 'secondary', className: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/20', label: 'Available', color: '#10B981', bg: 'rgba(16,185,129,0.08)' },
-  'maintenance': { variant: 'destructive', className: 'bg-red-500/15 text-red-400 border-red-500/30 hover:bg-red-500/20',       label: 'Down',         color: '#EF4444', bg: 'rgba(239,68,68,0.08)' },
-  'in-progress': { variant: 'default',   className: 'bg-amber-500/15 text-amber-400 border-amber-500/30 hover:bg-amber-500/20', label: 'In Progress',  color: '#F59E0B', bg: 'rgba(245,158,11,0.08)' },
-  'confirmed':   { variant: 'secondary', className: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/20', label: 'Confirmed', color: '#10B981', bg: 'rgba(16,185,129,0.08)' },
-  'scheduled':   { variant: 'secondary', className: 'bg-sky-500/15 text-sky-400 border-sky-500/30 hover:bg-sky-500/20',         label: 'Scheduled',    color: '#0EA5E9', bg: 'rgba(14,165,233,0.08)' },
-  'tentative':   { variant: 'outline',   className: 'bg-slate-500/15 text-slate-400 border-slate-500/30',                        label: 'Tentative',    color: '#64748B', bg: 'rgba(100,116,139,0.08)' },
+  'on-job':      { variant: 'default',   className: 'bg-[var(--ms-yellow)] text-[var(--ms-ink)] border-transparent hover:bg-[var(--ms-yellow)]', label: 'On Job',       color: 'var(--ms-accent-text)', bg: 'color-mix(in srgb, var(--ms-yellow) 12%, transparent)' },
+  'en-route':    { variant: 'secondary', className: 'bg-[var(--ms-blue)] text-[var(--ms-ink)] border-transparent hover:bg-[var(--ms-blue)]',     label: 'En Route',     color: 'var(--ms-accent-text)', bg: 'color-mix(in srgb, var(--ms-blue) 12%, transparent)' },
+  'available':   { variant: 'secondary', className: 'bg-transparent text-[var(--ms-text)] border-[var(--ms-border)]', label: 'Available', color: 'var(--ms-text)', bg: 'color-mix(in srgb, var(--ms-text) 8%, transparent)' },
+  'maintenance': { variant: 'destructive', className: 'bg-[var(--ms-magenta)] text-[var(--ms-ink)] border-transparent hover:bg-[var(--ms-magenta)]',       label: 'Down',         color: 'var(--ms-accent-text)', bg: 'color-mix(in srgb, var(--ms-magenta) 12%, transparent)' },
+  'in-progress': { variant: 'default',   className: 'bg-[var(--ms-yellow)] text-[var(--ms-ink)] border-transparent hover:bg-[var(--ms-yellow)]', label: 'In Progress',  color: 'var(--ms-accent-text)', bg: 'color-mix(in srgb, var(--ms-yellow) 12%, transparent)' },
+  'confirmed':   { variant: 'secondary', className: 'bg-transparent text-[var(--ms-text)] border-[var(--ms-border)]', label: 'Confirmed', color: 'var(--ms-text)', bg: 'color-mix(in srgb, var(--ms-text) 8%, transparent)' },
+  'scheduled':   { variant: 'secondary', className: 'bg-[var(--ms-blue)] text-[var(--ms-ink)] border-transparent hover:bg-[var(--ms-blue)]',         label: 'Scheduled',    color: 'var(--ms-accent-text)', bg: 'color-mix(in srgb, var(--ms-blue) 12%, transparent)' },
+  'tentative':   { variant: 'outline',   className: 'bg-transparent text-[var(--ms-text)] border-[var(--ms-border)]',                        label: 'Tentative',    color: 'var(--ms-muted)', bg: 'color-mix(in srgb, var(--ms-muted) 8%, transparent)' },
 };
 
 /* ── Live Clock ── */
@@ -55,12 +55,12 @@ function Header({ alertsOpen, setAlertsOpen, unread }: { alertsOpen: boolean; se
     <header className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur-md">
       <div className="flex items-center justify-between px-3 py-2 sm:px-6 sm:py-3">
         <div className="flex items-center gap-3">
-          <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 text-xs sm:text-sm font-extrabold text-background shadow-lg shadow-amber-500/20">
+          <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-gradient-to-br from-[var(--ms-ember)] to-[var(--ms-ember)] text-xs sm:text-sm font-extrabold text-[var(--ms-ink)] shadow-lg shadow-[var(--ms-ember)]/20">
             CP
           </div>
           <div>
             <h1 className="text-sm sm:text-lg font-bold text-foreground leading-tight">Core Pumping Solutions</h1>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-amber-400">Dispatch Command Center</p>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--ms-accent-text)]">Dispatch Command Center</p>
           </div>
         </div>
         <div className="flex items-center gap-2 sm:gap-5">
@@ -69,13 +69,13 @@ function Header({ alertsOpen, setAlertsOpen, unread }: { alertsOpen: boolean; se
             <Button variant="ghost" size="icon" className="relative" onClick={() => setAlertsOpen(!alertsOpen)}>
               <Bell className="h-5 w-5 text-muted-foreground" />
               {unread > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-[10px] font-bold text-destructive-foreground shadow-lg shadow-destructive/30">
+                <span className="absolute -top-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-[10px] font-bold text-[var(--ms-ink)] shadow-lg shadow-destructive/30">
                   {unread}
                 </span>
               )}
             </Button>
           </div>
-          <div className="flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-full border-2 border-amber-500 bg-amber-500/15 text-xs font-bold text-amber-400">
+          <div className="flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-full border-2 border-[var(--ms-ember)] bg-[var(--ms-ember)]/15 text-xs font-bold text-[var(--ms-text)]">
             MS
           </div>
         </div>
@@ -92,8 +92,8 @@ function FleetCard({ truck, isSelected, onClick }: { truck: typeof mockData.truc
     <Card
       className={`cursor-pointer transition-all duration-200 hover:shadow-lg snap-start flex-shrink-0 w-[160px] sm:w-auto ${
         isSelected
-          ? 'border-amber-500/60 bg-amber-500/5 shadow-lg shadow-amber-500/10 ring-1 ring-amber-500/30'
-          : 'border-border bg-card hover:border-amber-500/20'
+          ? 'border-[var(--ms-ember)]/60 bg-[var(--ms-ember)]/5 shadow-lg shadow-[var(--ms-ember)]/10 ring-1 ring-[var(--ms-ember)]/30'
+          : 'border-border bg-card hover:border-[var(--ms-ember)]/20'
       }`}
       onClick={onClick}
     >
@@ -111,14 +111,14 @@ function FleetCard({ truck, isSelected, onClick }: { truck: typeof mockData.truc
         <p className="text-xs text-muted-foreground">{truck.type}</p>
         <p className="text-xs text-muted-foreground mt-0.5">{truck.operator}</p>
         {job && (
-          <p className="text-[11px] text-amber-400/80 mt-2 font-medium">
+          <p className="text-[11px] text-[var(--ms-accent-text)] mt-2 font-medium">
             #{job.id} {job.customer}
           </p>
         )}
         <Separator className="my-2 opacity-50" />
         <p className="text-xs">
           {truck.hoursToday > 0 ? (
-            <span className="text-emerald-400 font-medium">{truck.hoursToday} hrs today</span>
+            <span className="text-[var(--ms-text)] font-medium">{truck.hoursToday} hrs today</span>
           ) : (
             <span className="text-muted-foreground">No hours today</span>
           )}
@@ -159,8 +159,8 @@ function Schedule({ selectedJobId, onSelectJob }: { selectedJobId: string | null
               const now = new Date(); const nowMin = now.getHours() * 60 + now.getMinutes();
               if (nowMin >= 360 && nowMin <= 1080) {
                 return (
-                  <div className="absolute top-0 bottom-0 z-10" style={{ left: `${((nowMin - 360) / 720) * 100}%`, borderLeft: '2px solid #EF4444' }}>
-                    <div className="absolute -top-1 left-[-4px] w-2 h-2 rounded-full bg-red-500 shadow-lg shadow-red-500/50" />
+                  <div className="absolute top-0 bottom-0 z-10" style={{ left: `${((nowMin - 360) / 720) * 100}%`, borderLeft: '2px solid var(--ms-ember)' }}>
+                    <div className="absolute -top-1 left-[-4px] w-2 h-2 rounded-full bg-[var(--ms-magenta)] shadow-lg shadow-red-500/50" />
                   </div>
                 );
               }
@@ -176,11 +176,11 @@ function Schedule({ selectedJobId, onSelectJob }: { selectedJobId: string | null
                   key={job.id}
                   onClick={() => onSelectJob(job.id)}
                   className={`absolute rounded-lg px-2 py-1.5 text-left transition-all duration-150 cursor-pointer overflow-hidden ${
-                    sel ? 'ring-2 ring-amber-400 z-20 shadow-lg' : 'hover:brightness-125'
+                    sel ? 'ring-2 ring-[var(--ms-ember)] z-20 shadow-lg' : 'hover:brightness-125'
                   }`}
                   style={{
                     left: `${left}%`, width: `${width}%`, top: idx * 34,
-                    background: sc.bg, border: sel ? `1px solid ${sc.color}` : '1px solid rgba(255,255,255,0.06)',
+                    background: sc.bg, border: sel ? `1px solid ${sc.color}` : '1px solid color-mix(in srgb, var(--ms-inverse-fg) 6%, transparent)',
                   }}
                 >
                   <div className="text-[11px] font-semibold text-foreground truncate">#{job.id} {job.customer}</div>
@@ -199,11 +199,11 @@ function Schedule({ selectedJobId, onSelectJob }: { selectedJobId: string | null
 function StatsCards() {
   const s = mockData.stats;
   const cards = [
-    { label: 'Jobs Today', value: s.jobsToday, max: 10, icon: CalendarDays, color: '#F59E0B', prefix: '' },
-    { label: 'Yards Pumped', value: s.yardsPumped, max: 800, icon: BarChart3, color: '#3B82F6', prefix: '' },
-    { label: 'Revenue Today', value: s.revenueToday, max: 8000, icon: DollarSign, color: '#10B981', prefix: '$' },
-    { label: 'On-Time Rate', value: s.onTimeRate, max: 100, icon: Clock, color: '#10B981', prefix: '', suffix: '%' },
-    { label: 'Fleet Utilization', value: s.fleetUtilization, max: 100, icon: Truck, color: '#F59E0B', prefix: '', suffix: '%' },
+    { label: 'Jobs Today', value: s.jobsToday, max: 10, icon: CalendarDays, color: 'var(--ms-accent-text)', prefix: '' },
+    { label: 'Yards Pumped', value: s.yardsPumped, max: 800, icon: BarChart3, color: 'var(--ms-accent-text)', prefix: '' },
+    { label: 'Revenue Today', value: s.revenueToday, max: 8000, icon: DollarSign, color: 'var(--ms-text)', prefix: '$' },
+    { label: 'On-Time Rate', value: s.onTimeRate, max: 100, icon: Clock, color: 'var(--ms-text)', prefix: '', suffix: '%' },
+    { label: 'Fleet Utilization', value: s.fleetUtilization, max: 100, icon: Truck, color: 'var(--ms-accent-text)', prefix: '', suffix: '%' },
   ];
   return (
     <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-1 sm:pb-0 sm:grid sm:grid-cols-5 -mx-2 px-2 sm:mx-0 sm:px-0 snap-x snap-mandatory">
@@ -256,10 +256,10 @@ function JobsTable({ selectedJobId, onSelectJob }: { selectedJobId: string | nul
                   key={job.id}
                   onClick={() => onSelectJob(job.id)}
                   className={`cursor-pointer border-b border-border/50 transition-colors ${
-                    sel ? 'bg-amber-500/8' : 'hover:bg-muted/50'
+                    sel ? 'bg-[var(--ms-ember)]/8' : 'hover:bg-muted/50'
                   }`}
                 >
-                  <td className="px-4 py-3 font-mono font-semibold text-amber-400">#{job.id}</td>
+                  <td className="px-4 py-3 font-mono font-semibold text-[var(--ms-accent-text)]">#{job.id}</td>
                   <td className="px-4 py-3 font-medium text-foreground">{job.customer}</td>
                   <td className="px-4 py-3 text-xs text-muted-foreground">{job.address.split(',')[0]}</td>
                   <td className="px-4 py-3 text-muted-foreground">{job.truck || '—'}</td>
@@ -341,13 +341,13 @@ function JobDetail({ job, onClose }: { job: typeof mockData.jobs[0] | undefined;
             </div>
             <div>
               <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Revenue</p>
-              <p className="text-sm font-bold text-emerald-400 mt-0.5">${revenue.toLocaleString()}</p>
+              <p className="text-sm font-bold text-[var(--ms-text)] mt-0.5">${revenue.toLocaleString()}</p>
             </div>
           </div>
 
           {job.specialInstructions && (
-            <div className="rounded-lg bg-amber-500/8 border-l-[3px] border-amber-500 p-3">
-              <p className="text-[10px] font-semibold uppercase tracking-wider text-amber-400 mb-1">Special Instructions</p>
+            <div className="rounded-lg bg-[var(--ms-ember)]/8 border-l-[3px] border-[var(--ms-ember)] p-3">
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--ms-accent-text)] mb-1">Special Instructions</p>
               <p className="text-xs text-muted-foreground">{job.specialInstructions}</p>
             </div>
           )}
@@ -358,7 +358,7 @@ function JobDetail({ job, onClose }: { job: typeof mockData.jobs[0] | undefined;
               {job.timeline.map((step, i) => (
                 <div key={i} className="flex items-center gap-3">
                   {step.done ? (
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[var(--ms-text)] flex-shrink-0" />
                   ) : (
                     <Circle className="w-3.5 h-3.5 text-muted-foreground/50 flex-shrink-0" />
                   )}
@@ -390,10 +390,10 @@ function JobDetail({ job, onClose }: { job: typeof mockData.jobs[0] | undefined;
 function AlertsPanel({ open, onClose }: { open: boolean; onClose: () => void }) {
   if (!open) return null;
   const typeConfig: Record<string, { icon: typeof AlertTriangle; color: string }> = {
-    warning: { icon: AlertTriangle, color: '#F59E0B' },
-    info:    { icon: Info,          color: '#3B82F6' },
-    new:     { icon: Plus,          color: '#10B981' },
-    success: { icon: CheckCircle2,  color: '#10B981' },
+    warning: { icon: AlertTriangle, color: 'var(--ms-accent-text)' },
+    info:    { icon: Info,          color: 'var(--ms-accent-text)' },
+    new:     { icon: Plus,          color: 'var(--ms-text)' },
+    success: { icon: CheckCircle2,  color: 'var(--ms-text)' },
   };
   return (
     <div className="fixed inset-0 z-50" onClick={onClose}>
@@ -410,7 +410,7 @@ function AlertsPanel({ open, onClose }: { open: boolean; onClose: () => void }) 
                 <div
                   key={alert.id}
                   className={`px-4 py-3 border-l-[3px] border-b border-border/50 transition-colors ${
-                    !alert.read ? 'bg-amber-500/5' : ''
+                    !alert.read ? 'bg-[var(--ms-ember)]/5' : ''
                   }`}
                   style={{ borderLeftColor: tc.color }}
                 >
@@ -472,12 +472,12 @@ export default function Dashboard() {
       {/* Footer */}
       <footer className="border-t border-border bg-card px-3 sm:px-6 py-2 flex flex-col sm:flex-row items-center justify-between gap-1 sm:gap-0 text-[10px] sm:text-[11px] text-muted-foreground">
         <div className="flex items-center gap-4">
-          <span><span className="inline-block w-2 h-2 rounded-full bg-emerald-500 mr-1" />{mockData.trucks.filter(t => t.status === 'available').length} Available</span>
-          <span><span className="inline-block w-2 h-2 rounded-full bg-amber-500 mr-1" />{mockData.trucks.filter(t => t.status === 'on-job').length} On Job</span>
-          <span><span className="inline-block w-2 h-2 rounded-full bg-blue-500 mr-1" />{mockData.trucks.filter(t => t.status === 'en-route').length} En Route</span>
-          <span><span className="inline-block w-2 h-2 rounded-full bg-red-500 mr-1" />{mockData.trucks.filter(t => t.status === 'maintenance').length} Down</span>
+          <span><span className="inline-block w-2 h-2 rounded-full bg-[var(--ms-yellow)] mr-1" />{mockData.trucks.filter(t => t.status === 'available').length} Available</span>
+          <span><span className="inline-block w-2 h-2 rounded-full bg-[var(--ms-ember)] mr-1" />{mockData.trucks.filter(t => t.status === 'on-job').length} On Job</span>
+          <span><span className="inline-block w-2 h-2 rounded-full bg-[var(--ms-blue)] mr-1" />{mockData.trucks.filter(t => t.status === 'en-route').length} En Route</span>
+          <span><span className="inline-block w-2 h-2 rounded-full bg-[var(--ms-magenta)] mr-1" />{mockData.trucks.filter(t => t.status === 'maintenance').length} Down</span>
         </div>
-        <span>Core Dispatch v1.0 — Built by <strong className="text-amber-400">Michael Shaw</strong></span>
+        <span>Core Dispatch v1.0 — Built by <strong className="text-[var(--ms-accent-text)]">Michael Shaw</strong></span>
       </footer>
     </div>
   );

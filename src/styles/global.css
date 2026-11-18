@@ -83,8 +83,9 @@
     --card-foreground: var(--ms-text);
     --popover: var(--ms-ground);
     --popover-foreground: var(--ms-text);
-    --primary: var(--ms-btn-bg);
-    --primary-foreground: var(--ms-btn-fg);
+    /* primary doubles as a text color in page markup, so it tracks text, not the ember button */
+    --primary: var(--ms-text);
+    --primary-foreground: var(--ms-ground);
     --secondary: var(--ms-surface);
     --secondary-foreground: var(--ms-text);
     --muted: var(--ms-surface);

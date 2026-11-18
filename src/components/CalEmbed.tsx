@@ -68,7 +68,7 @@ const CalEmbed: React.FC<CalEmbedProps> = ({
                     "theme": currentTheme,
                     "styles": {
                         "branding": {
-                            "brandColor": currentTheme === 'dark' ? '#D4AF37' : '#28A745'
+                            "brandColor": currentTheme === 'dark' ? '#FF6A2B' : '#120E24'
                         },
                         "colorScheme": currentTheme
                     },
@@ -93,14 +93,14 @@ const CalEmbed: React.FC<CalEmbedProps> = ({
 
     const themeStyles = {
         dark: {
-            backgroundColor: 'rgba(30, 30, 30, 0.9)',
-            color: '#E0E0E0',
-            borderColor: 'rgba(255, 255, 255, 0.1)'
+            backgroundColor: 'var(--ms-surface)',
+            color: 'var(--ms-muted)',
+            borderColor: 'color-mix(in srgb, var(--ms-border) 10%, transparent)'
         },
         light: {
-            backgroundColor: 'rgba(248, 249, 250, 0.9)',
-            color: '#212529',
-            borderColor: 'rgba(0, 0, 0, 0.1)'
+            backgroundColor: 'var(--ms-surface)',
+            color: 'var(--ms-text)',
+            borderColor: 'color-mix(in srgb, var(--ms-text) 10%, transparent)'
         }
     };
 
@@ -118,7 +118,7 @@ const CalEmbed: React.FC<CalEmbedProps> = ({
                 overflow: 'visible',
                 borderRadius: '8px',
                 transition: 'all 0.5s ease',
-                opacity: isLoading ? 0.5 : 1,
+                opacity: 1,
                 transform: isLoading ? 'scale(0.98)' : 'scale(1)',
                 backgroundColor: currentStyles.backgroundColor,
                 color: currentStyles.color,
@@ -133,15 +133,15 @@ const CalEmbed: React.FC<CalEmbedProps> = ({
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
                         textAlign: 'center',
-                        fontFamily: "'Inter', sans-serif"
+                        fontFamily: "var(--ms-font-body)"
                     }}
                 >
                     <div 
                         style={{
                             width: '50px',
                             height: '50px',
-                            border: '3px solid rgba(255,255,255,0.3)',
-                            borderTop: '3px solid #D4AF37',
+                            border: '3px solid color-mix(in srgb, var(--ms-border) 30%, transparent)',
+                            borderTop: '3px solid var(--ms-ember)',
                             borderRadius: '50%',
                             animation: 'spin 1s linear infinite',
                             margin: '0 auto 15px'

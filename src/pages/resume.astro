@@ -109,7 +109,7 @@ const experience = [
 <Layout title="Michael Shaw | Resume — Operations & Systems Architect">
     <Navbar />
 
-    <main class="pt-32 pb-24 bg-[#faf9f5]">
+    <main class="pt-32 pb-24 bg-[var(--ms-ground)]">
         <section class="px-6 md:px-[60px] max-w-4xl mx-auto">
             <div class="mb-10">
                 <a href="/" class="back-link">
@@ -224,10 +224,10 @@ const experience = [
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        font-family: "Outfit", sans-serif;
+        font-family: var(--ms-font-body);
         font-weight: 600;
         font-size: 0.9rem;
-        color: #2d4a3e;
+        color: var(--ms-text);
         text-decoration: none;
         transition: opacity 0.2s;
     }
@@ -241,7 +241,7 @@ const experience = [
         gap: 1rem;
         justify-content: space-between;
         align-items: flex-start;
-        border-bottom: 2px solid #2d4a3e;
+        border-bottom: 2px solid var(--ms-text);
         padding-bottom: 1.25rem;
         margin-bottom: 1.5rem;
     }
@@ -261,30 +261,30 @@ const experience = [
 
     .resume-name {
         margin: 0;
-        font-family: "Playfair Display", serif;
+        font-family: var(--ms-font-head);
         font-weight: 900;
         font-size: clamp(2rem, 4vw, 2.75rem);
         letter-spacing: 0.005em;
-        color: #2d4a3e;
+        color: var(--ms-text);
         line-height: 1;
     }
 
     .resume-eyebrow {
-        font-family: "JetBrains Mono", monospace;
+        font-family: var(--ms-font-mono);
         font-size: 11px;
         font-weight: 700;
         letter-spacing: 0.22em;
         text-transform: uppercase;
-        color: #E5007D;
+        color: var(--ms-accent-text);
     }
 
     .header-right {
         display: flex;
         flex-direction: column;
         gap: 0.25rem;
-        font-family: "JetBrains Mono", monospace;
+        font-family: var(--ms-font-mono);
         font-size: 11px;
-        color: rgba(45, 74, 62, 0.7);
+        color: color-mix(in srgb, var(--ms-text) 70%, transparent);
         text-align: left;
     }
 
@@ -296,10 +296,10 @@ const experience = [
 
     .resume-summary {
         margin: 0 0 2rem;
-        font-family: "Outfit", sans-serif;
+        font-family: var(--ms-font-body);
         font-size: 0.95rem;
         line-height: 1.65;
-        color: rgba(45, 74, 62, 0.85);
+        color: color-mix(in srgb, var(--ms-text) 85%, transparent);
         max-width: 60ch;
     }
 
@@ -311,16 +311,16 @@ const experience = [
     }
 
     .section-label {
-        font-family: "JetBrains Mono", monospace;
+        font-family: var(--ms-font-mono);
         font-size: 10px;
         font-weight: 700;
         letter-spacing: 0.22em;
         text-transform: uppercase;
-        color: rgba(45, 74, 62, 0.55);
+        color: var(--ms-muted);
     }
 
     .section-label--bordered {
-        border-bottom: 1px solid rgba(45, 74, 62, 0.15);
+        border-bottom: 1px solid color-mix(in srgb, var(--ms-text) 15%, transparent);
         padding-bottom: 0.6rem;
     }
 
@@ -349,17 +349,17 @@ const experience = [
     }
 
     .competency-item strong {
-        font-family: "Outfit", sans-serif;
+        font-family: var(--ms-font-body);
         font-size: 0.95rem;
         font-weight: 700;
-        color: #2d4a3e;
+        color: var(--ms-text);
     }
 
     .competency-item span {
-        font-family: "Outfit", sans-serif;
+        font-family: var(--ms-font-body);
         font-size: 0.82rem;
         line-height: 1.5;
-        color: rgba(45, 74, 62, 0.72);
+        color: color-mix(in srgb, var(--ms-text) 72%, transparent);
     }
 
     .experience-list {
@@ -399,22 +399,22 @@ const experience = [
     }
 
     .experience-title-row strong {
-        font-family: "Playfair Display", serif;
+        font-family: var(--ms-font-head);
         font-size: 1.1rem;
         font-weight: 800;
-        color: #2d4a3e;
+        color: var(--ms-text);
     }
 
     .experience-company {
-        font-family: "Outfit", sans-serif;
+        font-family: var(--ms-font-body);
         font-size: 0.88rem;
-        color: rgba(45, 74, 62, 0.6);
+        color: var(--ms-muted);
     }
 
     .experience-dates {
-        font-family: "JetBrains Mono", monospace;
+        font-family: var(--ms-font-mono);
         font-size: 10.5px;
-        color: rgba(45, 74, 62, 0.55);
+        color: var(--ms-muted);
         white-space: nowrap;
         flex-shrink: 0;
     }
@@ -428,10 +428,10 @@ const experience = [
     }
 
     .experience-bullets li {
-        font-family: "Outfit", sans-serif;
+        font-family: var(--ms-font-body);
         font-size: 0.88rem;
         line-height: 1.55;
-        color: rgba(45, 74, 62, 0.8);
+        color: color-mix(in srgb, var(--ms-text) 80%, transparent);
     }
 
     .education-row {
@@ -444,7 +444,7 @@ const experience = [
         gap: 2rem;
         margin-top: 1rem;
         padding-top: 2rem;
-        border-top: 1px solid rgba(45, 74, 62, 0.15);
+        border-top: 1px solid color-mix(in srgb, var(--ms-text) 15%, transparent);
     }
 
     @media (min-width: 768px) {
@@ -463,20 +463,20 @@ const experience = [
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
-        font-family: "Outfit", sans-serif;
+        font-family: var(--ms-font-body);
         font-size: 0.82rem;
         line-height: 1.55;
-        color: rgba(45, 74, 62, 0.8);
+        color: color-mix(in srgb, var(--ms-text) 80%, transparent);
     }
 
     .skills-list strong {
-        color: #2d4a3e;
+        color: var(--ms-text);
     }
 
     .footer-meta {
-        font-family: "JetBrains Mono", monospace;
+        font-family: var(--ms-font-mono);
         font-size: 10.5px;
-        color: rgba(45, 74, 62, 0.6);
+        color: var(--ms-muted);
         margin-top: 0.25rem;
     }
 </style>

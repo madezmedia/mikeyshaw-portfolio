@@ -44,9 +44,9 @@ export const PROJECTS: Project[] = [
             { name: 'ElevenLabs', icon: '/icons/elevenlabs.svg' }
         ],
         statistics: [
-            { label: 'Commits', value: '4', icon: '📝', color: '#00BCD4' },          // Cyan
-            { label: 'Assets', value: 'Postiz', icon: '🔄', color: '#FFCC00' },       // Yellow
-            { label: 'Status', value: 'Active', icon: '🚀', color: '#CC6688' }        // Pink
+            { label: 'Commits', value: '4', icon: '📝', color: 'var(--ms-accent-text)' },          // Cyan
+            { label: 'Assets', value: 'Postiz', icon: '🔄', color: 'var(--ms-accent-text)' },       // Yellow
+            { label: 'Status', value: 'Active', icon: '🚀', color: 'var(--ms-accent-text)' }        // Pink
         ],
         links: [
             { type: 'github', url: 'https://github.com/madezmedia/folanas-journal' }
@@ -67,9 +67,9 @@ export const PROJECTS: Project[] = [
             { name: 'Vercel', icon: '/icons/vercel.svg' }
         ],
         statistics: [
-            { label: 'Spec Version', value: 'v1.4.0', icon: '📄', color: '#FFCC00' }, // Yellow
-            { label: 'SDK', value: 'TS/Node', icon: '📦', color: '#00BCD4' },        // Cyan
-            { label: 'License', value: 'MIT', icon: '🔐', color: '#ffffff' }         // White
+            { label: 'Spec Version', value: 'v1.4.0', icon: '📄', color: 'var(--ms-accent-text)' }, // Yellow
+            { label: 'SDK', value: 'TS/Node', icon: '📦', color: 'var(--ms-accent-text)' },        // Cyan
+            { label: 'License', value: 'MIT', icon: '🔐', color: 'var(--ms-inverse-fg)' }         // White
         ],
         links: [
             { type: 'github', url: 'https://github.com/madezmedia/acmi' }
@@ -91,9 +91,9 @@ export const PROJECTS: Project[] = [
             { name: 'Supabase', icon: '/icons/supabase.svg' }
         ],
         statistics: [
-            { label: 'Commits', value: '421', icon: '💻', color: '#CC6688' },        // Pink
-            { label: 'Integrations', value: 'Fanvue', icon: '🔌', color: '#00BCD4' }, // Cyan
-            { label: 'Owner Agent', value: 'Claude', icon: '🤖', color: '#FFCC00' }  // Yellow
+            { label: 'Commits', value: '421', icon: '💻', color: 'var(--ms-accent-text)' },        // Pink
+            { label: 'Integrations', value: 'Fanvue', icon: '🔌', color: 'var(--ms-accent-text)' }, // Cyan
+            { label: 'Owner Agent', value: 'Claude', icon: '🤖', color: 'var(--ms-accent-text)' }  // Yellow
         ],
         links: [
             { type: 'github', url: 'https://github.com/madezmedia/ez-influencer-360' }
@@ -115,9 +115,9 @@ export const PROJECTS: Project[] = [
             { name: 'Next.js', icon: '/icons/nextjs.svg' }
         ],
         statistics: [
-            { label: 'Apps Live', value: '6', icon: '📱', color: '#FFCC00' },         // Yellow
-            { label: 'Revenue/Client', value: '$497/mo', icon: '💰', color: '#00BCD4' },// Cyan
-            { label: 'Cost Cut', value: '90%', icon: '📉', color: '#CC6688' }         // Pink
+            { label: 'Apps Live', value: '6', icon: '📱', color: 'var(--ms-accent-text)' },         // Yellow
+            { label: 'Revenue/Client', value: '$497/mo', icon: '💰', color: 'var(--ms-accent-text)' },// Cyan
+            { label: 'Cost Cut', value: '90%', icon: '📉', color: 'var(--ms-accent-text)' }         // Pink
         ],
         links: [
             { type: 'live', url: 'https://openclaw-restaurants-1dh0a6pgt-mad-ez-media.vercel.app' }

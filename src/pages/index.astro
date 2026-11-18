@@ -28,16 +28,16 @@ import ServicesAndOffers from '../components/ServicesAndOffers.tsx';
         <section class="min-h-screen editorial-grid pt-36 relative overflow-hidden" id="hero">
             <div class="overlap-1 flex flex-col justify-center reveal-item opacity-0">
                 <span class="font-label-mono text-accent-pink mb-4 tracking-[0.4em] uppercase text-xs font-semibold">N° 01 • THE STUDIO</span>
-                <h1 class="font-display-xl text-[5.5vw] md:text-[4.2vw] leading-[1.05] font-black tracking-tight text-[#2d4a3e]">
+                <h1 class="font-display-xl text-[5.5vw] md:text-[4.2vw] leading-[1.05] font-black tracking-tight text-[var(--ms-text)]">
                     Stop managing AI tools. <br/><em class="em-gradient font-black">Start running AI systems.</em>
                 </h1>
-                <p class="font-body-md text-lg text-[#2d4a3e]/85 max-w-xl mt-8 leading-relaxed">
+                <p class="font-body-md text-lg text-[var(--ms-text)]/85 max-w-xl mt-8 leading-relaxed">
                     I help operators, executives, and sales professionals build AI that remembers their business — using the ACMI framework (Profile / Signals / Timeline) so nothing falls through the cracks.
                 </p>
                 <div class="flex flex-wrap gap-4 items-center mt-10">
-                    <a class="bg-[#2d4a3e] text-white px-8 py-4 font-bold text-xs uppercase tracking-widest hover:bg-[#3a5c4e] transition-all rounded-full no-underline" href="/starter-kit">Get Free ACMI Kit →</a>
-                    <a class="bg-[#E5007D] text-white px-8 py-4 font-bold text-xs uppercase tracking-widest hover:bg-[#c4006a] transition-all rounded-full no-underline" href="/assessment">Book $499 AI Assessment</a>
-                    <a class="bg-[#00B9F1] text-white px-8 py-4 font-bold text-xs uppercase tracking-widest hover:bg-[#009ac8] transition-all rounded-full no-underline" href="/fleet">Deploy ACMI Fleet ($4,500)</a>
+                    <a class="bg-[var(--ms-btn-bg)] shadow-[var(--ms-btn-shadow)] text-[var(--ms-btn-fg)] px-8 py-4 font-bold text-xs uppercase tracking-widest hover:bg-[var(--ms-btn-bg)] transition-all rounded-full no-underline" href="/starter-kit">Get Free ACMI Kit →</a>
+                    <a class="bg-transparent border-2 border-[var(--ms-text)] text-[var(--ms-text)] px-8 py-4 font-bold text-xs uppercase tracking-widest hover:bg-[var(--ms-surface)] transition-all rounded-full no-underline" href="/assessment">Book $499 AI Assessment</a>
+                    <a class="bg-transparent border-2 border-[var(--ms-text)] text-[var(--ms-text)] px-8 py-4 font-bold text-xs uppercase tracking-widest hover:bg-[var(--ms-surface)] transition-all rounded-full no-underline" href="/fleet">Deploy ACMI Fleet ($4,500)</a>
                 </div>
             </div>
             
@@ -46,14 +46,14 @@ import ServicesAndOffers from '../components/ServicesAndOffers.tsx';
                     <Image 
                         src={mikeyShaw}
                         alt="Mikey Shaw" 
-                        class="w-full h-[550px] object-cover grayscale contrast-115 brightness-95 hover:grayscale-0 transition-all duration-700 rounded-2xl border border-[#2d4a3e]/10 shadow-md" 
+                        class="w-full h-[550px] object-cover grayscale contrast-115 brightness-95 hover:grayscale-0 transition-all duration-700 rounded-2xl border border-[var(--ms-text)]/10 shadow-md" 
                         width={800}
                         height={600}
                         format="avif"
                         quality="high"
                         loading="eager"
                     />
-                    <div class="absolute -bottom-6 -left-6 p-6 bg-white/95 backdrop-blur-md text-[#2d4a3e] max-w-xs rounded-xl border border-[#2d4a3e]/10 shadow-lg">
+                    <div class="absolute -bottom-6 -left-6 p-6 bg-[var(--ms-surface)]/95 backdrop-blur-md text-[var(--ms-text)] max-w-xs rounded-xl border border-[var(--ms-text)]/10 shadow-lg">
                         <p class="font-headline-md leading-tight font-bold text-sm">
                             "If it requires manual button clicks, it is an operational liability."
                         </p>
@@ -63,7 +63,7 @@ import ServicesAndOffers from '../components/ServicesAndOffers.tsx';
             </div>
 
             <!-- Vertical Text Decorative -->
-            <div class="absolute right-10 top-1/2 -translate-y-1/2 text-vertical font-label-mono text-[10px] tracking-[1em] opacity-35 uppercase hidden lg:block text-primary">
+            <div class="absolute right-10 top-1/2 -translate-y-1/2 text-vertical font-label-mono text-[10px] tracking-[1em] uppercase hidden lg:block text-[var(--ms-muted)]">
                 Autonomous Systems • Technical Leadership • Persistent Protocols
             </div>
         </section>
@@ -84,26 +84,26 @@ import ServicesAndOffers from '../components/ServicesAndOffers.tsx';
                     My engineering process is structured in three movements. We Architect the data flow and agent schemas; we Build using Next.js 16, Supabase, and Upstash Redis; and we Operate the pipelines on automated cron loops backed by ACMI.
                 </p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal-item opacity-0">
-                    <div class="bg-white border border-[#2d4a3e]/10 p-6 flex flex-col justify-between hover:border-[#2d4a3e]/30 transition-all rounded-xl shadow-sm hover:translate-y-[-2px]">
+                    <div class="bg-[var(--ms-surface)] border border-[var(--ms-text)]/10 p-6 flex flex-col justify-between hover:border-[var(--ms-text)]/30 transition-all rounded-xl shadow-sm hover:translate-y-[-2px]">
                         <div>
                             <span class="material-symbols-outlined text-3xl text-accent-cyan" data-icon="schema">schema</span>
-                            <h4 class="font-sans font-bold text-sm uppercase tracking-wider text-[#2d4a3e] mt-4 mb-2">01. Architect</h4>
+                            <h4 class="font-sans font-bold text-sm uppercase tracking-wider text-[var(--ms-text)] mt-4 mb-2">01. Architect</h4>
                         </div>
-                        <p class="font-sans text-xs text-[#2d4a3e]/70 leading-relaxed">Modeling data schemas, agent behaviors, and state-locked generation references before writing code.</p>
+                        <p class="font-sans text-xs text-[var(--ms-text)]/70 leading-relaxed">Modeling data schemas, agent behaviors, and state-locked generation references before writing code.</p>
                     </div>
-                    <div class="bg-white border border-[#2d4a3e]/10 p-6 flex flex-col justify-between hover:border-[#2d4a3e]/30 transition-all rounded-xl shadow-sm hover:translate-y-[-2px]">
+                    <div class="bg-[var(--ms-surface)] border border-[var(--ms-text)]/10 p-6 flex flex-col justify-between hover:border-[var(--ms-text)]/30 transition-all rounded-xl shadow-sm hover:translate-y-[-2px]">
                         <div>
                             <span class="material-symbols-outlined text-3xl text-accent-pink" data-icon="code">code</span>
-                            <h4 class="font-sans font-bold text-sm uppercase tracking-wider text-[#2d4a3e] mt-4 mb-2">02. Build</h4>
+                            <h4 class="font-sans font-bold text-sm uppercase tracking-wider text-[var(--ms-text)] mt-4 mb-2">02. Build</h4>
                         </div>
-                        <p class="font-sans text-xs text-[#2d4a3e]/70 leading-relaxed">Shipping TypeScript codebases with Supabase Postgres and Redis caching for sub-10ms response times.</p>
+                        <p class="font-sans text-xs text-[var(--ms-text)]/70 leading-relaxed">Shipping TypeScript codebases with Supabase Postgres and Redis caching for sub-10ms response times.</p>
                     </div>
-                    <div class="bg-white border border-[#2d4a3e]/10 p-6 flex flex-col justify-between hover:border-[#2d4a3e]/30 transition-all rounded-xl shadow-sm hover:translate-y-[-2px]">
+                    <div class="bg-[var(--ms-surface)] border border-[var(--ms-text)]/10 p-6 flex flex-col justify-between hover:border-[var(--ms-text)]/30 transition-all rounded-xl shadow-sm hover:translate-y-[-2px]">
                         <div>
                             <span class="material-symbols-outlined text-3xl text-accent-yellow" data-icon="sync_alt">sync_alt</span>
-                            <h4 class="font-sans font-bold text-sm uppercase tracking-wider text-[#2d4a3e] mt-4 mb-2">03. Operate</h4>
+                            <h4 class="font-sans font-bold text-sm uppercase tracking-wider text-[var(--ms-text)] mt-4 mb-2">03. Operate</h4>
                         </div>
-                        <p class="font-sans text-xs text-[#2d4a3e]/70 leading-relaxed">Running pipelines on automated loops via launchd, monitored with real-time ACMI event logs.</p>
+                        <p class="font-sans text-xs text-[var(--ms-text)]/70 leading-relaxed">Running pipelines on automated loops via launchd, monitored with real-time ACMI event logs.</p>
                     </div>
                 </div>
             </div>
@@ -124,7 +124,7 @@ import ServicesAndOffers from '../components/ServicesAndOffers.tsx';
         </section>
 
         <!-- Capabilities Horizontal Strip -->
-        <section class="bg-[#2d4a3e] py-24 px-6 md:px-[60px] overflow-hidden relative" id="capabilities">
+        <section class="bg-[var(--ms-inverse-bg)] py-24 px-6 md:px-[60px] overflow-hidden relative" id="capabilities">
             <div class="absolute top-0 right-0 p-4 font-label-mono text-[15rem] leading-none opacity-[0.03] text-white font-black select-none pointer-events-none">03</div>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
                 <div class="group reveal-item opacity-0">
@@ -181,7 +181,7 @@ import ServicesAndOffers from '../components/ServicesAndOffers.tsx';
         </section>
 
         <!-- Services, Offers & Whop Tiers Section -->
-        <section class="px-6 md:px-[60px] py-24 bg-[#faf9f5] border-t border-primary/10" id="services">
+        <section class="px-6 md:px-[60px] py-24 bg-[var(--ms-ground)] border-t border-primary/10" id="services">
             <div class="max-w-[1440px] mx-auto reveal-item opacity-0">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-baseline gap-6 mb-8">
                     <div class="flex items-baseline gap-8">
@@ -189,10 +189,10 @@ import ServicesAndOffers from '../components/ServicesAndOffers.tsx';
                         <span class="font-label-mono text-accent-pink tracking-[0.5em] uppercase text-xs">03 Offerings</span>
                     </div>
                     <div class="flex flex-wrap gap-3">
-                        <a href="/assessment" class="bg-[#E5007D] text-white px-6 py-3 font-bold text-xs uppercase tracking-widest hover:bg-[#c4006a] transition-all rounded-full no-underline shadow-sm">
+                        <a href="/assessment" class="bg-transparent border-2 border-[var(--ms-text)] text-[var(--ms-text)] px-6 py-3 font-bold text-xs uppercase tracking-widest hover:bg-[var(--ms-surface)] transition-all rounded-full no-underline shadow-sm">
                             $499 90-Min White-Glove Audit
                         </a>
-                        <a href="/fleet" class="bg-[#2d4a3e] text-white px-6 py-3 font-bold text-xs uppercase tracking-widest hover:bg-[#3a5c4e] transition-all rounded-full no-underline shadow-sm">
+                        <a href="/fleet" class="bg-[var(--ms-btn-bg)] shadow-[var(--ms-btn-shadow)] text-[var(--ms-btn-fg)] px-6 py-3 font-bold text-xs uppercase tracking-widest hover:bg-[var(--ms-btn-bg)] transition-all rounded-full no-underline shadow-sm">
                             $4,500 Private Fleet Deployment
                         </a>
                     </div>

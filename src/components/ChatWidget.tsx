@@ -225,17 +225,17 @@ export function ChatWidget() {
                                     
                                     {/* Link Preview Cards */}
                                     {detectedLinks.map((link, idx) => (
-                                        <div key={idx} className="link-preview-card border border-[#2d4a3e]/15 bg-[#faf9f5] rounded-xl overflow-hidden shadow-sm max-w-[280px] self-start transition-all hover:border-[#2d4a3e]/30 mt-1">
+                                        <div key={idx} className="link-preview-card border border-[var(--ms-text)]/15 bg-[var(--ms-ground)] rounded-xl overflow-hidden shadow-sm max-w-[280px] self-start transition-all hover:border-[var(--ms-text)]/30 mt-1">
                                             <img src={link.image} alt={link.title} className="w-full h-28 object-cover grayscale opacity-90 contrast-110" />
                                             <div className="p-3.5 space-y-2">
-                                                <span className="font-label-mono text-[8px] uppercase tracking-wider text-[#2d4a3e]/50 font-bold block">{link.domain}</span>
-                                                <h4 className="font-sans font-bold text-xs text-[#2d4a3e] leading-tight">{link.title}</h4>
-                                                <p className="font-sans text-[10px] text-[#2d4a3e]/70 leading-normal line-clamp-2">{link.description}</p>
+                                                <span className="font-label-mono text-[8px] uppercase tracking-wider text-[var(--ms-muted)] font-bold block">{link.domain}</span>
+                                                <h4 className="font-sans font-bold text-xs text-[var(--ms-text)] leading-tight">{link.title}</h4>
+                                                <p className="font-sans text-[10px] text-[var(--ms-text)]/70 leading-normal line-clamp-2">{link.description}</p>
                                                 <a 
                                                     href={link.url} 
                                                     target="_blank" 
                                                     rel="noopener noreferrer"
-                                                    className="inline-block w-full text-center py-2 bg-[#2d4a3e] hover:bg-[#3a5c4e] text-white font-sans font-bold text-[9px] uppercase tracking-wider rounded-md no-underline transition-all mt-1"
+                                                    className="inline-block w-full text-center py-2 bg-[var(--ms-btn-bg)] shadow-[var(--ms-btn-shadow)] hover:bg-[var(--ms-btn-bg)] text-[var(--ms-btn-fg)] font-sans font-bold text-[9px] uppercase tracking-wider rounded-md no-underline transition-all mt-1"
                                                 >
                                                     {link.ctaText}
                                                 </a>
