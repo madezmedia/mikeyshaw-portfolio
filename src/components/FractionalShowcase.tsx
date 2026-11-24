@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowUpRight, CheckCircle2, Layers, ShieldCheck, Terminal, Workflow } from 'lucide-react';
 import { trackEvent } from '@/lib/analytics';
+import { ProjectShowcase, type ShowcaseProject } from '@/components/ui/project-showcase';
 
 export type AudienceMode = 'fractional' | 'operator';
 
@@ -151,54 +152,153 @@ const OPERATOR_MODELS: EngagementModel[] = [
   },
 ];
 
-const PROOF_ASSETS = [
+const SHOWCASE_PROJECTS: ShowcaseProject[] = [
   {
-    tag: 'Open-Source Protocol',
-    title: 'LogMem Protocol & Console',
-    summary:
-      'MIT-licensed, Redis-native shared memory for AI agent fleets (Who / Now / Log). Public skills repo, npm packages, and MCP server.',
-    href: 'https://logmem.si',
-    cta: 'Visit logmem.si',
+    id: 'logmem',
+    title: 'LogMem Protocol',
+    category: 'Open-Source Protocol',
+    image: '/images/ez_influencer_360.png',
+    tagline: 'Shared memory for teams of AI agents',
+    description: (
+      <>
+        <p className="m-0">
+          MIT-licensed, Redis-native shared memory protocol built around three keys: Who (durable facts), Now (live state), and Log (append-only audit trail).
+        </p>
+        <p className="m-0">
+          Ships with public MCP servers, TypeScript SDK primitives, human approval gates, and a live fleet console so multi-agent teams pick up cleanly without starting from zero.
+        </p>
+      </>
+    ),
+    actions: (
+      <>
+        <a href="https://logmem.si" target="_blank" rel="noopener noreferrer" className="ms-btn">
+          Visit logmem.si
+          <ArrowUpRight aria-hidden="true" className="size-4" />
+        </a>
+        <a
+          href="https://github.com/logmem/logmem"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex min-h-[44px] items-center gap-1.5 rounded-[var(--ms-r-button)] border-2 border-[var(--ms-text)] px-4 font-sans text-xs font-bold uppercase tracking-[0.1em] text-[var(--ms-text)] no-underline hover:bg-[var(--ms-surface)]"
+        >
+          Source on GitHub
+          <ArrowUpRight aria-hidden="true" className="size-3.5" />
+        </a>
+      </>
+    ),
   },
   {
-    tag: 'Live Production Ops',
-    title: '20+ Agent Coordinated Fleet',
-    summary:
-      'Daily multi-agent production fleet running content, research, sales ops, and QA on shared memory with human approval gates and audit trails.',
-    href: '/fleet',
-    cta: 'See fleet architecture',
+    id: 'madez-voice',
+    title: 'Mad EZ Voice AI',
+    category: 'Voice AI · Trades',
+    image: '/images/mad_ez_media_mock.png',
+    tagline: '24/7 AI receptionist for local trades',
+    description: (
+      <>
+        <p className="m-0">
+          Production Voice AI receptionist and missed-call recovery system serving Charlotte trades across plumbing, HVAC, electrical, and garage door dispatch.
+        </p>
+        <p className="m-0">
+          Qualifies emergencies in real time, remembers repeat callers, routes high-priority dispatches, and books directly into the operator calendar.
+        </p>
+      </>
+    ),
+    actions: (
+      <>
+        <a href="https://madezmedia.com" target="_blank" rel="noopener noreferrer" className="ms-btn">
+          Visit Mad EZ Media
+          <ArrowUpRight aria-hidden="true" className="size-4" />
+        </a>
+        <a
+          href="#book-call"
+          className="inline-flex min-h-[44px] items-center gap-1.5 rounded-[var(--ms-r-button)] border-2 border-[var(--ms-text)] px-4 font-sans text-xs font-bold uppercase tracking-[0.1em] text-[var(--ms-text)] no-underline hover:bg-[var(--ms-surface)]"
+        >
+          Book a live walkthrough
+        </a>
+      </>
+    ),
   },
   {
-    tag: 'Voice AI · Trades',
-    title: 'Mad EZ Media Voice AI',
-    summary:
-      '24/7 AI receptionist and missed-call recovery for Charlotte trades (garage door, HVAC, plumbing) with qualification, booking, and repeat-caller memory.',
-    href: 'https://madezmedia.com',
-    cta: 'Visit Mad EZ Media',
+    id: 'agent-fleet',
+    title: '20+ Agent Fleet',
+    category: 'Live Production Ops',
+    image: '/images/tony_showcase.png',
+    tagline: 'Coordinated daily multi-agent operations',
+    description: (
+      <>
+        <p className="m-0">
+          My own internal production fleet handling research, engineering QA, content drafting, SEO audits, and outbound prep across isolated agent roles.
+        </p>
+        <p className="m-0">
+          Every handoff writes to LogMem and every irreversible action (send, spend, merge, deploy) pauses for explicit human sign-off.
+        </p>
+      </>
+    ),
+    actions: (
+      <>
+        <a href="/fleet" className="ms-btn">
+          Explore fleet architecture
+          <ArrowUpRight aria-hidden="true" className="size-4" />
+        </a>
+        <a
+          href="/starter-kit"
+          className="inline-flex min-h-[44px] items-center gap-1.5 rounded-[var(--ms-r-button)] border-2 border-[var(--ms-text)] px-4 font-sans text-xs font-bold uppercase tracking-[0.1em] text-[var(--ms-text)] no-underline hover:bg-[var(--ms-surface)]"
+        >
+          Get free starter kit
+        </a>
+      </>
+    ),
   },
   {
-    tag: 'Field Automation',
-    title: 'HomeGauge Voice-Agent Build',
-    summary:
-      'Desktop automation plus field tablet voice workflow built for a home-inspection partner to remove manual post-inspection data entry.',
-    href: '#book-call',
-    cta: 'Ask about this build',
+    id: 'folana',
+    title: "Folana's Journal",
+    category: 'Autonomous Media Pipeline',
+    image: '/images/folana_episode_251.png',
+    tagline: 'Daily creator media pipeline running on its own',
+    description: (
+      <>
+        <p className="m-0">
+          End-to-end automated storytelling, audio, and visual production pipeline publishing daily episodes with verifiable run logs and strict creative guardrails.
+        </p>
+        <p className="m-0">
+          Built to prove autonomous media generation can stay brand-consistent and auditable over hundreds of consecutive runs.
+        </p>
+      </>
+    ),
+    actions: (
+      <a
+        href="https://github.com/madezmedia/folanas-journal"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="ms-btn"
+      >
+        View repo on GitHub
+        <ArrowUpRight aria-hidden="true" className="size-4" />
+      </a>
+    ),
   },
   {
-    tag: 'Content Systems',
-    title: '100-Post Founder Campaign',
-    summary:
-      'End-to-end editorial campaign drafted, tracked, and scheduled by coordinated agents with explicit human sign-off on every post.',
-    href: '#intel',
-    cta: 'Read writing',
-  },
-  {
-    tag: 'Autonomous Pipeline',
-    title: "Folana's Journal Media Pipeline",
-    summary:
-      'Public creator media pipeline that drafts, checks, and publishes on a daily cadence with verifiable run logs.',
-    href: 'https://github.com/madezmedia/folanas-journal',
-    cta: 'View on GitHub',
+    id: 'homegauge',
+    title: 'HomeGauge Field Voice',
+    category: 'Field Automation',
+    image: '/images/favor-ai-preview.png',
+    tagline: 'Hands-free voice reporting for field inspections',
+    description: (
+      <>
+        <p className="m-0">
+          Custom desktop automation and tablet voice-agent workflow engineered for a home-inspection partner to eliminate hours of manual post-inspection data entry.
+        </p>
+        <p className="m-0">
+          Inspectors speak findings live on site while structured notes map directly into existing legacy desktop software.
+        </p>
+      </>
+    ),
+    actions: (
+      <a href="#book-call" className="ms-btn">
+        Ask about custom field builds
+        <ArrowUpRight aria-hidden="true" className="size-4" />
+      </a>
+    ),
   },
 ];
 
@@ -432,40 +532,10 @@ export function FractionalShowcase({
           </a>
         </div>
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {PROOF_ASSETS.map((item) => {
-            const external = item.href.startsWith('http');
-            return (
-              <article
-                key={item.title}
-                className="flex flex-col border border-[var(--ms-border)] bg-[var(--ms-ground)] p-6 transition-colors hover:border-[var(--ms-ember)]"
-                style={{ borderRadius: 'var(--ms-r-card)' }}
-              >
-                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--ms-accent-text)]">
-                  {item.tag}
-                </span>
-                <h4
-                  className="mt-2 mb-2 text-lg font-black leading-snug text-[var(--ms-text)]"
-                  style={{ fontFamily: 'var(--ms-font-head)' }}
-                >
-                  {item.title}
-                </h4>
-                <p className="m-0 flex-1 text-sm leading-relaxed text-[var(--ms-muted)]">
-                  {item.summary}
-                </p>
-                <a
-                  href={item.href}
-                  target={external ? '_blank' : undefined}
-                  rel={external ? 'noopener noreferrer' : undefined}
-                  className="mt-5 inline-flex min-h-[44px] items-center gap-1.5 font-sans text-sm font-bold text-[var(--ms-text)] underline decoration-[var(--ms-ember)] decoration-2 underline-offset-4 hover:text-[var(--ms-accent-text)]"
-                >
-                  <span>{item.cta}</span>
-                  <ArrowUpRight aria-hidden="true" className="size-3.5" />
-                </a>
-              </article>
-            );
-          })}
-        </div>
+        <ProjectShowcase
+          projects={SHOWCASE_PROJECTS}
+          label="Selected Production Systems"
+        />
       </div>
 
       {/* Stack / Skill Map — Text Chips Only (Kit v3 Rule: No Third-Party Logos) */}
