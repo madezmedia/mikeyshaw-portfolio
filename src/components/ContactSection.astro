@@ -1,322 +1,173 @@
 ---
-import { UX_CONFIG } from '../utils/ux';
-import SocialLinks from './SocialLinks.astro';
-import CalEmbed from './CalEmbed.tsx';
+import LetsWorkTogether from './ui/lets-work-section.tsx';
+import SocialIcons from './ui/social-icons.tsx';
+import MikeyBooking from './MikeyBooking.tsx';
 
-const contactOptions = [
+const directChannels = [
     {
-        platform: 'LinkedIn',
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>`,
-        url: 'https://www.linkedin.com/in/michael-shaw-clt/',
-        description: 'Systems architecture & advisory updates'
+        label: 'Email',
+        value: 'michael@madezmedia.com',
+        href: 'mailto:michael@madezmedia.com',
+        note: 'Direct inquiries & proposal reviews',
     },
     {
-        platform: 'Email',
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>`,
-        url: 'mailto:michael@madezmedia.com',
-        description: 'Direct inquiries & proposal reviews'
+        label: 'LinkedIn',
+        value: 'in/michael-shaw-clt',
+        href: 'https://www.linkedin.com/in/michael-shaw-clt/',
+        note: 'Fractional CTO & systems updates',
     },
     {
-        platform: 'GitHub',
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>`,
-        url: 'https://github.com/madezmedia',
-        description: 'LogMem docs and developer kits'
-    }
+        label: 'GitHub',
+        value: 'github.com/madezmedia',
+        href: 'https://github.com/madezmedia',
+        note: 'LogMem, agent kits & production code',
+    },
 ];
 ---
 
-<section id="contact" class="contact-section">
-    <div class="contact-header">
-        <h2 class="section-title">Let's Connect</h2>
-        <p class="section-subtitle">Schedule, Collaborate, Innovate</p>
+<section id="contact" class="ms-contact-section">
+    <!-- 1. Interactive CTA Header -->
+    <div class="ms-contact-hero">
+        <LetsWorkTogether client:load />
     </div>
 
-    <div class="contact-container">
-        <div class="contact-methods">
-            <div class="quick-connect-header">
-                <h3 class="quick-connect-title">Direct Dispatches</h3>
-                <p class="quick-connect-subtitle">Access channels & developer repositories</p>
-            </div>
-            <div class="quick-connect">
-                {contactOptions.map((option) => (
-                    <div 
-                        class="connection-card" 
-                        data-platform={option.platform}
-                    >
-                        <div class="connection-icon-container">
-                            <span class="connection-icon">
-                                <Fragment set:html={option.icon} />
-                            </span>
-                        </div>
-                        <div class="connection-details">
-                            <h3 class="connection-platform">{option.platform}</h3>
-                            <p class="connection-description">{option.description}</p>
-                            <a 
-                                href={option.url} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                class="connection-link"
-                            >
-                                Dispatch
-                            </a>
-                        </div>
-                    </div>
-                ))}
-            </div>
+    <!-- 2. Mobile-Optimized Custom Cal.com Scheduler with Limited Windows -->
+    <div class="ms-contact-scheduler">
+        <MikeyBooking client:only="react" compactHeading={true} />
+    </div>
 
-            <div class="social-connect">
-                <h3 class="social-title">Follow My Journey</h3>
-                <SocialLinks />
-            </div>
+    <!-- 3. Direct Channels & Social Dock -->
+    <div class="ms-contact-footer">
+        <div class="ms-direct-grid">
+            {directChannels.map((ch) => {
+                const isExternal = !ch.href.startsWith('mailto:');
+                return (
+                    <a
+                        href={ch.href}
+                        target={isExternal ? '_blank' : undefined}
+                        rel={isExternal ? 'noopener noreferrer' : undefined}
+                        class="ms-direct-card"
+                    >
+                        <span class="ms-direct-label">{ch.label}</span>
+                        <strong class="ms-direct-value">{ch.value}</strong>
+                        <span class="ms-direct-note">{ch.note}</span>
+                    </a>
+                );
+            })}
         </div>
 
-        <div class="scheduling-container">
-            <div class="scheduling-header">
-                <h3 class="scheduling-title">B2B Systems Architecture Brief</h3>
-                <p class="scheduling-subtitle">Book a direct 15-minute slot with Mikey Shaw</p>
-            </div>
-            <CalEmbed client:load />
+        <div class="ms-social-dock-wrap">
+            <span class="ms-social-dock-label">Follow &amp; Connect</span>
+            <SocialIcons client:load />
         </div>
     </div>
 </section>
 
-<style define:vars={{
-    transitionDuration: `${UX_CONFIG.TRANSITION_DURATION}ms`
-}}>
-    .contact-section {
-        max-width: 1440px;
-        margin: 4rem auto;
-        padding: 3rem;
+<style>
+    .ms-contact-section {
+        max-width: 1280px;
+        width: 100%;
+        min-width: 0;
+        overflow-x: clip;
+        margin: 0 auto;
+        padding: clamp(1.5rem, 3vw, 2.75rem);
         background: var(--ms-ground);
-        border: 1px solid color-mix(in srgb, var(--ms-text) 12%, transparent);
-        border-radius: 16px;
-        box-shadow: 0 10px 40px color-mix(in srgb, var(--ms-ink) 3%, transparent);
-        transition: transform var(--transitionDuration) cubic-bezier(0.16, 1, 0.3, 1);
+        border: 1px solid var(--ms-border);
+        border-radius: var(--ms-r-card);
     }
 
-    .contact-header {
-        text-align: left;
-        margin-bottom: 4rem;
-        border-bottom: 1px solid color-mix(in srgb, var(--ms-text) 10%, transparent);
-        padding-bottom: 2rem;
+    .ms-contact-hero {
+        border-bottom: 1px solid var(--ms-border);
+        margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem);
     }
 
-    .section-title {
-        font-size: clamp(3rem, 6vw, 5rem);
-        color: var(--primary);
-        margin: 0;
-        font-family: var(--ms-font-head);
-        font-weight: 900;
-        text-transform: uppercase;
-        letter-spacing: -0.02em;
-        line-height: 0.9;
+    .ms-contact-scheduler {
+        width: 100%;
+        min-width: 0;
+        overflow-x: clip;
     }
 
-    .section-subtitle {
-        color: var(--accent-pink);
-        font-family: var(--ms-font-mono);
-        font-size: 0.85rem;
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-        margin-top: 1rem;
+    .ms-contact-footer {
+        margin-top: clamp(2rem, 4vw, 3rem);
+        padding-top: clamp(1.5rem, 3vw, 2.25rem);
+        border-top: 1px solid var(--ms-border);
+        display: flex;
+        flex-direction: column;
+        gap: 1.75rem;
     }
 
-    .contact-container {
+    .ms-direct-grid {
         display: grid;
-        grid-template-columns: 3.8fr 6.2fr;
-        gap: 3.5rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
     }
 
-    .contact-methods {
-        display: flex;
-        flex-direction: column;
-        gap: 2.5rem;
-    }
-
-    .quick-connect-header {
-        border-left: 3px solid var(--accent-pink);
-        padding-left: 1rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .quick-connect-title {
-        color: var(--primary);
-        font-family: var(--ms-font-head);
-        font-size: 1.5rem;
-        font-weight: 850;
-        margin: 0;
-    }
-
-    .quick-connect-subtitle {
-        color: color-mix(in srgb, var(--primary) 70%, transparent);
-        font-family: var(--ms-font-mono);
-        font-size: 0.75rem;
-        margin: 0.25rem 0 0 0;
-        text-transform: uppercase;
-    }
-
-    .quick-connect {
-        display: flex;
-        flex-direction: column;
-        gap: 1.25rem;
-    }
-
-    .connection-card {
-        background: var(--bg-primary);
-        border: 1px solid color-mix(in srgb, var(--ms-text) 12%, transparent);
-        border-radius: 12px;
-        padding: 1.25rem;
-        display: flex;
-        align-items: center;
-        gap: 1.25rem;
-        transition: 
-            transform var(--transitionDuration) cubic-bezier(0.16, 1, 0.3, 1),
-            box-shadow var(--transitionDuration) cubic-bezier(0.16, 1, 0.3, 1),
-            border-color var(--transitionDuration) ease;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 4px 12px color-mix(in srgb, var(--ms-ink) 1%, transparent);
-    }
-
-    .connection-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px color-mix(in srgb, var(--ms-ink) 5%, transparent);
-        border-color: var(--ms-muted);
-    }
-
-    .connection-icon-container {
-        background: var(--ms-ground);
-        width: 52px;
-        height: 52px;
-        border: 1px solid color-mix(in srgb, var(--ms-text) 12%, transparent);
-        border-radius: 8px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: var(--primary);
-        transition: all var(--transitionDuration) cubic-bezier(0.16, 1, 0.3, 1);
-        flex-shrink: 0;
-    }
-
-    .connection-card:hover .connection-icon-container {
-        background: var(--primary);
-        color: var(--bg-primary);
-        transform: scale(1.05);
-    }
-
-    .connection-icon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .connection-details {
-        flex-grow: 1;
+    .ms-direct-card {
         display: flex;
         flex-direction: column;
         gap: 0.25rem;
-    }
-
-    .connection-platform {
-        margin: 0;
-        color: var(--primary);
-        font-family: var(--ms-font-head);
-        font-size: 1.25rem;
-        font-weight: 800;
-        line-height: 1.2;
-    }
-
-    .connection-description {
-        margin: 0;
-        color: color-mix(in srgb, var(--primary) 75%, transparent);
-        font-size: 0.85rem;
-        line-height: 1.4;
-    }
-
-    .connection-link {
-        align-self: flex-start;
-        display: inline-block;
-        background: var(--ms-ground);
-        color: var(--primary);
-        border: 1px solid color-mix(in srgb, var(--ms-text) 15%, transparent);
-        border-radius: 20px;
-        padding: 0.35rem 1.25rem;
+        padding: 1rem 1.15rem;
+        min-height: 44px;
+        border-radius: var(--ms-r-window);
+        border: 1px solid var(--ms-border);
+        background: var(--ms-surface);
         text-decoration: none;
-        font-family: var(--ms-font-mono);
-        font-size: 0.75rem;
-        font-weight: 700;
+        transition: transform 0.2s var(--ms-ease), border-color 0.2s var(--ms-ease);
+    }
+
+    .ms-direct-card:hover {
+        transform: translateY(-2px);
+        border-color: var(--ms-ember);
+    }
+
+    .ms-direct-label {
+        font: 700 0.6875rem/1.3 var(--ms-font-mono);
+        letter-spacing: 0.18em;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
-        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        margin-top: 0.5rem;
+        color: var(--ms-accent-text);
     }
 
-    .connection-link:hover {
-        background: var(--primary);
-        color: var(--bg-primary);
-        transform: translateY(-1px);
-        box-shadow: 0 4px 10px color-mix(in srgb, var(--ms-ink) 10%, transparent);
+    .ms-direct-value {
+        font: 700 0.95rem/1.3 var(--ms-font-body);
+        color: var(--ms-text);
+        word-break: break-word;
     }
 
-    .social-connect {
-        text-align: left;
-        border-top: 1px solid color-mix(in srgb, var(--ms-text) 10%, transparent);
-        padding-top: 2rem;
+    .ms-direct-note {
+        font: 500 0.8rem/1.4 var(--ms-font-body);
+        color: var(--ms-muted);
     }
 
-    .social-title {
-        color: var(--primary);
-        margin-bottom: 1rem;
-        font-family: var(--ms-font-mono);
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-        opacity: 0.7;
-    }
-
-    .scheduling-container {
-        background: var(--bg-primary);
-        border: 1px solid color-mix(in srgb, var(--ms-text) 12%, transparent);
-        border-radius: 16px;
-        padding: 2rem;
+    .ms-social-dock-wrap {
         display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        height: fit-content;
-        box-shadow: 0 10px 30px color-mix(in srgb, var(--ms-ink) 3%, transparent);
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-top: 0.25rem;
     }
 
-    .scheduling-header {
-        text-align: left;
-        border-bottom: 1px solid color-mix(in srgb, var(--ms-text) 8%, transparent);
-        padding-bottom: 1.25rem;
-    }
-
-    .scheduling-title {
-        color: var(--primary);
-        margin: 0;
-        font-family: var(--ms-font-head);
-        font-size: 1.6rem;
-        font-weight: 850;
-        letter-spacing: -0.01em;
-    }
-
-    .scheduling-subtitle {
-        color: var(--accent-pink);
-        font-family: var(--ms-font-mono);
-        font-size: 0.75rem;
+    .ms-social-dock-label {
+        font: 700 0.7rem/1.4 var(--ms-font-mono);
+        letter-spacing: 0.2em;
         text-transform: uppercase;
-        margin-top: 0.5rem;
-        letter-spacing: 0.05em;
+        color: var(--ms-muted);
     }
 
-    @media (max-width: 1024px) {
-        .contact-container {
+    @media (max-width: 840px) {
+        .ms-direct-grid {
             grid-template-columns: 1fr;
-            gap: 2.5rem;
         }
-        .contact-section {
-            padding: 2rem;
+        .ms-social-dock-wrap {
+            justify-content: center;
+            flex-direction: column;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .ms-contact-section {
+            padding: 1.15rem;
+            border-radius: 14px;
         }
     }
 </style>

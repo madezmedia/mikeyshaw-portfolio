@@ -12,7 +12,8 @@ const navLinks = [
     { name: 'Resume', href: '/resume', id: '06' }
 ];
 
-const ctaHref = isHome ? '#contact' : '/#contact';
+const hasLocalBooking = ['/', '', '/fractional', '/fleet', '/assessment'].includes(Astro.url.pathname.replace(/\/$/, '') || '/');
+const ctaHref = hasLocalBooking ? '#book-call' : '/#book-call';
 ---
 
 <nav class="ms-header" aria-label="Main">
