@@ -196,7 +196,7 @@ export function ChatWidget() {
 
       const data = await response.json();
 
-      if (data.text) {
+      if (data.text && !String(data.text).startsWith("Bentley API Offline")) {
         if (data.leadId && data.leadId !== leadId) {
           localStorage.setItem("bentley_lead_id", data.leadId);
           setLeadId(data.leadId);
