@@ -290,7 +290,10 @@ export default function CTAWithVerticalMarquee() {
                   style={{ fontFamily: "var(--ms-font-head)" }}
                 >
                   Never miss an emergency call for{" "}
-                  <em className="italic underline decoration-[#120E24] decoration-[3px] underline-offset-4">
+                  <em
+                    className="italic underline decoration-[#120E24] decoration-[3px] underline-offset-4"
+                    style={{ color: "#120E24" }}
+                  >
                     Charlotte trades.
                   </em>
                 </h2>
