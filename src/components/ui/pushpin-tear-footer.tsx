@@ -528,7 +528,7 @@ const DEFAULT_COLUMNS: FooterColumn[] = [
       { label: "Mad EZ Media", href: "https://madezmedia.com" },
       { label: "Resume", href: "/resume" },
     ],
-    cta: { label: "book call.", href: "#book-call" },
+    cta: { label: "book call.", href: "/#book-call" },
   },
 ];
 
@@ -577,12 +577,12 @@ export default function PushpinTearFooter({
   socials = DEFAULT_SOCIALS,
   email = "michael@madezmedia.com",
   newsletter = null,
-  status = { label: "Open for Fractional CTO & AI Builds", href: "#book-call" },
+  status = { label: "Open for Fractional CTO & AI Builds", href: "/#book-call" },
   mark = "CLT / 2026",
   timeZone = "America/New_York",
   timeLabel = "CLT",
   columns = DEFAULT_COLUMNS,
-  chat = { label: "book call", href: "#book-call" },
+  chat = { label: "book call", href: "/#book-call" },
   sideLinks = DEFAULT_SIDES,
   copyright = "© 2026 Mikey Shaw",
   credit = "Mad EZ Media Partners LLC",
