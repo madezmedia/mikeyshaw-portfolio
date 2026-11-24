@@ -7,6 +7,8 @@ import BlogFeed from '../components/BlogFeed.astro';
 import WindowFrameLog from '../components/WindowFrameLog.tsx';
 import FractionalShowcase from '../components/FractionalShowcase.tsx';
 import MikeyEditorialHero from '../components/ui/mikey-editorial-hero.tsx';
+import CTASection1 from '../components/ui/cta-1.tsx';
+import CTAWithVerticalMarquee from '../components/ui/cta-with-text-marquee.tsx';
 
 const CALL = 'https://cal.com/mad-ez-media/ai-automation-discovery';
 
@@ -95,34 +97,18 @@ const keys = [
             </div>
         </section>
 
-        <!-- 6. Contact -->
+        <!-- 6. Newsletter Subscribe -->
+        <CTASection1 client:load />
+
+        <!-- 7. Contact & Custom Cal.com Booking -->
         <section class="px-6 md:px-[60px] py-24 bg-[var(--ms-surface)] border-t border-[var(--ms-border)]">
             <div class="max-w-[1440px] mx-auto reveal-item opacity-0">
                 <ContactSection />
             </div>
         </section>
 
-        <!-- 7. Kit v3 Cross-Link Door to Mad EZ Media (Safety Yellow ground, Ink text — 12.27:1 contrast) -->
-        <a
-            href="https://madezmedia.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="ms-door-band block border-t border-[var(--ms-ink)] no-underline transition-opacity hover:opacity-95"
-        >
-            <div class="max-w-[1440px] mx-auto px-6 md:px-[60px] py-16 flex flex-wrap items-end justify-between gap-6">
-                <div>
-                    <span class="font-mono text-xs font-bold uppercase tracking-[0.2em] block mb-2" style="color:#120E24">
-                        Run a trade or local service business?
-                    </span>
-                    <strong class="ms-door-name block font-black italic leading-[0.95]" style="font-family:var(--ms-font-head);color:#120E24">
-                        Mad EZ Media →
-                    </strong>
-                </div>
-                <span class="font-sans text-base font-bold max-w-sm" style="color:#120E24">
-                    24/7 AI receptionist, emergency triage, and dispatch builds for plumbers, HVAC, and electricians.
-                </span>
-            </div>
-        </a>
+        <!-- 8. Kit v3 Cross-Link Door to Mad EZ Media (Safety Yellow ground + Vertical Marquee) -->
+        <CTAWithVerticalMarquee client:load />
     </main>
 
     <Footer

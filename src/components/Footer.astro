@@ -1,11 +1,10 @@
 ---
 /**
- * Site footer band, brand kit v3.
- * Light theme: ink band, white text, ember links.
- * Dark theme: ember band, ink text.
- * Copy is passed in by each page so this slice does not change page copy.
+ * Site footer — Brand Kit v3 Pushpin Tear Footer.
+ * Deep Violet (#1E1640) poster sheet + glossy Ember (#FF6A2B) pushpin ripping
+ * away to reveal Lavender Mist (#F3F0FC) paper printed with Ink (#120E24).
  */
-import MikeyLogo from './MikeyLogo.astro';
+import PushpinTearFooter from './ui/pushpin-tear-footer.tsx';
 
 export interface Props {
     copyright?: string;
@@ -13,74 +12,20 @@ export interface Props {
 }
 
 const currentYear = new Date().getFullYear();
-const { copyright = `© ${currentYear} Mad EZ Media. All rights reserved.`, links = [] } = Astro.props;
+const { copyright = `© ${currentYear} Mikey Shaw` } = Astro.props;
 ---
 
-<footer class="ms-footer">
-    <div class="ms-footer__inner">
-        <a class="ms-footer__home" href="/" aria-label="Mikey Shaw, home">
-            <MikeyLogo size={14} />
-        </a>
-        {links.length > 0 && (
-            <nav class="ms-footer__links" aria-label="Footer">
-                {links.map((link) => (
-                    <a class="ms-footer__link" href={link.href}>{link.label}</a>
-                ))}
-            </nav>
-        )}
-        <p class="ms-footer__copy">{copyright}</p>
-    </div>
-</footer>
+<div class="ms-tear-footer-host">
+    <PushpinTearFooter
+        client:only="react"
+        copyright={copyright}
+    />
+</div>
 
 <style>
-    .ms-footer {
+    .ms-tear-footer-host {
         position: relative;
         z-index: 1;
-        background: var(--ms-footer-bg);
-        color: var(--ms-footer-fg);
-        padding: 40px max(16px, env(safe-area-inset-left)) max(76px, env(safe-area-inset-bottom));
-    }
-    .ms-footer :global(.ms-lockup) { color: var(--ms-footer-fg); }
-    /* The ember bar would vanish on the ember band in dark, so it turns ink there. */
-    :global([data-theme="dark"]) .ms-footer :global(.ms-lockup__bar) { background: var(--ms-ink); }
-    .ms-footer__inner {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 24px;
-    }
-    .ms-footer__home {
-        display: inline-flex;
-        align-items: center;
-        min-height: var(--ms-tap);
-        text-decoration: none;
-    }
-    .ms-footer__links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px 24px;
-    }
-    .ms-footer__link {
-        display: inline-flex;
-        align-items: center;
-        min-height: var(--ms-tap);
-        font: 700 0.6875rem/1.4 var(--ms-font-mono);
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--ms-footer-link);
-        text-decoration: none;
-    }
-    .ms-footer__link:hover { text-decoration: underline; }
-    .ms-footer__link:focus-visible,
-    .ms-footer__home:focus-visible { outline-color: var(--ms-footer-focus); }
-    .ms-footer__copy {
-        margin: 0;
-        font: 700 0.6875rem/1.4 var(--ms-font-mono);
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--ms-footer-muted);
+        width: 100%;
     }
 </style>
