@@ -5,13 +5,15 @@ import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import ContactSection from '../components/ContactSection.astro';
 import BlogFeed from '../components/BlogFeed.astro';
+import WindowFrameLog from '../components/WindowFrameLog.tsx';
+import FractionalShowcase from '../components/FractionalShowcase.tsx';
 import mikeyShaw from '../images/mikey-shaw.png';
 
 const CALL = 'https://cal.com/mad-ez-media/ai-automation-discovery';
 
 const running = [
-    { name: 'LogMem', line: 'Open-source shared memory for teams of AI agents.', href: 'https://github.com/logmem/logmem', cta: 'View on GitHub' },
-    { name: 'Mad EZ Media', line: 'The 24/7 AI receptionist for plumbers, HVAC and electricians.', href: 'https://madezmedia.com', cta: 'Visit Mad EZ' },
+    { name: 'LogMem', line: 'MIT-licensed, Redis-native shared memory for teams of AI agents.', href: 'https://logmem.si', cta: 'Visit logmem.si' },
+    { name: 'Mad EZ Media', line: 'The 24/7 AI receptionist and growth systems for Charlotte trades.', href: 'https://madezmedia.com', cta: 'Visit Mad EZ' },
     { name: 'Folana', line: 'A creator media pipeline that runs on its own, every day.', href: 'https://github.com/madezmedia/folanas-journal', cta: 'View on GitHub' },
 ];
 
@@ -20,38 +22,38 @@ const keys = [
     { key: 'now', name: 'Now', line: 'The current state, overwritten as it changes. What is open, what is blocked, what is next.' },
     { key: 'log', name: 'Log', line: 'Every step, in order, never edited. Who did what and when, so anyone can pick it up.' },
 ];
-
-const steps = [
-    { n: '01', name: 'Free kit', line: 'Set up agent memory yourself this weekend.', href: '/starter-kit', cta: 'Get the kit' },
-    { n: '02', name: 'First Shift', line: 'One agent doing one real job, live in a week.', href: CALL, cta: 'Book a call' },
-    { n: '03', name: 'Fleet deploy', line: 'A team of agents with shared memory, on your own stack.', href: CALL, cta: 'Book a call' },
-    { n: '04', name: 'Ongoing care', line: 'I run it, watch it and improve it every month.', href: CALL, cta: 'Book a call' },
-];
 ---
 
-<Layout title="Mikey Shaw | AI agents that remember your business">
+<Layout
+    title="Mikey Shaw | Fractional CTO, Head of AI & AI Systems Architect"
+    description="Operator first, technologist second. I build AI agent systems that answer, book, follow up, and remember using LogMem shared memory."
+>
     <Navbar />
 
     <main class="w-full">
         <!-- 1. Hero -->
         <section class="home-hero max-w-[1440px] mx-auto px-6 md:px-[60px] pt-36 pb-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center" id="hero">
             <div class="lg:col-span-7 reveal-item opacity-0">
-                <div class="home-eyebrow"><span class="num">N° 01</span>Mikey Shaw</div>
-                <h1 class="font-display-xl text-[clamp(2.5rem,5.5vw,4.75rem)] leading-[1.05] font-black tracking-tight text-[var(--ms-text)]">
-                    Your AI agents shouldn't start <br class="hidden md:block"/><em class="em-gradient font-black">from zero.</em>
+                <div class="home-eyebrow">
+                    <span class="num">N° 01</span>
+                    <span>Fractional CTO · Head of AI · Charlotte, NC</span>
+                </div>
+                <h1 class="font-display-xl text-[clamp(2.6rem,5.6vw,4.9rem)] leading-[1.02] font-black tracking-tight text-[var(--ms-text)]">
+                    Your AI agents should not start <br class="hidden md:block"/><em class="em-gradient font-black">from zero.</em>
                 </h1>
                 <p class="font-body-md text-lg text-[var(--ms-text)]/85 max-w-xl mt-8 leading-relaxed">
-                    I build AI agents that remember your business. They keep shared memory in LogMem, hand work off cleanly and log every step. You stop being the memory, the messenger and the auditor.
+                    Operator first, technologist second. I build production AI agent systems that answer, book, follow up, and remember on shared memory in LogMem. I run them in production for my own companies before I ever sell them to yours.
                 </p>
                 <div class="flex flex-wrap gap-4 items-center mt-10">
-                    <a class="ms-btn" href="/starter-kit">Get the free kit →</a>
-                    <a class="home-btn-ghost" href="#work-with-me">Work with me</a>
+                    <a class="ms-btn" href={CALL} target="_blank" rel="noopener noreferrer">Book discovery call →</a>
+                    <a class="home-btn-ghost" href="/fractional">Fractional CTO rate card</a>
+                    <a class="home-link" href="/starter-kit">Get the free kit →</a>
                 </div>
             </div>
             <div class="lg:col-span-5 reveal-item opacity-0 flex justify-center">
                 <Image
                     src={mikeyShaw}
-                    alt="Mikey Shaw"
+                    alt="Mikey Shaw, Fractional CTO and AI Systems Architect"
                     class="w-full max-w-md aspect-[4/5] object-cover grayscale contrast-115 brightness-95 hover:grayscale-0 transition-all duration-700 rounded-2xl border border-[var(--ms-border)]"
                     width={800}
                     height={1000}
@@ -65,7 +67,7 @@ const steps = [
         <!-- 2. Running now -->
         <section class="border-y border-[var(--ms-border)] bg-[var(--ms-surface)]" aria-labelledby="running-title">
             <div class="max-w-[1440px] mx-auto px-6 md:px-[60px] py-10">
-                <h2 id="running-title" class="home-label mb-6">Running now</h2>
+                <h2 id="running-title" class="home-label mb-6">Running in production</h2>
                 <ul class="grid grid-cols-1 md:grid-cols-3 gap-6 list-none p-0 m-0">
                     {running.map((r) => (
                         <li class="flex flex-col gap-1">
@@ -78,57 +80,42 @@ const steps = [
             </div>
         </section>
 
-        <!-- 3. The idea -->
+        <!-- 3. The idea + Signature Kit v3 Window-Frame Log -->
         <section class="max-w-[1440px] mx-auto px-6 md:px-[60px] py-24" id="idea">
-            <div class="max-w-3xl reveal-item opacity-0">
-                <div class="home-eyebrow"><span class="num">N° 02</span>The idea</div>
-                <h2 class="font-display-xl text-[clamp(2rem,4vw,3.25rem)] font-black tracking-tight leading-[1.1] text-[var(--ms-text)]">
-                    Most AI forgets everything when the chat ends.
-                </h2>
-                <p class="font-body-md text-lg text-[var(--ms-text)]/80 mt-6 leading-relaxed">
-                    So you explain your business again, every session, to every tool. The fix is simple. Give every agent the same three keys.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 reveal-item opacity-0">
-                {keys.map((k) => (
-                    <div class={`home-key home-key--${k.key}`}>
-                        <span class="home-key__label">Key</span>
-                        <h3 class="home-key__name">{k.name}</h3>
-                        <p class="font-sans text-sm text-[var(--ms-muted)] leading-relaxed m-0">{k.line}</p>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <div class="lg:col-span-6 reveal-item opacity-0">
+                    <div class="home-eyebrow"><span class="num">N° 02</span>The idea</div>
+                    <h2 class="font-display-xl text-[clamp(2rem,4vw,3.25rem)] font-black tracking-tight leading-[1.06] text-[var(--ms-text)]">
+                        Stop managing AI tools. Start running <em class="em-gradient font-black">systems.</em>
+                    </h2>
+                    <p class="font-body-md text-lg text-[var(--ms-text)]/80 mt-6 leading-relaxed">
+                        Most AI forgets everything when the chat ends. You become the memory, the messenger, and the auditor for your own bots. Give every agent the same three keys and work passes cleanly without loss.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+                        {keys.map((k) => (
+                            <div class={`home-key home-key--${k.key}`}>
+                                <span class="home-key__label">Key</span>
+                                <h3 class="home-key__name">{k.name}</h3>
+                                <p class="font-sans text-xs text-[var(--ms-muted)] leading-relaxed m-0">{k.line}</p>
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
+                    <div class="flex flex-wrap gap-6 mt-8">
+                        <a class="home-link" href="/starter-kit">Get the free kit →</a>
+                        <a class="home-link" href="https://github.com/logmem/logmem" target="_blank" rel="noopener noreferrer">See LogMem on GitHub →</a>
+                    </div>
+                </div>
 
-            <p class="font-body-md text-lg text-[var(--ms-text)]/80 mt-12 max-w-3xl leading-relaxed reveal-item opacity-0">
-                Then your agents hand off work like a real team. Each one reads the same memory, picks up where the last one stopped and leaves a record you can check.
-            </p>
-            <div class="flex flex-wrap gap-6 mt-6 reveal-item opacity-0">
-                <a class="home-link" href="/starter-kit">Get the free kit →</a>
-                <a class="home-link" href="https://github.com/logmem/logmem" target="_blank" rel="noopener noreferrer">See LogMem on GitHub →</a>
+                <div class="lg:col-span-6 reveal-item opacity-0">
+                    <WindowFrameLog />
+                </div>
             </div>
         </section>
 
-        <!-- 4. Ways to work together -->
+        <!-- 4. Interactive Audience Switcher: Fractional CTO / Head of AI + Operator Ladder + Proof Assets -->
         <section class="border-t border-[var(--ms-border)] bg-[var(--ms-surface)]" id="work-with-me">
             <div class="max-w-[1440px] mx-auto px-6 md:px-[60px] py-24 reveal-item opacity-0">
-                <div class="home-eyebrow"><span class="num">N° 03</span>Work with me</div>
-                <h2 class="font-display-xl text-[clamp(2rem,4vw,3.25rem)] font-black tracking-tight leading-[1.1] text-[var(--ms-text)] max-w-3xl">
-                    Start small. Grow it when it works.
-                </h2>
-                <ol class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mt-12 list-none p-0">
-                    {steps.map((s) => (
-                        <li class="home-step">
-                            <span class="home-step__n">{s.n}</span>
-                            <h3 class="home-step__name">{s.name}</h3>
-                            <p class="font-sans text-sm text-[var(--ms-muted)] leading-relaxed m-0 flex-1">{s.line}</p>
-                            <a class="home-link mt-6" href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined}>{s.cta} →</a>
-                        </li>
-                    ))}
-                </ol>
-                <p class="font-sans text-sm text-[var(--ms-muted)] mt-8">
-                    Want the details first? <a class="home-link" href="/fleet">See how a fleet deploy works →</a>
-                </p>
+                <FractionalShowcase client:load defaultAudience="fractional" callUrl={CALL} />
             </div>
         </section>
 
@@ -145,13 +132,36 @@ const steps = [
                 <ContactSection />
             </div>
         </section>
+
+        <!-- 7. Kit v3 Cross-Link Door to Mad EZ Media (Safety Yellow ground, Ink text — 12.27:1 contrast) -->
+        <a
+            href="https://madezmedia.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="ms-door-band block border-t border-[var(--ms-ink)] no-underline transition-opacity hover:opacity-95"
+        >
+            <div class="max-w-[1440px] mx-auto px-6 md:px-[60px] py-16 flex flex-wrap items-end justify-between gap-6">
+                <div>
+                    <span class="font-mono text-xs font-bold uppercase tracking-[0.2em] block mb-2" style="color:#120E24">
+                        Run a trade or local service business?
+                    </span>
+                    <strong class="ms-door-name block font-black italic leading-[0.95]" style="font-family:var(--ms-font-head);color:#120E24">
+                        Mad EZ Media →
+                    </strong>
+                </div>
+                <span class="font-sans text-base font-bold max-w-sm" style="color:#120E24">
+                    24/7 AI receptionist, emergency triage, and dispatch builds for plumbers, HVAC, and electricians.
+                </span>
+            </div>
+        </a>
     </main>
 
     <Footer
-        copyright="© 2026 Mikey Shaw. All rights reserved."
+        copyright="© 2026 Mikey Shaw · Mad EZ Media Partners LLC."
         links={[
+            { label: 'Fractional CTO', href: '/fractional' },
             { label: 'Mad EZ Media', href: 'https://madezmedia.com' },
-            { label: 'LogMem', href: 'https://github.com/logmem/logmem' },
+            { label: 'LogMem', href: 'https://logmem.si' },
             { label: 'Resume', href: '/resume' },
         ]}
     />
@@ -169,7 +179,6 @@ const steps = [
         color: var(--ms-accent-text);
     }
     .home-eyebrow .num { color: var(--ms-muted); }
-    /* Solid accent, not a gradient: bright ember on white fails contrast. */
     .em-gradient {
         font-style: italic;
         color: var(--ms-accent-text);
@@ -191,7 +200,7 @@ const steps = [
     }
     .home-link:hover { color: var(--ms-accent-text); }
     .home-link:focus-visible, .home-btn-ghost:focus-visible {
-        outline: 2px solid var(--ms-focus);
+        outline: 3px solid var(--ms-focus);
         outline-offset: 3px;
         border-radius: 4px;
     }
@@ -216,7 +225,7 @@ const steps = [
         border: 1px solid var(--ms-border);
         border-top: 4px solid var(--key);
         border-radius: var(--ms-r-card);
-        padding: 24px;
+        padding: 18px;
     }
     .home-key--who { --key: var(--ms-who); --key-text: var(--ms-who-text); }
     .home-key--now { --key: var(--ms-now); --key-text: var(--ms-now-text); }
@@ -228,27 +237,14 @@ const steps = [
         color: var(--key-text);
     }
     .home-key__name {
-        font: 900 1.75rem/1.1 var(--ms-font-head);
+        font: 900 1.45rem/1.1 var(--ms-font-head);
         color: var(--ms-text);
-        margin: 4px 0 10px;
+        margin: 4px 0 8px;
     }
-
-    .home-step {
-        display: flex;
-        flex-direction: column;
-        background: var(--ms-ground);
-        border: 1px solid var(--ms-border);
-        border-radius: var(--ms-r-card);
-        padding: 24px;
+    .ms-door-band {
+        background: var(--ms-yellow);
     }
-    .home-step__n {
-        font: 700 0.75rem/1 var(--ms-font-mono);
-        letter-spacing: 0.2em;
-        color: var(--ms-accent-text);
-    }
-    .home-step__name {
-        font: 800 1.25rem/1.2 var(--ms-font-head);
-        color: var(--ms-text);
-        margin: 10px 0 8px;
+    .ms-door-name {
+        font-size: clamp(2.5rem, 7vw, 5.25rem);
     }
 </style>
