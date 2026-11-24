@@ -6,6 +6,7 @@ import OpenSlotBooking, {
   type OsbBusy,
   type OsbHours,
 } from "@/components/ui/open-slot-booking";
+import { trackEvent } from "@/lib/analytics";
 
 export const MIKEY_CAL_BASE_URL =
   "https://cal.com/mad-ez-media/ai-automation-discovery";
@@ -75,6 +76,12 @@ export interface MikeyBookingProps {
 export default function MikeyBooking({ compactHeading = false }: MikeyBookingProps) {
   const handleBook = useCallback((booking: OsbBooking) => {
     const calUrl = buildCalBookingUrl(booking);
+    // Track conversion in GTM/GA4 without sending PII (no email/name in dataLayer)
+    trackEvent("booking_cal_handoff", {
+      duration_min: booking.duration,
+      visitor_tz: booking.timeZone,
+      source: "open_slot_booking",
+    });
     // Open pre-filled Cal.com confirmation in a new tab so the slot actually locks on Mikey's calendar.
     if (typeof window !== "undefined") {
       window.open(calUrl, "_blank", "noopener,noreferrer");
@@ -97,6 +104,9 @@ export default function MikeyBooking({ compactHeading = false }: MikeyBookingPro
           href={MIKEY_BOOKING_CONFIG.calHref}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() =>
+            trackEvent("booking_cal_direct_click", { source: "scheduler_header" })
+          }
           className="inline-flex min-h-[44px] items-center text-xs font-bold uppercase tracking-[0.12em] text-[var(--ms-text)] underline decoration-[var(--ms-ember)] decoration-2 underline-offset-4 hover:text-[var(--ms-accent-text)]"
           style={{ fontFamily: "var(--ms-font-mono)" }}
         >

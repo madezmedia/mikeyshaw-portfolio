@@ -2,6 +2,7 @@
 
 import type React from "react";
 import { useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 export interface SocialIconItem {
   name: string;
@@ -89,6 +90,7 @@ export function SocialIcons({
             onMouseLeave={() => setHoveredIndex(null)}
             onFocus={() => setHoveredIndex(index)}
             onBlur={() => setHoveredIndex(null)}
+            onClick={() => trackEvent("social_profile_click", { platform: social.name })}
             aria-label={social.name}
           >
             <span

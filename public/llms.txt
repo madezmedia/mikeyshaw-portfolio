@@ -1,0 +1,28 @@
+# Mikey Shaw
+
+> Operator-first Fractional CTO, Head of AI, and AI Systems Architect based in Charlotte, NC (remote-first). Founder of Mad EZ Media Partners LLC and creator of LogMem.
+
+## Canonical Site
+- Home: https://mikeyshaw.work/
+- Fractional CTO & Head of AI: https://mikeyshaw.work/fractional
+- Free Starter Kit: https://mikeyshaw.work/starter-kit
+- First Shift Assessment: https://mikeyshaw.work/assessment
+- Agent Fleet Overview: https://mikeyshaw.work/fleet
+- Full Resume: https://mikeyshaw.work/resume
+- Sitemap: https://mikeyshaw.work/sitemap.xml
+
+## Core Focus
+- Production multi-agent systems with shared memory (Who, Now, Log) built on LogMem (MIT-licensed, Redis-native)
+- 24/7 Voice AI receptionists, emergency triage, and dispatch automation
+- Fractional CTO, Head of AI, and architecture sprints for SMBs, trade businesses, and AI-native teams
+
+## Production Systems
+- LogMem: https://logmem.si (https://github.com/logmem/logmem)
+- Mad EZ Media: https://madezmedia.com
+- Folana Media Pipeline: https://github.com/madezmedia/folanas-journal
+
+## Contact & Booking
+- Discovery Call (Tue to Thu, 10:00 AM to 3:00 PM ET): https://cal.com/mad-ez-media/ai-automation-discovery
+- Email: michael@madezmedia.com
+- LinkedIn: https://www.linkedin.com/in/michael-shaw-clt/
+- GitHub: https://github.com/madezmedia

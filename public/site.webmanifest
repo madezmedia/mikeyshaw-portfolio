@@ -1,0 +1,17 @@
+{
+  "name": "Mikey Shaw | Fractional CTO & AI Systems Architect",
+  "short_name": "Mikey Shaw",
+  "description": "Operator-first Fractional CTO, Head of AI, and AI Systems Architect. Production multi-agent systems, LogMem shared memory, and Voice AI.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#120E24",
+  "theme_color": "#FF6A2B",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

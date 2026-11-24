@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowUpRight, CheckCircle2, Layers, ShieldCheck, Terminal, Workflow } from 'lucide-react';
+import { trackEvent } from '@/lib/analytics';
 
 export type AudienceMode = 'fractional' | 'operator';
 
@@ -256,7 +257,10 @@ export function FractionalShowcase({
             <button
               type="button"
               aria-pressed={audience === 'fractional'}
-              onClick={() => setAudience('fractional')}
+              onClick={() => {
+                setAudience('fractional');
+                trackEvent('audience_switcher_change', { audience: 'fractional' });
+              }}
               className="min-h-[44px] cursor-pointer rounded-full px-4 py-2 font-mono text-[11px] font-bold uppercase tracking-[0.14em] transition-colors"
               style={
                 audience === 'fractional'
@@ -269,7 +273,10 @@ export function FractionalShowcase({
             <button
               type="button"
               aria-pressed={audience === 'operator'}
-              onClick={() => setAudience('operator')}
+              onClick={() => {
+                setAudience('operator');
+                trackEvent('audience_switcher_change', { audience: 'operator' });
+              }}
               className="min-h-[44px] cursor-pointer rounded-full px-4 py-2 font-mono text-[11px] font-bold uppercase tracking-[0.14em] transition-colors"
               style={
                 audience === 'operator'

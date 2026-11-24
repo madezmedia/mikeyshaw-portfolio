@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /proposals/
+Disallow: /core-pumping-proposal
+Disallow: /dispatch-demo
+
+Sitemap: https://mikeyshaw.work/sitemap.xml

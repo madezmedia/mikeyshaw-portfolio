@@ -1,0 +1,268 @@
+---
+/**
+ * Full webmaster, SEO, Open Graph, JSON-LD, GTM, GA4, Clarity, LinkedIn, and Meta Pixel head block.
+ * All tracking IDs are read from PUBLIC_* env vars (zero bloat when unset; zero hardcoded cross-site IDs).
+ */
+
+export interface Props {
+	title: string;
+	description: string;
+	keywords: string[];
+	author: string;
+	ogImage: string;
+	canonicalPath?: string;
+	noindex?: boolean;
+	jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const SITE_URL = 'https://mikeyshaw.work';
+
+const {
+	title,
+	description,
+	keywords,
+	author,
+	ogImage,
+	canonicalPath,
+	noindex = false,
+	jsonLd,
+} = Astro.props;
+
+// Normalize per-page canonical path (no trailing slash except root '/')
+const rawPath = canonicalPath ?? Astro.url.pathname ?? '/';
+const normalizedPath = rawPath === '/' ? '/' : rawPath.replace(/\/+$/, '');
+const canonicalUrl = new URL(normalizedPath, SITE_URL).href;
+const absoluteOgImage = ogImage.startsWith('http')
+	? ogImage
+	: new URL(ogImage.startsWith('/') ? ogImage : `/${ogImage}`, SITE_URL).href;
+
+// Public Webmaster & Analytics IDs (configured in Vercel / .env)
+const gtmId = (import.meta.env.PUBLIC_GTM_ID || '').trim();
+const ga4Id = (import.meta.env.PUBLIC_GA4_ID || '').trim();
+const loadDirectGa4 = Boolean(ga4Id) && (!gtmId || import.meta.env.PUBLIC_GA4_DIRECT === 'true');
+const gscVerification = (import.meta.env.PUBLIC_GSC_VERIFICATION || '').trim();
+const bingVerification = (import.meta.env.PUBLIC_BING_VERIFICATION || '').trim();
+const ahrefsVerification = (import.meta.env.PUBLIC_AHREFS_VERIFICATION || '').trim();
+const clarityId = (import.meta.env.PUBLIC_CLARITY_ID || '').trim();
+const linkedinPartnerId = (import.meta.env.PUBLIC_LINKEDIN_PARTNER_ID || '').trim();
+const metaPixelId = (import.meta.env.PUBLIC_META_PIXEL_ID || '').trim();
+
+const baseSchemas: Record<string, unknown>[] = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'Person',
+		'@id': `${SITE_URL}/#person`,
+		name: 'Mikey Shaw',
+		alternateName: 'Michael Shaw',
+		jobTitle: 'Fractional CTO & Head of AI',
+		description:
+			'Operator-first Fractional CTO, Head of AI, and AI Systems Architect building production multi-agent systems, LogMem shared memory, and Voice AI.',
+		url: SITE_URL,
+		image: `${SITE_URL}/images/mikey-shaw.png`,
+		email: 'mailto:michael@madezmedia.com',
+		address: {
+			'@type': 'PostalAddress',
+			addressLocality: 'Charlotte',
+			addressRegion: 'NC',
+			addressCountry: 'US',
+		},
+		sameAs: [
+			'https://www.linkedin.com/in/michael-shaw-clt/',
+			'https://github.com/madezmedia',
+			'https://x.com/madezmedia',
+			'https://medium.com/@madezmedia',
+			'https://madezmedia.com',
+			'https://logmem.si',
+		],
+		worksFor: {
+			'@type': 'Organization',
+			name: 'Mad EZ Media Partners LLC',
+			url: 'https://madezmedia.com',
+		},
+		knowsAbout: [
+			'Fractional CTO',
+			'AI Systems Architecture',
+			'Multi-Agent Systems',
+			'LogMem Shared Agent Memory',
+			'Voice AI',
+			'Revenue Automation',
+		],
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': 'WebSite',
+		'@id': `${SITE_URL}/#website`,
+		name: 'Mikey Shaw',
+		url: SITE_URL,
+		publisher: { '@id': `${SITE_URL}/#person` },
+		inLanguage: 'en-US',
+	},
+];
+
+const extraSchemas = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+const allSchemas = [...baseSchemas, ...extraSchemas];
+---
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="author" content={author} />
+<meta name="keywords" content={keywords.join(', ')} />
+
+<!-- Canonical & Robots -->
+<link rel="canonical" href={canonicalUrl} />
+<link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta
+	name="robots"
+	content={noindex
+		? 'noindex, nofollow'
+		: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
+/>
+
+<!-- Webmaster Verification Meta Tags -->
+{gscVerification && <meta name="google-site-verification" content={gscVerification} />}
+{bingVerification && <meta name="msvalidate.01" content={bingVerification} />}
+{ahrefsVerification && <meta name="ahrefs-site-verification" content={ahrefsVerification} />}
+
+<!-- Open Graph / Social Media -->
+<meta property="og:site_name" content="Mikey Shaw" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={absoluteOgImage} />
+<meta property="og:image:alt" content="Mikey Shaw, Fractional CTO and AI Systems Architect" />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@madezmedia" />
+<meta name="twitter:creator" content="@madezmedia" />
+<meta name="twitter:url" content={canonicalUrl} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={absoluteOgImage} />
+
+<!-- Structured Data (JSON-LD) -->
+{allSchemas.map((schema) => (
+	<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}
+
+<!-- Initialize dataLayer before GTM / GA4 -->
+<script is:inline>
+	window.dataLayer = window.dataLayer || [];
+</script>
+
+<!-- Google Tag Manager (Head) -->
+{gtmId && (
+	<script is:inline define:vars={{ gtmId }}>
+		(function (w, d, s, l, i) {
+			w[l] = w[l] || [];
+			w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+			var f = d.getElementsByTagName(s)[0],
+				j = d.createElement(s),
+				dl = l != 'dataLayer' ? '&l=' + l : '';
+			j.async = true;
+			j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+			f.parentNode.insertBefore(j, f);
+		})(window, document, 'script', 'dataLayer', gtmId);
+
+		document.addEventListener('astro:page-load', function () {
+			window.dataLayer = window.dataLayer || [];
+			window.dataLayer.push({
+				event: 'virtual_pageview',
+				page_path: window.location.pathname,
+				page_title: document.title,
+			});
+		});
+	</script>
+)}
+
+<!-- Google Analytics 4 Direct (only when PUBLIC_GA4_ID is set and GTM is not managing GA4) -->
+{loadDirectGa4 && (
+	<>
+		<script async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`} is:inline></script>
+		<script is:inline define:vars={{ ga4Id }}>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				window.dataLayer.push(arguments);
+			}
+			window.gtag = gtag;
+			gtag('js', new Date());
+			gtag('config', ga4Id, { send_page_view: true });
+			document.addEventListener('astro:page-load', function () {
+				gtag('config', ga4Id, {
+					page_path: window.location.pathname,
+					page_title: document.title,
+				});
+			});
+		</script>
+	</>
+)}
+
+<!-- Microsoft Clarity (Optional) -->
+{clarityId && (
+	<script is:inline define:vars={{ clarityId }}>
+		(function (c, l, a, r, i, t, y) {
+			c[a] =
+				c[a] ||
+				function () {
+					(c[a].q = c[a].q || []).push(arguments);
+				};
+			t = l.createElement(r);
+			t.async = 1;
+			t.src = 'https://www.clarity.ms/tag/' + i;
+			y = l.getElementsByTagName(r)[0];
+			y.parentNode.insertBefore(t, y);
+		})(window, document, 'clarity', 'script', clarityId);
+	</script>
+)}
+
+<!-- LinkedIn Insight Tag (Optional) -->
+{linkedinPartnerId && (
+	<script is:inline define:vars={{ linkedinPartnerId }}>
+		_linkedin_partner_id = linkedinPartnerId;
+		window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+		window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+		(function (l) {
+			if (!l) {
+				window.lintrk = function (a, b) {
+					window.lintrk.q.push([a, b]);
+				};
+				window.lintrk.q = [];
+			}
+			var s = document.getElementsByTagName('script')[0];
+			var b = document.createElement('script');
+			b.type = 'text/javascript';
+			b.async = true;
+			b.src = 'https://snap.licdn.com/li.lms-analytics/insight.min.js';
+			s.parentNode.insertBefore(b, s);
+		})(window.lintrk);
+	</script>
+)}
+
+<!-- Meta Pixel (Optional) -->
+{metaPixelId && (
+	<script is:inline define:vars={{ metaPixelId }}>
+		!(function (f, b, e, v, n, t, s) {
+			if (f.fbq) return;
+			n = f.fbq = function () {
+				n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+			};
+			if (!f._fbq) f._fbq = n;
+			n.push = n;
+			n.loaded = !0;
+			n.version = '2.0';
+			n.queue = [];
+			t = b.createElement(e);
+			t.async = !0;
+			t.src = v;
+			s = b.getElementsByTagName(e)[0];
+			s.parentNode.insertBefore(t, s);
+		})(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+		fbq('init', metaPixelId);
+		fbq('track', 'PageView');
+	</script>
+)}

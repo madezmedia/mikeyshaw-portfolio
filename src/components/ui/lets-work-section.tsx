@@ -3,6 +3,7 @@
 import type React from "react";
 import { useState } from "react";
 import { ArrowUpRight, Calendar } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 
 export interface LetsWorkTogetherProps {
   availabilityText?: string;
@@ -35,6 +36,7 @@ export function LetsWorkTogether({
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsClicked(true);
+    trackEvent("cta_lets_work_reveal", { source: "contact_section" });
 
     window.setTimeout(() => {
       setShowSuccess(true);
@@ -42,6 +44,7 @@ export function LetsWorkTogether({
   };
 
   const handleBookCall = () => {
+    trackEvent("cta_jump_to_booking", { source: "lets_work_together" });
     if (scrollTargetId && typeof document !== "undefined") {
       const target = document.getElementById(scrollTargetId);
       if (target) {
