@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
@@ -7,7 +6,7 @@ import ContactSection from '../components/ContactSection.astro';
 import BlogFeed from '../components/BlogFeed.astro';
 import WindowFrameLog from '../components/WindowFrameLog.tsx';
 import FractionalShowcase from '../components/FractionalShowcase.tsx';
-import mikeyShaw from '../images/mikey-shaw.png';
+import MikeyEditorialHero from '../components/ui/mikey-editorial-hero.tsx';
 
 const CALL = 'https://cal.com/mad-ez-media/ai-automation-discovery';
 
@@ -31,38 +30,8 @@ const keys = [
     <Navbar />
 
     <main class="w-full">
-        <!-- 1. Hero -->
-        <section class="home-hero max-w-[1440px] mx-auto px-6 md:px-[60px] pt-36 pb-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center" id="hero">
-            <div class="lg:col-span-7 reveal-item opacity-0">
-                <div class="home-eyebrow">
-                    <span class="num">N° 01</span>
-                    <span>Fractional CTO · Head of AI · Charlotte, NC</span>
-                </div>
-                <h1 class="font-display-xl text-[clamp(2.6rem,5.6vw,4.9rem)] leading-[1.02] font-black tracking-tight text-[var(--ms-text)]">
-                    Your AI agents should not start <br class="hidden md:block"/><em class="em-gradient font-black">from zero.</em>
-                </h1>
-                <p class="font-body-md text-lg text-[var(--ms-text)]/85 max-w-xl mt-8 leading-relaxed">
-                    Operator first, technologist second. I build production AI agent systems that answer, book, follow up, and remember on shared memory in LogMem. I run them in production for my own companies before I ever sell them to yours.
-                </p>
-                <div class="flex flex-wrap gap-4 items-center mt-10">
-                    <a class="ms-btn" href="#book-call">Book discovery call →</a>
-                    <a class="home-btn-ghost" href="/fractional">Fractional CTO &amp; Advisory</a>
-                    <a class="home-link" href="/starter-kit">Get the free kit →</a>
-                </div>
-            </div>
-            <div class="lg:col-span-5 reveal-item opacity-0 flex justify-center">
-                <Image
-                    src={mikeyShaw}
-                    alt="Mikey Shaw, Fractional CTO and AI Systems Architect"
-                    class="w-full max-w-md aspect-[4/5] object-cover grayscale contrast-115 brightness-95 hover:grayscale-0 transition-all duration-700 rounded-2xl border border-[var(--ms-border)]"
-                    width={800}
-                    height={1000}
-                    format="avif"
-                    quality="high"
-                    loading="eager"
-                />
-            </div>
-        </section>
+        <!-- 1. Editorial Hero: Monumental MIKEY / SHAW + HD Cutout + 3D Systems Folio + Live LogMem Shift -->
+        <MikeyEditorialHero client:load />
 
         <!-- 2. Running now -->
         <section class="border-y border-[var(--ms-border)] bg-[var(--ms-surface)]" aria-labelledby="running-title">
